@@ -1,0 +1,36 @@
+library MatrixImage;
+
+{$E plg}
+
+uses
+  Windows,
+  SysUtils,
+  Classes,
+  Forms,
+  Dialogs,
+  Graphics,
+  MainInterface;
+
+{$R *.res}
+
+procedure InitializeDLL(Plugin:HModule;Handle:THandle);stdcall;
+begin
+
+end;
+
+procedure CheckState;stdcall;
+begin
+end;
+
+function Can_Close:boolean;stdcall;
+begin
+end;
+
+procedure FinalizeDLL;stdcall;
+begin
+end;
+
+exports InitializeDLL, FinalizeDLL,ShowForm,GetPluginName,Can_Close,CheckState;
+
+begin
+end.

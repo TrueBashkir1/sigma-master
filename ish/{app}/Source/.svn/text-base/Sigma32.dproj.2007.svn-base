@@ -1,0 +1,190 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{292DF41B-BAAA-4B7B-8ECA-FB010E0580B7}</ProjectGuid>
+			<MainSource>Sigma32.dpr</MainSource>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UsePackage>Vcl40;Vclx40;Vcldb40;vcldbx40;VclSmp40;Qrpt40;TeeUI40;teedb40;tee40;Dss40;ibevnt40;Vclmid40;NMFast40;Inetdb40;Inet40</DCC_UsePackage>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_UNSAFE_CODE>true</DCC_UNSAFE_CODE>
+			<DCC_UNSAFE_TYPE>true</DCC_UNSAFE_TYPE>
+			<DCC_DependencyCheckOutputName>f:\work_dir\ish\5.0a\bin\Sigma32.exe</DCC_DependencyCheckOutputName>
+			<DCC_Platform>x86</DCC_Platform>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+			<DCC_UnitSearchPath>f:\work_dir\ish\5.0a\bin\shit;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+			<DCC_ExeOutput>f:\work_dir\ish\5.0a\bin</DCC_ExeOutput>
+			<DCC_UNSAFE_CAST>true</DCC_UNSAFE_CAST>
+			<DCC_K>false</DCC_K>
+			<DCC_F>false</DCC_F>
+			<DCC_S>false</DCC_S>
+			<DCC_N>true</DCC_N>
+			<DCC_E>false</DCC_E>
+			<DebugSourcePath>f:\work_dir\ish\5.0a\bin\shit;$(DebugSourcePath)</DebugSourcePath>
+			<DCC_WriteableConstants>true</DCC_WriteableConstants>
+			<DCC_DcuOutput>f:\work_dir\ish\5.0a\bin\shit</DCC_DcuOutput>
+			<DCC_SymbolReferenceInfo>1</DCC_SymbolReferenceInfo>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="Sigma32.dpr">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<RcCompile Include="_Sigma32.rc">
+				<ModuleName>_Sigma32.rc</ModuleName>
+				<Form>_Sigma32.res</Form>
+			</RcCompile>
+			<DCCReference Include="MainForm.pas">
+				<Form>MainForm1</Form>
+			</DCCReference>
+			<DCCReference Include="UPluginList.pas">
+				<Form>PluginList</Form>
+			</DCCReference>
+			<DCCReference Include="AddFile.pas">
+				<Form>AddFileForm</Form>
+			</DCCReference>
+			<DCCReference Include="WaitForm.pas">
+				<Form>WaitForm1</Form>
+			</DCCReference>
+			<DCCReference Include="Splash.pas">
+				<Form>SplashHigh</Form>
+			</DCCReference>
+			<DCCReference Include="..\editor\Unit3.pas">
+				<Form>Form3</Form>
+			</DCCReference>
+			<DCCReference Include="..\editor\Unit2.pas">
+				<Form>GrafikX</Form>
+			</DCCReference>
+			<DCCReference Include="..\editor\Unit4.pas">
+				<Form>GrafikY</Form>
+			</DCCReference>
+			<DCCReference Include="..\editor\Unit5.pas">
+				<Form>GrafikXY</Form>
+			</DCCReference>
+			<DCCReference Include="..\editor\Unit6.pas">
+				<Form>GrafikGL</Form>
+			</DCCReference>
+			<DCCReference Include="About.pas">
+				<Form>FAbout</Form>
+			</DCCReference>
+			<DCCReference Include="..\editor\Unit7.pas">
+				<Form>GrafikGl2</Form>
+			</DCCReference>
+			<DCCReference Include="..\editor\Unit8.pas">
+				<Form>GrafikUg</Form>
+			</DCCReference>
+			<DCCReference Include="..\editor\Unit9.pas">
+				<Form>Form9</Form>
+			</DCCReference>
+			<DCCReference Include="..\editor\Unit10.pas">
+				<Form>Form10</Form>
+			</DCCReference>
+			<DCCReference Include="..\editor\Unit11.pas">
+				<Form>Form11</Form>
+			</DCCReference>
+			<DCCReference Include="..\project_config\project_config.pas">
+				<Form>Project_configForm</Form>
+			</DCCReference>
+			<DCCReference Include="..\project_config\project_order.pas">
+				<Form>ProjectOrderForm</Form>
+			</DCCReference>
+			<DCCReference Include="..\project_run\ProjectRunUnit.pas">
+				<Form>ProjectRun</Form>
+			</DCCReference>
+			<DCCReference Include="..\Statistics_methods__Monte_Karlo\Main.pas">
+				<Form>Statistics_methods_Main</Form>
+			</DCCReference>
+			<DCCReference Include="..\Statistics_methods__Monte_Karlo\test_generator_conf.pas">
+				<Form>Statistics_methods_test_genrator_conf</Form>
+			</DCCReference>
+			<DCCReference Include="..\Statistics_methods__Monte_Karlo\test_generator_result.pas">
+				<Form>Statistics_methods_test_genrator_result</Form>
+			</DCCReference>
+			<DCCReference Include="..\Statistics_methods__Monte_Karlo\Run_Result.pas">
+				<Form>Statistics_methods_Run_Result</Form>
+			</DCCReference>
+			<DCCReference Include="..\bin\shit\Unit12.pas"/>
+			<DCCReference Include="..\editor\Unit13.pas">
+				<Form>GrafikPerY</Form>
+			</DCCReference>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType>VCLApplication</Borland.ProjectType>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Source>
+						<Source Name="MainSource">Sigma32.dpr</Source>
+					</Source>
+					<Parameters>
+						<Parameters Name="HostApplication">J:\work_dir\ish\5.0a\bin\Sigma32.exe</Parameters>
+						<Parameters Name="UseLauncher">False</Parameters>
+						<Parameters Name="LoadAllSymbols">True</Parameters>
+						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+					</Parameters>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">4</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1049</VersionInfo>
+						<VersionInfo Name="CodePage">1251</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName">Московсий Авиационный Институт</VersionInfoKeys>
+						<VersionInfoKeys Name="FileDescription">Sigma32 Development</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">4.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName">Sigma 4</VersionInfoKeys>
+						<VersionInfoKeys Name="LegalCopyright">Copyright © МАИ каф.609</VersionInfoKeys>
+						<VersionInfoKeys Name="LegalTrademarks">Sigma32</VersionInfoKeys>
+						<VersionInfoKeys Name="OriginalFilename">Sigma32.exe</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductName">Учебный комплекс &quot;Определение напряженно-деформированного состояния плоского объекта&quot;</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductVersion">4.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+				</Delphi.Personality>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

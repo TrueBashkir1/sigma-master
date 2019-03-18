@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.602,C:\Users\Yuriy\Desktop\source\nastran\ResultsArrays.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.328,C:\Users\Yuriy\Desktop\source\nastran\ChooseCalc.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.997,C:\Users\Yuriy\Desktop\source\SigmaPlotProcessing\SigmaPlotProcessing.dproj=C:\Users\Yuriy\Desktop\source\nastran\Nastran.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.596,=C:\Users\Yuriy\Desktop\source\SigmaPlotProcessing\Unit1.pas</Transaction>
+    <Transaction>2011.06.14 19:09:06.303,C:\Users\Yuriy\Desktop\source\SigmaPlotProcessing\Unit1.pas=</Transaction>
+    <Transaction>2011.06.14 19:09:12.635,=C:\Users\Yuriy\Desktop\source\SigmaPlotProcessing\Unit2.pas</Transaction>
+    <Transaction>2011.06.14 19:28:49.691,=C:\Users\Yuriy\Desktop\source\SigmaPlotProcessing\Unit1.pas</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="Unit1.pas"/>
+    <File Path="Unit1.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>

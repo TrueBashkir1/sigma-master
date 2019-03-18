@@ -1,0 +1,4 @@
+// Microsoft Visual C++ generated Help ID include file.
+// Used by cmpgui.rc
+//
+#define HIDC_RADIO_NOTEPAD              0x80660409    // IDD_CMPGUI_DIALOG

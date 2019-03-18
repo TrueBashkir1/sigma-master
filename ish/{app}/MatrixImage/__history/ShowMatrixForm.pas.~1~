@@ -1,0 +1,321 @@
+unit ShowMatrixForm;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, ComCtrls;
+
+
+type
+  TA = ARRAY [1..9] OF BYTE;
+  pTA = ^TA;
+
+  MatrixType = (A=1, L=2);
+
+  TMatrixForm = class(TForm)
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    PaintBox1: TPaintBox;
+    PaintBox2: TPaintBox;
+    Label1: TLabel;
+    procedure PaintBox1Paint(Sender: TObject);
+    procedure PaintBox2Paint(Sender: TObject);
+    procedure TabChange(Sender: TObject);
+    procedure CloseForm(Sender: TObject; VAR Action: TCloseAction);
+  private
+    { Private declarations }
+    matrixSize: Integer;
+
+    envA       : Array of Integer;
+    xenvA      : Array of Integer;
+    envASize   : Integer;
+
+    envL       : Array of Integer;
+    xenvL      : Array of Integer;
+    envLSize   : Integer;
+
+    maxX, maxY: Integer;
+    //количество элементнов матрицы на один пиксель
+    cx, cy : Real;
+    //площадь, занимаема€ одним пикселем, измер€етс€ в элементах матрицы в квадрате
+    area :  Real;
+    //собственно буфер дл€ хранени€ образов матриц
+    BitmapA : TBitmap;
+    BitmapL : TBitmap;
+    F : File of Byte;
+  public
+    { Public declarations }
+    Error : Integer;
+    procedure ShowForm(SourceFile: String);
+    procedure LoadResults(SourceFile: String);
+    procedure DrawMatrix();
+    procedure MyRead(pX:pTA; n:BYTE);
+    //возвращает значение элемента в нижнем треуголнике матрицы, хран€щейс€ модифицированным
+    //профильным методом. диагональные элементы и элементы выше даигонали не выдает
+    function GetElement(i,j:Integer; xenv,env:Array of Integer):Integer;
+    function GetColorForPixel(x,y:Integer; matrix:MatrixType):TColor;
+  end;
+
+var
+  MatrixForm: TMatrixForm;
+
+implementation
+
+PROCEDURE TMatrixForm.MyRead(pX:pTA; n:BYTE);
+VAR i : BYTE;
+BEGIN
+  FOR i:=1 TO n DO READ(F,pX^[i]);
+END;
+
+procedure TMatrixForm.ShowForm(SourceFile: string);
+  begin
+
+    LoadResults(SourceFile);
+    if  Error<>0 then begin
+      ShowMessage('ќшибка в модуле создани€ изображени€ матрицы '+IntToStr(Error));
+      EXIT;
+    end;
+    Show;
+    DrawMatrix;
+
+  end;
+
+procedure TMatrixForm.LoadResults(SourceFile: String);
+  var
+    i,counter : Integer;
+    j         : ShortInt;
+  begin
+    Error:=1;
+    if not FileExists(SourceFile) then begin
+      ShowMessage('Ќе могу найти файл');
+      EXIT;
+    end else begin
+      AssignFile(F, SourceFile);
+      Reset(F);
+      i:=0;
+    //ѕолучаем размер матрицы
+      while not Eof(F) do begin
+        MyRead(Addr(i), 4);
+        if (i = -1) then BREAK;
+        matrixSize:=i;
+      end;
+    //ѕолучаем все остальые данные по матрице ј
+      counter:=0;
+      i:=0;
+      SetLength(xenvA, matrixSize+1);
+      while not Eof(F) do begin
+        MyRead(Addr(i),4);
+        if (i = -1) then BREAK;
+        xenvA[counter]:=i;
+        inc(counter);
+      end;
+    //размер профил€
+      while not Eof(F) do begin
+        MyRead(Addr(i),4);
+        if (i = -1) then BREAK;
+        envASize:=i;
+      end;
+      SetLength(envA, envASize);
+      j:=0;
+      counter:=0;
+      while not Eof(F) do begin
+        MyRead(Addr(j),4);
+        if (j = -1) then BREAK;
+        envA[counter]:=j;
+        inc(counter);
+      end;
+  //¬се то же самое дл€ множител€ L
+      counter:=0;
+      i:=0;
+      SetLength(xenvL, matrixSize+1);
+      while not Eof(F) do begin
+        MyRead(Addr(i),4);
+        if (i = -1) then BREAK;
+        xenvL[counter]:=i;
+        inc(counter);
+      end;
+      while not Eof(F) do begin
+        MyRead(Addr(i),4);
+        if (i = -1) then BREAK;
+        envLSize:=i;
+      end;
+      SetLength(envL, envASize);
+      j:=0;
+      counter:=0;
+      while not Eof(F) do begin
+        MyRead(Addr(j),4);
+        if (j = -1) then BREAK;
+        envL[counter]:=j;
+        inc(counter);
+      end;
+      CloseFile(F);
+    end;
+    Error:=0;
+  end;
+
+  procedure TMatrixForm.DrawMatrix;
+  var
+    i,j : Integer;
+    Dest,Source: TRect;
+  begin
+
+    maxX := PaintBox1.Width-4;
+    maxY := PaintBox1.Height-4;;
+    cx:=matrixSize/maxX;
+    cy:=matrixSize/maxY;
+    area:=cx*cy;
+    BitmapA := TBitmap.Create;
+    BitmapA.Width:=PaintBox1.Width;
+    BitmapA.Height:=PaintBox1.Height;
+
+    Dest:=Rect(0,0,BitmapA.Width,BitmapA.Height);
+    Source:=Rect(0,0,BitmapA.Width,BitmapA.Height);
+
+    BitmapA.Canvas.Pen.Width :=1;
+    BitmapA.Canvas.Pen.Color := clBlack;
+    BitmapA.Canvas.Pen.Style := psSolid;
+    BitmapA.Canvas.Pen.Mode := pmCopy;
+    BitmapA.Canvas.Brush.Color := clWhite;
+    BitmapA.Canvas.Brush.Style := bsSolid;
+    BitmapA.Canvas.Rectangle(0,0,BitmapA.Width,BitmapA.Height);
+    PaintBox1.Canvas.Draw(0,0,BitmapA);
+    for i := 1 to maxY do begin
+      for j := 1 to maxX do begin
+        BitmapA.Canvas.Pixels[j+1,i+1]:=GetColorForPixel(j,i,A);
+      end;
+      PaintBox1.Canvas.Draw(0,0,BitmapA);
+    end;
+    PaintBox1.Canvas.Draw(0,0,BitmapA);
+
+
+
+    Self.Caption:='ќбраз матрицы';
+    Label1.Caption:='–азмер матрицы: '+IntToStr(matrixSize)+'x'+IntToStr(matrixSize);
+
+  end;
+
+  function TMatrixForm.GetColorForPixel(x,y:Integer; matrix:MatrixType):TColor;
+  {исходна€ матрица представл€етс€ непрервыной областью
+   на которую накладываетс€ сетка пикселей.
+    оличество элементов, попадающих под один пиксель
+   хранитс€ в cx,cy.
+   ќпреде€ем какие элементы из матрицы попадают под каждый пиксель
+   и вычисл€ем их веса в общем расчете интенсивности этого пиксел€
+   на основе площади
+  }
+  var
+    startx, starty  : Real;
+    endx, endy      : Real;
+    Color           : TColor;
+    weightHeight, weightWidth : Integer;
+    weight          : Array of Array of Real;
+    startIndexX     : Integer;
+    startIndexY     : Integer;
+    i, j            : Integer;
+    hs,ws,he,we     : Real;
+    intensity       : Real;
+
+    endIndexX, endIndexY :Integer;
+  begin
+      Color := $000000;
+      //определ€ем какие элементы матрицы попадают под текущий пиксель
+      startx:=cx*(x-1);
+      starty:=cy*(y-1);
+      endx:=cx*(x);
+      endy:=cy*(y);
+      startIndexX := Trunc(startx);
+      startIndexY := Trunc(starty);
+      endIndexX := Trunc(endx);
+      if (endIndexX<endx) then inc(endIndexX);
+      endIndexY := Trunc(endy);
+      if (endIndexY<endy) then inc(endIndexY);
+      //опреде€ем размер матрицы, в которой будут хранитс€ веса
+      //всех элементов, попавших под пиксель
+      weightWidth := endIndexX-startIndexX;
+      weightHeight := endIndexY-startIndexY;
+      SetLength(weight,WeightHeight,WeightWidth);
+      intensity:=0;
+      for i := 0 to weightHeight-1 do begin
+        for j:= 0 to weightWidth-1 do begin
+          if startx>startIndexX+j then ws := startx else ws := startIndexX+j;
+          if starty>startIndexY+i then hs := starty else hs := startIndexY+i;
+          if endx<startIndexX+j+1 then we := endx else we := startIndexX+j+1;
+          if endy<startIndexY+i+1 then he :=endy else he := startIndexY+i+1;
+          //опреде€ем вклад(вес) данного элемента в интенсивность данного пиксел€
+          weight[i,j]:=(we-ws)*(he-hs)/area;
+          if (matrix=A) then
+            intensity:=intensity+weight[i,j]*GetElement(Trunc(startIndexY+i),Trunc(startIndexX+j),xenvA, envA);
+          if (matrix=L) then
+            intensity:=intensity+weight[i,j]*GetElement(Trunc(startIndexY+i),Trunc(startIndexX+j),xenvL, envL);
+        end;
+      end;
+      //ну и на основе интенсивности генерируем цвет пиксел€ (используютс€ градации серого)
+      intensity:=255-intensity*255;
+      Color:=(Trunc(intensity)*$100+Trunc(intensity))*$100+Trunc(intensity);
+      Result:=Color;
+  end;
+
+  function TMatrixForm.GetElement(i,j:Integer;xenv,env:Array of Integer):Integer;
+  begin
+    if(i=j) then Result:=1;
+    if(j>i) then Result:=0;
+    if(j<i) then begin
+      if((i-xenv[i+1]+xenv[i])<=j) then begin
+        Result:=env[xenv[i+1]-i+j-1];
+      end else begin
+        Result:=0;
+      end;
+    end;
+  end;
+
+  procedure TMatrixForm.PaintBox1Paint(Sender: TObject);
+  begin
+    PaintBox1.Canvas.Draw(0,0,BitmapA);
+  end;
+
+  procedure TMatrixForm.PaintBox2Paint(Sender: TObject);
+  begin
+    PaintBox2.Canvas.Draw(0,0,BitmapL);
+  end;
+
+  procedure TMatrixForm.TabChange(Sender: TObject);
+  var
+    i,j   :Integer;
+  begin
+    if (PageControl1.ActivePage=TabSheet2) And (BitmapL=nil) then begin
+      Self.Caption := Self.Caption + 'ѕожалуйста, ждите...';
+      BitmapL := TBitmap.Create;
+      BitmapL.Width:=PaintBox2.Width;
+      BitmapL.Height:=PaintBox2.Height;
+
+      BitmapL.Canvas.Pen.Width :=1;
+      BitmapL.Canvas.Pen.Color := clBlack;
+      BitmapL.Canvas.Pen.Style := psSolid;
+      BitmapL.Canvas.Pen.Mode := pmCopy;
+      BitmapL.Canvas.Brush.Color := clWhite;
+      BitmapL.Canvas.Brush.Style := bsSolid;
+      BitmapL.Canvas.Rectangle(0,0,BitmapL.Width,BitmapL.Height);
+      PaintBox2.Canvas.Draw(0,0,BitmapL);
+
+      for i := 1 to maxY do begin
+        for j := 1 to i+Round(1/cx)+2 do begin
+          BitmapL.Canvas.Pixels[j+1,i+1]:=GetColorForPixel(j,i,L);
+        end;
+        PaintBox2.Canvas.Draw(0,0,BitmapL);
+      end;
+      PaintBox2.Canvas.Draw(0,0,BitmapL);
+    end;
+  end;
+
+  procedure TMatrixForm.CloseForm(Sender: TObject; VAR Action: TCloseAction);
+  begin
+    MatrixForm:=nil;
+    Action:=caFree;
+
+  end;
+{$R *.dfm}
+
+end.
+

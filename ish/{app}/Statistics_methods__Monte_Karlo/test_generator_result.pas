@@ -1,0 +1,63 @@
+unit test_generator_result;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, TeEngine, Series, ExtCtrls, TeeProcs, Chart;
+
+type
+  TStatistics_methods_test_genrator_result = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Iter: TEdit;
+    Label2: TLabel;
+    Vrem: TEdit;
+    GroupBox2: TGroupBox;
+    Label3: TLabel;
+    Label4: TLabel;
+    GUI_M_v_interv: TEdit;
+    Otnoshenie_M_k_N: TEdit;
+    GroupBox3: TGroupBox;
+    Label5: TLabel;
+    Itog_Statstick: TEdit;
+    GroupBox4: TGroupBox;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    GUI_Diverg_Summ: TEdit;
+    GUI_Diverg_Summ__k_N: TEdit;
+    Itog_Div: TEdit;
+    GroupBox5: TGroupBox;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    GUI_Diverg_kv_Summ: TEdit;
+    GUI_Diverg_kv_Summ__k_N: TEdit;
+    Itog_kv_Div: TEdit;
+    Button1: TButton;
+    GroupBox6: TGroupBox;
+    Grafic: TChart;
+    Series1: TLineSeries;
+    Series2: TLineSeries;
+    Series3: TLineSeries;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Statistics_methods_test_genrator_result: TStatistics_methods_test_genrator_result;
+
+implementation
+
+{$R *.dfm}
+
+procedure TStatistics_methods_test_genrator_result.Button1Click(Sender: TObject);
+  begin
+    Statistics_methods_test_genrator_result.Close;
+  end;
+
+end.

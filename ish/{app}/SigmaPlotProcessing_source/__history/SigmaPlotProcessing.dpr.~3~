@@ -1,0 +1,65 @@
+{*********************************************************************}
+{                                                                     }
+{                    Московский Авиационный Институт                  }
+{                                                                     }
+{                               кафедра 609                           }
+{                                                                     }
+{                    Копылов Антон Анатольевич 2001                   }
+{                                                                     }
+{*********************************************************************}
+library SigmaPlotProcessing;
+
+uses
+  Windows,
+  SysUtils,
+  Classes,
+  Dialogs,
+  Graphics,
+  MainInterface,
+  inifiles,
+  Registry,
+  clipbrd,
+  ExportNastran,
+  Unit1 in 'Unit1.pas' {Form1};
+
+{$E plg}
+const
+     IniFileName='Sigma32.ini';
+{$R *.RES}
+const
+     PluginName = 'Экспорт результатов в SigmaPlot.';
+     StringReg  = '\Software\MAI.609\SIGMA32\3.0';
+     //NastranKey = 'NastranFile';
+var
+     Button,Menu:Pointer;
+procedure InitializeDLL(Plugin:HModule;Handle:THandle);stdcall;
+begin
+     Menu:=RegisterMenu(Plugin,PChar(PluginName),55,5,PChar('ShowForm'));
+     Button:=RegisterToolButton(Plugin,PChar(PluginName),55,PChar('Экспорт'),PChar('ShowForm'));
+     RegisterPlugin(Plugin,3);
+end;
+procedure CheckState;stdcall;
+begin
+
+end;
+procedure FinalizeDLL;stdcall;
+begin
+     //Application:=OldApplication;
+end;
+
+procedure ShowForm;stdcall;
+begin
+
+end;
+function GetPluginName:PChar;stdcall;
+begin
+     Result:=PChar(PluginName);
+end;
+function Can_Close:boolean;stdcall;
+begin
+     //if Form1<>nil then Form1.Close;
+     Result:=true;
+end;
+exports InitializeDLL, FinalizeDLL,ShowForm,GetPluginName,Can_Close,CheckState;
+
+end.

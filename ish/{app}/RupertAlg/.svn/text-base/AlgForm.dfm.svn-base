@@ -1,0 +1,1696 @@
+object AlgForm: TAlgForm
+  Left = 222
+  Top = 120
+  Anchors = [akTop]
+  BorderStyle = bsSingle
+  Caption = #1047#1072#1076#1072#1085#1080#1077' '#1072#1083#1075#1086#1088#1080#1090#1084#1072' '#1080' '#1086#1087#1088#1077#1076#1077#1083#1077#1085#1080#1077' '#1077#1075#1086' '#1087#1072#1088#1072#1084#1077#1090#1088#1086#1074
+  ClientHeight = 573
+  ClientWidth = 892
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Icon.Data = {
+    0000010001002020100000000000E80200001600000028000000200000004000
+    0000010004000000000080020000000000000000000000000000000000000000
+    000000008000008000000080800080000000800080008080000080808000C0C0
+    C0000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFF
+    FFFFFFFFFFFFFFFFFFFFFFFCCCFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFFFCFFFFC
+    CCFFFFFFFFFF00000FFFFCFFFFFCFFCFFFCFFFFFFFFF0FF00EEEECFFFFFCFCFF
+    FFFEEEEEEEEE0FF00FFFFCFFFFFCFCFFFFFCFFFFFFFF0FF00FFFFFCFFFCFFCFF
+    FFFCFFFFFFFF0FF00FFFFFFCECFFFFCFFFEFFFFFFFFF0FF00FFFFFFEFFFFFFFC
+    CCEFFFFFFFFF0FF00FFFFFFEFFFFFFFFFFEFFFFFFFFF0FF00FFFFFEFFFFFFFFF
+    FEFFFFFFFFFF0FF00FFFFFEFFFFFFFFFFEFFFFFFFFFF0FF00FFFFEFFFFFFFFFF
+    FEFFFFFFFFFF0FF00FFFFEFFFFFFFFFFFEFFFFFFFFFF0FF00FFFEFFFFFFFFFFF
+    FEFFFFFFFFFF0FF00FFFEFFFFFFFFFFFEFFFFFFFFFFF0FF00FFEFFFFFFFFFFFF
+    EFFF000000000FF0000EFFFFFFFFFFFFFEF0000000000FF0000FFFFFFFFFFFFF
+    FEFF000000000FF0000FFFFFFFFFFFFFFEFF0FFFFFFFFFFFFF0FFFFFFFFFFFFF
+    FEFFF00000000000000FFFFFFFFFFFFFFFEFFF0000000000000FFFFFFFFFFFFF
+    FFFEFFFFFFFFFFFEFFFFFFFFFFFFFFFFFFFFEEEFFFFFCCCEFFFFFFFFFFFFFFFF
+    FFFFFFFEEFFCFFFCFFFFFFFFFFFFFFFFFFFFFFFFFEEFFFFFCFFFFFFFFFFFFFFF
+    FFFFFFFFFFCFFFFFCFFFFFFFFFFFFFFFFFFFFFFFFFCFFFFFCFFFFFFFFFFFFFFF
+    FFFFFFFFFFFCFFFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCCFFFFFFFFFFFFFFFFF
+    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    000000000000000000000000000000000000000000000000000000000000}
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  Scaled = False
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnResize = FormResize
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object TopPanel: TPanel
+    Left = 0
+    Top = 0
+    Width = 892
+    Height = 277
+    Align = alTop
+    TabOrder = 0
+    object Operations: TGroupBox
+      Left = 1
+      Top = 1
+      Width = 276
+      Height = 275
+      Align = alLeft
+      Caption = #1042#1099#1073#1088#1072#1085#1085#1099#1077' '#1076#1077#1081#1089#1090#1074#1080#1103
+      TabOrder = 0
+      DesignSize = (
+        276
+        275)
+      object ToDo: TCheckListBox
+        Left = 2
+        Top = 15
+        Width = 272
+        Height = 216
+        OnClickCheck = ToDoClickCheck
+        Align = alTop
+        ItemHeight = 13
+        TabOrder = 0
+      end
+      object Calculate: TButton
+        Left = 2
+        Top = 230
+        Width = 272
+        Height = 41
+        Anchors = [akBottom]
+        Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100' '#1072#1083#1075#1086#1088#1080#1090#1084#1099' '#1082' '#1089#1077#1090#1082#1077' '#1050#1069
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Verdana'
+        Font.Pitch = fpFixed
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 1
+        OnClick = CalculateClick
+      end
+    end
+    object OperationsToSelect: TPanel
+      Left = 277
+      Top = 1
+      Width = 288
+      Height = 275
+      Align = alLeft
+      BevelOuter = bvNone
+      BorderStyle = bsSingle
+      TabOrder = 1
+      object AddDo: TButton
+        Left = 3
+        Top = 1
+        Width = 70
+        Height = 32
+        Caption = #1044#1086#1073#1072#1074#1080#1090#1100
+        TabOrder = 0
+        OnClick = AddDoClick
+      end
+      object DeleleDo: TButton
+        Left = 211
+        Top = 1
+        Width = 70
+        Height = 32
+        Caption = #1059#1076#1072#1083#1080#1090#1100
+        TabOrder = 1
+        OnClick = DeleleDoClick
+      end
+      object MainDo: TGroupBox
+        Left = 0
+        Top = 33
+        Width = 284
+        Height = 89
+        Align = alBottom
+        Caption = #1054#1089#1085#1086#1074#1085#1099#1077
+        TabOrder = 2
+        object ListMain: TListBox
+          Left = 2
+          Top = 15
+          Width = 280
+          Height = 72
+          Align = alClient
+          ItemHeight = 13
+          Items.Strings = (
+            #1057#1084#1077#1085#1072' '#1076#1080#1072#1075#1086#1085#1072#1083#1077#1081
+            #1056#1072#1079#1073#1080#1077#1085#1080#1077' '#1089#1077#1075#1084#1077#1085#1090#1072
+            #1056#1072#1079#1073#1080#1077#1085#1080#1077' '#1082#1086#1085#1090#1091#1088#1072
+            #1056#1072#1079#1073#1080#1077#1085#1080#1077' '#1090#1088#1077#1075#1086#1083#1100#1085#1080#1082#1072)
+          TabOrder = 0
+          OnClick = ListMainClick
+        end
+      end
+      object OtherDo: TGroupBox
+        Left = 0
+        Top = 122
+        Width = 284
+        Height = 149
+        Align = alBottom
+        Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1099#1077
+        TabOrder = 3
+        object ListOther: TListBox
+          Left = 2
+          Top = 15
+          Width = 280
+          Height = 132
+          Align = alClient
+          ItemHeight = 13
+          Items.Strings = (
+            #1055#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077' '#1091#1079#1083#1086#1074' ('#1043#1088#1091#1073#1086#1077' '#1087#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077')'
+            #1055#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077' '#1091#1079#1083#1086#1074' ('#1055#1086' '#1094#1077#1085#1090#1088#1091' '#1090#1103#1078#1077#1089#1090#1080')')
+          TabOrder = 0
+          OnClick = ListOtherClick
+        end
+      end
+      object UP: TBitBtn
+        Left = 72
+        Top = 1
+        Width = 70
+        Height = 32
+        TabOrder = 4
+        OnClick = UPClick
+        Glyph.Data = {
+          16090000424D1609000000000000360400002800000032000000180000000100
+          080000000000E004000000000000000000000001000000000000000000000000
+          80000080000000808000800000008000800080800000C0C0C000C0DCC000F0CA
+          A6000020400000206000002080000020A0000020C0000020E000004000000040
+          20000040400000406000004080000040A0000040C0000040E000006000000060
+          20000060400000606000006080000060A0000060C0000060E000008000000080
+          20000080400000806000008080000080A0000080C0000080E00000A0000000A0
+          200000A0400000A0600000A0800000A0A00000A0C00000A0E00000C0000000C0
+          200000C0400000C0600000C0800000C0A00000C0C00000C0E00000E0000000E0
+          200000E0400000E0600000E0800000E0A00000E0C00000E0E000400000004000
+          20004000400040006000400080004000A0004000C0004000E000402000004020
+          20004020400040206000402080004020A0004020C0004020E000404000004040
+          20004040400040406000404080004040A0004040C0004040E000406000004060
+          20004060400040606000406080004060A0004060C0004060E000408000004080
+          20004080400040806000408080004080A0004080C0004080E00040A0000040A0
+          200040A0400040A0600040A0800040A0A00040A0C00040A0E00040C0000040C0
+          200040C0400040C0600040C0800040C0A00040C0C00040C0E00040E0000040E0
+          200040E0400040E0600040E0800040E0A00040E0C00040E0E000800000008000
+          20008000400080006000800080008000A0008000C0008000E000802000008020
+          20008020400080206000802080008020A0008020C0008020E000804000008040
+          20008040400080406000804080008040A0008040C0008040E000806000008060
+          20008060400080606000806080008060A0008060C0008060E000808000008080
+          20008080400080806000808080008080A0008080C0008080E00080A0000080A0
+          200080A0400080A0600080A0800080A0A00080A0C00080A0E00080C0000080C0
+          200080C0400080C0600080C0800080C0A00080C0C00080C0E00080E0000080E0
+          200080E0400080E0600080E0800080E0A00080E0C00080E0E000C0000000C000
+          2000C0004000C0006000C0008000C000A000C000C000C000E000C0200000C020
+          2000C0204000C0206000C0208000C020A000C020C000C020E000C0400000C040
+          2000C0404000C0406000C0408000C040A000C040C000C040E000C0600000C060
+          2000C0604000C0606000C0608000C060A000C060C000C060E000C0800000C080
+          2000C0804000C0806000C0808000C080A000C080C000C080E000C0A00000C0A0
+          2000C0A04000C0A06000C0A08000C0A0A000C0A0C000C0A0E000C0C00000C0C0
+          2000C0C04000C0C06000C0C08000C0C0A000F0FBFF00A4A0A000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00090909FAFAFA
+          0909090909090909090909090909090909090909090909090909090909090909
+          0909090909090909090909090000090909FAFAFA090909090909090909090909
+          0909090909090909090909090909090909090909090909090909090909090909
+          0000090909FAFAFA090909090909090909090909090909090909090909090909
+          09090909090909090909090909090909090909090000090909FAFAFA09090909
+          0909090909090909090909090909090909090909090909090909090909090909
+          09090909090909090000090909FAFAFA09090909090909090909090909090909
+          09090909090909090909090909FC090909090909090909090909090900000909
+          09FAFAFA09090909090909090909090909090909090909090909090909090909
+          09FC09090909090909090909090909090000090909FAFAFA0909090909090909
+          090909090909090909090909090909090909090909FC09090909090909090909
+          090909090000090909FAFAFA090909090909FCFCFCFCFCFC090909FCFCFCFC09
+          090909FCFCFC090909FC09FCFC090909FC090909FC0909090000090909FAFAFA
+          090909090909FC0909090909FC0909FC090909FC0909FC090909FC0909FCFC09
+          09FC090909FC09FC090909090000090909FAFAFA090909090909FC0909090909
+          FC0909FC090909FC0909FC090909090909FC090909FC090909FC09FC09090909
+          0000090909FAFAFA090909090909FC0909090909FC0909FCFCFCFC090909FCFC
+          FCFCFC0909FC090909FC09090909FC09090909090000090909FAFAFA09090909
+          0909FC0909090909FC0909FC090909FC0909FC090909FC0909FC090909FC0909
+          09FC09FC090909090000090909FAFAFA090909090909FCFCFCFCFCFC090909FC
+          090909FC0909FC090909FC0909FCFC0909FC090909FC09FC0909090900000909
+          09FAFAFA090909090909FC0909090909FC0909FCFCFCFC09090909FCFCFC0909
+          09FC09FCFC090909FC090909FC0909090000090909FAFAFA090909090909FC09
+          09090909FC090909090909090909090909090909090909090909090909090909
+          090909090000FAFA09FAFAFA09FAFA090909FC0909090909FC09090909090909
+          0909090909090909090909090909090909090909090909090000FAFA09FAFAFA
+          09FAFA090909FCFCFCFCFCFC0909090909090909090909090909090909090909
+          090909090909090909090909000009FAFAFAFAFAFAFA09090909090909090909
+          0909090909090909090909090909090909090909090909090909090909090909
+          000009FAFAFAFAFAFAFA09090909090909090909090909090909090909090909
+          090909090909090909090909090909090909090900000909FAFAFAFAFA090909
+          0909090909090909090909090909090909090909090909090909090909090909
+          090909090909090900000909FAFAFAFAFA090909090909090909090909090909
+          0909090909090909090909090909090909090909090909090909090900000909
+          09FAFAFA09090909090909090909090909090909090909090909090909090909
+          090909090909090909090909090909090000090909FAFAFA0909090909090909
+          0909090909090909090909090909090909090909090909090909090909090909
+          09090909000009090909FAFA0909090909090909090909090909090909090909
+          0909090909090909090909090909090909090909090909090000}
+      end
+      object DOWN: TBitBtn
+        Left = 141
+        Top = 1
+        Width = 70
+        Height = 32
+        TabOrder = 5
+        OnClick = DOWNClick
+        Glyph.Data = {
+          16090000424D1609000000000000360400002800000032000000180000000100
+          080000000000E004000000000000000000000001000000000000000000000000
+          80000080000000808000800000008000800080800000C0C0C000C0DCC000F0CA
+          A6000020400000206000002080000020A0000020C0000020E000004000000040
+          20000040400000406000004080000040A0000040C0000040E000006000000060
+          20000060400000606000006080000060A0000060C0000060E000008000000080
+          20000080400000806000008080000080A0000080C0000080E00000A0000000A0
+          200000A0400000A0600000A0800000A0A00000A0C00000A0E00000C0000000C0
+          200000C0400000C0600000C0800000C0A00000C0C00000C0E00000E0000000E0
+          200000E0400000E0600000E0800000E0A00000E0C00000E0E000400000004000
+          20004000400040006000400080004000A0004000C0004000E000402000004020
+          20004020400040206000402080004020A0004020C0004020E000404000004040
+          20004040400040406000404080004040A0004040C0004040E000406000004060
+          20004060400040606000406080004060A0004060C0004060E000408000004080
+          20004080400040806000408080004080A0004080C0004080E00040A0000040A0
+          200040A0400040A0600040A0800040A0A00040A0C00040A0E00040C0000040C0
+          200040C0400040C0600040C0800040C0A00040C0C00040C0E00040E0000040E0
+          200040E0400040E0600040E0800040E0A00040E0C00040E0E000800000008000
+          20008000400080006000800080008000A0008000C0008000E000802000008020
+          20008020400080206000802080008020A0008020C0008020E000804000008040
+          20008040400080406000804080008040A0008040C0008040E000806000008060
+          20008060400080606000806080008060A0008060C0008060E000808000008080
+          20008080400080806000808080008080A0008080C0008080E00080A0000080A0
+          200080A0400080A0600080A0800080A0A00080A0C00080A0E00080C0000080C0
+          200080C0400080C0600080C0800080C0A00080C0C00080C0E00080E0000080E0
+          200080E0400080E0600080E0800080E0A00080E0C00080E0E000C0000000C000
+          2000C0004000C0006000C0008000C000A000C000C000C000E000C0200000C020
+          2000C0204000C0206000C0208000C020A000C020C000C020E000C0400000C040
+          2000C0404000C0406000C0408000C040A000C040C000C040E000C0600000C060
+          2000C0604000C0606000C0608000C060A000C060C000C060E000C0800000C080
+          2000C0804000C0806000C0808000C080A000C080C000C080E000C0A00000C0A0
+          2000C0A04000C0A06000C0A08000C0A0A000C0A0C000C0A0E000C0C00000C0C0
+          2000C0C04000C0C06000C0C08000C0C0A000F0FBFF00A4A0A000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00080808083A3A
+          0808080808080808080808080808080808080808080808080808080808080808
+          08080808080808080808080800000808083A3A3A3A0808080808080808080808
+          0808080808080808080808080808080808080808080808080808080808080808
+          000008083A3A3A3A3A0808080808080808080808080808080808080808080808
+          0808080808080808080808080808080808080808000008083A3A3A3A3A3A0808
+          0808080808080808080808080808080808080808080808080808080808080808
+          08080808080808080000083A3A3A3A3A3A3A0808080808080808080808080808
+          080808080808080808080808080808080808080808080808080808080000083A
+          3A3A3A3A083A3A08080808080808080808080808080808080808080808080808
+          0808080808080808080808080808080800003A3A083A3A3A083A3A0808080808
+          FCFCFCFCFCFC080808FC080808FC0808FC080808FC0808FCFCFC080808080808
+          0808080800003A3A083A3A3A083A3A0808080808FC0808080808FC0808FC0808
+          08FC0808FCFC0808FC08FC080808FC08080808080808080800000808083A3A3A
+          0808080808080808FC0808080808FC0808FC080808FC0808FCFC0808FC080808
+          0808FC08080808080808080800000808083A3A3A0808080808080808FC080808
+          0808FC0808FCFCFCFCFC0808FC08FC08FC080808FCFC08080808080808080808
+          00000808083A3A3A0808080808080808FC0808080808FC0808FC080808FC0808
+          FC0808FCFC0808080808FC08080808080808080800000808083A3A3A08080808
+          08080808FCFCFCFCFCFC080808FC080808FC0808FC0808FCFC08FC080808FC08
+          080808080808080800000808083A3A3A0808080808080808FC0808080808FC08
+          08FC080808FC0808FC080808FC0808FCFCFC0808080808080808080800000808
+          083A3A3A0808080808080808FC0808080808FC08080808080808080808080808
+          0808080808080808080808080808080800000808083A3A3A0808080808080808
+          FC0808080808FC08080808080808080808080808080808080808080808080808
+          0808080800000808083A3A3A0808080808080808FCFCFCFCFCFC080808080808
+          08080808080808080808080808080808080808080808080800000808083A3A3A
+          0808080808080808080808080808080808080808080808080808080808080808
+          08080808080808080808080800000808083A3A3A080808080808080808080808
+          0808080808080808080808080808080808080808080808080808080808080808
+          00000808083A3A3A080808080808080808080808080808080808080808080808
+          080808080808080808080808080808080808080800000808083A3A3A08080808
+          0808080808080808080808080808080808080808080808080808080808080808
+          080808080808080800000808083A3A3A08080808080808080808080808080808
+          0808080808080808080808080808080808080808080808080808080800000808
+          083A3A3A08080808080808080808080808080808080808080808080808080808
+          0808080808080808080808080808080800000808083A3A3A0808080808080808
+          0808080808080808080808080808080808080808080808080808080808080808
+          0808080800000808083A3A3A0808080808080808080808080808080808080808
+          0808080808080808080808080808080808080808080808080000}
+      end
+    end
+    object Criteria: TGroupBox
+      Left = 565
+      Top = 1
+      Width = 326
+      Height = 275
+      Align = alClient
+      Caption = #1047#1072#1076#1072#1085#1080#1077' '#1082#1088#1080#1090#1077#1088#1080#1077#1074' '#1076#1083#1103' '#1087#1088#1086#1094#1077#1076#1091#1088' '#1072#1083#1075#1086#1088#1080#1090#1084#1072
+      TabOrder = 2
+      object Params: TPageControl
+        Left = 2
+        Top = 15
+        Width = 322
+        Height = 258
+        ActivePage = BaseAlg
+        Align = alClient
+        MultiLine = True
+        ParentShowHint = False
+        ShowHint = False
+        TabIndex = 0
+        TabOrder = 0
+        object BaseAlg: TTabSheet
+          Caption = #1055#1077#1088#1074#1080#1095#1085#1099#1077' '#1086#1075#1088#1072#1085#1080#1095#1077#1085#1080#1103
+          ImageIndex = 2
+          object BaseMinTR: TGroupBox
+            Left = 0
+            Top = 0
+            Width = 314
+            Height = 51
+            Align = alTop
+            Caption = #1055#1088#1086#1074#1077#1088#1082#1072' '#1084#1080#1085#1080#1084#1072#1083#1100#1085#1086#1075#1086' '#1091#1075#1083#1072
+            Ctl3D = True
+            ParentCtl3D = False
+            TabOrder = 0
+            object Label2: TLabel
+              Left = 145
+              Top = 23
+              Width = 51
+              Height = 13
+              Caption = #1047#1085#1072#1095#1077#1085#1080#1077':'
+            end
+            object UseCheckBaseMinTR: TCheckBox
+              Left = 8
+              Top = 22
+              Width = 113
+              Height = 17
+              Caption = #1044#1077#1083#1072#1090#1100' '#1087#1088#1086#1074#1077#1088#1082#1091
+              TabOrder = 0
+              OnClick = UseCheckBaseMinTRClick
+            end
+            object UpDownBaseMinTrunc: TUpDown
+              Left = 222
+              Top = 20
+              Width = 15
+              Height = 22
+              Associate = BaseMinTrunc
+              Enabled = False
+              Min = 0
+              Max = 90
+              Position = 0
+              TabOrder = 1
+              Wrap = False
+            end
+            object BaseMinTrunc: TEdit
+              Left = 199
+              Top = 20
+              Width = 23
+              Height = 22
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              MaxLength = 2
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 2
+              Text = '0'
+            end
+            object BtnFillBaseMinTrunc: TButton
+              Left = 280
+              Top = 19
+              Width = 20
+              Height = 22
+              Caption = 'V'
+              Enabled = False
+              TabOrder = 3
+              OnClick = BtnFillBaseMinTruncClick
+            end
+            object ForMinTr: TEdit
+              Left = 239
+              Top = 20
+              Width = 40
+              Height = 20
+              AutoSelect = False
+              AutoSize = False
+              BiDiMode = bdRightToLeft
+              Color = clMoneyGreen
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlue
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              MaxLength = 2
+              ParentBiDiMode = False
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 4
+              Text = '25'
+            end
+          end
+          object BaseMaxSum: TGroupBox
+            Left = 0
+            Top = 51
+            Width = 314
+            Height = 57
+            Align = alTop
+            Caption = #1055#1088#1086#1074#1077#1088#1082#1072' '#1084#1072#1082#1089#1080#1084#1072#1083#1100#1085#1086#1081' '#1087#1083#1086#1097#1072#1076#1080' '#1090#1088#1077#1091#1075#1086#1083#1100#1085#1080#1082#1072
+            Ctl3D = True
+            ParentCtl3D = False
+            TabOrder = 1
+            object Label3: TLabel
+              Left = 122
+              Top = 28
+              Width = 51
+              Height = 13
+              Caption = #1047#1085#1072#1095#1077#1085#1080#1077':'
+            end
+            object UseBaseMaxS: TCheckBox
+              Left = 7
+              Top = 27
+              Width = 114
+              Height = 17
+              Caption = #1044#1077#1083#1072#1090#1100' '#1087#1088#1086#1074#1077#1088#1082#1091
+              TabOrder = 0
+              OnClick = UseBaseMaxSClick
+            end
+            object UpDownBaseMaxS: TUpDown
+              Left = 221
+              Top = 25
+              Width = 15
+              Height = 22
+              Associate = BaseMaxS
+              Enabled = False
+              Min = 0
+              Max = 9999
+              Position = 0
+              TabOrder = 1
+              Wrap = False
+            end
+            object BaseMaxS: TEdit
+              Left = 175
+              Top = 25
+              Width = 46
+              Height = 22
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              MaxLength = 2
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 2
+              Text = '0'
+            end
+            object BtnFillBaseMaxS: TButton
+              Left = 279
+              Top = 24
+              Width = 20
+              Height = 22
+              Caption = 'V'
+              Enabled = False
+              TabOrder = 3
+              OnClick = BtnFillBaseMaxSClick
+            end
+            object MaxS1: TEdit
+              Left = 240
+              Top = 25
+              Width = 38
+              Height = 20
+              TabStop = False
+              AutoSelect = False
+              AutoSize = False
+              BiDiMode = bdRightToLeft
+              Color = clMoneyGreen
+              Ctl3D = True
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlue
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              MaxLength = 2
+              ParentBiDiMode = False
+              ParentCtl3D = False
+              ParentFont = False
+              ParentShowHint = False
+              ReadOnly = True
+              ShowHint = False
+              TabOrder = 4
+              Text = '1'
+            end
+          end
+          object BasePosition: TGroupBox
+            Left = 0
+            Top = 108
+            Width = 314
+            Height = 66
+            Align = alTop
+            Caption = #1055#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077
+            TabOrder = 2
+            object BasePosRough: TRadioButton
+              Left = 8
+              Top = 14
+              Width = 153
+              Height = 17
+              Caption = #1043#1088#1091#1073#1086#1077' '#1087#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077
+              TabOrder = 0
+            end
+            object BasePosGravityCenter: TRadioButton
+              Left = 8
+              Top = 30
+              Width = 145
+              Height = 17
+              Caption = #1055#1086' '#1094#1077#1085#1090#1088#1091' '#1090#1103#1078#1077#1089#1090#1080
+              TabOrder = 1
+            end
+            object BasePosDoNotUse: TRadioButton
+              Left = 8
+              Top = 46
+              Width = 143
+              Height = 17
+              Caption = #1041#1077#1079' '#1087#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1103
+              Checked = True
+              TabOrder = 2
+              TabStop = True
+            end
+          end
+        end
+        object Addings: TTabSheet
+          Caption = #1042#1090#1086#1088#1080#1095#1085#1099#1077' '#1086#1075#1088#1072#1085#1080#1095#1077#1085#1080#1103
+          ImageIndex = 3
+          object CheckMinTrInNewElements: TGroupBox
+            Left = 0
+            Top = 0
+            Width = 314
+            Height = 49
+            Align = alTop
+            Caption = #1055#1088#1086#1074#1077#1088#1082#1072' '#1084#1080#1085'-'#1086#1075#1086' '#1091#1075#1083#1072' '#1085#1086#1074#1099#1093' '#1101#1083#1077#1084#1077#1085#1090#1086#1074' ('#1090#1088#1077#1091#1075'.)'
+            TabOrder = 0
+            object Label4: TLabel
+              Left = 131
+              Top = 20
+              Width = 51
+              Height = 13
+              Caption = #1047#1085#1072#1095#1077#1085#1080#1077':'
+            end
+            object BaseCheckTRInNewElements: TCheckBox
+              Left = 8
+              Top = 19
+              Width = 123
+              Height = 17
+              Caption = #1044#1077#1083#1072#1090#1100' '#1087#1088#1086#1074#1077#1088#1082#1091
+              TabOrder = 0
+              OnClick = BaseCheckTRInNewElementsClick
+            end
+            object UpDownBaseMinTrInNewElement: TUpDown
+              Left = 208
+              Top = 17
+              Width = 15
+              Height = 22
+              Associate = BaseMinTrInNewElement
+              Enabled = False
+              Min = 0
+              Max = 90
+              Position = 0
+              TabOrder = 1
+              Wrap = False
+            end
+            object BaseMinTrInNewElement: TEdit
+              Left = 185
+              Top = 17
+              Width = 23
+              Height = 22
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              MaxLength = 2
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 2
+              Text = '0'
+            end
+            object BtnFillBaseMinTrInNewElement: TButton
+              Left = 277
+              Top = 17
+              Width = 20
+              Height = 22
+              Caption = 'V'
+              Enabled = False
+              TabOrder = 3
+              OnClick = BtnFillBaseMinTrInNewElementClick
+            end
+            object OutMinTrT: TEdit
+              Left = 229
+              Top = 18
+              Width = 46
+              Height = 20
+              AutoSelect = False
+              AutoSize = False
+              BiDiMode = bdRightToLeft
+              Color = clMoneyGreen
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlue
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              MaxLength = 2
+              ParentBiDiMode = False
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 4
+              Text = '25'
+            end
+          end
+          object CheckMinTrInNewSElements: TGroupBox
+            Left = 0
+            Top = 49
+            Width = 314
+            Height = 72
+            Align = alTop
+            Caption = #1055#1088#1086#1074#1077#1088#1082#1072' '#1085#1086#1074#1099#1093' '#1101#1083#1077#1084#1077#1085#1090#1086#1074' ('#1088#1072#1079#1073#1080#1077#1085#1080#1077' '#1089#1077#1075#1084#1077#1085#1090#1072')'
+            TabOrder = 1
+            object Label5: TLabel
+              Left = 146
+              Top = 20
+              Width = 51
+              Height = 13
+              Caption = #1047#1085#1072#1095#1077#1085#1080#1077':'
+            end
+            object Label6: TLabel
+              Left = 147
+              Top = 46
+              Width = 51
+              Height = 13
+              Caption = #1047#1085#1072#1095#1077#1085#1080#1077':'
+            end
+            object BaseCheckTRInNewSElements: TCheckBox
+              Left = 8
+              Top = 19
+              Width = 123
+              Height = 17
+              Caption = #1052#1080#1085#1080#1084#1072#1083#1100#1085#1086#1075#1086' '#1091#1075#1083#1072
+              TabOrder = 0
+              OnClick = BaseCheckTRInNewSElementsClick
+            end
+            object UpDownBaseMinTrInNewSElement: TUpDown
+              Left = 223
+              Top = 17
+              Width = 15
+              Height = 22
+              Associate = BaseMinTrInNewSElement
+              Enabled = False
+              Min = 0
+              Max = 90
+              Position = 0
+              TabOrder = 1
+              Wrap = False
+            end
+            object BaseMinTrInNewSElement: TEdit
+              Left = 200
+              Top = 17
+              Width = 23
+              Height = 22
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              MaxLength = 2
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 2
+              Text = '0'
+            end
+            object BaseCheckMinSInNewSElements: TCheckBox
+              Left = 9
+              Top = 47
+              Width = 122
+              Height = 15
+              Caption = #1052#1080#1085#1080#1084'-'#1086#1081' '#1087#1083#1086#1097#1072#1076#1080
+              TabOrder = 3
+              OnClick = BaseCheckMinSInNewSElementsClick
+            end
+            object UpDownBaseMinSInNewSElement: TUpDown
+              Left = 224
+              Top = 43
+              Width = 15
+              Height = 22
+              Associate = BaseMinSInNewSElement
+              Enabled = False
+              Min = 0
+              Max = 9999
+              Position = 0
+              TabOrder = 4
+              Wrap = False
+            end
+            object BaseMinSInNewSElement: TEdit
+              Left = 201
+              Top = 43
+              Width = 23
+              Height = 22
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              MaxLength = 2
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 5
+              Text = '0'
+            end
+            object BtnFillBaseCheckTRInNewSElements: TButton
+              Left = 279
+              Top = 17
+              Width = 20
+              Height = 22
+              Caption = 'V'
+              Enabled = False
+              TabOrder = 6
+              OnClick = BtnFillBaseCheckTRInNewSElementsClick
+            end
+            object BtnFillBaseCheckMinSInNewSElements: TButton
+              Left = 279
+              Top = 43
+              Width = 20
+              Height = 22
+              Caption = 'V'
+              Enabled = False
+              TabOrder = 7
+              OnClick = BtnFillBaseCheckMinSInNewSElementsClick
+            end
+            object OutMinTrS: TEdit
+              Left = 240
+              Top = 18
+              Width = 40
+              Height = 20
+              AutoSelect = False
+              AutoSize = False
+              BiDiMode = bdRightToLeft
+              Color = clMoneyGreen
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlue
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              MaxLength = 2
+              ParentBiDiMode = False
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 8
+              Text = '25'
+            end
+            object OutMinS: TEdit
+              Left = 240
+              Top = 44
+              Width = 40
+              Height = 20
+              AutoSelect = False
+              AutoSize = False
+              BiDiMode = bdRightToLeft
+              Color = clMoneyGreen
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlue
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              MaxLength = 2
+              ParentBiDiMode = False
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 9
+              Text = '1'
+            end
+          end
+        end
+        object ChangeD: TTabSheet
+          Caption = #1050#1088#1080#1090#1077#1088#1080#1080' '#1087#1088#1086#1094#1077#1076#1091#1088#1099' "'#1057#1084#1077#1085#1072' '#1076#1080#1072#1075#1086#1085#1072#1083#1077#1081'"'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          object Posiotion: TGroupBox
+            Left = 0
+            Top = 0
+            Width = 314
+            Height = 89
+            Align = alTop
+            Caption = #1055#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077
+            TabOrder = 0
+            object PosRough: TRadioButton
+              Left = 8
+              Top = 24
+              Width = 153
+              Height = 17
+              Caption = #1043#1088#1091#1073#1086#1077' '#1087#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077
+              TabOrder = 0
+            end
+            object PosGravityCenter: TRadioButton
+              Left = 8
+              Top = 40
+              Width = 145
+              Height = 17
+              Caption = #1055#1086' '#1094#1077#1085#1090#1088#1091' '#1090#1103#1078#1077#1089#1090#1080
+              TabOrder = 1
+            end
+            object PosDoNotUse: TRadioButton
+              Left = 8
+              Top = 56
+              Width = 143
+              Height = 17
+              Caption = #1041#1077#1079' '#1087#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1103
+              Checked = True
+              TabOrder = 2
+              TabStop = True
+            end
+          end
+          object CheckTR: TGroupBox
+            Left = 0
+            Top = 89
+            Width = 314
+            Height = 52
+            Align = alTop
+            Caption = #1055#1088#1086#1074#1077#1088#1082#1072' '#1084#1080#1085#1080#1084#1072#1083#1100#1085#1086#1075#1086' '#1091#1075#1083#1072
+            Ctl3D = True
+            ParentCtl3D = False
+            TabOrder = 1
+            object Label1: TLabel
+              Left = 131
+              Top = 20
+              Width = 51
+              Height = 13
+              Caption = #1047#1085#1072#1095#1077#1085#1080#1077':'
+            end
+            object UseMinTR: TCheckBox
+              Left = 11
+              Top = 19
+              Width = 110
+              Height = 17
+              Caption = #1044#1077#1083#1072#1090#1100' '#1087#1088#1086#1074#1077#1088#1082#1091
+              TabOrder = 0
+              OnClick = UseMinTRClick
+            end
+            object UpDownMinTrunc: TUpDown
+              Left = 208
+              Top = 17
+              Width = 15
+              Height = 22
+              Associate = MinTrunc
+              Enabled = False
+              Min = 0
+              Max = 90
+              Position = 0
+              TabOrder = 1
+              Wrap = False
+            end
+            object MinTrunc: TEdit
+              Left = 185
+              Top = 17
+              Width = 23
+              Height = 22
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              MaxLength = 2
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 2
+              Text = '0'
+            end
+            object BtnFillMinTrunc: TButton
+              Left = 260
+              Top = 17
+              Width = 20
+              Height = 22
+              Caption = 'V'
+              Enabled = False
+              TabOrder = 3
+              OnClick = BtnFillMinTruncClick
+            end
+            object MinTrForDiag: TEdit
+              Left = 228
+              Top = 18
+              Width = 33
+              Height = 20
+              AutoSelect = False
+              AutoSize = False
+              BiDiMode = bdRightToLeft
+              Color = clMoneyGreen
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlue
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              MaxLength = 2
+              ParentBiDiMode = False
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 4
+              Text = '25'
+            end
+          end
+        end
+        object MeshNRS: TTabSheet
+          Caption = #1053#1077#1087#1088#1072#1074#1080#1083#1100#1085#1099#1081' '#1090#1088#1077#1091#1075#1086#1083#1100#1085#1080#1082
+          ImageIndex = 1
+          TabVisible = False
+          object NRS_TODO: TGroupBox
+            Left = 0
+            Top = 0
+            Width = 314
+            Height = 61
+            Align = alTop
+            Caption = 'E'#1089#1083#1080' '#1085#1072#1096#1083#1080' '#1091#1079#1077#1083', '#1090#1086
+            TabOrder = 0
+            object NRS_ChangeD: TRadioButton
+              Left = 10
+              Top = 20
+              Width = 121
+              Height = 17
+              Caption = #1057#1084#1077#1085#1080#1084' '#1076#1080#1072#1075#1086#1085#1072#1083#1100
+              TabOrder = 0
+              OnClick = NRS_ChangeDClick
+            end
+            object NRS_AppNewNode: TRadioButton
+              Left = 10
+              Top = 40
+              Width = 131
+              Height = 17
+              Caption = #1044#1086#1073#1072#1074#1080#1084' '#1085#1086#1074#1099#1081' '#1091#1079#1077#1083
+              Checked = True
+              TabOrder = 1
+              TabStop = True
+              OnClick = NRS_AppNewNodeClick
+            end
+          end
+          object NRS_Position: TGroupBox
+            Left = 0
+            Top = 139
+            Width = 314
+            Height = 73
+            Align = alBottom
+            Caption = #1057#1084#1077#1085#1072' '#1076#1080#1072#1075#1086#1085#1072#1083#1080
+            Enabled = False
+            TabOrder = 1
+            object NRS_PosRough: TRadioButton
+              Left = 8
+              Top = 14
+              Width = 153
+              Height = 17
+              Caption = #1043#1088#1091#1073#1086#1077' '#1087#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077
+              Enabled = False
+              TabOrder = 0
+            end
+            object NRS_PosGravityCenter: TRadioButton
+              Left = 8
+              Top = 30
+              Width = 145
+              Height = 17
+              Caption = #1055#1086' '#1094#1077#1085#1090#1088#1091' '#1090#1103#1078#1077#1089#1090#1080
+              Enabled = False
+              TabOrder = 1
+            end
+            object NRS_PosDoNotUse: TRadioButton
+              Left = 8
+              Top = 46
+              Width = 143
+              Height = 17
+              Caption = #1041#1077#1079' '#1087#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1103
+              Checked = True
+              Enabled = False
+              TabOrder = 2
+              TabStop = True
+            end
+          end
+          object NRS_PosNewNode: TGroupBox
+            Left = 0
+            Top = 61
+            Width = 314
+            Height = 78
+            Align = alClient
+            Caption = #1055#1086#1083#1086#1078#1077#1085#1080#1077' '#1085#1086#1074#1086#1075#1086' '#1091#1079#1083#1072
+            Enabled = False
+            TabOrder = 2
+            object NRS_Middle: TRadioButton
+              Left = 10
+              Top = 20
+              Width = 131
+              Height = 17
+              Caption = #1055#1086#1089#1077#1088#1077#1076#1080#1085#1077
+              Checked = True
+              Enabled = False
+              TabOrder = 0
+              TabStop = True
+            end
+            object NRS_Optimum: TRadioButton
+              Left = 10
+              Top = 40
+              Width = 113
+              Height = 17
+              Caption = #1054#1087#1090#1080#1084#1072#1083#1100#1085#1086#1077
+              Enabled = False
+              TabOrder = 1
+            end
+          end
+        end
+      end
+    end
+  end
+  object INFOPanel: TPanel
+    Left = 0
+    Top = 277
+    Width = 281
+    Height = 296
+    Align = alLeft
+    Caption = 'INFOPanel'
+    TabOrder = 1
+    object INFO: TLabel
+      Left = 2
+      Top = 267
+      Width = 25
+      Height = 13
+      Caption = 'INFO'
+      Visible = False
+    end
+    object INFO2: TLabel
+      Left = 2
+      Top = 279
+      Width = 31
+      Height = 13
+      Caption = 'INFO2'
+      Visible = False
+    end
+    object ProgressBar: TProgressBar
+      Left = 1
+      Top = 251
+      Width = 279
+      Height = 14
+      Align = alTop
+      Min = 0
+      Max = 100
+      Step = 1
+      TabOrder = 0
+    end
+    object START: TButton
+      Left = 210
+      Top = 10
+      Width = 51
+      Height = 25
+      Caption = 'START'
+      TabOrder = 1
+      Visible = False
+      OnClick = STARTClick
+    end
+    object INFOGroupBox: TGroupBox
+      Left = 1
+      Top = 1
+      Width = 279
+      Height = 250
+      Align = alTop
+      Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103
+      TabOrder = 2
+      object Nodes: TMemo
+        Left = 2
+        Top = 15
+        Width = 275
+        Height = 234
+        Align = alTop
+        Ctl3D = False
+        MaxLength = 99999
+        ParentCtl3D = False
+        ReadOnly = True
+        ScrollBars = ssVertical
+        TabOrder = 0
+        WantReturns = False
+      end
+    end
+    object ClearNodes: TButton
+      Left = 205
+      Top = 17
+      Width = 57
+      Height = 16
+      Caption = '<<'#1057#1090#1077#1088#1077#1090#1100
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      OnClick = ClearNodesClick
+    end
+  end
+  object Information: TGroupBox
+    Left = 281
+    Top = 277
+    Width = 611
+    Height = 296
+    Align = alClient
+    Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103
+    TabOrder = 2
+    object Logs: TPageControl
+      Left = 2
+      Top = 15
+      Width = 607
+      Height = 279
+      ActivePage = TabSheet2
+      Align = alClient
+      MultiLine = True
+      TabIndex = 4
+      TabOrder = 0
+      object LogChangeD: TTabSheet
+        Caption = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1076#1080#1072#1075#1086#1085#1072#1083#1077#1081
+        object LogDiag: TMemo
+          Left = 0
+          Top = 0
+          Width = 599
+          Height = 233
+          Align = alClient
+          Ctl3D = True
+          MaxLength = 9999999
+          ParentCtl3D = False
+          ReadOnly = True
+          ScrollBars = ssVertical
+          TabOrder = 0
+        end
+      end
+      object LogsT: TTabSheet
+        Caption = #1056#1072#1079#1073#1080#1077#1085#1080#1077' '#1090#1088#1077#1091#1075#1086#1083#1100#1085#1080#1082#1086#1074
+        ImageIndex = 4
+        object LogT: TMemo
+          Left = 0
+          Top = 0
+          Width = 599
+          Height = 255
+          Align = alClient
+          ReadOnly = True
+          ScrollBars = ssVertical
+          TabOrder = 0
+        end
+      end
+      object LogsSegments: TTabSheet
+        Caption = #1056#1072#1079#1073#1080#1077#1085#1080#1077' '#1089#1077#1075#1084#1077#1085#1090#1086#1074
+        ImageIndex = 5
+        object LogSS: TMemo
+          Left = 0
+          Top = 0
+          Width = 599
+          Height = 233
+          Align = alClient
+          ScrollBars = ssVertical
+          TabOrder = 0
+        end
+      end
+      object TabSheet3: TTabSheet
+        Caption = #1056#1072#1079#1073#1080#1077#1085#1080#1077' '#1082#1086#1085#1090#1091#1088#1072
+        ImageIndex = 8
+        object LogSE: TMemo
+          Left = 0
+          Top = 0
+          Width = 599
+          Height = 233
+          Align = alClient
+          ScrollBars = ssVertical
+          TabOrder = 0
+        end
+      end
+      object TabSheet2: TTabSheet
+        Caption = #1056#1072#1089#1095#1077#1090'    '
+        ImageIndex = 3
+        object Stop: TButton
+          Left = 80
+          Top = 30
+          Width = 371
+          Height = 111
+          Caption = #1055#1088#1077#1088#1074#1072#1090#1100' '#1088#1072#1089#1095#1077#1090
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -29
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          Visible = False
+          OnClick = StopClick
+        end
+        object SaveIfAlgWas: TButton
+          Left = 240
+          Top = 96
+          Width = 349
+          Height = 111
+          Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -29
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          Visible = False
+          OnClick = SaveIfAlgWasClick
+        end
+        object Roolback: TButton
+          Left = 8
+          Top = 97
+          Width = 233
+          Height = 111
+          Caption = #1042#1077#1088#1085#1091#1090#1100' '#1085#1072#1079#1072#1076
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -29
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
+          Visible = False
+          OnClick = RoolbackClick
+        end
+      end
+      object LogPosition: TTabSheet
+        Caption = #1055#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077' '#1091#1079#1083#1086#1074
+        ImageIndex = 2
+        object Memo1: TMemo
+          Left = 0
+          Top = 0
+          Width = 599
+          Height = 255
+          Align = alClient
+          BevelInner = bvLowered
+          BevelOuter = bvRaised
+          Ctl3D = True
+          MaxLength = 999999
+          ParentCtl3D = False
+          ReadOnly = True
+          ScrollBars = ssVertical
+          TabOrder = 0
+        end
+      end
+      object TabSheet1: TTabSheet
+        Caption = #1059#1075#1083#1099' '#1074' '#1050#1069
+        ImageIndex = 1
+        OnShow = TabSheet1Show
+        object LogTR: TMemo
+          Left = 0
+          Top = 0
+          Width = 599
+          Height = 233
+          Align = alClient
+          Ctl3D = True
+          MaxLength = 999999
+          ParentCtl3D = False
+          ReadOnly = True
+          ScrollBars = ssVertical
+          TabOrder = 0
+        end
+      end
+      object LogSum: TTabSheet
+        Caption = #1055#1083#1086#1097#1072#1076#1080' '#1050#1069
+        ImageIndex = 6
+        OnShow = CalcSumEClick
+        object LogSumm: TMemo
+          Left = 0
+          Top = 0
+          Width = 599
+          Height = 233
+          Align = alClient
+          ReadOnly = True
+          ScrollBars = ssVertical
+          TabOrder = 0
+        end
+      end
+      object NodeALL: TTabSheet
+        Caption = #1059#1079#1083#1099' '#1089#1077#1090#1082#1080
+        ImageIndex = 7
+        OnShow = ALLNodesClick
+        object NodeA: TMemo
+          Left = 0
+          Top = 0
+          Width = 599
+          Height = 233
+          Align = alClient
+          ReadOnly = True
+          ScrollBars = ssVertical
+          TabOrder = 0
+        end
+      end
+      object Statistics: TTabSheet
+        Caption = #1057#1088#1072#1074#1085#1077#1085#1080#1077' '#1080' '#1089#1090#1072#1090#1080#1089#1090#1080#1082#1072
+        ImageIndex = 9
+        object Varinat0: TGroupBox
+          Left = 0
+          Top = 0
+          Width = 180
+          Height = 233
+          Align = alLeft
+          Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1080#1089#1093#1086#1076#1085#1086#1081' '#1089#1077#1090#1082#1077
+          TabOrder = 0
+          object Var0minT: TLabeledEdit
+            Left = 120
+            Top = 20
+            Width = 50
+            Height = 21
+            EditLabel.Width = 101
+            EditLabel.Height = 13
+            EditLabel.Caption = #1052#1080#1085#1080#1084#1072#1083#1100#1085#1099#1081' '#1091#1075#1086#1083':'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 0
+          end
+          object Var0minS: TLabeledEdit
+            Left = 120
+            Top = 42
+            Width = 50
+            Height = 21
+            EditLabel.Width = 101
+            EditLabel.Height = 13
+            EditLabel.Caption = #1052#1080#1085#1080#1084#1072#1083#1100#1085#1072#1103' S '#1050#1069':'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 1
+          end
+          object Var0maxS: TLabeledEdit
+            Left = 120
+            Top = 65
+            Width = 50
+            Height = 21
+            EditLabel.Width = 107
+            EditLabel.Height = 13
+            EditLabel.Caption = #1052#1072#1082#1089#1080#1084#1072#1083#1100#1085#1072#1103' S '#1050#1069':'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 5
+          end
+          object Var0numE: TLabeledEdit
+            Left = 120
+            Top = 88
+            Width = 50
+            Height = 21
+            EditLabel.Width = 79
+            EditLabel.Height = 13
+            EditLabel.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1050#1069':'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 3
+          end
+          object Var0numN: TLabeledEdit
+            Left = 120
+            Top = 110
+            Width = 50
+            Height = 21
+            EditLabel.Width = 94
+            EditLabel.Height = 13
+            EditLabel.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1091#1079#1083#1086#1074':'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 6
+          end
+          object Var0arS: TLabeledEdit
+            Left = 120
+            Top = 133
+            Width = 50
+            Height = 21
+            EditLabel.Width = 111
+            EditLabel.Height = 13
+            EditLabel.Caption = #1057#1088#1077#1076#1085#1103#1103' '#1087#1083#1086#1097#1072#1076#1100' '#1050#1069':'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 4
+          end
+          object Var0argS: TLabeledEdit
+            Left = 125
+            Top = 156
+            Width = 45
+            Height = 21
+            EditLabel.Width = 118
+            EditLabel.Height = 13
+            EditLabel.Caption = #1057#1082#1086#1088#1088#1077#1082#1090#1080#1088'-'#1072#1103' '#1089#1088#1077#1076'. S:'
+            EditLabel.Transparent = True
+            EditLabel.Layout = tlBottom
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 2
+          end
+          object Var0Refresh: TButton
+            Left = 40
+            Top = 190
+            Width = 75
+            Height = 25
+            Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+            TabOrder = 7
+            OnClick = Var0RefreshClick
+          end
+        end
+        object Varinat1: TGroupBox
+          Left = 180
+          Top = 0
+          Width = 180
+          Height = 233
+          Align = alLeft
+          Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1090#1077#1082#1091#1097#1077#1081' '#1089#1077#1090#1082#1077
+          TabOrder = 1
+          object Var1numN: TLabeledEdit
+            Left = 120
+            Top = 109
+            Width = 50
+            Height = 21
+            EditLabel.Width = 94
+            EditLabel.Height = 13
+            EditLabel.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1091#1079#1083#1086#1074':'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 0
+          end
+          object Var1numE: TLabeledEdit
+            Left = 120
+            Top = 87
+            Width = 50
+            Height = 21
+            EditLabel.Width = 79
+            EditLabel.Height = 13
+            EditLabel.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1050#1069':'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 1
+          end
+          object Var1minT: TLabeledEdit
+            Left = 120
+            Top = 20
+            Width = 50
+            Height = 21
+            EditLabel.Width = 101
+            EditLabel.Height = 13
+            EditLabel.Caption = #1052#1080#1085#1080#1084#1072#1083#1100#1085#1099#1081' '#1091#1075#1086#1083':'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 2
+          end
+          object Var1minS: TLabeledEdit
+            Left = 120
+            Top = 42
+            Width = 50
+            Height = 21
+            EditLabel.Width = 101
+            EditLabel.Height = 13
+            EditLabel.Caption = #1052#1080#1085#1080#1084#1072#1083#1100#1085#1072#1103' S '#1050#1069':'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 3
+          end
+          object Var1maxS: TLabeledEdit
+            Left = 120
+            Top = 64
+            Width = 50
+            Height = 21
+            EditLabel.Width = 107
+            EditLabel.Height = 13
+            EditLabel.Caption = #1052#1072#1082#1089#1080#1084#1072#1083#1100#1085#1072#1103' S '#1050#1069':'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 4
+          end
+          object Var1arS: TLabeledEdit
+            Left = 120
+            Top = 132
+            Width = 50
+            Height = 21
+            EditLabel.Width = 111
+            EditLabel.Height = 13
+            EditLabel.Caption = #1057#1088#1077#1076#1085#1103#1103' '#1087#1083#1086#1097#1072#1076#1100' '#1050#1069':'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 5
+          end
+          object Var1Refresh: TButton
+            Left = 40
+            Top = 190
+            Width = 75
+            Height = 25
+            Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+            TabOrder = 6
+            OnClick = Var1RefreshClick
+          end
+          object Var1argS: TLabeledEdit
+            Left = 125
+            Top = 156
+            Width = 45
+            Height = 21
+            EditLabel.Width = 115
+            EditLabel.Height = 13
+            EditLabel.Caption = #1057#1082#1086#1088#1088#1077#1082#1090#1080#1088'-'#1072#1103' '#1089#1088#1077#1076'.S:'
+            EditLabel.Transparent = True
+            LabelPosition = lpLeft
+            LabelSpacing = 4
+            ReadOnly = True
+            TabOrder = 7
+          end
+        end
+        object Summary: TGroupBox
+          Left = 360
+          Top = 0
+          Width = 239
+          Height = 233
+          Align = alClient
+          Caption = #1057#1088#1072#1074#1085#1080#1090#1077#1083#1100#1085#1099#1077' '#1087#1086#1082#1072#1079#1072#1090#1077#1083#1080
+          TabOrder = 2
+          object SummaryMinT: TLabeledEdit
+            Left = 180
+            Top = 20
+            Width = 50
+            Height = 21
+            EditLabel.Width = 158
+            EditLabel.Height = 13
+            EditLabel.Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1084#1080#1085#1080#1084'-'#1099#1093' '#1091#1075#1083#1086#1074', %:'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 0
+          end
+          object SummaryMinS: TLabeledEdit
+            Left = 180
+            Top = 40
+            Width = 50
+            Height = 21
+            EditLabel.Width = 154
+            EditLabel.Height = 13
+            EditLabel.Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1084#1080#1085#1080#1084'-'#1099#1093' S '#1050#1069', %:'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 1
+          end
+          object SummaryMaxS: TLabeledEdit
+            Left = 180
+            Top = 60
+            Width = 50
+            Height = 21
+            EditLabel.Width = 160
+            EditLabel.Height = 13
+            EditLabel.Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1084#1072#1082#1089#1080#1084'-'#1099#1093' S '#1050#1069', %:'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 2
+          end
+          object SummaryNumE: TLabeledEdit
+            Left = 180
+            Top = 80
+            Width = 50
+            Height = 21
+            EditLabel.Width = 152
+            EditLabel.Height = 13
+            EditLabel.Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1072' '#1050#1069', %:'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 3
+          end
+          object SummaryNumN: TLabeledEdit
+            Left = 181
+            Top = 101
+            Width = 50
+            Height = 21
+            EditLabel.Width = 167
+            EditLabel.Height = 13
+            EditLabel.Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1072' '#1091#1079#1083#1086#1074', %:'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 4
+          end
+          object SummaryArS: TLabeledEdit
+            Left = 181
+            Top = 121
+            Width = 50
+            Height = 21
+            EditLabel.Width = 145
+            EditLabel.Height = 13
+            EditLabel.Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1089#1088#1077#1076#1085#1080#1093' S '#1050#1069', %:'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 5
+          end
+          object SummaryArgS: TLabeledEdit
+            Left = 181
+            Top = 141
+            Width = 50
+            Height = 21
+            EditLabel.Width = 175
+            EditLabel.Height = 13
+            EditLabel.Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1089#1082#1086#1088#1077#1082#1090'. '#1089#1088#1077#1076#1085#1080#1093' S, %:'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 6
+          end
+          object SummaryRefresh: TButton
+            Left = 80
+            Top = 190
+            Width = 75
+            Height = 25
+            Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+            TabOrder = 7
+            OnClick = SummaryRefreshClick
+          end
+          object SummaryArgMS: TLabeledEdit
+            Left = 181
+            Top = 161
+            Width = 50
+            Height = 21
+            EditLabel.Width = 131
+            EditLabel.Height = 13
+            EditLabel.Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' minS/maxS, %:'
+            LabelPosition = lpLeft
+            LabelSpacing = 2
+            ReadOnly = True
+            TabOrder = 8
+          end
+        end
+      end
+    end
+  end
+end

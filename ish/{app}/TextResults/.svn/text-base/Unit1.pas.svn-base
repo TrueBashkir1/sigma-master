@@ -1,0 +1,253 @@
+unit Unit1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, ExtCtrls, ComCtrls, Buttons, PrnServ, Printers;
+
+const
+     IniFileName='sigma32.ini';
+type
+  TForm1 = class(TForm)
+    StatusBar1: TStatusBar;
+    ListBox1: TListBox;
+    Splitter1: TSplitter;
+    Memo1: TMemo;
+    Panel1: TPanel;
+    SpeedButton1: TSpeedButton;
+    SaveDlg: TSaveDialog;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ListBox1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure SaveForm(Name:string);
+    procedure LoadForm(Name:string);
+  end;
+
+var
+  Form1: TForm1;
+  FileName:String;
+   LsB: string;
+implementation
+uses inifiles, Registry;
+const
+     Sigma32_exe='Sigma32.exe';
+     StringReg = '\Software\MAI.609\SIGMA32\3.0';
+     Plugin_Edit_Form=1;
+     Plugin_Edit_Fortran=2;
+
+
+{$R *.DFM}
+
+procedure TForm1.LoadForm(Name:string);
+var
+     Registry:TRegistry;
+begin
+     Registry        :=TRegistry.Create;
+     Registry.RootKey:=HKEY_CURRENT_USER;
+     if Registry.OpenKeyReadOnly(StringReg+'\'+Name) then
+     begin
+          if Registry.ValueExists('Top') then
+               Top:=Registry.ReadInteger('Top');
+          if Registry.ValueExists('Left') then
+               Left:=Registry.ReadInteger('Left');
+          if Registry.ValueExists('Width') then
+               Width:=Registry.ReadInteger('Width');
+          if Registry.ValueExists('Height') then
+               Height:=Registry.ReadInteger('Height');
+          if Registry.ValueExists('Maximized') then
+          begin
+               if Registry.ReadBool('Maximized') then WindowState:=wsMaximized
+               else WindowState:=wsNormal;
+          end;
+     end;
+     Registry.free;
+end;
+procedure TForm1.SaveForm(Name:string);
+var
+     Registry:TRegistry;
+begin
+     Registry        :=TRegistry.Create;
+     Registry.RootKey:=HKEY_CURRENT_USER;
+     if Registry.OpenKey(StringReg+'\'+Name,true) then
+     begin
+          Registry.WriteBool('Maximized',WindowState=wsMaximized);
+          if WindowState=wsMaximized then WindowState:=wsNormal;
+          Registry.WriteInteger('Top',Top);
+          Registry.WriteInteger('Left',Left);
+          Registry.WriteInteger('Width',Width);
+          Registry.WriteInteger('Height',Height);
+     end;
+     Registry.free;
+end;
+procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+     Action:=caFree;
+end;
+
+procedure TForm1.ListBox1Click(Sender: TObject);
+var
+     cur:Integer;
+     s:string;
+     Handle:TextFile;
+     start:boolean;
+     st,fn:string;
+     IniFile:TIniFile;
+begin
+     cur:=ListBox1.ItemIndex;
+     Memo1.Lines.Clear;
+     IniFile:=TIniFile.Create(ExtractFilePath(ParamStr(0))+IniFileName);
+     with IniFile do
+     begin
+          st := ReadString('ResultSets','Start'+IntToStr(cur),'');
+          fn := ReadString('ResultSets','Finish'+IntToStr(cur),'');
+          if (st='') or (fn='') then cur:=0;
+     end;
+     IniFile.Free;
+     if FileExists(FileName) then
+     begin
+          if (cur=0) then Memo1.Lines.LoadFromFile(FileName)
+          else begin
+               if (cur<=14) and (cur>=1) then
+               begin
+                    Memo1.Lines.BeginUpdate;
+                    AssignFile(Handle,FileName);
+                    Reset(Handle);
+                    Start:=false;
+                    While not EOF(Handle) do
+                    begin
+                         ReadLn(Handle,s);
+                         if (pos(st,s)<>0) then Start:=True;
+                         if (Start) then Memo1.lines.Add(s);
+                         if (pos(fn,s)<>0) then Start:=False;
+
+                    end;
+                    CloseFile(Handle);
+                    Memo1.Lines.EndUpdate;
+               end
+          end;
+     end;
+end;
+
+{
+Функция для получение
+имени проекта из
+полного пути к файлу проекта
+который лежит в реестре
+}
+function GetProjectName:String;
+var
+  projName:String;
+  tempStr:String;
+  slashPos:Integer;
+  Registry:TRegistry;
+begin
+      projName := '';
+     Registry        :=TRegistry.Create;
+     Registry.RootKey:=HKEY_CURRENT_USER;
+     if Registry.OpenKey(StringReg, true) then
+     begin
+          if Registry.ValueExists('InputFileName') then
+          begin
+          // Получаем полный путь до файла проекта
+            tempStr:=Registry.ReadString('InputFileName');
+
+            // Получаем только имя файла проекта
+            while(Pos('\',tempStr) <> 0) do
+            begin
+              slashPos:= Pos('\',tempStr);
+              Delete(tempStr,1,slashPos);
+            end;
+            Delete(tempStr,Pos('.',tempStr),Length(tempStr));
+            // Удаляем расширение и получаем имя проекта
+            projName:= tempStr;
+          end;
+     end;
+     Result := projName;
+End;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+    Caption:= Caption + ' ' + GetProjectName;
+     ListBox1.ItemIndex:=0;
+     ListBox1Click(nil);
+end;
+
+procedure TForm1.FormDestroy(Sender: TObject);
+begin
+     Form1:=nil;
+end;
+
+procedure TForm1.FormResize(Sender: TObject);
+var
+dop :integer;
+cfF: TIniFile;
+SigmaLocation:string;
+i:integer;
+begin
+dop:=0;
+     top:=0;
+          //определение места расположения Сигмы
+     SigmaLocation   :=LowerCase(ExtractFilePath(ParamStr(0)));
+     i:=pos('\bin',SigmaLocation);
+     if i>0 then SetLength(SigmaLocation,i);
+     cfF:=TIniFile.Create(SigmaLocation+'bin\sforms.ini');
+
+     //      cfF:=TIniFile.Create('sforms.ini');
+      try
+                dop:=CfF.ReadInteger('Главная','Высота',top);
+                top:=dop-StatusBar1.Height-8;
+                left:=0;
+                Height:=Screen.Height-dop;
+                cfF.Free;
+      except
+                MessageDlg('Не могу прочитать файл sforms.ini!',mtError,[mbOk],0);
+      end;
+
+
+     Constraints.MaxHeight:=Screen.Height-dop;
+     top:=dop-StatusBar1.Height-8;
+
+end;
+
+procedure TForm1.SpeedButton2Click(Sender: TObject);
+var ttt:TPrintService;
+begin
+        ttt.PrinterSetupDialog;
+end;
+
+  {************************************************}
+  //Сохранение выделенного раздела
+procedure TForm1.SpeedButton1Click(Sender: TObject);
+begin
+    if SaveDlg.Execute then
+        begin
+            Memo1.Lines.SaveToFile(SaveDlg.FileName);
+        end;
+end;
+
+procedure TForm1.SpeedButton3Click(Sender: TObject);
+var
+        stroka: system.text;
+        i: integer;
+begin
+   AssignPrn(Stroka);
+   rewrite(Stroka);
+
+   printer.Canvas.Font:=Memo1.Font;
+   for i:=0 to Memo1.Lines.Count-1 do Writeln(Stroka, Memo1.lines[i]);
+   System.Close(Stroka);
+
+end;
+end.

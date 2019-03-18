@@ -1,0 +1,240 @@
+unit Run_Result;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, TeEngine, Series, ExtCtrls, TeeProcs, Chart;
+
+type
+  TStatistics_methods_Run_Result = class(TForm)
+    GroupBox2: TGroupBox;
+    Button1: TButton;
+    Grafic: TChart;
+    Series1: TLineSeries;
+    Series2: TLineSeries;
+    GroupBox1: TGroupBox;
+    Param_1: TRadioButton;
+    Param_2: TRadioButton;
+    Param_3: TRadioButton;
+    GroupBox3: TGroupBox;
+    Mater_1: TRadioButton;
+    Mater_2: TRadioButton;
+    Mater_3: TRadioButton;
+    GroupBox4: TGroupBox;
+    Param_4: TRadioButton;
+    Label5: TLabel;
+    Dopust_napr_param1: TEdit;
+    Dopust_napr_param2: TEdit;
+    Dopust_napr_param3: TEdit;
+    Label6: TLabel;
+    znach_param_3: TEdit;
+    znach_param_2: TEdit;
+    znach_param_1: TEdit;
+    znach_param_4: TEdit;
+    Series3: TLineSeries;
+    Series4: TLineSeries;
+    Label7: TLabel;
+    znach_param_4_opt: TEdit;
+    znach_param_3_opt: TEdit;
+    znach_param_2_opt: TEdit;
+    znach_param_1_opt: TEdit;
+    criter_param_3: TComboBox;
+    criter_param_2: TComboBox;
+    criter_param_1: TComboBox;
+    Button3: TButton;
+    GroupBox5: TGroupBox;
+    criter_param_4: TComboBox;
+    Label8: TLabel;
+    param_4_pogr: TEdit;
+    param_1_pogr: TEdit;
+    param_3_pogr: TEdit;
+    param_2_pogr: TEdit;
+    Label9: TLabel;
+    Label15: TLabel;
+    Ves_param_1: TComboBox;
+    Ves_param_2: TComboBox;
+    Ves_param_3: TComboBox;
+    Ves_param_4: TComboBox;
+    Main_rez: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Iter: TEdit;
+    Time: TEdit;
+    Ver_Dist: TEdit;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    procedure Mater_2Click(Sender: TObject);
+    procedure Mater_3Click(Sender: TObject);
+    procedure Mater_1Click(Sender: TObject);
+    procedure Param_1Click(Sender: TObject);
+    procedure Param_2Click(Sender: TObject);
+    procedure Param_3Click(Sender: TObject);
+    procedure Param_4Click(Sender: TObject);
+    procedure criter_param_1Change(Sender: TObject);
+    procedure criter_param_2Change(Sender: TObject);
+    procedure criter_param_3Change(Sender: TObject);
+    procedure criter_param_4Change(Sender: TObject);
+    procedure Ves_param_1Change(Sender: TObject);
+    procedure Ves_param_2Change(Sender: TObject);
+    procedure Ves_param_3Change(Sender: TObject);
+    procedure Ves_param_4Change(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Statistics_methods_Run_Result: TStatistics_methods_Run_Result;
+
+implementation
+
+uses Main, MainForm, Unit3, WaitForm;
+
+{$R *.dfm}
+
+procedure TStatistics_methods_Run_Result.Mater_2Click(Sender: TObject);
+begin
+Statistics_methods_Main.postroenie_graf_res;
+end;
+
+procedure TStatistics_methods_Run_Result.Mater_3Click(Sender: TObject);
+begin
+Statistics_methods_Main.postroenie_graf_res;
+end;
+
+procedure TStatistics_methods_Run_Result.Mater_1Click(Sender: TObject);
+begin
+Statistics_methods_Main.postroenie_graf_res;
+end;
+
+procedure TStatistics_methods_Run_Result.Param_1Click(Sender: TObject);
+begin
+Statistics_methods_Main.postroenie_graf_res;
+end;
+
+procedure TStatistics_methods_Run_Result.Param_2Click(Sender: TObject);
+begin
+Statistics_methods_Main.postroenie_graf_res;
+end;
+
+procedure TStatistics_methods_Run_Result.Param_3Click(Sender: TObject);
+begin
+Statistics_methods_Main.postroenie_graf_res;
+end;
+
+procedure TStatistics_methods_Run_Result.Param_4Click(Sender: TObject);
+begin
+Statistics_methods_Main.postroenie_graf_res;
+end;
+
+procedure TStatistics_methods_Run_Result.criter_param_1Change(
+  Sender: TObject);
+begin
+Statistics_methods_Main.opredelenie_luchshego_reshenia();
+end;
+
+procedure TStatistics_methods_Run_Result.criter_param_2Change(
+  Sender: TObject);
+begin
+Statistics_methods_Main.opredelenie_luchshego_reshenia();
+end;
+
+procedure TStatistics_methods_Run_Result.criter_param_3Change(
+  Sender: TObject);
+begin
+Statistics_methods_Main.opredelenie_luchshego_reshenia();
+end;
+
+procedure TStatistics_methods_Run_Result.criter_param_4Change(
+  Sender: TObject);
+begin
+Statistics_methods_Main.opredelenie_luchshego_reshenia();
+end;
+
+procedure TStatistics_methods_Run_Result.Ves_param_1Change(
+  Sender: TObject);
+begin
+Statistics_methods_Main.opredelenie_luchshego_reshenia();
+end;
+
+procedure TStatistics_methods_Run_Result.Ves_param_2Change(
+  Sender: TObject);
+begin
+Statistics_methods_Main.opredelenie_luchshego_reshenia();
+end;
+
+procedure TStatistics_methods_Run_Result.Ves_param_3Change(
+  Sender: TObject);
+begin
+Statistics_methods_Main.opredelenie_luchshego_reshenia();
+end;
+
+procedure TStatistics_methods_Run_Result.Ves_param_4Change(
+  Sender: TObject);
+begin
+Statistics_methods_Main.opredelenie_luchshego_reshenia();
+end;
+
+procedure TStatistics_methods_Run_Result.Button3Click(Sender: TObject);
+ var
+    Name, Znach: string;
+begin
+
+    //{->устанавливаем новые ƒэфолтные значени€ измен€емых параметров
+    // дл€ 1-го параметра
+    Name := Statistics_methods_Main.change_value_1_name.Text; // берЄм из гу€ название переменной
+    Znach := znach_param_1_opt.Text;                          // берЄм из гу€ новое значение переменной
+    Statistics_methods_Main.UstanovkaParametra(Statistics_methods_Main, Name, Znach);  //устанавливаем параметр
+    // дл€ 1-го параметра
+
+       // дл€ 2-го параметра
+    Name := Statistics_methods_Main.change_value_2_name.Text; // берЄм из гу€ название переменной
+    Znach := znach_param_2_opt.Text;                          // берЄм из гу€ новое значение переменной
+    Statistics_methods_Main.UstanovkaParametra(Statistics_methods_Main, Name, Znach);  //устанавливаем параметр
+    // дл€ 2-го параметра
+
+       // дл€ 3-го параметра
+    Name := Statistics_methods_Main.change_value_3_name.Text; // берЄм из гу€ название переменной
+    Znach := znach_param_3_opt.Text;                          // берЄм из гу€ новое значение переменной
+    Statistics_methods_Main.UstanovkaParametra(Statistics_methods_Main, Name, Znach);  //устанавливаем параметр
+    // дл€ 1-го параметра
+
+       // дл€ 4-го параметра
+    Name := Statistics_methods_Main.change_value_4_name.Text; // берЄм из гу€ название переменной
+    Znach := znach_param_4_opt.Text;                          // берЄм из гу€ новое значение переменной
+    Statistics_methods_Main.UstanovkaParametra(Statistics_methods_Main, Name, Znach);  //устанавливаем параметр
+    // дл€ 4-го параметра
+    //{<-устанавливаем новые ƒэфолтные значени€ измен€емых параметров
+
+
+    //{->–асчЄт с  новыми ƒэфолтными параметрами
+    MainForm1.RunClick(Form3);
+    WaitForm1.StartShow('ћетод —татист. »спыт. примен€ет новые значени€');
+    repeat
+        Application.ProcessMessages;
+    until WaitForm1.FileExecuted = false;
+    //{<-–асчЄт с  новыми ƒэфолтными параметрами
+
+    //{закрываем окно результатов расчЄта
+    Statistics_methods_Run_Result.Close;
+
+end;
+
+
+
+    procedure TStatistics_methods_Run_Result.Button1Click(Sender: TObject);
+begin
+    Statistics_methods_Run_Result.Close;
+end;
+
+end.

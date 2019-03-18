@@ -1,0 +1,118 @@
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\sigma6.0c\EXAMPL~1\BOUND.for"
+f:\sigma6.0c\EXAMPL~1\BOUND.for
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\sigma6.0c\EXAMPL~1\FORCE.for"
+f:\sigma6.0c\EXAMPL~1\FORCE.for
+f:\sigma6.0c\EXAMPL~1\FORCE.for(65): warning FOR4269: unused dummy argument RSUM
+f:\sigma6.0c\EXAMPL~1\FORCE.for(65): warning FOR4269: unused dummy argument NB
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\GRIDDM.for"
+f:\source\SOURCE~1\GRIDDM.for
+f:\source\SOURCE~1\GRIDDM.for(468): warning FOR4280: unused local variable IP
+f:\source\SOURCE~1\GRIDDM.for(468): warning FOR4280: unused local variable IN
+f:\source\SOURCE~1\GRIDDM.for(468): warning FOR4270: unused symbol OP
+f:\source\SOURCE~1\GRIDDM.for(468): warning FOR4270: unused symbol NODEY
+f:\source\SOURCE~1\GRIDDM.for(468): warning FOR4270: unused symbol NODEX
+f:\source\SOURCE~1\GRIDDM.for(468): warning FOR4280: unused local variable GLOB
+f:\source\SOURCE~1\GRIDDM.for(468): warning FOR4270: unused symbol CORD1
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\REGULA~1.FOR"
+f:\source\SOURCE~1\REGULA~1.FOR
+f:\source\SOURCE~1\REGULA~1.FOR(211): warning FOR4270: unused symbol NOTMOVE
+f:\source\SOURCE~1\REGULA~1.FOR(211): warning FOR4270: unused symbol J
+f:\source\SOURCE~1\REGULA~1.FOR(211): warning FOR4270: unused symbol Y1
+f:\source\SOURCE~1\REGULA~1.FOR(211): warning FOR4270: unused symbol X1
+f:\source\SOURCE~1\REGULA~1.FOR(211): warning FOR4270: unused symbol MM
+f:\source\SOURCE~1\REGULA~1.FOR(211): warning FOR4269: unused dummy argument NCOL
+f:\source\SOURCE~1\REGULA~1.FOR(211): warning FOR4269: unused dummy argument NROWS
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\FIND_M~1.FOR"
+f:\source\SOURCE~1\FIND_M~1.FOR
+f:\source\SOURCE~1\FIND_M~1.FOR(55): warning FOR4270: unused symbol IFM
+f:\source\SOURCE~1\FIND_M~1.FOR(55): warning FOR4280: unused local variable NUMVAL
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\FINDNODD.for"
+f:\source\SOURCE~1\FINDNODD.for
+f:\source\SOURCE~1\FINDNODD.for(34): warning FOR4270: unused symbol MAX1
+f:\source\SOURCE~1\FINDNODD.for(34): warning FOR4269: unused dummy argument NTMOVE
+f:\source\SOURCE~1\FINDNODD.for(48): warning FOR4269: unused dummy argument IMAT
+f:\source\SOURCE~1\FINDNODD.for(48): warning FOR4269: unused dummy argument NEL
+f:\source\SOURCE~1\FINDNODD.for(48): warning FOR4269: unused dummy argument NMAT
+f:\source\SOURCE~1\FINDNODD.for(48): warning FOR4269: unused dummy argument NRG
+f:\source\SOURCE~1\FINDNODD.for(70): warning FOR4269: unused dummy argument NOP
+f:\source\SOURCE~1\FINDNODD.for(70): warning FOR4269: unused dummy argument CORD
+f:\source\SOURCE~1\FINDNODD.for(70): warning FOR4269: unused dummy argument IMAT
+f:\source\SOURCE~1\FINDNODD.for(70): warning FOR4269: unused dummy argument NMAT
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\GET_STAR.for"
+f:\source\SOURCE~1\GET_STAR.for
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\GENRCM.for"
+f:\source\SOURCE~1\GENRCM.for
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\STSM.for"
+f:\source\SOURCE~1\STSM.for
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\ROOTLS.for"
+f:\source\SOURCE~1\ROOTLS.for
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\FORMDD.for"
+f:\source\SOURCE~1\FORMDD.for
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\MGSDTR.for"
+f:\source\SOURCE~1\MGSDTR.for
+f:\source\SOURCE~1\MGSDTR.for(83): warning FOR4270: unused symbol IPR
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\RCMSLV.for"
+f:\source\SOURCE~1\RCMSLV.for
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\ESFCT.for"
+f:\source\SOURCE~1\ESFCT.for
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\ELSLV.for"
+f:\source\SOURCE~1\ELSLV.for
+f:\source\SOURCE~1\ELSLV.for(43): warning FOR4270: unused symbol CONT
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\EUSLV.for"
+f:\source\SOURCE~1\EUSLV.for
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\STRDD.for"
+f:\source\SOURCE~1\STRDD.for
+f:\source\SOURCE~1\STRDD.for(60): warning FOR4269: unused dummy argument DD
+f:\source\SOURCE~1\STRDD.for(60): warning FOR4269: unused dummy argument NP
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\QMDMRG.for"
+f:\source\SOURCE~1\QMDMRG.for
+f:\source\SOURCE~1\QMDMRG.for(124): warning FOR4265: symbol DEG0 referenced but not set
+f:\source\SOURCE~1\QMDMRG.for(124): warning FOR4269: unused dummy argument MARKERDEG0
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\QMDQT.for"
+f:\source\SOURCE~1\QMDQT.for
+f:\source\SOURCE~1\QMDQT.for(72): warning FOR4270: unused symbol LINKNABOR
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\QMDRCH.for"
+f:\source\SOURCE~1\QMDRCH.for
+f:\source\SOURCE~1\QMDRCH.for(80): warning FOR4265: symbol ISTART referenced but not set
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\QMDUPD.for"
+f:\source\SOURCE~1\QMDUPD.for
+f:\source\SOURCE~1\QMDUPD.for(95): warning FOR4270: unused symbol ROOT
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\DATA.for"
+f:\source\SOURCE~1\DATA.for
+f:\source\SOURCE~1\DATA.for(135): warning FOR4270: unused symbol FORM
+f:\source\SOURCE~1\DATA.for(135): warning FOR4270: unused symbol IMAT
+f:\source\SOURCE~1\DATA.for(135): warning FOR4269: unused dummy argument DD
+f:\source\SOURCE~1\DATA.for(135): warning FOR4269: unused dummy argument NFP
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\DGRIDD.for"
+f:\source\SOURCE~1\DGRIDD.for
+f:\source\SOURCE~1\DGRIDD.for(46): warning FOR4270: unused symbol N
+f:\source\SOURCE~1\DGRIDD.for(46): warning FOR4269: unused dummy argument ZP
+f:\source\SOURCE~1\DGRIDD.for(46): warning FOR4280: unused local variable PI
+f:\source\SOURCE~1\DGRIDD.for(46): warning FOR4280: unused local variable NEL
+f:\source\SOURCE~1\DGRIDD.for(46): warning FOR4280: unused local variable NB
+f:\source\SOURCE~1\DGRIDD.for(46): warning FOR4280: unused local variable NBW
+f:\source\SOURCE~1\DGRIDD.for(46): warning FOR4280: unused local variable IP
+f:\source\SOURCE~1\DGRIDD.for(46): warning FOR4280: unused local variable IO
+f:\source\SOURCE~1\DGRIDD.for(46): warning FOR4280: unused local variable IN
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\PRNTDD.for"
+f:\source\SOURCE~1\PRNTDD.for
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\RCM.for"
+f:\source\SOURCE~1\RCM.for
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\RENMDD.for"
+f:\source\SOURCE~1\RENMDD.for
+f:\source\SOURCE~1\RENMDD.for(116): warning FOR4269: unused dummy argument RCHESET
+f:\source\SOURCE~1\RENMDD.for(116): warning FOR4270: unused symbol XENV
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\GENQMD.for"
+f:\source\SOURCE~1\GENQMD.for
+f:\source\SOURCE~1\GENQMD.for(157): warning FOR4270: unused symbol NEQNCS
+f:\source\SOURCE~1\GENQMD.for(157): warning FOR4270: unused symbol IPCH
+f:\source\SOURCE~1\GENQMD.for(157): warning FOR4270: unused symbol ADJENCYBC
+f:\source\SOURCE~1\GENQMD.for(157): warning FOR4269: unused dummy argument NOFSB
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\DEGREE.for"
+f:\source\SOURCE~1\DEGREE.for
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\FNROOT.for"
+f:\source\SOURCE~1\FNROOT.for
+	fl32.exe /Zi /I "f:\sigma6.0c\EXAMPL~1\Obj/" /c /nologo /Fo"f:\sigma6.0c\EXAMPL~1\Obj/" /Fd"f:\sigma6.0c\EXAMPL~1\Obj\example1.pdb" "f:\source\SOURCE~1\FNENDD.for"
+f:\source\SOURCE~1\FNENDD.for
+	link.exe @C:\DOCUME~1\9335~1\LOCALS~1\Temp\nma03012.
+LINK : LNK6004: f:\sigma6.0c\EXAMPL~1\Obj/example1.exe not found or not built by the last incremental link; performing full link

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="Windows-1252" standalone="No" ?>
+<!--This is the configuration and state file for Notepad++ Change Markers.-->
+<!--These values should not be changed manually.-->
+<NotepadPlus>
+    <Languages>
+        <Language name="Change Marks" ext="" />
+    </Languages>
+    <LexerStyles>
+        <LexerType name="Change Marks" desc="Change Marks" ext="" excluded="yes">
+            <WordsStyle name="Changes: Saved" styleID="0" bgColor="A4FFA4" />
+            <WordsStyle name="Changes: Not Saved" styleID="0" bgColor="FFFC71" />
+        </LexerType>
+    </LexerStyles>
+    <GUIConfigs>
+        <GUIConfig name="SciMarkers" trackUNDOREDO="true" margin="MARGIN_CHANGES" />
+        <GUIConfig name="JumpControl" includeSaved="false" />
+    </GUIConfigs>
+</NotepadPlus>

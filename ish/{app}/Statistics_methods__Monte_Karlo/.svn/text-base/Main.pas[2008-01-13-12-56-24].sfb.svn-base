@@ -1,0 +1,1813 @@
+{*********************************************************************}
+  {                                                                     }
+  {                    Московский Авиационный Институт                  }
+  {                                                                     }
+  {                               кафедра 609                           }
+  {                                                                     }
+  {                               изменения:                            }
+  {                                                                     }
+  {                       Имаметдинов Ренат Ильдарович                  }
+  {                                                                     }
+  {*********************************************************************}
+
+
+unit Main;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls,Math, Spin;
+
+type
+  TA = ARRAY [1..9] OF BYTE;
+  pTA = ^TA;
+
+  TSave_iterac = class
+  private
+  public
+    Nomer_iteracii: Integer;
+    Param_Znach: array[0..5] of string;
+    Razrushenie: Boolean;
+    MAX_ekviv_stress: array[0..5] of Real;
+
+    constructor Create;
+    destructor Destroy; override;
+    PROCEDURE MyREAD(pX:pTA; n:BYTE);  //читать n-байт из F(набор байтов, ообычно из .bin файла) в pX
+
+    function Iter_results_save(VN_Nomer_Iteracii: Integer): Boolean;
+               {
+                ->:
+                    - Входные параметры на итерации
+                    - Файлы с результатами расчёта
+                <-:
+                    - Максимальное эквивалентное напряжение
+                    - Факт разрушения
+                    Возвращает:
+                       1 - удачно прочитали
+                       2 - в ф-ле .res есть ошибки
+                }
+  end;
+
+
+  TStatistics_methods_Main = class(TForm)
+    normal_law_distribution: TRadioButton;
+    equal_law_distribution: TRadioButton;
+    distribution: TGroupBox;
+    random_number_generator: TGroupBox;
+    standart_generator: TRadioButton;
+    custom_generator: TRadioButton;
+    custom_generator_browse: TButton;
+    custom_generator_path: TLabel;
+    converter_chose: TGroupBox;
+    custom_converter_path: TLabel;
+    standart_converter: TRadioButton;
+    custom_converter: TRadioButton;
+    custom_converter_browse: TButton;
+    test_generator: TButton;
+    test_converter: TButton;
+    Main_param: TGroupBox;
+    number_iteration: TEdit;
+    number_iteration_Label3: TLabel;
+    max_time: TEdit;
+    max_time_Label4: TLabel;
+    Run: TButton;
+    GroupBox1: TGroupBox;
+    change_value_1_check: TCheckBox;
+    change_value_1_name: TComboBox;
+    Label1: TLabel;
+    change_value_1_aver_distr: TEdit;
+    Label2: TLabel;
+    change_value_1_max_diverg: TEdit;
+    Label3: TLabel;
+    change_value_2_max_diverg: TEdit;
+    change_value_2_aver_distr: TEdit;
+    change_value_2_name: TComboBox;
+    change_value_2_check: TCheckBox;
+    change_value_3_max_diverg: TEdit;
+    change_value_3_aver_distr: TEdit;
+    change_value_3_name: TComboBox;
+    change_value_3_check: TCheckBox;
+    change_value_4_max_diverg: TEdit;
+    change_value_4_aver_distr: TEdit;
+    change_value_4_name: TComboBox;
+    change_value_4_check: TCheckBox;
+    STOP: TButton;
+    old_result_show: TButton;
+
+    procedure test_generatorClick(Sender: TObject);
+    {проверка генератора случайных чисел}
+
+    procedure RunClick(Sender: TObject);
+    {Запускается при нажатии RUN}
+
+    function UstanovkaParametra(Sender: TObject; var Param_Name: string;
+      var Param_znach: string): string; // Имаметдинов
+    {
+    подпрограмма для:
+    1) установки к.л. параметра
+    2) получения к.л. параметра
+    Param_Name - название параметра, возможные значения:
+    -'NRC'
+    -'RSUMX'
+    -'RSUMY'
+    -'ORT_7'
+    -'PRM1'
+    -'PRM2'
+    -'PRM3'
+    -'DR'
+    -'ORT14'
+    -'ORT21'
+
+
+    Param_znach:
+     - значение параметра
+     - 'Poluchenie' - для его получения
+    }
+
+    function Poluchenie_i_ustanovka_random(Sender: TObject;
+      var Param_Name: string; var Nachalo_intervala: Real;
+      var Konec_intervala: Real): string;// Имаметдинов
+    {
+    подпрограмма для:
+    1) получения равномерного случайного числа
+    2) при необходимости, его преобразования в нормальное
+    3) приведение к интарвалу
+    4) вызова п/п установки необходимого параметра
+    }
+
+    function default_znach_po_nazv(var Param_Name: string): string;
+        {
+        -> имя дефолтного параметра
+        <- значение в текстовом формате
+        }
+
+    function poluchenie_ravnomern_sluch_chisla(): Real;
+        {
+        -> инф-ия из гуя
+        <- равномерное случайное число от 0 до 1
+        }
+
+    function poluchenie_normaln_sluch_chisla(): Real;
+        {
+        -> инф-ия из гуя
+        <- нормальное случайное число от 0 до 1
+        }
+    function nachln_ustanovka_izm_param(pr1: Integer; pr2: Integer; pr3: Integer; pr4: Integer): Real;
+        {
+        -> инф-ия из файла формы + какие пераметры меняем(в нужном 1)
+        <- дефолтные значения в гуе
+        }
+    function postroenie_graf_res(): Real;
+        {
+        формирует графики в отображении результатов
+        }
+
+
+    function opredelenie_luchshego_reshenia(): Real;
+        {
+        ->рузультаты всех итерации (Save_iterac)
+        <-в гуе решение в полях Statistics_methods_Run_Result.znach_param_*N*_opt
+        }
+
+    function vibor_luchshego(N_pretend: Integer;N_luchsh: Integer): Real;
+       {
+        -> из Save_iterac:
+               N_pretend - номер итерации претендента на лучшую
+               N_luchsh - текущая лучшая итерация
+        <- vibor_luchshego:
+               <= 0, претедент оказался хуже(таким же), N_luchsh не будет изменён
+               > 0, претедент оказался лучше, N_luchsh изменён на N_pretend
+        }
+
+    function TXT_READ(TXT_NAME: String;TXT_Type: String): Boolean;
+                 {
+                ->:
+                    - название TXT - файла
+                    - Тип файла(src - c равномерными или snc - c нормальными)
+                <-:
+                    - Глобальные массивы RAVNOMERN_CHISLA[10000] или NORMALN_CHISLA[10000]
+                    - result: Подходит ли TXT - файл:
+                                               True - ДА
+                                               False - Нет
+                }
+    procedure custom_generator_browseClick(Sender: TObject);
+    procedure change_value_1_nameChange(Sender: TObject);
+    procedure change_value_2_nameChange(Sender: TObject);
+    procedure change_value_3_nameChange(Sender: TObject);
+    procedure change_value_4_nameChange(Sender: TObject);
+    procedure change_value_1_checkClick(Sender: TObject);
+    procedure change_value_2_checkClick(Sender: TObject);
+    procedure change_value_3_checkClick(Sender: TObject);
+    procedure change_value_4_checkClick(Sender: TObject);
+    procedure STOPClick(Sender: TObject);
+    procedure custom_converterClick(Sender: TObject);
+    procedure standart_converterClick(Sender: TObject);
+    procedure custom_generatorClick(Sender: TObject);
+    procedure standart_generatorClick(Sender: TObject);
+    procedure equal_law_distributionClick(Sender: TObject);
+    procedure normal_law_distributionClick(Sender: TObject);
+    procedure test_converterClick(Sender: TObject);
+    procedure custom_converter_browseClick(Sender: TObject);
+    procedure old_result_showClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+        MAX_napr_mater : array[0..5] of real;
+        Ostanovka : Boolean;
+        RAVNOMERN_CHISLA,NORMALN_CHISLA: array[0..10000]of real;
+        RAVNOMERN_nomer,NORMALN_nomer,RAVNOMERN_nomer_tek,NORMALN_nomer_tek: integer;
+  end;
+
+var
+  F                      : FILE OF BYTE;
+  Statistics_methods_Main: TStatistics_methods_Main;
+  Save_iterac: array[0..1000] of TSave_iterac;
+  I_init: Integer;
+  Default_NRC: Integer;
+  Default_RSUMX, Default_RSUMY, Default__ORT_7,Default__PRM1,Default__PRM2,Default__PRM3: Real;
+  Default__DR, Default__ORT14,Default__ORT21: Real;
+  Luch_parametra: array[0..5] of Real;
+
+
+implementation
+
+uses test_generator_conf, Run_Result,{MainParam}Unit3, TSigmaForm,
+  MainInterface, MainForm, TProject, BrowseFolder,strfunc,
+  WaitForm;
+
+{$R *.dfm}
+
+  {Имаметдинов}
+  { | }
+  {\ /}
+
+// -> ///////////////////////////////////////////////////// !!TStatistics_methods_Main!! /////////////////////////////////////
+procedure TStatistics_methods_Main.test_generatorClick(Sender: TObject);
+  begin
+    //{вызов окна конфигурации тестирования генератора}
+    Statistics_methods_test_genrator_conf.Caption:= 'Настройка анализа случаных чисел';
+    Statistics_methods_test_genrator_conf.Chisl_type.Text:= 'Равномерные случаные';
+    Statistics_methods_test_genrator_conf.average.Text:= '0,5';
+    Statistics_methods_test_genrator_conf.Dispersia.Text:= '0,2887';
+    Statistics_methods_test_genrator_conf.Rasch_statistick.Text := '0,5774';
+    Statistics_methods_test_genrator_conf.Rasch_Div.Text := '0,5';
+    Statistics_methods_test_genrator_conf.Rasch_kv_Div.Text := '0,33';
+    Statistics_methods_test_genrator_conf.Show;
+
+  end;
+
+
+procedure TStatistics_methods_Main.RunClick(Sender: TObject);
+Const
+     messeges: Array[1..3] Of String= (
+     'Проверьте основные параметры, они должны быть целыми числами > 0.',
+     'Проверьте Мат ожидания в Изменяемых величинах, они должны быть вещественными числами.',
+     'Проверьте Макс. отклонения в Изменяемых величинах, они должны быть вещественными числами > 0.'
+     );
+  var
+    Name, Znach: string;
+    I, Kolichestvo_iteraciy, k_vo_razrushen,ii : Integer;
+    Test_int,Error,Vremya_vipolnen: Integer;
+
+    Test_Real,Nachalo_intervala, Konec_intervala: Real;
+    //Param_Znach: array[0..5] of string;
+    Time_Nach, Time_Tek: TDateTime;
+  label
+    zaversh_rasch;
+  begin
+
+
+  ///// проверка всех введённых данных //////
+  Error:=0;
+  if (Not CheckInt(number_iteration.Text,Test_int)) then Error:=1;
+  number_iteration.Text:=inttostr(Test_int);
+  if  Test_int < 1 then Error:=1;
+  if (Not CheckInt(max_time.Text,Test_int)) then Error:=1;
+  max_time.Text:=inttostr(Test_int);
+  if  Test_int < 1 then Error:=1;
+
+  if (Not CheckReal(change_value_1_aver_distr.Text,Test_Real)) then Error:=2;
+  change_value_1_aver_distr.Text:= floattostr(Test_Real);
+  if (Not CheckReal(change_value_2_aver_distr.Text,Test_Real)) then Error:=2;
+  change_value_2_aver_distr.Text:= floattostr(Test_Real);
+  if (Not CheckReal(change_value_3_aver_distr.Text,Test_Real)) then Error:=2;
+  change_value_3_aver_distr.Text:= floattostr(Test_Real);
+  if (Not CheckReal(change_value_4_aver_distr.Text,Test_Real)) then Error:=2;
+  change_value_4_aver_distr.Text:= floattostr(Test_Real);
+
+  if (Not CheckReal(change_value_1_max_diverg.Text,Test_Real)) then Error:=3;
+  change_value_1_max_diverg.Text:= floattostr(Test_Real);
+  if  Test_Real < 0 then Error:=3;
+  if (Not CheckReal(change_value_2_max_diverg.Text,Test_Real)) then Error:=3;
+  change_value_2_max_diverg.Text:= floattostr(Test_Real);
+  if  Test_Real < 0 then Error:=3;
+  if (Not CheckReal(change_value_3_max_diverg.Text,Test_Real)) then Error:=3;
+  change_value_3_max_diverg.Text:= floattostr(Test_Real);
+  if  Test_Real < 0 then Error:=3;
+  if (Not CheckReal(change_value_4_max_diverg.Text,Test_Real)) then Error:=3;
+  change_value_4_max_diverg.Text:= floattostr(Test_Real);
+  if  Test_Real < 0 then Error:=3;
+
+  if Error <> 0 then
+  begin
+  showmessage('Ошибка: '+ messeges[Error]);
+  exit;
+  end;
+  ///// проверка всех введённых данных //////
+
+
+  if change_value_1_check.Checked or change_value_2_check.Checked or change_value_3_check.Checked or change_value_4_check.Checked then
+  begin
+    Kolichestvo_iteraciy := StrToInt(number_iteration.Text);    // к-во итераций
+    Vremya_vipolnen := StrToInt(max_time.Text);    // макс время работы
+
+    //{->Запомнить время начала работы
+    Time_Nach := Time;
+    //{<-Запомнить время начала работы
+
+
+//Включить кнопку "STOP" Метода     //
+Statistics_methods_Main.Ostanovka := False;
+Statistics_methods_Main.STOP.Visible:= True;
+
+//на всякий случай выключить все кнопки из главного окна
+Statistics_methods_Main.Run.Enabled:=False;
+Statistics_methods_Main.test_converter.Enabled:=False;
+Statistics_methods_Main.custom_converter_browse.Enabled:=False;
+Statistics_methods_Main.test_generator.Enabled:=False;
+Statistics_methods_Main.custom_generator_browse.Enabled:=False;
+//на всякий случай выключить все кнопки из главного окна
+
+    //{->Основная работа по преобразованию чисел и запуска расчёта с ними
+    for  I := 1 to Kolichestvo_iteraciy do
+      begin
+        //{->передаём название 1-ой переменной и диапозон, в котором она изменяется
+            //NAME := 'RSUMX';
+            Name := change_value_1_name.Text;
+
+            if change_value_1_check.Checked then begin
+            //Nachalo_intervala:= 1;
+             Nachalo_intervala := StrToFloat(change_value_1_aver_distr.Text) -
+                StrToFloat(change_value_1_max_diverg.Text);
+
+            //Konec_intervala :=10;
+             Konec_intervala := StrToFloat(change_value_1_aver_distr.Text)
+                + StrToFloat(change_value_1_max_diverg.Text);
+            end
+            else begin
+            Nachalo_intervala := StrToFloat(change_value_1_aver_distr.Text);
+            Konec_intervala := Nachalo_intervala;
+            end;
+
+            Save_iterac[I].Param_Znach[1] := Statistics_methods_Main.Poluchenie_i_ustanovka_random
+                (Statistics_methods_Main, Name, Nachalo_intervala, Konec_intervala);
+        //{<-передаём название 1-ой переменной и диапозон, в котором она изменяется
+
+        //{->передаём название 2-ой переменной и диапозон, в котором она изменяется
+            //NAME := 'RSUMX';
+            Name := change_value_2_name.Text;
+
+            if change_value_2_check.Checked then begin
+            //Nachalo_intervala:= 1;
+             Nachalo_intervala := StrToFloat(change_value_2_aver_distr.Text) -
+                StrToFloat(change_value_2_max_diverg.Text);
+
+            //Konec_intervala :=10;
+             Konec_intervala := StrToFloat(change_value_2_aver_distr.Text)
+                + StrToFloat(change_value_2_max_diverg.Text);
+            end
+            else begin
+            Nachalo_intervala := StrToFloat(change_value_2_aver_distr.Text);
+            Konec_intervala := Nachalo_intervala;
+            end;
+
+            Save_iterac[I].Param_Znach[2] := Statistics_methods_Main.Poluchenie_i_ustanovka_random
+                (Statistics_methods_Main, Name, Nachalo_intervala, Konec_intervala);
+        //{<-передаём название 1-ой переменной и диапозон, в котором она изменяется
+
+
+        //{->передаём название 3-ой переменной и диапозон, в котором она изменяется
+            //NAME := 'RSUMX';
+            Name := change_value_3_name.Text;
+
+            if change_value_3_check.Checked then begin
+            //Nachalo_intervala:= 1;
+             Nachalo_intervala := StrToFloat(change_value_3_aver_distr.Text) -
+                StrToFloat(change_value_3_max_diverg.Text);
+
+            //Konec_intervala :=10;
+             Konec_intervala := StrToFloat(change_value_3_aver_distr.Text)
+                + StrToFloat(change_value_3_max_diverg.Text);
+            end
+            else begin
+            Nachalo_intervala := StrToFloat(change_value_3_aver_distr.Text);
+            Konec_intervala := Nachalo_intervala;
+            end;
+
+            Save_iterac[I].Param_Znach[3] := Statistics_methods_Main.Poluchenie_i_ustanovka_random
+                (Statistics_methods_Main, Name, Nachalo_intervala, Konec_intervala);
+        //{<-передаём название 3-ой переменной и диапозон, в котором она изменяется
+
+        //{->передаём название 4-ой переменной и диапозон, в котором она изменяется
+            //NAME := 'RSUMX';
+            Name := change_value_4_name.Text;
+
+            if change_value_4_check.Checked then begin
+            //Nachalo_intervala:= 1;
+             Nachalo_intervala := StrToFloat(change_value_4_aver_distr.Text) -
+                StrToFloat(change_value_4_max_diverg.Text);
+
+            //Konec_intervala :=10;
+             Konec_intervala := StrToFloat(change_value_4_aver_distr.Text)
+                + StrToFloat(change_value_4_max_diverg.Text);
+            end
+            else begin
+            Nachalo_intervala := StrToFloat(change_value_4_aver_distr.Text);
+            Konec_intervala := Nachalo_intervala;
+            end;
+
+            Save_iterac[I].Param_Znach[4] := Statistics_methods_Main.Poluchenie_i_ustanovka_random
+                (Statistics_methods_Main, Name, Nachalo_intervala, Konec_intervala);
+        //{<-передаём название 1-ой переменной и диапозон, в котором она изменяется
+
+        //{->Расчёт с установленными параметрами
+        MainForm1.RunClick({MainParamsForm}Form3);
+        WaitForm1.StartShow('Работает метод Статистических испытаний');
+        repeat
+            Application.ProcessMessages;
+        until WaitForm1.FileExecuted = false;
+        //{<-Расчёт с установленными параметрами
+
+
+        //{Вызов функции записи нужной информации/результатов расчёта на текущем шаге//
+        if (not(Save_iterac[I].Iter_results_save(I))) then  begin
+            ShowMessage('на шаге= '+inttostr(I)+'ошибка в .res - файле');
+            goto zaversh_rasch;
+        end;
+
+
+        //{Проверка времени работы и выход из цикла, если больше чем указано в ГУЕ
+        Time_Tek := Time;
+        if ((Time_Tek - Time_Nach) * 100000) > Vremya_vipolnen then
+          begin
+            ShowMessage('Время  = ' + IntToStr(Vremya_vipolnen) + ' секунд истекло');
+
+            //записываем итоговое время выполнения
+            Statistics_methods_Run_Result.Time.Text := TimeToStr((Time_Tek - Time_Nach));
+
+            //записываем итоговое колличество итераций
+            Statistics_methods_Run_Result.Iter.Text := IntToStr(I);
+
+            goto zaversh_rasch;
+          end;
+        //{Проверка времени работы и выход из цикла, если больше чем указано в ГУЕ
+
+        //{Проверка кнопки "STOP" Метода //
+        IF  Statistics_methods_Main.Ostanovka then
+           begin
+            ShowMessage('прервано пользователем');
+            //записываем итоговое время выполнения
+            Statistics_methods_Run_Result.Time.Text := TimeToStr((Time_Tek - Time_Nach));
+            //записываем итоговое колличество итераций
+            Statistics_methods_Run_Result.Iter.Text := IntToStr(I);
+            goto zaversh_rasch;
+        //{Проверка кнопки "STOP" Метода //
+           end;
+
+
+      end;
+
+    //{<-Основная работа по преобразованию чисел и запуска расчёта с ними
+    ShowMessage('Выполнены все  = ' + IntToStr(Kolichestvo_iteraciy) + ' итераций');
+    Time_Tek := Time;
+    //записываем итоговое время выполнения
+    Statistics_methods_Run_Result.Time.Text := TimeToStr((Time_Tek - Time_Nach));
+    //записываем итоговое колличество итераций
+    Statistics_methods_Run_Result.Iter.Text := IntToStr(Kolichestvo_iteraciy);
+
+     zaversh_rasch:
+
+Statistics_methods_Main.STOP.Visible:= false;
+
+//включить все кнопки из главного окна
+Statistics_methods_Main.Run.Enabled:=True;
+Statistics_methods_Main.test_converter.Enabled:=True;
+Statistics_methods_Main.custom_converter_browse.Enabled:=True;
+Statistics_methods_Main.test_generator.Enabled:=True;
+Statistics_methods_Main.custom_generator_browse.Enabled:=True;
+//включить все кнопки из главного окна
+
+
+    //{->возвращаем Дэфолтные значения изменяемых параметров
+    // для 1-го параметра
+    //NAME:='RSUMX';
+    Name := change_value_1_name.Text; // берём из гуя название переменной
+    Znach := default_znach_po_nazv(Name);
+    Statistics_methods_Main.UstanovkaParametra(Statistics_methods_Main, Name, Znach);
+    // для 1-го параметра
+
+    //{->возвращаем Дэфолтные значения изменяемых параметров
+    // для 2-го параметра
+    //NAME:='RSUMX';
+    Name := change_value_2_name.Text;   // берём из гуя название переменной
+    Znach := default_znach_po_nazv(Name);
+    Statistics_methods_Main.UstanovkaParametra(Statistics_methods_Main, Name, Znach);
+    // для 2-го параметра
+
+    //{->возвращаем Дэфолтные значения изменяемых параметров
+    // для 3-го параметра
+    //NAME:='RSUMX';
+    Name := change_value_3_name.Text;   // берём из гуя название переменной
+    Znach := default_znach_po_nazv(Name);
+    Statistics_methods_Main.UstanovkaParametra(Statistics_methods_Main, Name, Znach);
+    // для 3-го параметра
+
+    //{->возвращаем Дэфолтные значения изменяемых параметров
+    // для 4-го параметра
+    //NAME:='RSUMX';
+    Name := change_value_4_name.Text;     // берём из гуя название переменной
+    Znach := default_znach_po_nazv(Name);
+    Statistics_methods_Main.UstanovkaParametra(Statistics_methods_Main, Name, Znach);
+    // для 4-го параметра
+    //{<-возвращаем Дэфолтные значения изменяемых параметров
+
+
+    //{->Расчёт с  Дэфолтными параметрами
+    MainForm1.RunClick({MainParamsForm}Form3);
+    WaitForm1.StartShow('Метод Статист. Испыт. возвращает исходные данные');
+    repeat
+        Application.ProcessMessages;
+    until WaitForm1.FileExecuted = false;
+    //{<-Расчёт с  Дэфолтными параметрами
+
+
+    //{->расчёт вероятности разрушения.
+    //посчитать к-во разрушений
+
+        k_vo_razrushen:=0;
+        I:= strtoint(Statistics_methods_Run_Result.Iter.Text);
+        for  ii := 1 to I do
+        begin
+             if (Save_iterac[ii].Razrushenie = true) then
+                 k_vo_razrushen:= k_vo_razrushen +1;
+        end;
+    //посчитать к-во разрушений
+
+     Statistics_methods_Run_Result.Ver_Dist.Text := floattostr((k_vo_razrushen/I)*100);
+    //{<-расчёт вероятности разрушения.
+
+
+    Statistics_methods_Run_Result.Dopust_napr_param1.Text:= floattostr(Statistics_methods_Main.MAX_napr_mater[1]);
+    Statistics_methods_Run_Result.Dopust_napr_param2.Text:= floattostr(Statistics_methods_Main.MAX_napr_mater[2]);
+    Statistics_methods_Run_Result.Dopust_napr_param3.Text:= floattostr(Statistics_methods_Main.MAX_napr_mater[3]);
+
+    Statistics_methods_Run_Result.Param_1.Caption := change_value_1_name.Text;
+    Statistics_methods_Run_Result.Param_2.Caption := change_value_2_name.Text;
+    Statistics_methods_Run_Result.Param_3.Caption := change_value_3_name.Text;
+    Statistics_methods_Run_Result.Param_4.Caption := change_value_4_name.Text;
+
+    // выбираем граффик для первого выбранного параметра
+    if change_value_1_check.Checked  then  Statistics_methods_Run_Result.Param_1.Checked := true
+    else if change_value_2_check.Checked  then  Statistics_methods_Run_Result.Param_2.Checked := true
+    else if change_value_3_check.Checked  then  Statistics_methods_Run_Result.Param_3.Checked := true
+    else if change_value_4_check.Checked  then  Statistics_methods_Run_Result.Param_4.Checked := true;
+    
+    postroenie_graf_res;    // создаём граффик результатов расчёта
+
+    opredelenie_luchshego_reshenia; // находим лучшее решение
+
+    old_result_show.Visible:= true;
+    //{вызов окна результатов расчёта
+    Statistics_methods_Run_Result.Show;
+end
+else begin
+ShowMessage('Выберете хотя бы один параметр');
+exit;
+end;
+  end;
+
+
+// -> ///////////////////////////////////////////////////// Начало ф-ии nachln_ustanovka_izm_param /////////////////////////////////////
+      function TStatistics_methods_Main.nachln_ustanovka_izm_param(pr1: Integer; pr2: Integer; pr3: Integer; pr4: Integer): Real;
+        {
+        -> инф-ия из файла формы
+        <- дефолтные значения в гуе
+        }
+     var
+    Name, Znach,itog: string;
+  begin
+  
+result:=0;
+
+  //{->получаем нужные дефолтные значения изменяемых параметров и устанавливаем их
+
+  // для 1-го параметра
+  if  pr1=1 then begin
+    Name := Statistics_methods_Main.change_value_1_name.Text; // берём из гуя название переменной
+    Znach := 'Poluchenie';
+    itog := Statistics_methods_Main.UstanovkaParametra(Statistics_methods_Main, Name, Znach);
+    Statistics_methods_Main.change_value_1_aver_distr.Text := itog;
+    Statistics_methods_Run_Result.znach_param_1.Text := itog;
+    Statistics_methods_Main.change_value_1_max_diverg.Text := floattostr(int(abs(strtofloat(itog)/10)));
+  end;
+  // для 1-го параметра
+
+  // для 2-го параметра
+  if  pr2=1 then begin
+    Name := Statistics_methods_Main.change_value_2_name.Text; // берём из гуя название переменной
+    Znach := 'Poluchenie';
+    itog := Statistics_methods_Main.UstanovkaParametra(Statistics_methods_Main, Name, Znach);
+    Statistics_methods_Main.change_value_2_aver_distr.Text := itog;
+    Statistics_methods_Run_Result.znach_param_2.Text := itog;
+    Statistics_methods_Main.change_value_2_max_diverg.Text := floattostr(int(abs(strtofloat(itog)/10)));
+  end;
+  // для 2-го параметра
+
+    // для 3-го параметра
+  if  pr3=1 then begin
+    Name := Statistics_methods_Main.change_value_3_name.Text; // берём из гуя название переменной
+    Znach := 'Poluchenie';
+    itog := Statistics_methods_Main.UstanovkaParametra(Statistics_methods_Main, Name, Znach);
+    Statistics_methods_Main.change_value_3_aver_distr.Text := itog;
+    Statistics_methods_Run_Result.znach_param_3.Text := itog;
+    Statistics_methods_Main.change_value_3_max_diverg.Text := floattostr(int(abs(strtofloat(itog)/10)));
+  end;
+  // для 1-го параметра
+
+    // для 4-го параметра
+  if  pr4=1 then begin
+    Name := Statistics_methods_Main.change_value_4_name.Text; // берём из гуя название переменной
+    Znach := 'Poluchenie';
+    itog := Statistics_methods_Main.UstanovkaParametra(Statistics_methods_Main, Name, Znach);
+    Statistics_methods_Main.change_value_4_aver_distr.Text := itog;
+    Statistics_methods_Run_Result.znach_param_4.Text := itog;
+    Statistics_methods_Main.change_value_4_max_diverg.Text := floattostr(int(abs(strtofloat(itog)/10)));
+  end;
+  // для 4-го параметра
+result:=1;
+  end;
+// -> ///////////////////////////////////////////////////// Конец ф-ии nachln_ustanovka_izm_param /////////////////////////////////////
+
+
+
+
+
+// -> ///////////////////////////////////////////////////// Начало ф-ии postroenie_graf_res /////////////////////////////////////
+     function TStatistics_methods_Main.postroenie_graf_res(): Real;
+        {
+        формирует графики в отображении результатов
+        }
+  var
+    I, ii: Integer;
+    ID_param, ID_mater : Integer;
+    Nachalo_intervala, Konec_intervala,X_zn,Y_zn,max_Y_zn,min_Y_zn : Real;
+    dopusk_max_napr: Real;
+  label
+    zaversh_rasch;
+  begin
+result:=0;
+/// Убираем прошлые ряды
+       Statistics_methods_Run_Result.Series1.Clear;
+       Statistics_methods_Run_Result.Series2.Clear;
+       Statistics_methods_Run_Result.Series3.Clear;
+       Statistics_methods_Run_Result.Series4.Clear;
+
+/// Получение основных параметров граффика:
+//ID_mater
+//ID_mater := 1; //  берётся из Statistics_methods_Run_Result.gr
+ID_mater:=0;
+if Statistics_methods_Run_Result.Mater_1.Checked then ID_mater := 1;
+if Statistics_methods_Run_Result.Mater_2.Checked then ID_mater := 2;
+if Statistics_methods_Run_Result.Mater_3.Checked then ID_mater := 3;
+if ID_mater=0 then ID_mater := 1;
+
+//ID_param
+//ID_param := 1; //  берётся из Statistics_methods_Run_Result.gr
+ID_Param := 0;
+if Statistics_methods_Run_Result.Param_1.Checked then ID_Param := 1;
+if Statistics_methods_Run_Result.Param_2.Checked then ID_Param := 2;
+if Statistics_methods_Run_Result.Param_3.Checked then ID_Param := 3;
+if Statistics_methods_Run_Result.Param_4.Checked then ID_Param := 4;
+if ID_Param = 0 then ID_Param := 1;
+
+//dopusk_max_napr
+dopusk_max_napr := Statistics_methods_Main.MAX_napr_mater[ID_mater];
+
+//MAX_znach_param
+Nachalo_intervala:=0;
+Konec_intervala:=0;
+if  ID_param = 1 then
+begin
+Nachalo_intervala := StrToFloat(change_value_1_aver_distr.Text)
+                                + StrToFloat(change_value_1_max_diverg.Text);
+//MIN_znach_param
+Konec_intervala := StrToFloat(change_value_1_aver_distr.Text)
+                                - StrToFloat(change_value_1_max_diverg.Text);
+end;
+if  ID_param=2 then
+begin
+Nachalo_intervala := StrToFloat(change_value_2_aver_distr.Text)
+                                + StrToFloat(change_value_2_max_diverg.Text);
+//MIN_znach_param
+Konec_intervala := StrToFloat(change_value_2_aver_distr.Text)
+                                - StrToFloat(change_value_2_max_diverg.Text);
+end;
+if  ID_param=3 then
+begin
+Nachalo_intervala := StrToFloat(change_value_3_aver_distr.Text)
+                                + StrToFloat(change_value_3_max_diverg.Text);
+//MIN_znach_param
+Konec_intervala := StrToFloat(change_value_3_aver_distr.Text)
+                                - StrToFloat(change_value_3_max_diverg.Text);
+end;
+if  ID_param=4 then
+begin
+Nachalo_intervala := StrToFloat(change_value_4_aver_distr.Text)
+                                + StrToFloat(change_value_4_max_diverg.Text);
+//Konec_intervala
+Konec_intervala := StrToFloat(change_value_4_aver_distr.Text)
+                                - StrToFloat(change_value_4_max_diverg.Text);
+end;
+
+
+/// Вывод результатов в граффик:
+// выводим границу разрушения
+       Statistics_methods_Run_Result.Series2.AddXY(Nachalo_intervala,dopusk_max_napr);
+       Statistics_methods_Run_Result.Series2.AddXY(Konec_intervala,dopusk_max_napr);
+
+
+
+//получаем к-во итераций
+       I:= strtoint(Statistics_methods_Run_Result.Iter.Text);
+
+  // выводим пару -  "значение_параметра : максим_эквив_напряж"
+  max_Y_zn  := 0;
+  min_Y_zn  := 100000000;
+        for  ii := 1 to I do
+        begin
+             X_zn := strtofloat(Save_iterac[ii].Param_Znach[ID_param]);
+             Y_zn := Save_iterac[ii].MAX_ekviv_stress[ID_mater];
+             Statistics_methods_Run_Result.Series1.AddXY(X_zn ,Y_zn);
+             if Y_zn > max_Y_zn then max_Y_zn := Y_zn;
+             if Y_zn < min_Y_zn then min_Y_zn := Y_zn;
+        end;
+
+       if dopusk_max_napr > max_Y_zn then max_Y_zn := dopusk_max_napr;
+       if dopusk_max_napr < min_Y_zn  then min_Y_zn := dopusk_max_napr;
+       Statistics_methods_Run_Result.Series3.AddXY(Konec_intervala, max_Y_zn + 0.1*max_Y_zn );
+       Statistics_methods_Run_Result.Series4.AddXY(Konec_intervala, min_Y_zn - 0.1*max_Y_zn);
+
+     result:=1;
+
+     end;
+// -> ///////////////////////////////////////////////////// Конец ф-ии postroenie_graf_res /////////////////////////////////////
+
+
+
+// -> ///////////////////////////////////////////////////// Начало п/п opredelenie_luchshego_reshenia /////////////////////////////////////
+    function TStatistics_methods_Main.opredelenie_luchshego_reshenia(): Real;
+        {
+        ->рузультаты всех итерации (Save_iterac)
+        <-в гуе решение в полях Statistics_methods_Run_Result.znach_param_*N*_opt
+        }
+     var
+     I, Kolichestvo_iteraciy, N_luchsh: Integer;
+     tmp_znach,koef_urovn: real;
+    begin
+      result:=0;
+
+    Kolichestvo_iteraciy:= strtoint(Statistics_methods_Run_Result.Iter.Text);
+   N_luchsh := 0;
+// делаем самой лучшей любую итерацию без разрушения
+    for  I := 1 to Kolichestvo_iteraciy do
+    begin
+     if not(Save_iterac[i].Razrushenie) then N_luchsh := I;
+    end;
+
+// проверка найденного решения
+    if N_luchsh = 0 then begin
+      //ShowMessage('определение оптимального решения невозможно: пластина разрушается на всех итерациях');
+      //N_luchsh := 1;
+      exit;
+    end;
+
+// устанавливаем в лучшее значение параметра из любой итерации без разрушения
+    for  I := 1 to 4 do
+    begin
+    Luch_parametra[I] := strtofloat(Save_iterac[N_luchsh].Param_Znach[I]);
+    end;
+    
+// проходим по всем итерациям и ищем более хорошее решение.
+    for  I := 1 to Kolichestvo_iteraciy do
+    begin
+    if (not(Save_iterac[i].Razrushenie)) and (vibor_luchshego(I,N_luchsh) > 0 ) then N_luchsh:= I;
+    end;
+
+
+  ////////////////// установка лучшего решения в нужные поля///////////////////
+   //для 1-го поля: если изменяется, то из Save_iterac, иначе из условия
+   Statistics_methods_Run_Result.znach_param_1_opt.Text := Save_iterac[N_luchsh].Param_Znach[1];
+
+   //для 2-го поля: если изменяется, то из Save_iterac, иначе из условия
+   Statistics_methods_Run_Result.znach_param_2_opt.Text := Save_iterac[N_luchsh].Param_Znach[2];
+
+   //для 3-го поля: если изменяется, то из Save_iterac, иначе из условия
+   Statistics_methods_Run_Result.znach_param_3_opt.Text := Save_iterac[N_luchsh].Param_Znach[3];
+
+   //для 4-го поля: если изменяется, то из Save_iterac, иначе из условия
+   Statistics_methods_Run_Result.znach_param_4_opt.Text := Save_iterac[N_luchsh].Param_Znach[4];
+  ////////////////// установка лучшего решения в нужные поля///////////////////
+  
+
+ ////////////////// определение погрешности и установка в нужные поля /////////////
+ //для 1-го поля: вычисляем процентную разницу от лучшего значения
+ tmp_znach := strtofloat(Save_iterac[N_luchsh].Param_Znach[1]);
+ if Statistics_methods_Run_Result.criter_param_1.Text = ' =' then Luch_parametra[1]:= tmp_znach;
+ koef_urovn:= max(abs(tmp_znach),abs(Luch_parametra[1]));
+ If koef_urovn=0 then  koef_urovn:=1;
+ Statistics_methods_Run_Result.param_1_pogr.Text := floattostr(100*abs(tmp_znach - Luch_parametra[1])/(koef_urovn));
+
+  //для 2-го поля: вычисляем процентную разницу от лучшего значения
+ tmp_znach := strtofloat(Save_iterac[N_luchsh].Param_Znach[2]);
+ koef_urovn:= max(abs(tmp_znach),abs(Luch_parametra[2]));
+ If koef_urovn=0 then  koef_urovn:=1;
+ if Statistics_methods_Run_Result.criter_param_2.Text = ' =' then Luch_parametra[2]:= tmp_znach;
+ Statistics_methods_Run_Result.param_2_pogr.Text := floattostr(100*abs(tmp_znach - Luch_parametra[2])/(koef_urovn));
+
+  //для 3-го поля: вычисляем процентную разницу от лучшего значения
+ tmp_znach := strtofloat(Save_iterac[N_luchsh].Param_Znach[3]);
+ koef_urovn:= max(abs(tmp_znach),abs(Luch_parametra[3]));
+ If koef_urovn=0 then  koef_urovn:=1;
+ if Statistics_methods_Run_Result.criter_param_3.Text = ' =' then Luch_parametra[3]:= tmp_znach;
+ Statistics_methods_Run_Result.param_3_pogr.Text := floattostr(100*abs(tmp_znach - Luch_parametra[3])/(koef_urovn));
+
+  //для 4-го поля: вычисляем процентную разницу от лучшего значения
+ tmp_znach := strtofloat(Save_iterac[N_luchsh].Param_Znach[4]);
+ koef_urovn:= max(abs(tmp_znach),abs(Luch_parametra[4]));
+ If koef_urovn=0 then  koef_urovn:=1;
+ if Statistics_methods_Run_Result.criter_param_4.Text = ' =' then Luch_parametra[4]:= tmp_znach;
+ Statistics_methods_Run_Result.param_4_pogr.Text := floattostr(100*abs(tmp_znach - Luch_parametra[4])/(koef_urovn));
+ ////////////////// определение погрешности и установка в нужные поля /////////////
+     result:=1;
+ end;
+// -> ///////////////////////////////////////////////////// Конец ф-ии opredelenie_luchshego_reshenia /////////////////////////////////////
+
+// -> ///////////////////////////////////////////////////// Начало ф-ии vibor_luchshego /////////////////////////////////////
+    function TStatistics_methods_Main.vibor_luchshego(N_pretend: Integer;N_luchsh: Integer): Real;
+       {
+        -> из Save_iterac:
+               N_pretend - номер итерации претендента на лучшую
+               N_luchsh - текущая лучшая итерация
+        <- vibor_luchshego:
+               <= 0, претедент оказался хуже(таким же), N_luchsh не будет изменён
+               > 0, претедент оказался лучше, N_luchsh изменён на N_pretend
+        }
+   var
+     I: Integer;
+     criterii,ves : array[0..5] of Real;
+     Znachenie_resultata_criteria,urovn_koef : Real;
+   begin
+
+  //// учитываем критерий выбора для каждого параметра
+   //для 1-го параметра
+    if Statistics_methods_Run_Result.criter_param_1.Text = 'max'  then criterii[1] := 1
+    else if Statistics_methods_Run_Result.criter_param_1.Text = 'min'  then criterii[1] := -1
+    else if Statistics_methods_Run_Result.criter_param_1.Text = ' ='  then criterii[1] := 0;
+
+   //для 2-го параметра
+    if Statistics_methods_Run_Result.criter_param_2.Text = 'max'  then criterii[2] := 1
+    else if Statistics_methods_Run_Result.criter_param_2.Text = 'min'  then criterii[2] := -1
+    else if Statistics_methods_Run_Result.criter_param_2.Text = ' ='  then criterii[2] := 0;
+
+    //для 3-го параметра
+    if Statistics_methods_Run_Result.criter_param_3.Text = 'max'  then criterii[3] := 1
+    else if Statistics_methods_Run_Result.criter_param_3.Text = 'min'  then criterii[3] := -1
+    else if Statistics_methods_Run_Result.criter_param_3.Text = ' ='  then criterii[3] := 0;
+
+    //для 4-го параметра
+    if Statistics_methods_Run_Result.criter_param_4.Text = 'max'  then criterii[4] := 1
+    else if Statistics_methods_Run_Result.criter_param_4.Text = 'min'  then criterii[4] := -1
+    else if Statistics_methods_Run_Result.criter_param_4.Text = ' ='  then criterii[4] := 0;
+  //// учитываем критерий выбора для каждого параметра
+
+  //// получеам вес каждого параметра
+   //для 1-го параметра
+     ves[1]:= strtofloat(Statistics_methods_Run_Result.Ves_param_1.Text);
+
+   //для 2-го параметра
+    ves[2]:= strtofloat(Statistics_methods_Run_Result.Ves_param_2.Text);
+
+    //для 3-го параметра
+    ves[3]:= strtofloat(Statistics_methods_Run_Result.Ves_param_3.Text);
+
+    //для 4-го параметра
+     ves[4]:= strtofloat(Statistics_methods_Run_Result.Ves_param_4.Text);
+  //// получеам вес каждого параметра
+
+
+  Result := 0;
+
+  // в  Znachenie_resultata складываем вердикт по всем параметрам
+   for  I := 1 to 4 do
+    begin
+// для всех параметров определяем их лучшее значение без учёта остальных
+if ((criterii[I]*strtofloat(Save_iterac[N_pretend].Param_Znach[I])) > (criterii[I]*Luch_parametra[I])) then
+Luch_parametra[I] := strtofloat(Save_iterac[N_pretend].Param_Znach[I]);
+
+// для всех параметров вычитаем из результатов N_pretend результаты N_luchsh
+    urovn_koef:= max(abs(strtofloat(Save_iterac[N_pretend].Param_Znach[I])),abs(strtofloat(Save_iterac[N_luchsh].Param_Znach[I])));
+    if urovn_koef=0 then  urovn_koef:=1;
+    Znachenie_resultata_criteria := criterii[I]*ves[I]*(strtofloat(Save_iterac[N_pretend].Param_Znach[I])
+                                                      - strtofloat(Save_iterac[N_luchsh].Param_Znach[I]))/urovn_koef;
+    Result := Result + Znachenie_resultata_criteria;
+   end;
+
+   end;
+
+// -> ///////////////////////////////////////////////////// Конец ф-ии vibor_luchshego /////////////////////////////////////
+
+
+
+// -> ///////////////////////////////////////////////////// Начало п/п UstanovkaParametra /////////////////////////////////////
+function TStatistics_methods_Main.UstanovkaParametra(Sender: TObject; var Param_Name: string;
+  var Param_znach: string): string;
+    {
+    подпрограмма для:
+    1) установки к.л. параметра
+    2) получения к.л. параметра
+    Param_Name - название параметра, возможные значения:
+    -'NRC'
+    -'RSUMX'
+    -'RSUMY'
+    -'ORT_7'
+    -'PRM1'
+    -'PRM2'
+    -'PRM3'
+    -'DR'
+    -'ORT14'
+    -'ORT21'
+    Param_znach:
+     - значение параметра
+     - 'Poluchenie' - для его получения
+    }
+  var
+    FMainParams: TMainParams;
+    FMainParamsMaterial: TMainParamsMaterial;
+    FFileName, f: string;
+    NrcMy: Integer;
+    RSUMX, RSUMY, ORT_7, PRM1, PRM2, PRM3, DR, ORT14, ORT21: Real;
+  begin
+    F := Project_GetFormFile;
+    if FileExists(F) then
+      FFilename := f;
+
+   NrcMy:=0; RSUMX:=0; RSUMY:=0; ORT_7:=0; PRM1:=0; PRM2:=0; PRM3:=0; DR:=0; ORT14:=0; ORT21:=0;
+
+    // Вытаскивание параметра
+    if (Param_znach <> 'Poluchenie') and (Param_Name = 'NRC') then
+      NrcMy := StrToInt(Param_znach);
+    if (Param_znach <> 'Poluchenie') and (Param_Name = 'RSUMX') then
+      RSUMX := StrToFloat(Param_znach);
+    if (Param_znach <> 'Poluchenie') and (Param_Name = 'RSUMY') then
+      RSUMY := StrToFloat(Param_znach);
+    if (Param_znach <> 'Poluchenie') and (Param_Name = 'ORT_7') then
+      ORT_7 := StrToFloat(Param_znach);
+    if (Param_znach <> 'Poluchenie') and (Param_Name = 'PRM1') then
+      PRM1 := StrToFloat(Param_znach);
+    if (Param_znach <> 'Poluchenie') and (Param_Name = 'PRM2') then
+      PRM2 := StrToFloat(Param_znach);
+    if (Param_znach <> 'Poluchenie') and (Param_Name = 'PRM3') then
+      PRM3 := StrToFloat(Param_znach);
+    if (Param_znach <> 'Poluchenie') and (Param_Name = 'DR') then
+      DR := StrToFloat(Param_znach);
+    if (Param_znach <> 'Poluchenie') and (Param_Name = 'ORT14') then
+      ORT14 := StrToFloat(Param_znach);
+    if (Param_znach <> 'Poluchenie') and (Param_Name = 'ORT21') then
+      ORT21 := StrToFloat(Param_znach);
+
+{    if (Param_znach <> 'Poluchenie') and (Param_Name = 'NRC')  then NrcMy := strtoint(Param_znach);
+    if (Param_znach <> 'Poluchenie') and (Param_Name = 'NRC')  then NrcMy := strtoint(Param_znach);
+    if (Param_znach <> 'Poluchenie') and (Param_Name = 'NRC')  then NrcMy := strtoint(Param_znach);}
+
+
+    // Вытаскиваем значения Параметра, изменяем их и записываем обратно
+    if (Length(FFileName) > 0) and (LowerCase(ExtractFileExt(FFileName)) =
+        '.sfm') then
+      begin
+        with TZonesClass.Create do
+          begin
+            //CountOfNodesInZone:=NrcMy*2 + (NrcMy - 2 )*2;
+            Load(FFileName);
+            FmainParams := MainParamsClass.MainParams;
+            FmainParamsMaterial := MainParamsClass.MainParamsMaterial;
+
+            if (Param_znach <> 'Poluchenie') and (Param_Name = 'NRC') then
+              FMainParams.NRC := NrcMy;
+            if (Param_znach = 'Poluchenie') and (Param_Name = 'NRC') then
+              begin
+               Default_NRC := FMainParams.NRC;
+               Result :=  inttostr(FMainParams.NRC);
+              end;
+
+            if (Param_znach <> 'Poluchenie') and (Param_Name = 'RSUMX') then
+              FMainParams.RSUMX := RSUMX;
+            if (Param_znach = 'Poluchenie') and (Param_Name = 'RSUMX') then
+              begin
+                Default_RSUMX := FMainParams.RSUMX;
+                Result :=  floattostr(FMainParams.RSUMX);
+              end;
+
+            if (Param_znach <> 'Poluchenie') and (Param_Name = 'RSUMY') then
+              FMainParams.RSUMY := RSUMY;
+            if (Param_znach = 'Poluchenie') and (Param_Name = 'RSUMY') then
+              begin
+                Default_RSUMY := FMainParams.RSUMY;
+                Result :=  floattostr(FMainParams.RSUMY);
+              end;
+
+            if (Param_znach <> 'Poluchenie') and (Param_Name = 'ORT_7') then
+              FMainParams.DD := ORT_7;
+            if (Param_znach = 'Poluchenie') and (Param_Name = 'ORT_7') then
+              begin
+               Default__ORT_7 := FMainParams.DD;
+               Result :=  floattostr(FMainParams.DD);
+              end;
+
+            if (Param_znach <> 'Poluchenie') and (Param_Name = 'PRM1') then
+              FmainParamsMaterial.PRM1 := PRM1;
+            if (Param_znach = 'Poluchenie') and (Param_Name = 'PRM1') then
+              begin
+               Default__PRM1 := FmainParamsMaterial.PRM1;
+               Result :=  floattostr(FmainParamsMaterial.PRM1);
+              end; 
+
+            if (Param_znach <> 'Poluchenie') and (Param_Name = 'PRM2') then
+              FmainParamsMaterial.PRM2 := PRM2;
+            if (Param_znach = 'Poluchenie') and (Param_Name = 'PRM2') then
+              begin
+               Default__PRM2 := FmainParamsMaterial.PRM2;
+               Result :=  floattostr(FmainParamsMaterial.PRM2);
+              end;
+
+            if (Param_znach <> 'Poluchenie') and (Param_Name = 'PRM3') then
+              FmainParamsMaterial.PRM3 := PRM3;
+            if (Param_znach = 'Poluchenie') and (Param_Name = 'PRM3') then
+              begin
+               Default__PRM3 := FmainParamsMaterial.PRM3;
+               Result :=  floattostr(FmainParamsMaterial.PRM3);
+              end;
+
+            if (Param_znach <> 'Poluchenie') and (Param_Name = 'DR') then
+              FMainParams.DR := DR;
+            if (Param_znach = 'Poluchenie') and (Param_Name = 'DR') then
+              begin
+               Default__DR := FmainParams.DR;
+               Result :=  floattostr(FmainParams.DR);
+              end;
+
+            if (Param_znach <> 'Poluchenie') and (Param_Name = 'ORT14') then
+              FmainParamsMaterial.ORT14 := ORT14;
+            if (Param_znach = 'Poluchenie') and (Param_Name = 'ORT14') then
+              begin
+               Default__ORT14 := FmainParamsMaterial.ORT14;
+               Result :=  floattostr(FmainParamsMaterial.ORT14);
+              end;
+
+            if (Param_znach <> 'Poluchenie') and (Param_Name = 'ORT21') then
+              FmainParamsMaterial.ORT21 := ORT21;
+            if (Param_znach = 'Poluchenie') and (Param_Name = 'ORT21') then
+              begin
+               Default__ORT21 := FmainParamsMaterial.ORT21;
+               Result :=  floattostr(FmainParamsMaterial.ORT21);
+              end;
+
+
+{                    if (Param_znach <> 'Poluchenie') and (Param_Name = 'NRC')  then FMainParams.NRC:=NrcMy;
+                    if (Param_znach = 'Poluchenie') and (Param_Name = 'NRC')  then Default_NRC:=FMainParams.NRC;
+
+{                    if (Param_znach <> 'Poluchenie') and (Param_Name = 'NRC')  then FMainParams.NRC:=NrcMy;
+                    if (Param_znach =  'Poluchenie') and (Param_Name = 'NRC')  then Default_NRC:=FMainParams.NRC;
+ }
+
+            MainParamsClass.MainParamsMaterial := FmainParamsMaterial;
+            MainParamsClass.MainParams := FMainParams;
+            Save(FFileName);
+            Free;
+          end;
+      end;
+  end;
+// <- ///////////////////////////////////////////////////// Конец п/п UstanovkaParametra /////////////////////////////////////
+
+
+
+// -> ///////////////////////////////////////////////////// Ф-ия Poluchenie_i_ustanovka_random /////////////////////////////////////
+function TStatistics_methods_Main.Poluchenie_i_ustanovka_random(Sender: TObject;
+  var Param_Name: string; var Nachalo_intervala: Real;
+  var Konec_intervala: Real): string;
+    {
+    подпрограмма для:
+    1) получения равномерного случайного числа
+    2) при необходимости, его преобразования в нормальное
+    3) приведение к интарвалу
+    4) вызова п/п установки необходимого параметра
+    }
+  var
+    Name, Znach: string;
+    //Random_chisl_int,tmp,I,j,Kolichestvo_iteraciy:Integer;
+    Random_chisl: Real;
+  begin
+    //{->Получение нормального или равномерного случайного числа от 0 до 1
+    if normal_law_distribution.Checked = true then
+      Random_chisl := poluchenie_normaln_sluch_chisla()
+          //{->Получение нормального случайного числа от 0 до 1
+    else
+      Random_chisl := poluchenie_ravnomern_sluch_chisla();
+    //{->Получение равномерного случайного числа от 0 до 1
+    //{->Получение равномерного или нормального случайного числа от 0 до 1
+
+    //{->Приведение случайного числа к заданному интервалу
+    Random_chisl := Nachalo_intervala + (Konec_intervala - Nachalo_intervala) *
+        Random_chisl;
+    //{<-Приведение случайного числа к заданному интервалу
+
+
+    //{->установка параметров
+    Name := Param_Name;
+    if Param_Name = 'NRC' then
+      Znach := FloatToStr(Int(Random_chisl))   // т.к.  NRC - int
+    else
+      Znach := FloatToStr(Random_chisl);
+    // т.к.  все остальные - real
+    Statistics_methods_Main.UstanovkaParametra(Statistics_methods_Main,
+        Name, Znach);
+    Result := Znach;
+    //{<-установка параметров
+  end;
+// <- ///////////////////////////////////////////////////// Конец Ф-ии Poluchenie_i_ustanovka_random /////////////////////////////////////
+
+
+
+// -> ///////////////////////////////////////////////////// Ф-ия default_znach_po_nazv /////////////////////////////////////
+function TStatistics_methods_Main.default_znach_po_nazv(
+  var Param_Name: string): string;
+        {
+        -> имя дефолтного параметра
+        <- значение в текстовом формате
+        }
+  begin
+    if Param_Name = 'NRC' then
+      Result := IntToStr(Default_NRC);
+    if Param_Name = 'RSUMX' then
+      Result := FloatToStr(Default_RSUMX);
+    if Param_Name = 'RSUMY' then
+      Result := FloatToStr(Default_RSUMY);
+    if Param_Name = 'ORT_7' then
+      Result := FloatToStr(Default__ORT_7);
+    if Param_Name = 'PRM1' then
+      Result := FloatToStr(Default__PRM1);
+    if Param_Name = 'PRM2' then
+      Result := FloatToStr(Default__PRM2);
+    if Param_Name = 'PRM3' then
+      Result := FloatToStr(Default__PRM3);
+    if Param_Name = 'DR' then
+      Result := FloatToStr(Default__DR);
+    if Param_Name = 'ORT14' then
+      Result := FloatToStr(Default__ORT14);
+    if Param_Name = 'ORT21' then
+      Result := FloatToStr(Default__ORT21);
+    //        if   Param_Name = 'NRC' then Result:=inttostr(Default_NRC);
+
+  end;
+// <- ///////////////////////////////////////////////////// Конец ф-ии default_znach_po_nazv /////////////////////////////////////
+
+
+// -> ///////////////////////////////////////////////////// Ф-ия poluchenie_ravnomern_sluch_chisla /////////////////////////////////////
+function TStatistics_methods_Main.poluchenie_ravnomern_sluch_chisla(): Real;
+        {
+        -> инф-ия из гуя
+        <- равномерное случайное число от 0 до 1
+        }
+  var
+    Random_chisl_int: Integer;
+    //tmp1:Integer;
+  begin
+    if custom_generator.Checked then
+    ////Получение чисел из .src
+      begin
+        if custom_generator_path.Caption = 'Путь к случайным числам не выбран' then
+          custom_generator_browseClick(self);
+
+
+        //Result := 1;
+       RAVNOMERN_nomer_tek := RAVNOMERN_nomer_tek + 1;
+       if RAVNOMERN_nomer_tek > RAVNOMERN_nomer then  RAVNOMERN_nomer_tek:=1;
+       Result := RAVNOMERN_CHISLA[RAVNOMERN_nomer_tek];
+
+      end
+    else
+      begin
+        Random_chisl_int := Random(100);
+        //стандартная функция Дэлфи
+        Result := Random_chisl_int / 100;
+      end;
+  end;
+// <- ///////////////////////////////////////////////////// Конец ф-ии poluchenie_ravnomern_sluch_chisla /////////////////////////////////////
+
+
+// -> ///////////////////////////////////////////////////// Ф-ия poluchenie_normaln_sluch_chisla /////////////////////////////////////
+function TStatistics_methods_Main.poluchenie_normaln_sluch_chisla(): Real;
+        {
+        -> инф-ия из гуя
+        <- нормальное случайное число от 0 до 1
+        }
+  var
+    //Random_chisl_int:Integer;
+    {tmp,}i, N: Integer;
+    //revnomer_sluch: array[0..7] of real;
+    summa_sluch, normaln_sluch: Real;
+  begin
+    if custom_converter.Checked then
+      begin
+          if custom_converter_path.Caption = 'Путь к нормальным числам не выбран' then
+          custom_converter_browseClick(self);
+        //Result := 1;
+        ////Получение чисел из .snc
+       {RAVNOMERN_nomer_tek := RAVNOMERN_nomer_tek + 1;
+       if RAVNOMERN_nomer_tek > 1000 then  RAVNOMERN_nomer_tek:=0;
+       Result := RAVNOMERN_CHISLA[RAVNOMERN_nomer_tek];}
+
+       NORMALN_nomer_tek := NORMALN_nomer_tek + 1;
+       if NORMALN_nomer_tek > NORMALN_nomer then  NORMALN_nomer_tek:=1;
+       Result := NORMALN_CHISLA[NORMALN_nomer_tek];
+
+
+      end
+    else
+      begin
+        //////////////реализация метода преобразования: получение из суммы нескольких равномерных ////////////////////////////////////////////
+        summa_sluch := 0;
+        N           := 6;
+        for  I := 1 to N do
+          begin
+            summa_sluch := summa_sluch +
+                poluchenie_ravnomern_sluch_chisla;
+          end;
+
+        normaln_sluch := ((Sqrt(3)) * (2 * summa_sluch - N)) / ((Sqrt(N)));
+        // нормальное ?от -4.25 до 4.25?
+
+        //////////////реализация метода преобразования: получение из суммы нескольких равномерных ////////////////////////////////////////////
+
+        Result := (normaln_sluch + 4.25) / (8.5);    // нормальное от 0 до 1
+      end;
+  end;
+// <- ///////////////////////////////////////////////////// Конец ф-ии poluchenie_normaln_sluch_chisla /////////////////////////////////////
+
+
+
+
+
+
+  { / \}
+  {  | }
+  {Имаметдинов}
+procedure TStatistics_methods_Main.custom_generator_browseClick(Sender: TObject);
+  var
+    Dialog: TOpenDialog;
+    s,s_type: string;
+  begin
+    Dialog := TOpenDialog.Create(self);
+    Dialog.Title := 'Открыть txt с равномерными случайными числами';
+    s_type:='src';
+    if Dialog.Execute then
+      begin
+        //Dialog.f
+        s := Dialog.FileName;
+        if TXT_READ(s,s_type) = False then begin
+        ShowMessage('Файл: "' + s + '" не содержит необходимых чисел.');
+        exit;
+        end;
+        custom_generator_path.Caption := s;
+      end
+      else standart_generator.Checked:=true;
+    Dialog.Free;
+  end;
+
+// <- ///////////////////////////////////////////////////// Начало ф-ии TXT_READ /////////////////////////////////////
+function TStatistics_methods_Main.TXT_READ(TXT_NAME: String;TXT_Type: String): Boolean;
+                 {
+                ->:
+                    - название TXT - файла
+                    - Тип файла(src - c равномерными или snc - c нормальными)
+                <-:
+                    - Глобальные массивы RAVNOMERN_CHISLA[10000] или NORMALN_CHISLA[10000]
+                    - result: Подходит ли TXT - файл:
+                                               True - ДА
+                                               False - Нет
+                }
+            var
+            Tip_chisel,I: integer;
+            s,tmp: String;
+            F: TextFile;
+            Test_Real : Real;
+label
+    sled_chislo;
+begin
+
+       if TXT_Type = 'snc' then Tip_chisel:=2
+       else Tip_chisel := 1;
+  Result:=False;
+
+          AssignFile(F,TXT_NAME);
+          Reset(F);
+          If Not EOF(F) Then Readln(F,s);
+          if ((s = '#Ravnomernie sluchainie chisla')and(Tip_chisel = 1))or((s = '#Normalnie sluchainie chisla')and(Tip_chisel = 2)) then
+           begin
+
+            If Not EOF(F) Then Readln(F,s);
+            //обнуление прошлых результатов
+            IF Tip_chisel = 1 then
+                begin
+                 custom_generator_path.Caption:= 'Путь к случайным числам не выбран';
+                 RAVNOMERN_nomer  := 0;
+                end
+                else begin
+                 custom_converter_path.Caption:= 'Путь к случайным числам не выбран';
+                 NORMALN_nomer  := 0;
+                end;
+              //обнуление прошлых результатов
+
+
+            for  I := 1 to Length(s) do
+            begin
+              if s[I] <> ';' then  begin
+                tmp:= tmp + s[I];
+              end
+              else begin
+                IF Tip_chisel = 1 then
+                begin
+                  if (Not CheckReal(tmp,Test_Real)) then goto sled_chislo;  // проверяем корректность числа из файла, если нет, то идём к следующему в файле
+                  RAVNOMERN_nomer := RAVNOMERN_nomer + 1;
+                  if RAVNOMERN_nomer > 10000 then  RAVNOMERN_nomer:=9999;
+                  RAVNOMERN_CHISLA[RAVNOMERN_nomer]:= Test_Real;
+                end
+                else begin
+                  if (Not CheckReal(tmp,Test_Real)) then goto sled_chislo;  // проверяем корректность числа из файла, если нет, то идём к следующему в файле
+                  NORMALN_nomer := NORMALN_nomer + 1;
+                  if NORMALN_nomer > 10000 then  NORMALN_nomer:=9999;
+                  NORMALN_CHISLA[NORMALN_nomer]:= Test_Real;
+                end;
+                Result:=True;
+sled_chislo:
+                tmp:='';
+              end;
+            end;
+
+          end;
+
+          CloseFile(F);
+
+            //проверка количества случайных чисел в файле. если меньше 10, то вывод предупреждения.
+            IF (Tip_chisel = 1)and (RAVNOMERN_nomer < 10) and (Result)
+                 then ShowMessage('Файл: "' + TXT_NAME + '" содержит только '+inttostr(RAVNOMERN_nomer) + ' равномерных чисел.');
+            IF (Tip_chisel = 2)and (NORMALN_nomer < 10) and (Result)
+                 then ShowMessage('Файл: "' + TXT_NAME + '" содержит только '+inttostr(NORMALN_nomer) + ' нормальных чисел.');
+               //проверка количества случайных чисел в файле. если меньше 10, то вывод предупреждения.
+
+  //Result:=True;
+
+end;
+// <- ///////////////////////////////////////////////////// Конец ф-ии TXT_READ /////////////////////////////////////
+
+// <- ///////////////////////////////////////////////////// !!TStatistics_methods_Main!! /////////////////////////////////////
+
+
+
+
+// -> ///////////////////////////////////////////////////// !!TSave_iterac!! /////////////////////////////////////
+
+// -> ///////////////////////////////////////////////////// Начало ф-ии Iter_results_save /////////////////////////////////////
+function TSave_iterac.Iter_results_save(VN_Nomer_Iteracii: Integer): Boolean;
+                 {
+                ->:
+                    - Входные параметры на итерации
+                    - Файлы с результатами расчёта
+                <-:
+                    - Максимальное эквивалентное напряжение
+                    - Факт разрушения
+                    Возвращает:
+                       True - удачно прочитали
+                       False - в ф-ле .res есть ошибки
+                }
+  var
+  x          : DOUBLE;
+  n,n1     : WORD;
+  Path       : STRING;
+  vipoln         : INTEGER; // проверяем, что операция выполнилась хотя бы раз.
+
+  Nomer_elementa,Nomer_mater, ii,jj:  Integer;
+
+    Ekviv_stress: array[0..10000] of real;
+    Dopust_Ekviv_stress: array[0..4] of real;
+    Nomer_svoystva_element: array[0..10000] of Integer;
+
+    max_Ekviv_mater: array[0..4] of real;
+
+  begin
+Result:=False;
+
+    Nomer_iteracii := VN_Nomer_Iteracii;
+
+    //из Result2.bin получить эквив напряжения всех КЭ и его допутимое значение для каждого материала//////////
+      Path:= ExtractFilePath(ProjectFileName) +'RESULT2.BIN';
+      IF NOT FileExists(Path) THEN EXIT;
+  AssignFile(F,Path);
+  Reset(F);
+  // считываем координаты узлов, составляющих КЭ в пустоту
+  vipoln := 0 ; // обнуление выполнения считывания координат
+  WHILE NOT Eof(F) DO BEGIN
+    MyREAD(ADDR(n),2);
+    IF n = 65535 THEN BREAK;
+    //OneElement.Number:=CountOfElements+1;
+    //OneElement.Node1:=n;
+    MyREAD(ADDR(n),2);
+    //OneElement.Node2:=n;
+    MyREAD(ADDR(n),2);
+    //OneElement.Node3:=n;
+    //FOR j:=1 TO 7 DO OneElement.strain[j]:=0;
+    //AddElement(OneElement);
+    vipoln := 1;           // выполнилось считывание координат
+  END;
+  //IF CountOfElements=0 THEN EXIT;
+  IF vipoln=0 THEN EXIT; // операция ни разу не выполнялась
+
+  n:=0;
+  Nomer_elementa:=0;
+  // считываем значения напряжений в КЭ, все впустую, кроме эквивалентного
+   vipoln := 0 ; // обнуление выполнения
+  WHILE NOT Eof(F) DO BEGIN
+    MyREAD(ADDR(x),8);
+    IF x = -1 THEN BREAK;
+    INC(n);
+    //OneElement:=GetElement(n);
+    //OneElement.strain[1]:=x;
+    MyREAD(ADDR(x),8);
+    //OneElement.strain[2]:=x;
+    MyREAD(ADDR(x),8);
+    //OneElement.strain[3]:=x;
+    MyREAD(ADDR(x),8);
+    //OneElement.strain[4]:=x;
+    MyREAD(ADDR(x),8);
+    //OneElement.strain[5]:=x;
+    MyREAD(ADDR(x),8);
+    //OneElement.strain[6]:=x;
+
+    Nomer_elementa:= Nomer_elementa + 1;
+    Ekviv_stress[Nomer_elementa]:=x;  //запоминаем эквивалентное напряжение.
+    MyREAD(ADDR(x),8);
+    //OneElement.strain[7]:=x;
+    //EditElement(n,OneElement);
+    vipoln := 1;           // выполнилось
+  END;
+   IF vipoln=0 THEN EXIT; // операция ни разу не выполнялась
+
+  // Считываем св-ва материала КЭ   kotov , все впустую, кроме допускаемых напряжений для 3-х материалов
+  n:=0;
+  Nomer_mater:=0;
+  vipoln := 0 ; // обнуление выполнения
+  WHILE NOT Eof(F) DO BEGIN
+    MyREAD(ADDR(x),8);
+    IF x = -1 THEN BREAK;
+    INC(n);
+    //Materials[n].E := x;
+    MyREAD(ADDR(x),8);
+    //Materials[n].Mu := x;
+    MyREAD(ADDR(x),8);
+
+    Nomer_mater:= Nomer_mater + 1;
+    Dopust_Ekviv_stress[Nomer_mater]:=x;  //запоминаем допускаемое напряжение для конкретного материала
+    //Materials[n].Sg := x;
+    MyREAD(ADDR(x),8);
+    //Materials[n].free4 := x;
+    MyREAD(ADDR(x),8);
+    //Materials[n].free5 := x;
+    MyREAD(ADDR(x),8);
+    //Materials[n].free6 := x;
+    MyREAD(ADDR(x),8);
+    //Materials[n].Thickness := x;
+    vipoln := 1;           // выполнилось
+  END;
+    IF vipoln=0 THEN EXIT; // операция ни разу не выполнялась
+
+  n:=0;
+  Nomer_elementa:=0;
+  vipoln := 0 ; // обнуление выполнения
+  WHILE NOT Eof(F) DO BEGIN
+    MyREAD(ADDR(n1),2);
+    IF x = 65535 THEN BREAK;
+    INC(n);
+    //OneElement:=GetElement(n);
+
+    Nomer_elementa:= Nomer_elementa + 1;
+    Nomer_svoystva_element[Nomer_elementa]:=n1;
+    //OneElement.Material:=n1;
+    //EditElement(n,OneElement);
+    vipoln := 1;           // выполнилось
+  END;
+  IF vipoln=0 THEN EXIT; // операция ни разу не выполнялась
+  Close(F);
+
+    Nomer_elementa:= Nomer_elementa - 4;
+    //ShowMessage('Nomer_elementa  = ' + IntToStr(Nomer_elementa) + ' Nomer_svoystva_element = '+ FloatToStr(Nomer_svoystva_element[Nomer_elementa])+ ' Ekviv_stress = '+ FloatToStr(Ekviv_stress[Nomer_elementa]));
+    //из Result2.bin получить эквив напряжения всех КЭ и его допутимое значение для каждого материала//////////
+
+
+    //найти мах_эквив_напряжение для каждого материала///////////
+    max_Ekviv_mater[1] := 0;
+    max_Ekviv_mater[2] := 0;
+    max_Ekviv_mater[3] := 0;
+       for  ii := 1 to 3 do
+       begin
+            for  jj := 1 to Nomer_elementa do
+            begin
+                if (Nomer_svoystva_element[jj] = ii)and( Ekviv_stress[jj] > max_Ekviv_mater[ii]) then
+                max_Ekviv_mater[ii]:= Ekviv_stress[jj];
+            end;
+       end;
+     
+  //ShowMessage('max_Ekviv_mater[1]='+ FloatToStr(max_Ekviv_mater[1])+'max_Ekviv_mater[2]='+ FloatToStr(max_Ekviv_mater[2])+'max_Ekviv_mater[3]='+ FloatToStr(max_Ekviv_mater[3]));
+   //найти мах_эквив_напряжение для каждого материала///////////
+
+        for  ii := 1 to 3 do
+        begin
+                 Statistics_methods_Main.MAX_napr_mater[ii] := Dopust_Ekviv_stress[ii];
+        end;
+    //сравнить мах_эквив_напряж с допустимым у каждого материала и установить "Razrushenie"/////
+        Razrushenie:=FALSE;
+        for  ii := 1 to 3 do
+        begin
+             MAX_ekviv_stress[ii] :=  max_Ekviv_mater[ii];
+             if (max_Ekviv_mater[ii] >  Dopust_Ekviv_stress[ii]) then
+                 Razrushenie:=true; //т.е. пластина разрушится в этом материале.
+        end;
+    //ShowMessage('Razrushenie='+ BoolToStr(Razrushenie));
+    //сравнить мах_эквив_напряж с допустимым у каждого материала и установить "Razrushenie"/////
+
+
+
+    //сравнить максимально напряжение во всех материала и установить "MAX_ekviv_stress"/////
+        MAX_ekviv_stress[5]:=max_Ekviv_mater[1];
+        for  ii := 2 to 3 do
+        begin
+             if (max_Ekviv_mater[ii] >  MAX_ekviv_stress[5]) then
+                 MAX_ekviv_stress[5]:=max_Ekviv_mater[ii];
+        end;
+    //ShowMessage('MAX_ekviv_stress'+ floatToStr(MAX_ekviv_stress));
+    //сравнить максимально напряжение во всех материала и установить "MAX_ekviv_stress"/////
+
+
+Result:=True;
+
+  end;
+// <- ///////////////////////////////////////////////////// Конец ф-ии Iter_results_save /////////////////////////////////////
+
+
+// <- ///////////////////////////////////////////////////// Начало ф-ии MyREAD /////////////////////////////////////
+PROCEDURE TSave_iterac.MyREAD(pX:pTA; n:BYTE);
+VAR i : BYTE;
+BEGIN
+  FOR i:=1 TO n DO READ(F,pX^[i]);
+END;
+// <- ///////////////////////////////////////////////////// Конец ф-ии MyREAD /////////////////////////////////////
+
+
+// -> ///////////////////////////////////////////////////// Конструкторы/дискрипторы /////////////////////////////////////
+constructor TSave_iterac.Create;
+  begin
+    //ProgramFiles:=TStringList.Create;
+    //ProgramFiles.OnChange:=ListChange;
+    //FormZones:=TZonesClass.Create;
+  end;
+
+destructor TSave_iterac.Destroy;
+  begin
+    //ProgramFiles.Free;
+  end;
+
+procedure TStatistics_methods_Main.change_value_1_nameChange(
+  Sender: TObject);
+begin
+Statistics_methods_Main.nachln_ustanovka_izm_param(1,0,0,0);
+end;
+
+procedure TStatistics_methods_Main.change_value_2_nameChange(
+  Sender: TObject);
+begin
+Statistics_methods_Main.nachln_ustanovka_izm_param(0,1,0,0);
+end;
+
+procedure TStatistics_methods_Main.change_value_3_nameChange(
+  Sender: TObject);
+begin
+Statistics_methods_Main.nachln_ustanovka_izm_param(0,0,1,0);
+end;
+
+procedure TStatistics_methods_Main.change_value_4_nameChange(
+  Sender: TObject);
+begin
+Statistics_methods_Main.nachln_ustanovka_izm_param(0,0,0,1);
+end;
+
+procedure TStatistics_methods_Main.change_value_1_checkClick(
+  Sender: TObject);
+begin
+if change_value_1_check.Checked then
+ begin
+ change_value_1_name.Enabled:=true;
+ change_value_1_aver_distr.Enabled:=true;
+ change_value_1_max_diverg.Enabled:=true;
+ Statistics_methods_Run_Result.Param_1.Enabled:=true;
+ Statistics_methods_Run_Result.criter_param_1.Enabled:=true;
+ Statistics_methods_Run_Result.Ves_param_1.Enabled:=true;
+ end
+else
+begin
+ change_value_1_name.Enabled:=false;
+ change_value_1_aver_distr.Enabled:=false;
+ change_value_1_max_diverg.Enabled:=false;
+ Statistics_methods_Run_Result.Param_1.Enabled:=false;
+ Statistics_methods_Run_Result.criter_param_1.Enabled:=false;
+ Statistics_methods_Run_Result.Ves_param_1.Enabled:=false;
+end;
+end;
+
+procedure TStatistics_methods_Main.change_value_2_checkClick(
+  Sender: TObject);
+begin
+if change_value_2_check.Checked then
+ begin
+ change_value_2_name.Enabled:=true;
+ change_value_2_aver_distr.Enabled:=true;
+ change_value_2_max_diverg.Enabled:=true;
+ Statistics_methods_Run_Result.Param_2.Enabled:=true;
+  Statistics_methods_Run_Result.criter_param_2.Enabled:=true;
+ Statistics_methods_Run_Result.Ves_param_2.Enabled:=true;
+
+ end
+else
+begin
+ change_value_2_name.Enabled:=false;
+ change_value_2_aver_distr.Enabled:=false;
+ change_value_2_max_diverg.Enabled:=false;
+ Statistics_methods_Run_Result.Param_2.Enabled:=false;
+  Statistics_methods_Run_Result.criter_param_2.Enabled:=false;
+ Statistics_methods_Run_Result.Ves_param_2.Enabled:=false;
+end;
+end;
+
+procedure TStatistics_methods_Main.change_value_3_checkClick(
+  Sender: TObject);
+begin
+if change_value_3_check.Checked then
+ begin
+ change_value_3_name.Enabled:=true;
+ change_value_3_aver_distr.Enabled:=true;
+ change_value_3_max_diverg.Enabled:=true;
+ Statistics_methods_Run_Result.Param_3.Enabled:=true;
+ Statistics_methods_Run_Result.criter_param_3.Enabled:=true;
+ Statistics_methods_Run_Result.Ves_param_3.Enabled:=true;
+
+ end
+else
+begin
+ change_value_3_name.Enabled:=false;
+ change_value_3_aver_distr.Enabled:=false;
+ change_value_3_max_diverg.Enabled:=false;
+ Statistics_methods_Run_Result.Param_3.Enabled:=false;
+ Statistics_methods_Run_Result.criter_param_3.Enabled:=false;
+ Statistics_methods_Run_Result.Ves_param_3.Enabled:=false;
+end;
+end;
+
+procedure TStatistics_methods_Main.change_value_4_checkClick(
+  Sender: TObject);
+begin
+if change_value_4_check.Checked then
+ begin
+ change_value_4_name.Enabled:=true;
+ change_value_4_aver_distr.Enabled:=true;
+ change_value_4_max_diverg.Enabled:=true;
+ Statistics_methods_Run_Result.Param_4.Enabled:=true;
+ Statistics_methods_Run_Result.criter_param_4.Enabled:=true;
+ Statistics_methods_Run_Result.Ves_param_4.Enabled:=true;
+ end
+else
+begin
+ change_value_4_name.Enabled:=false;
+ change_value_4_aver_distr.Enabled:=false;
+ change_value_4_max_diverg.Enabled:=false;
+ Statistics_methods_Run_Result.Param_4.Enabled:=false;
+ Statistics_methods_Run_Result.criter_param_4.Enabled:=false;
+ Statistics_methods_Run_Result.Ves_param_4.Enabled:=false;
+end;
+end;
+
+procedure TStatistics_methods_Main.STOPClick(Sender: TObject);
+begin
+//выключить кнопку "STOP" Метода
+Statistics_methods_Main.Ostanovka := True;
+Statistics_methods_Main.STOP.Visible:= false;
+end;
+
+procedure TStatistics_methods_Main.custom_converterClick(Sender: TObject);
+begin
+custom_converter_browse.Enabled := true;
+custom_converter_path.Enabled := true;
+end;
+
+procedure TStatistics_methods_Main.standart_converterClick(
+  Sender: TObject);
+begin
+custom_converter_browse.Enabled := false;
+custom_converter_path.Enabled := false;
+end;
+
+procedure TStatistics_methods_Main.custom_generatorClick(Sender: TObject);
+begin
+custom_generator_browse.Enabled := true;
+custom_generator_path.Enabled  := true;
+end;
+
+procedure TStatistics_methods_Main.standart_generatorClick(
+  Sender: TObject);
+begin
+custom_generator_browse.Enabled := false;
+custom_generator_path.Enabled  := false;
+end;
+
+procedure TStatistics_methods_Main.equal_law_distributionClick(
+  Sender: TObject);
+begin
+converter_chose.Visible := false;
+end;
+
+procedure TStatistics_methods_Main.normal_law_distributionClick(
+  Sender: TObject);
+begin
+converter_chose.Visible := true;
+end;
+
+procedure TStatistics_methods_Main.test_converterClick(Sender: TObject);
+begin
+    //{вызов окна конфигурации анализа нормальных чисел}
+    Statistics_methods_test_genrator_conf.Caption:= 'Настройка анализа нормальных чисел';
+    Statistics_methods_test_genrator_conf.Chisl_type.Text:= 'Нормальные случаные';
+    Statistics_methods_test_genrator_conf.average.Text:= '0,5';
+    Statistics_methods_test_genrator_conf.Dispersia.Text:= '0,2887';
+    Statistics_methods_test_genrator_conf.Rasch_statistick.Text := '0,99';
+    Statistics_methods_test_genrator_conf.Rasch_Div.Text := '0,5';
+    Statistics_methods_test_genrator_conf.Rasch_kv_Div.Text := '0,25';
+    Statistics_methods_test_genrator_conf.Show;
+end;
+
+procedure TStatistics_methods_Main.custom_converter_browseClick(
+  Sender: TObject);
+  var
+    Dialog: TOpenDialog;
+    s,s_type: string;
+  begin
+    Dialog := TOpenDialog.Create(self);
+    Dialog.Title := 'Открыть txt с нормальными случайными числами';
+    s_type:='snc';
+    if Dialog.Execute then
+      begin
+        s := Dialog.FileName;
+        if TXT_READ(s,s_type) = False then begin
+        ShowMessage('Файл: ' + s + ' не содержит необходимых чисел');
+        exit;
+        end;
+        custom_converter_path.Caption := s;
+      end
+      else standart_converter.Checked:=true;
+    Dialog.Free;
+  end;
+
+procedure TStatistics_methods_Main.old_result_showClick(Sender: TObject);
+begin
+    Statistics_methods_Run_Result.Show;
+end;
+
+initialization
+    for  I_init := 0 to 1000 do
+      if Save_iterac[I_init] = nil then
+          Save_iterac[I_init] := TSave_iterac.Create;
+
+finalization
+    for  I_init := 0 to 1000 do
+      if Save_iterac[I_init] <> nil then
+          Save_iterac[I_init].Free;
+    // <- ///////////////////////////////////////////////////// Конструкторы/дискрипторы /////////////////////////////////////
+    // <- ///////////////////////////////////////////////////// !!TSave_iterac!! /////////////////////////////////////
+  end.

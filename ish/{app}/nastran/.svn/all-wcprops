@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/16/trunc/source/nastran
+END
+msxmldom.pas
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/16/trunc/source/nastran/msxmldom.pas
+END
+msxml.pas
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/16/trunc/source/nastran/msxml.pas
+END
+ChooseCalc.pas
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/16/trunc/source/nastran/ChooseCalc.pas
+END
+MainInterface.pas
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/16/trunc/source/nastran/MainInterface.pas
+END
+Nastran.dpr
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/16/trunc/source/nastran/Nastran.dpr
+END
+ExportNastran.pas
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/16/trunc/source/nastran/ExportNastran.pas
+END
+Compile.bat
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/16/trunc/source/nastran/Compile.bat
+END
+Nastran.res
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/16/trunc/source/nastran/Nastran.res
+END
+ExportNastran_my.pas
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/16/trunc/source/nastran/ExportNastran_my.pas
+END
+Nastran.cfg
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/16/trunc/source/nastran/Nastran.cfg
+END
+ResultsArrays.pas
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/16/trunc/source/nastran/ResultsArrays.pas
+END
+~errtmp
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/12/trunc/source/nastran/~errtmp
+END
+ChooseCalc.dfm
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/16/trunc/source/nastran/ChooseCalc.dfm
+END
+ChooseCalc.ddp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/16/trunc/source/nastran/ChooseCalc.ddp
+END
+Nastran.dof
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/16/trunc/source/nastran/Nastran.dof
+END

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/12/trunc/source/Ansys
+END
+Ansys.pas
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/12/trunc/source/Ansys/Ansys.pas
+END
+ExportAnsys.dpr
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/12/trunc/source/Ansys/ExportAnsys.dpr
+END
+ResultsArrays.pas
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/12/trunc/source/Ansys/ResultsArrays.pas
+END
+ExportAnsys.dof
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/12/trunc/source/Ansys/ExportAnsys.dof
+END
+MainInterface.pas
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/12/trunc/source/Ansys/MainInterface.pas
+END
+ansys.bmp
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/12/trunc/source/Ansys/ansys.bmp
+END
+ExportAnsys.cfg
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/12/trunc/source/Ansys/ExportAnsys.cfg
+END

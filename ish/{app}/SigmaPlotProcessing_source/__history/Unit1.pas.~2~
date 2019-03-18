@@ -1,0 +1,81 @@
+library SigmaPlotProcessing;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, CheckLst, ExtCtrls, MainInterface;
+
+type
+  TForm1 = class(TForm)
+    ChaptersList: TListBox;
+    GroupBox1: TGroupBox;
+    DataType: TRadioGroup;
+    NRCList: TCheckListBox;
+    Label1: TLabel;
+    AllNRC: TButton;
+    ActionType: TRadioGroup;
+    AddChapter: TButton;
+    DeleteChapter: TButton;
+    ProcessSigmaPlot: TButton;
+    Label2: TLabel;
+    NameField: TEdit;
+    Label3: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+{$E plg}
+const
+     IniFileName='Sigma32.ini';
+{$R *.RES}
+const
+     PluginName = 'Экспорт результатов в SigmaPlot.';
+     StringReg  = '\Software\MAI.609\SIGMA32\3.0';
+     //NastranKey = 'NastranFile';
+var
+     Button,Menu:Pointer;
+     Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure InitializeDLL(Plugin:HModule;Handle:THandle);stdcall;
+begin
+     Menu:=RegisterMenu(Plugin,PChar(PluginName),55,5,PChar('ShowForm'));
+     Button:=RegisterToolButton(Plugin,PChar(PluginName),55,PChar('В SigmaPlot'),PChar('ShowForm'));
+     RegisterPlugin(Plugin,3);
+end;
+
+procedure CheckState;stdcall;
+begin
+
+end;
+
+procedure FinalizeDLL;stdcall;
+begin
+
+end;
+
+procedure ShowForm;stdcall;
+begin
+
+end;
+
+function GetPluginName:PChar;stdcall;
+begin
+     Result:=PChar(PluginName);
+end;
+
+function Can_Close:boolean;stdcall;
+begin
+     //if Form1<>nil then Form1.Close;
+     Result:=true;
+end;
+
+exports InitializeDLL, FinalizeDLL,ShowForm,GetPluginName,Can_Close,CheckState;
+
+end.

@@ -1,0 +1,298 @@
+unit Unit1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls,Forms, Dialogs,
+  StdCtrls, ExtCtrls, ComCtrls, Buttons, inifiles, PrnServ, Printers;
+    const
+  IniFileName='sigma32.ini';
+type
+  TForm1 = class(TForm)
+    StatusBar1: TStatusBar;
+    Splitter1: TSplitter;
+    Memo1: TMemo;
+    Panel1: TPanel;
+    SpeedButton1: TSpeedButton;
+    SaveDlg: TSaveDialog;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    ListBox2: TListBox;
+    ListBox3: TListBox;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure ListBox2Click(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure SaveForm(Name:string);
+    procedure LoadForm(Name:string);
+  end;
+
+var
+  Form1: TForm1;
+  FileName:String;
+   LsB: string;
+   r : string;
+     SigmaIni : TIniFile;
+   
+     SigmaLocation   : String;
+implementation
+uses Registry;
+const
+     Sigma32_exe='Sigma32.exe';
+     StringReg = '\Software\MAI.609\SIGMA32\3.0';
+     Plugin_Edit_Form=1;
+     Plugin_Edit_Fortran=2;
+     MsgCount=32;
+     CheckHints:array [1..MsgCount] of String=
+     ('1. NRC, размеры, свободные параметры, свойства КЭ.(DATA)', '2. Исходные координаты опорных точек зон.(GRIDDM)', '3. Связи зон разбиения.(GRIDDM)',
+'4. Номера узлов по зонам (GRIDDM)', '5. Элементы-узлы по зонам (GRIDDM)', '6. Координаты узлов по зонам (GRIDDM)', '7. Характеристики сетки и неупорядоченой матрицы (GRIDDM)',
+'8. Печать матрицы А  (MAIN)', '9. Печать матрицы в ленточном виде', '10. Начальная нумерация - КЭ и его узлы. (RENMDD)',
+'11. Структура смежности XADJ, ADJNCY. (RENMDD)', '12. Таблица номеров узлов- старые/новые номера (RENMDD)', '13.  Таблица номеров узлов - новые/старые номера (RENMDD)',
+'14. Конечная нумерация - КЭ и его узлы. ( MAIN )', '15. Печать результатов оптимизации сетки (REGULARIZATION)', '16.  Печать множителя L (RCMSLV)', '17.  Контрольная печать параметров задачи  перед  FNENDD (MAIN)',
+'18. Резерв', '19. Координаты узлов (MAIN)', '20.  Массив  NOP перед и в FORMDD (MAIN)', '21.  Параметры закрепления  (BOUND)', '22. Свободные параметры в FORCE (контроль)',
+'23. Распределение нагрузки по узлам. (FORCE)', '24. Резерв', '25. Характеристики модфицированной профильной схемы хранения', '26.  Сообщения о работе программ', '27.  Распределение памяти для профильного метода XENV (MAIN)',
+'28. Размер оболочки, ширина ленты матрицы (MAIN)', '29. Резерв', '30. Резерв','31.  Перемещения узлов (MAIN)','32.  Напряжения в КЭ (STRDD)');
+     //******ИЮНЬ 2012
+   ResultSets:array [1..2*MsgCount] of String=
+     ('**********Start  DATA','*****Finish DATA','*****Start  GRIDDM','*****Finish GRIDDM','CONNECTIVITY DATA','*****Finish GRIDDM',
+   'REGION   1  ****', '*****Finish GRIDDM','NEL   NODE NUMBERS','*****Finish GRIDDM','COORDINATES NOTES OF REGION','*****Finish GRIDDM',
+   'Характеристики сетки','*****Finish GRIDDM', '*****Start PRNTDD','*****Finish PRNTDD','*****Start PRNTDD','*****Finish PRNTDD','*****Start RENMDD','*****Start STSM in RENMDD',
+   'СТРУКТУРА СМЕЖНОСТИ', '*****Start GENRCM in RENMDD','+OLD+ +NEW+ +OLD+ +NEW+ +OLD+ +NEW+','*****Finish RENMDD','+NEW+ +OLD+ +NEW+ +OLD+ +NEW+ +OLD+','*****Finish RENMDD',
+   'НОВАЯ НУМЕРАЦИЯ УЗЛОВ (ЭЛЕМЕНТ И ЕГО УЗЛЫ)   MACCИB <<NOP>>','*****Start BOUND','*****Start REGULARIZATION in GRIDDM','*****Finish  REGULARIZATION in GRIDDM',
+   '*****Finish ESFCT in RCMSLV','*****Start  ELSLV in RCMSLV','КОНТРОЛЬНАЯ ПЕЧАТЬ ПАРАМЕТРОВ ЗАДАЧИ','*****Start FNENDD','Hello!','****good luck****',
+   ' KOOPДИHATЫ УЗЛOB','*****Start FNENDD',' NOP ПЕРЕД FORMDD','*****Finish FORMDD','*****Start BOUND','*****Finish BOUND','*****Start FORCE','PACПPEДEЛEHИE HAГPУЗOK',
+   'PACПPEДEЛEHИE HAГPУЗOK','*****Finish FORCE','Hello!','****good luck****','begin memory','end memory','Hello!','****good luck****',
+   '*****Finish FNENDD','begin memory','*****Finish FNENDD','begin memory','Hello!','****good luck****','Hello!','****good luck****','ПEPEMEЩEHИЯ УЗЛOB','*****Start STRSDD',
+   '*****Start STRSDD', '*****Finish STRSDD');
+     //******ИЮНЬ 2012
+{$R *.DFM}
+
+procedure TForm1.LoadForm(Name:string);
+var
+     Registry:TRegistry;
+begin
+     Registry        :=TRegistry.Create;
+     Registry.RootKey:=HKEY_CURRENT_USER;
+     if Registry.OpenKeyReadOnly(StringReg+'\'+Name) then
+     begin
+          if Registry.ValueExists('Top') then
+               Top:=Registry.ReadInteger('Top');
+          if Registry.ValueExists('Left') then
+               Left:=Registry.ReadInteger('Left');
+          if Registry.ValueExists('Width') then
+               Width:=Registry.ReadInteger('Width');
+          if Registry.ValueExists('Height') then
+               Height:=Registry.ReadInteger('Height');
+          if Registry.ValueExists('Maximized') then
+          begin
+               if Registry.ReadBool('Maximized') then WindowState:=wsMaximized
+               else WindowState:=wsNormal;
+          end;
+     end;
+     Registry.free;
+end;
+procedure TForm1.SaveForm(Name:string);
+var
+     Registry:TRegistry;
+begin
+     Registry        :=TRegistry.Create;
+     Registry.RootKey:=HKEY_CURRENT_USER;
+     if Registry.OpenKey(StringReg+'\'+Name,true) then
+     begin
+          Registry.WriteBool('Maximized',WindowState=wsMaximized);
+          if WindowState=wsMaximized then WindowState:=wsNormal;
+          Registry.WriteInteger('Top',Top);
+          Registry.WriteInteger('Left',Left);
+          Registry.WriteInteger('Width',Width);
+          Registry.WriteInteger('Height',Height);
+     end;
+     Registry.free;
+end;
+procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+     Action:=caFree;
+end;
+
+
+{
+Функция для получение
+имени проекта из
+полного пути к файлу проекта
+который лежит в реестре
+}
+function GetProjectName:String;
+var
+  projName:String;
+  tempStr:String;
+  slashPos:Integer;
+  Registry:TRegistry;
+begin
+      projName := '';
+     Registry        :=TRegistry.Create;
+     Registry.RootKey:=HKEY_CURRENT_USER;
+     if Registry.OpenKey(StringReg, true) then
+     begin
+          if Registry.ValueExists('InputFileName') then
+          begin
+          // Получаем полный путь до файла проекта
+            tempStr:=Registry.ReadString('InputFileName');
+
+            // Получаем только имя файла проекта
+            while(Pos('\',tempStr) <> 0) do
+            begin
+              slashPos:= Pos('\',tempStr);
+              Delete(tempStr,1,slashPos);
+            end;
+            Delete(tempStr,Pos('.',tempStr),Length(tempStr));
+            // Удаляем расширение и получаем имя проекта
+            projName:= tempStr;
+          end;
+     end;
+     Result := projName;
+End;
+
+procedure TForm1.FormCreate(Sender: TObject);
+var i:integer;
+begin
+//******ИЮНЬ 2012
+ // доступ к файлу с хранящимися данными о конфигурации проекта, заданной пользователем
+          SigmaIni:=TIniFile.Create(ExtractFilePath(ParamStr(0))+IniFileName);
+             for i := 1 to MsgCount do
+     begin
+ // отображать пункты в меню согласно файлу конфигурации
+         with SigmaIni do
+  if SigmaIni.ReadString('FortranPrint',InttoStr(i),'NO')= 'YES' then
+        begin
+
+       ListBox2.Items.Add(CheckHints[i]);
+       // заполнить вспомогательный список, границами разделов между отдельными блоками текстового результата
+        ListBox3.Items.Add(ResultSets[2*i-1]);
+        ListBox3.Items.Add(ResultSets[2*i]);
+        end;
+     end;
+     SigmaIni.Free;
+//******ИЮНЬ 2012
+    Caption:= Caption + ' ' + GetProjectName;
+
+
+
+end;
+
+procedure TForm1.FormDestroy(Sender: TObject);
+begin
+     Form1:=nil;
+end;
+
+procedure TForm1.FormResize(Sender: TObject);
+var
+dop :integer;
+cfF: TIniFile;
+SigmaLocation:string;
+i:integer;
+begin
+{c:=0;
+     top:=0;
+          //определение места расположения Сигмы
+     SigmaLocation   :=LowerCase(ExtractFilePath(ParamStr(0)));
+     i:=pos('\bin',SigmaLocation);
+     if i>0 then SetLength(SigmaLocation,i);
+     cfF:=TIniFile.Create(SigmaLocation+'bin\sforms.ini');
+
+     //      cfF:=TIniFile.Create('sforms.ini');
+      try
+                dop:=CfF.ReadInteger('Главная','Высота',top);
+                top:=dop-StatusBar1.Height-8;
+                left:=0;
+                Height:=Screen.Height-dop;
+                cfF.Free;
+      except
+                MessageDlg('Не могу прочитать файл sforms.ini!',mtError,[mbOk],0);
+      end;
+
+
+     Constraints.MaxHeight:=Screen.Height-dop;
+     top:=dop-StatusBar1.Height-8;
+         }
+end;
+
+procedure TForm1.SpeedButton2Click(Sender: TObject);
+var ttt:TPrintService;
+begin
+        ttt.PrinterSetupDialog;
+end;
+
+  {************************************************}
+  //Сохранение выделенного раздела
+procedure TForm1.SpeedButton1Click(Sender: TObject);
+begin
+    if SaveDlg.Execute then
+        begin
+            Memo1.Lines.SaveToFile(SaveDlg.FileName);
+        end;
+end;
+
+procedure TForm1.SpeedButton3Click(Sender: TObject);
+var
+        stroka: system.text;
+        i: integer;
+begin
+   AssignPrn(Stroka);
+   rewrite(Stroka);
+
+   printer.Canvas.Font:=Memo1.Font;
+   for i:=0 to Memo1.Lines.Count-1 do Writeln(Stroka, Memo1.lines[i]);
+   System.Close(Stroka);
+
+end;
+
+//******ИЮНЬ 2012
+procedure TForm1.ListBox2Click(Sender: TObject);
+var
+ cur:Integer;
+     s:string;
+     Handle:TextFile;
+     start:boolean;
+     st,fn:string;
+     IniFile:TIniFile;
+begin
+     cur:=ListBox2.ItemIndex;
+
+     Memo1.Lines.Clear;
+
+     if FileExists(FileName) then
+     begin
+          if (cur=0) then Memo1.Lines.LoadFromFile(FileName)
+          else begin
+          st := ListBox3.Items[(ListBox2.ItemIndex)*2-1];
+          //fn := ReadString('ResultSets','Finish'+IntToStr(cur),'');
+          fn :=  ListBox3.Items[(ListBox2.ItemIndex)*2];
+
+                    Memo1.Lines.BeginUpdate;
+                    AssignFile(Handle,FileName);
+                    Reset(Handle);
+                    Start:=false;
+                    While not EOF(Handle) do
+                    begin
+                         ReadLn(Handle,s);
+                         if (pos(st,s)<>0) then Start:=True;
+                         if (Start) then Memo1.lines.Add(s);
+                         if (pos(fn,s)<>0) then Start:=False;
+
+                    end;
+                    CloseFile(Handle);
+                    Memo1.Lines.EndUpdate;
+               end;
+     end;
+end;
+//******ИЮНЬ 2012
+end.

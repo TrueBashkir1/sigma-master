@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/16/trunc/source/Msdev/Lib
+END
+Portlib.lib
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/16/trunc/source/Msdev/Lib/Portlib.lib
+END
+Libf.lib
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/16/trunc/source/Msdev/Lib/Libf.lib
+END
+~errtmp
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/16/trunc/source/Msdev/Lib/~errtmp
+END
+Console.lib
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/12/trunc/source/Msdev/Lib/Console.lib
+END
+Kernel32.lib
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/16/trunc/source/Msdev/Lib/Kernel32.lib
+END
+Libc.lib
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/16/trunc/source/Msdev/Lib/Libc.lib
+END

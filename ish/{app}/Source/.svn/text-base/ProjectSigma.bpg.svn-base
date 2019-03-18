@@ -1,0 +1,37 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = FormEditor.dll ProgEditor.dll ShowResult.dll Sigma32.exe Nastran.plg \
+  TextResults.plg
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+
+Sigma32.exe: Sigma32.dpr
+  $(DCC)
+
+FormEditor.dll: ..\editor\FormEditor.dpr
+  $(DCC)
+
+ProgEditor.dll: ..\progeditor\ProgEditor.dpr
+  $(DCC)
+
+ShowResult.dll: ..\showresult\ShowResult.dpr
+  $(DCC)
+
+Nastran.plg: ..\nastran\Nastran.dpr
+  $(DCC)
+
+TextResults.plg: ..\TextResults\TextResults.dpr
+  $(DCC)
+
+

@@ -1,0 +1,135 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = #1054#1073#1088#1072#1073#1086#1090#1082#1072' '#1074' SugmaPlot'
+  ClientHeight = 288
+  ClientWidth = 412
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label3: TLabel
+    Left = 8
+    Top = 232
+    Width = 396
+    Height = 13
+    Caption = 'Log'
+  end
+  object ChaptersList: TListBox
+    Left = 8
+    Top = 16
+    Width = 137
+    Height = 129
+    ItemHeight = 13
+    TabOrder = 0
+  end
+  object GroupBox1: TGroupBox
+    Left = 160
+    Top = 16
+    Width = 249
+    Height = 214
+    Caption = #1057#1086#1076#1077#1088#1078#1072#1085#1080#1077' '#1088#1072#1079#1076#1077#1083#1072
+    TabOrder = 1
+    object Label1: TLabel
+      Left = 159
+      Top = 43
+      Width = 21
+      Height = 13
+      Caption = 'NRC'
+    end
+    object Label2: TLabel
+      Left = 3
+      Top = 19
+      Width = 97
+      Height = 13
+      Caption = #1053#1072#1079#1074#1072#1085#1080#1077' '#1088#1072#1079#1076#1077#1083#1072':'
+    end
+    object DataType: TRadioGroup
+      Left = 3
+      Top = 38
+      Width = 150
+      Height = 81
+      Caption = #1044#1072#1085#1085#1099#1077
+      Items.Strings = (
+        #1057#1080#1083#1099' (X,Y,Sum)'
+        #1053#1072#1087#1088#1103#1078#1077#1085#1080#1103' '#1074' '#1090#1086#1095#1082#1077
+        'Max '#1080' min '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1103)
+      TabOrder = 0
+    end
+    object NRCList: TCheckListBox
+      Left = 159
+      Top = 62
+      Width = 81
+      Height = 149
+      ItemHeight = 13
+      Items.Strings = (
+        '3'
+        '4'
+        '5'
+        '6'
+        '7'
+        '8'
+        '9'
+        '10'
+        '11'
+        '12')
+      TabOrder = 1
+    end
+    object AllNRC: TButton
+      Left = 197
+      Top = 43
+      Width = 41
+      Height = 17
+      Caption = #1042#1089#1077
+      TabOrder = 2
+    end
+    object ActionType: TRadioGroup
+      Left = 3
+      Top = 125
+      Width = 150
+      Height = 86
+      Caption = #1044#1077#1081#1089#1090#1074#1080#1077
+      Items.Strings = (
+        #1055#1086' '#1086#1076#1085#1086#1084#1091' '#1075#1088#1072#1092#1080#1082#1091
+        #1057#1088#1072#1074#1085#1080#1090#1077#1083#1100#1085#1099#1081' '#1075#1088#1072#1092#1080#1082
+        #1056#1077#1075#1088#1077#1089#1089#1080#1103)
+      TabOrder = 3
+    end
+    object NameField: TEdit
+      Left = 106
+      Top = 16
+      Width = 127
+      Height = 21
+      TabOrder = 4
+    end
+  end
+  object AddChapter: TButton
+    Left = 8
+    Top = 152
+    Width = 65
+    Height = 25
+    Caption = #1044#1086#1073#1072#1074#1080#1090#1100
+    TabOrder = 2
+  end
+  object DeleteChapter: TButton
+    Left = 79
+    Top = 152
+    Width = 66
+    Height = 25
+    Caption = #1059#1076#1072#1083#1080#1090#1100
+    TabOrder = 3
+  end
+  object ProcessSigmaPlot: TButton
+    Left = 8
+    Top = 184
+    Width = 137
+    Height = 43
+    Caption = #1054#1073#1088#1072#1073#1086#1090#1072#1090#1100
+    TabOrder = 4
+  end
+end

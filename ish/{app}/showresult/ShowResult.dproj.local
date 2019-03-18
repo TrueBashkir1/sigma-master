@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2011.06.13 06:57:36.633.pas,C:\source\showresult_Stekoln\ImgForm.pas=</Transaction>
+    <Transaction>2011.06.13 06:57:36.634.dfm,C:\source\showresult_Stekoln\ImgForm.dfm=</Transaction>
+    <Transaction>2011.06.13 06:59:12.986.pas,C:\source\showresult_Stekoln\Prnserv.pas=</Transaction>
+    <Transaction>2011.06.13 06:59:12.986.dfm,C:\source\showresult_Stekoln\Prnserv.dfm=</Transaction>
+    <Transaction>2011.06.13 06:59:43.574.pas,C:\source\showresult_Stekoln\strfunc.pas=</Transaction>
+    <Transaction>2011.10.16 07:32:32.528.pas,C:\SigmaDev\Juli_Sigma2\ShowMatrixForm.pas=</Transaction>
+    <Transaction>2011.10.16 07:32:32.528.dfm,C:\SigmaDev\Juli_Sigma2\ShowMatrixForm.dfm=</Transaction>
+    <Transaction>2011.10.16 07:42:04.896.dproj,C:\SigmaDev\Juli_Sigma2\ShowResult.dproj=C:\SigmaDev\MatrixImage\MatrixImage.dproj</Transaction>
+    <Transaction>2011.10.16 07:42:33.148.dproj,C:\SigmaDev\MatrixImage\MatrixImage.dproj=C:\SigmaDev\Juli_Sigma2\ShowResult.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
