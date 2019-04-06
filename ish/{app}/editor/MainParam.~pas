@@ -1456,6 +1456,6 @@ begin
   CheckBox2.Checked:=false;
   genrzn.Checked:=false;
 end;
-
+//test
 
 End.
