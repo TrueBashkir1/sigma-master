@@ -192,5 +192,5 @@ end;
 
 exports InitializeDLL,FinalizeDLL,StartExport,GetPluginName,Can_Close,CheckState;
 end.
-
+// test made by serafim
 // Export to Ansys (Written by: Shevchenko T.L., 26.11.2005) <--

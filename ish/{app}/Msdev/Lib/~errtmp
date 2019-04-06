@@ -1,2 +1,181 @@
-	link.exe @C:\Users\TRUEB\AppData\Local\Temp\nma21904.
-LINK : LNK6004: C:\Stolyar\KR\KURS\kurs\project\p8\2sigma\Obj/pr2.exe not found or not built by the last incremental link; performing full link
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MAIN.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MAIN.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MAIN.for(561): warning FOR4280: unused local variable TEXTF
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MAIN.for(561): warning FOR4270: unused symbol TEST
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MAIN.for(561): warning FOR4270: unused symbol MAXSUB
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MAIN.for(561): warning FOR4270: unused symbol MAXLNZ
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MAIN.for(561): warning FOR4270: unused symbol FLAG
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MAIN.for(561): warning FOR4270: unused symbol XNZSUB
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MAIN.for(561): warning FOR4270: unused symbol XLNZ
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MAIN.for(561): warning FOR4270: unused symbol RCHLNK
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MAIN.for(561): warning FOR4270: unused symbol NZSUB
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MAIN.for(561): warning FOR4270: unused symbol MRGLNK
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MAIN.for(561): warning FOR4270: unused symbol CORDD
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MAIN.for(561): warning FOR4270: unused symbol GLOB
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MAIN.for(561): warning FOR4270: unused symbol FORM
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MAIN.for(561): warning FOR4270: unused symbol CORDPO
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MAIN.for(561): warning FOR4270: unused symbol X8
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DATA.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DATA.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DATA.for(135): warning FOR4270: unused symbol FORM
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DATA.for(135): warning FOR4270: unused symbol IMAT
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DATA.for(135): warning FOR4269: unused dummy argument DD
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DATA.for(135): warning FOR4269: unused dummy argument NFP
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DGRIDD.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DGRIDD.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DGRIDD.for(46): warning FOR4270: unused symbol N
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DGRIDD.for(46): warning FOR4269: unused dummy argument ZP
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DGRIDD.for(46): warning FOR4280: unused local variable PI
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DGRIDD.for(46): warning FOR4280: unused local variable NEL
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DGRIDD.for(46): warning FOR4280: unused local variable NB
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DGRIDD.for(46): warning FOR4280: unused local variable NBW
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DGRIDD.for(46): warning FOR4280: unused local variable IP
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DGRIDD.for(46): warning FOR4280: unused local variable IO
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DGRIDD.for(46): warning FOR4280: unused local variable IN
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GRIDDM.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GRIDDM.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GRIDDM.for(487): warning FOR4280: unused local variable IP
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GRIDDM.for(487): warning FOR4280: unused local variable IN
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GRIDDM.for(487): warning FOR4270: unused symbol OP
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GRIDDM.for(487): warning FOR4270: unused symbol NODEY
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GRIDDM.for(487): warning FOR4270: unused symbol NODEX
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GRIDDM.for(487): warning FOR4280: unused local variable GLOB
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GRIDDM.for(487): warning FOR4270: unused symbol CORD1
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\REGULA~1.FOR"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\REGULA~1.FOR
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\REGULA~1.FOR(211): warning FOR4270: unused symbol NOTMOVE
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\REGULA~1.FOR(211): warning FOR4270: unused symbol J
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\REGULA~1.FOR(211): warning FOR4270: unused symbol Y1
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\REGULA~1.FOR(211): warning FOR4270: unused symbol X1
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\REGULA~1.FOR(211): warning FOR4270: unused symbol MM
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\REGULA~1.FOR(211): warning FOR4269: unused dummy argument NCOL
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\REGULA~1.FOR(211): warning FOR4269: unused dummy argument NROWS
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FIND_M~1.FOR"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FIND_M~1.FOR
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FIND_M~1.FOR(55): warning FOR4270: unused symbol IFM
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FIND_M~1.FOR(55): warning FOR4280: unused local variable NUMVAL
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FINDNODD.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FINDNODD.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FINDNODD.for(34): warning FOR4270: unused symbol MAX1
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FINDNODD.for(34): warning FOR4269: unused dummy argument NTMOVE
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FINDNODD.for(48): warning FOR4269: unused dummy argument IMAT
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FINDNODD.for(48): warning FOR4269: unused dummy argument NEL
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FINDNODD.for(48): warning FOR4269: unused dummy argument NMAT
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FINDNODD.for(48): warning FOR4269: unused dummy argument NRG
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FINDNODD.for(70): warning FOR4269: unused dummy argument NOP
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FINDNODD.for(70): warning FOR4269: unused dummy argument CORD
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FINDNODD.for(70): warning FOR4269: unused dummy argument IMAT
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FINDNODD.for(70): warning FOR4269: unused dummy argument NMAT
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GET_STAR.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GET_STAR.for
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\RENMDD.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\RENMDD.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\RENMDD.for(139): warning FOR4269: unused dummy argument RCHESET
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\RENMDD.for(139): warning FOR4270: unused symbol XENV
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GENRCM.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GENRCM.for
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\STSM.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\STSM.for
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DEGREE.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\DEGREE.for
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FNROOT.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FNROOT.for
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\RCM.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\RCM.for
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\ROOTLS.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\ROOTLS.for
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\BOUND.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\BOUND.for
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FORCE.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FORCE.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FORCE.for(75): warning FOR4269: unused dummy argument DH
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FORCE.for(75): warning FOR4269: unused dummy argument RSUM
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FORCE.for(75): warning FOR4269: unused dummy argument NRC
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FORCE.for(75): warning FOR4269: unused dummy argument NB
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FNENDD.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FNENDD.for
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PRNTDD.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PRNTDD.for
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FORMDD.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\FORMDD.for
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MGSDTR.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MGSDTR.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MGSDTR.for(83): warning FOR4270: unused symbol IPR
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\RCMSLV.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\RCMSLV.for
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\ELSLV.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\ELSLV.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\ELSLV.for(43): warning FOR4270: unused symbol CONT
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\ESFCT.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\ESFCT.for
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\EUSLV.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\EUSLV.for
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\STRDD.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\STRDD.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\STRDD.for(60): warning FOR4269: unused dummy argument DD
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\STRDD.for(60): warning FOR4269: unused dummy argument NP
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\genqmd.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\genqmd.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\genqmd.for(157): warning FOR4270: unused symbol NEQNCS
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\genqmd.for(157): warning FOR4270: unused symbol IPCH
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\genqmd.for(157): warning FOR4270: unused symbol ADJENCYBC
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\genqmd.for(157): warning FOR4269: unused dummy argument NOFSB
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\qmdmrg.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\qmdmrg.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\qmdmrg.for(124): warning FOR4265: symbol DEG0 referenced but not set
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\qmdmrg.for(124): warning FOR4269: unused dummy argument MARKERDEG0
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\qmdqt.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\qmdqt.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\qmdqt.for(72): warning FOR4270: unused symbol LINKNABOR
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\qmdrch.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\qmdrch.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\qmdrch.for(80): warning FOR4265: symbol ISTART referenced but not set
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\qmdupd.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\qmdupd.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\qmdupd.for(95): warning FOR4270: unused symbol ROOT
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GENAU.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GENAU.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GENAU.for(106): warning FOR4270: unused symbol J
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GENAU.for(106): warning FOR4265: symbol STEP referenced but not set
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GENAU.for(113): warning FOR4269: unused dummy argument ADJNCY
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GENAU.for(170): warning FOR4270: unused symbol TMP
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GENAU.for(191): warning FOR4265: symbol F referenced but not set
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\TOSPW.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\TOSPW.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\TOSPW.for(21): warning FOR4270: unused symbol STATUS
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for(47): warning FOR4269: unused dummy argument NP
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for(47): warning FOR4269: unused dummy argument DB
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for(115): warning FOR4269: unused dummy argument NRC
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for(115): warning FOR4269: unused dummy argument DB
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for(115): warning FOR4269: unused dummy argument DH
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for(115): warning FOR4269: unused dummy argument NB
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for(115): warning FOR4269: unused dummy argument RSUM
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for(612): warning FOR4280: unused local variable IP
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for(612): warning FOR4280: unused local variable IN
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for(612): warning FOR4270: unused symbol OP
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for(612): warning FOR4270: unused symbol NODEY
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for(612): warning FOR4270: unused symbol NODEX
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for(612): warning FOR4280: unused local variable GLOB
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for(612): warning FOR4270: unused symbol CORD1
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for(640): warning FOR4269: unused dummy argument NOP
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for(640): warning FOR4269: unused dummy argument NMAT
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\PREPR.for(640): warning FOR4269: unused dummy argument CORD
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\SMBFCT.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\SMBFCT.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\SMBFCT.for(230): warning FOR4280: unused local variable ZN
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\SMBFCT.for(230): warning FOR4280: unused local variable PR
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\SMBFCT.for(230): warning FOR4270: unused symbol STR
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GENKNG.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GENKNG.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GENKNG.for(80): warning FOR4270: unused symbol MINNODE
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GENRZN.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GENRZN.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GENRZN.for(146): warning FOR4265: symbol OLDPMAX referenced but not set
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\GENRZN.for(146): warning FOR4270: unused symbol BETT
+	fl32.exe /Zi /I "D:\exp\Obj/" /c /nologo /Fo"D:\exp\Obj/" /Fd"D:\exp\Obj\proexp.pdb" "c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MEMCNT.for"
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MEMCNT.for
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MEMCNT.for(126): warning FOR4270: unused symbol COUNT
+c:\PROGRA~1\mai\sigma7.3\Source\SOURCE~1\MEMCNT.for(126): warning FOR4280: unused local variable NI
+	link.exe @C:\Users\E61A~1\AppData\Local\Temp\nma06368.
