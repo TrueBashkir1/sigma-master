@@ -54,7 +54,7 @@ C ******************************************************************
      > rchlnk(1000), xlnz(3000),xnzsub(3000)
        integer flag,maxlnz,maxsub,FL
 
-       INTEGER NFP/10/,XADJ,ADJNCY,PERM,INVP,XENV,ENVSZE,BANDW,test
+       INTEGER NFP/10/,XADJ,ADJNCY,PERM,INVP,XENV,ENVSZE,BANDW,test,SIZ
         LOGICAL PREP
        LOGICAL*1 IPR(50)
 C       character*512  ExpGrd
@@ -462,7 +462,13 @@ C ================================================================
        CALL STRSDD ( 3,NP,NE,NCN,NDF,DD,NOP,R,ESIGMA,IPR,BBB)
        IF(IPR(26)) WRITE(6,1008)
 1008   FORMAT(/,5X,'*****Finish STRSDD')
+1009   FORMAT(/,5X,'*****Start SCHEMA')
+1010   FORMAT(/,5X,'*****Finish SCHEMA')
 
+       IF(IPR(26)) WRITE(6,1009)
+              SIZ=NSZF
+       CALL SCHEMA (DIAG, ENV, XENV, SIZ)
+       IF(IPR(26)) WRITE(6,1010)
 c Записываем в файл 2 значения напряжений к КЭ.
 
        DO 669 I=1,NE
