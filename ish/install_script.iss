@@ -270,6 +270,7 @@ Source: "{app}\Source\Source__sort\GENRCM.for"; DestDir: "{app}\Source\Source__s
 Source: "{app}\Source\Source__sort\GET_STAR.for"; DestDir: "{app}\Source\Source__sort"; Components: "main"; Flags: ignoreversion 
 Source: "{app}\Source\Source__sort\GRIDDM.for"; DestDir: "{app}\Source\Source__sort"; Components: "main"; Flags: ignoreversion 
 Source: "{app}\Source\Source__sort\MAIN.for"; DestDir: "{app}\Source\Source__sort"; Components: "main"; Flags: ignoreversion 
+Source: "{app}\Source\Source__sort\SCHEMA.for"; DestDir: "{app}\Source\Source__sort"; Components: "main"; Flags: ignoreversion 
 Source: "{app}\Source\Source__sort\MGSDTR.for"; DestDir: "{app}\Source\Source__sort"; Components: "main"; Flags: ignoreversion 
 Source: "{app}\Source\Source__sort\PRNTDD.for"; DestDir: "{app}\Source\Source__sort"; Components: "main"; Flags: ignoreversion 
 Source: "{app}\Source\Source__sort\QMDMRG.for"; DestDir: "{app}\Source\Source__sort"; Components: "main"; Flags: ignoreversion 
