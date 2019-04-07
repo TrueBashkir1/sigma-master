@@ -1,10 +1,10 @@
 C Последняя модификация: декабрь 2011 года, Насибуллин Т.Р.
 
 C  файл MAIN.for
-C  Содержит программу MAIN - управляющую программу комплекса Sigma 
+C  Содержит программу MAIN - управляющую программу комплекса Sigma
 C ===================================================================
 C ===================================================================
-C ПPOГPAMMHЫЙ KOMПЛEKC SIGMA ДЛЯ РАСЧЕТА HAПPЯЖEHHO-ДEФOPMИPOBAHHOГO 
+C ПPOГPAMMHЫЙ KOMПЛEKC SIGMA ДЛЯ РАСЧЕТА HAПPЯЖEHHO-ДEФOPMИPOBAHHOГO
 C COCTOЯHИЯ  ПЛOCKИX KOHCTPУKЦИЙ
 C PEAЛИЗУET METOД KOHEЧHOГO ЭЛEMEHTA  PAЗPAБOTAHA HA KAФ 603
 C           ABTOP PAЗPAБOTKИ PУCEЦKИЙ B.A.
@@ -16,21 +16,21 @@ C        MAIN - УПPABЛЯЮЩAЯ ПPOГPAMMA KOMПЛEKCA
 C BЫЗЫBAET ПOДПPOГPAMMЫ:DATA,DGRIDD,GRIDDM,RENMDD,BOUND,
 C FORCE, FNENDD,FORMDD,PRNTDD,STRSDD и т.д.(см. схему расчетного блока)
 C
-C XADJ - массив,хранящий структуру смежности упорядоченного графа  
-C ADJNCY - массив,хранящий структуру смежности упорядоченного графа 
-C PERM - вектор, содержащий обратное переупорядочение Катхилла-Макки. 
+C XADJ - массив,хранящий структуру смежности упорядоченного графа
+C ADJNCY - массив,хранящий структуру смежности упорядоченного графа
+C PERM - вектор, содержащий обратное переупорядочение Катхилла-Макки.
 C INVP - массив с информацией о перестановке для переупорядочения матрицы
 C XENV - индексный массив профильного метода
 C NOP - массив номеров узлов
 C CORD - массив одномерный массив глобальных координат узлов
 C DIAG - массив диагональных элементов
-C ORT - массив характеристик материалов, из которых изготовлена конструкция 
+C ORT - массив характеристик материалов, из которых изготовлена конструкция
 C IMAT - номер материала
 C R - массив значений усилий в узлах
 C NBC - массив номеров узлов, имеющих закрепление по оси X или Y
 C NFIX - массив, в котором указывается тип закрепления узла
 C ENV - массив оболочки матрицы
-C ESIGMA - хранит значения 6 видов напряжений и значение угла для каждого КЭ 
+C ESIGMA - хранит значения 6 видов напряжений и значение угла для каждого КЭ
 C IPR - логический массив управления печатью (выводом в текстовый файл)
 C IPR  задается в "Конфигурация комплекса", раздел "Результаты расчета"
 C ===================================================================
@@ -43,7 +43,7 @@ C ================== начало кода MAIN =============================
      >          DIAG(10000),ORT(1000),IMAT(10000),R(30000),NBC(10000),
      >          NFIX(10000), ESIGMA(42000), CORDPO(10),deg(3000),
      >          marker(3000),RCHESET(3000),NBRHD(3000),
-     >          QSIZE(3000),QLINK(3000), ADJNCYBC(6000), 
+     >          QSIZE(3000),QLINK(3000), ADJNCYBC(6000),
      >          FORM(40),GLOB(9),Density(10000),
      >          XP(600),YP(600),ZP(600),
      >          CORDD(1),NDD(8,20),JT(20,4),BBB(3,6)
@@ -53,29 +53,29 @@ C ******************************************************************
        dimension mrglnk(1000),nzsub(3000),
      > rchlnk(1000), xlnz(3000),xnzsub(3000)
        integer flag,maxlnz,maxsub,FL
-                                                       
-       INTEGER NFP/10/,XADJ,ADJNCY,PERM,INVP,XENV,ENVSZE,BANDW,test
+
+       INTEGER NFP/10/,XADJ,ADJNCY,PERM,INVP,XENV,ENVSZE,BANDW,test,SIZ
         LOGICAL PREP
        LOGICAL*1 IPR(50)
 C       character*512  ExpGrd
 
-       DATA R/30000*0.0/,IMAT/10000*1/,IPR/50*.FALSE./,    
+       DATA R/30000*0.0/,IMAT/10000*1/,IPR/50*.FALSE./,
      > TEXTF/'FORM'/,ORT/1000*0.0/,Density/10000*1.0/,
      > PRM1/0.0/,PRM2/0.0/,PRM3/0.0/,PRM4/0.0/,PRM5/0.0/,PRM6/0.0/
-C    
+C
 C        ЗABOДИM ЧACЫ
 C     CALL STIMER ('TASK',EXIT,1000000)
 C ***************************************************************
 C        CЧИTЫBAHИE ДAHHЫX ПO KOHCTPУKЦИИ
 C ================================================================
 
-       OPEN(33,FILE='RESULT1.BIN',FORM='BINARY')    
+       OPEN(33,FILE='RESULT1.BIN',FORM='BINARY')
        OPEN(34,FILE='RESULT2.BIN',FORM='BINARY')
 
        WRITE(6,777)
-777    FORMAT(9X,'Hello!')       
-     
-     
+777    FORMAT(9X,'Hello!')
+
+
 !    Панфилов А.А.
 !    Пытаемся найти файлы с данными из препроцессора
 !    Если все необходимые файлы существуют, дальше работаем с данным из
@@ -87,15 +87,15 @@ C ================================================================
       ENDIF
       IF (PREP) THEN
       inquire( file="materials.elems", exist=PREP)
-      ENDIF     
+      ENDIF
       IF (PREP) THEN
       inquire( file="prep_griddm.elems", exist=PREP)
-      ENDIF     
+      ENDIF
       IF (PREP) THEN
       inquire( file="prep_griddm.nodes", exist=PREP)
-      ENDIF    
-! Идентификатор PREP в дальнейшем используем для вызова связанных с 
-! препроцессором функций  
+      ENDIF
+! Идентификатор PREP в дальнейшем используем для вызова связанных с
+! препроцессором функций
 
 
        IF(IPR(26)) WRITE(6,999)
@@ -122,7 +122,7 @@ C ===============================================================
 C  ПPOГPAMMA ПOДГOTOBKИ ИCXOДHЫX ДAHHЫX ДЛЯ MKЭ
 C  ФOPMИPOBAHИE CETKИ KOHEЧHЫX ЭЛEMEHTOB
 C  ==============================================================
-   
+
 
        IF(IPR(26)) WRITE(6,997)
 997    FORMAT(/,5X,'*****Start  GRIDDM',/,
@@ -131,7 +131,7 @@ C ================================================================
       IF (PREP) THEN
        CALL PREP_GRIDDM(NRC,NOP,IPR,NP,NE,CORD,
      >  INBP,INRG,NDD,XP,YP,ZP,JT,NCN,ENV,NMAT,IMAT)
-      ELSE     
+      ELSE
        CALL GRIDDM(NRC,NOP,IPR,NP,NE,CORD,
      >  INBP,INRG,NDD,XP,YP,ZP,JT,NCN,ENV,NMAT,IMAT)
       ENDIF
@@ -157,7 +157,7 @@ c Записываем в файл 1 координаты узлов после разбиения на КЭ.
 c исключение разделителя "-1" из возможных данных
        IF(X1.eq.(-1)) X1=X1+0.001
        IF(X2.eq.(-1)) X2=X2+0.001
-c 
+c
         WRITE(33) X1,X2
 664    CONTINUE
        WRITE(33) DBLE(-1)
@@ -183,11 +183,10 @@ C ================================================================
      > 2X,' MACCИB <<NOP>>'/(3('  *N',I3,'(' ,3I4,')')))
 
 
-       call fS (CORD,NOP,ne,IPR)
 c       calc(XADJ,ADJNCY,PERM,INVP,XENV,ENV,NOP,cord,
 c     >diag,ort,imat,nrc,inrg,r,NBC,NFIX,ESIGMA,NLL)
 C   ==============================================================
-C              ЗAДAHИE  ГPAHИЧHЫX УCЛOBИЙ 
+C              ЗAДAHИE  ГPAHИЧHЫX УCЛOBИЙ
 C   ==============================================================
        IF(IPR(26)) WRITE(6,995)
 995    FORMAT(/,5X,'*****Start BOUND',/,
@@ -198,7 +197,7 @@ C ================================================================
       ELSE
        CALL BOUND(NB,CORD,NBC,NFIX,DB,IPR,NP)
       ENDIF
-      
+
        IF(IPR(26)) WRITE(6,1003)
 1003   FORMAT(/,5X,'*****Finish BOUND')
 
@@ -220,7 +219,7 @@ C исключение разделителя "-1" из возможных данных
        WRITE(33) DBLE(-1)
 
 C   ==============================================================
-C               PAЗHECEHИE HAГPУЗKИ 
+C               PAЗHECEHИE HAГPУЗKИ
 C   ==============================================================
        IF(IPR(26)) WRITE(6,994)
 994    FORMAT(/,5X,'*****Start FORCE',/,
@@ -233,9 +232,9 @@ C ================================================================
        CALL FORCE(NB,CORD,NRC,DB,IPR,NP,RSUM,R,NDF,DH,NR,
      > PRM1,PRM2,PRM3,PRM4,PRM5,PRM6)
       ENDIF
-      
-      
-      
+
+
+
              IF(IPR(26)) WRITE(6,1004)
 1004   FORMAT(/,5X,'*****Finish FORCE')
 C   Контрольная печать параметров задачи после FORCE
@@ -255,7 +254,7 @@ C   Контрольная печать параметров задачи после FORCE
      > F6.0,2X,'ТОЛЩИНА =',F4.2)
        endif
 C   ==============================================================
-C Записываем в файл 1 координаты узлов, к которым 
+C Записываем в файл 1 координаты узлов, к которым
 C     приложены силы, и значения этих сил.
 C   ==============================================================
        DO 666 I=1,NP
@@ -269,7 +268,7 @@ C       исключение разделителя "-1" из возможных данных
        IF(X4.eq.-1) X4=X4+0.001
        IF(X1.eq.-1) X1=X1+0.001
        IF(X2.eq.-1) X2=X2+0.001
-C 
+C
         WRITE(33) X3,X4,X1,X2
 666    CONTINUE
        WRITE(33) DBLE(-1)
@@ -310,13 +309,13 @@ C ================================================================
      >  (XENV(I+1),I=1,NSZF)
   16   FORMAT (5X,'РАСПРЕДЕЛЕНИЕ ПАМЯТИ (XENV)',
      > 3X,'РАЗМЕР XENV=',I5 /(10I6))
-    
+
        IF(IPR(28)) WRITE(6,17) ENVSZE,BANDW+1
   17   FORMAT ( '   PAЗMEP OБOЛOЧKИ -',I8,'
      >   ШИPИHA ЛEHTЫ -',I5)
-C   ==============================================================  
-C    В профильной схеме хранения затраты памяти равны: 
-C     размер оболочки = ENVSZE + диагональ = 
+C   ==============================================================
+C    В профильной схеме хранения затраты памяти равны:
+C     размер оболочки = ENVSZE + диагональ =
 C     2NP + размер вектора индексов XENV = nszf+1
         IF(IPR(25)) then
          print*,'begin memory'
@@ -324,7 +323,7 @@ C     2NP + размер вектора индексов XENV = nszf+1
      >  or.(fl.eq.-4).or.(fl.eq.11).or.(fl.eq.12).or.(fl.eq.22))then
        print*,''
        print*,'Модифицированная профильная схема хранения '
-       print*,'' 
+       print*,''
        print*,'диагональ:',2*np
        print*,'размер оболочки:',ENVSZE
        print*,'размер индесного вектора:',nszf+1
@@ -370,28 +369,28 @@ C ================================================================
 
 *----------------Добавлено Насибуллиным Т.Р. 2011г.
 *----- для модуля отображения заполненности матрицы
-       
+
 686    OPEN(36,FILE='RESULT3.BIN',FORM='BINARY')
        WRITE(36) INT4(NSZF)
        WRITE(36) INT4(-1)
        DO I =1, NSZF+1
-          WRITE(36) INT4(XENV(I))          
+          WRITE(36) INT4(XENV(I))
        ENDDO
        WRITE(36) INT4(-1)
        WRITE(36) INT4(ENVSZE)
        WRITE(36) INT4(-1)
 *записываем только наличие записи в ячейке. Сама запись нас не волнует.
-       DO COUNTER=1, ENVSZE 
-        IF(ENV(COUNTER).EQ.0.0) THEN 
+       DO COUNTER=1, ENVSZE
+        IF(ENV(COUNTER).EQ.0.0) THEN
             WRITE(36) INT4(0)
         ENDIF
-        IF(ENV(COUNTER).NE.0.0) THEN 
+        IF(ENV(COUNTER).NE.0.0) THEN
             WRITE(36) INT4(1)
         ENDIF
        ENDDO
        WRITE(36) INT4(-1)
 *---------Конец изменений от Насибуллина
-      
+
 C
 C   ==============================================================
 C      PEШEHИE CИCTEMЫ УPABHEHИЙ ПPOФИЛЬHЫM METOДOM
@@ -410,17 +409,17 @@ C
 *----- ВНИМАНИЕ! Работает в случае, если в подпрограмма RCMSLV не менялась,
 *----- иначе нужно проверять корректность работы
        DO I =1, NSZF+1
-          WRITE(36) INT4(XENV(I))          
+          WRITE(36) INT4(XENV(I))
        ENDDO
        WRITE(36) INT4(-1)
        WRITE(36) INT4(ENVSZE)
        WRITE(36) INT4(-1)
 *записываем только наличие записи в ячейке. Сама запись нас не волнует.
-       DO COUNTER=1, ENVSZE 
-        IF(ENV(COUNTER).EQ.0.0) THEN 
+       DO COUNTER=1, ENVSZE
+        IF(ENV(COUNTER).EQ.0.0) THEN
             WRITE(36) INT4(0)
         ENDIF
-        IF(ENV(COUNTER).NE.0.0) THEN 
+        IF(ENV(COUNTER).NE.0.0) THEN
             WRITE(36) INT4(1)
         ENDIF
        ENDDO
@@ -442,14 +441,14 @@ C Записываем в файл 1 перемещения узлов.
 c исключение разделителя "-1" из возможных данных
        IF(X1.eq.-1) X1=X1+0.001
        IF(X2.eq.-1) X2=X2+0.001
-c 
+c
 
         WRITE(33) X1,X2
 668    CONTINUE
        WRITE(33) DBLE(-1)
 
   11   FORMAT (//' ПEPEMEЩEHИЯ УЗЛOB'/2(I5,2G12.4))
-  12   FORMAT (//' CЧИTЫBAHИE ИCXOДHЫX 
+  12   FORMAT (//' CЧИTЫBAHИE ИCXOДHЫX
      > ДAHHЫX  ЗAKOHЧEHO  УCПEШHO')
 
 C   ==============================================================
@@ -463,7 +462,13 @@ C ================================================================
        CALL STRSDD ( 3,NP,NE,NCN,NDF,DD,NOP,R,ESIGMA,IPR,BBB)
        IF(IPR(26)) WRITE(6,1008)
 1008   FORMAT(/,5X,'*****Finish STRSDD')
+1009   FORMAT(/,5X,'*****Start SCHEMA')
+1010   FORMAT(/,5X,'*****Finish SCHEMA')
 
+       IF(IPR(26)) WRITE(6,1009)
+              SIZ=NSZF
+       CALL SCHEMA (DIAG, ENV, XENV, SIZ)
+       IF(IPR(26)) WRITE(6,1010)
 c Записываем в файл 2 значения напряжений к КЭ.
 
        DO 669 I=1,NE
@@ -492,7 +497,7 @@ c Записываем свойства материалов
 
 c исключение разделителя "-1" из возможных данных
        IF(X1.eq.-1) X1=X1+0.001
-c 
+c
 
         WRITE(34) X1
 701    CONTINUE
@@ -510,7 +515,7 @@ c
 188     FORMAT(/,7X,'****good luck****')
 
 * Дополнение от Давыдовой Ю.А. В файл RESULT2 записывается информация об исходном разбиении на зоны.
-* Эта информация используется в графическом отображении результатов.       
+* Эта информация используется в графическом отображении результатов.
 * записываем в файл 2 количество зон
        WRITE (34) INT2(INRG)
        WRITE (34) INT2(-1)
@@ -524,19 +529,19 @@ c
           WRITE(34)X1
           WRITE(34)X2
          ENDDO
-       ENDDO 
+       ENDDO
        WRITE (34) DBLE(-1)
-       
+
 C ================================================================
 C подготовка набора данных для считывания программой Sigma Postproc
 C и отображения результатов в 3D - графике.
-C  Подпрограммы Grid, Sigmas, Delta, Materials, PDensity   
+C  Подпрограммы Grid, Sigmas, Delta, Materials, PDensity
 C находятся в файле C_dgridd_DGRIDD.for
-C ================================================================       
+C ================================================================
        call Grid(CORD,NP,NOP,NE,'ExpGrd.poi')
        call Sigmas (ESIGMA,NE,'ExpGrd.poi')
        call Delta(R,NP,NDF,'ExpGrd.poi')
-       call Materials(IMAT,NE,ORT,'ExpGrd.poi')  
+       call Materials(IMAT,NE,ORT,'ExpGrd.poi')
        call PDensity(Density,NE,'ExpGrd.poi')
 C*********************************************
 C*********************************************

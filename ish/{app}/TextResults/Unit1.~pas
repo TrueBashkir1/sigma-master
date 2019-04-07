@@ -23,7 +23,6 @@ type
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure FormResize(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
@@ -60,19 +59,41 @@ const
 '11. Структура смежности XADJ, ADJNCY. (RENMDD)', '12. Таблица номеров узлов- старые/новые номера (RENMDD)', '13.  Таблица номеров узлов - новые/старые номера (RENMDD)',
 '14. Конечная нумерация - КЭ и его узлы. ( MAIN )', '15. Печать результатов оптимизации сетки (REGULARIZATION)', '16.  Печать множителя L (RCMSLV)', '17.  Контрольная печать параметров задачи  перед  FNENDD (MAIN)',
 '18. Резерв', '19. Координаты узлов (MAIN)', '20.  Массив  NOP перед и в FORMDD (MAIN)', '21.  Параметры закрепления  (BOUND)', '22. Свободные параметры в FORCE (контроль)',
-'23. Распределение нагрузки по узлам. (FORCE)', '24. Резерв', '25. Характеристики модфицированной профильной схемы хранения', '26.  Сообщения о работе программ', '27.  Распределение памяти для профильного метода XENV (MAIN)',
+'23. Распределение нагрузки по узлам. (FORCE)', '24. Различные схемы хранения матриц', '25. Характеристики модфицированной профильной схемы хранения', '26.  Сообщения о работе программ', '27.  Распределение памяти для профильного метода XENV (MAIN)',
 '28. Размер оболочки, ширина ленты матрицы (MAIN)', '29. Резерв', '30. Резерв','31.  Перемещения узлов (MAIN)','32.  Напряжения в КЭ (STRDD)');
      //******ИЮНЬ 2012
    ResultSets:array [1..2*MsgCount] of String=
-     ('**********Start  DATA','*****Finish DATA','*****Start  GRIDDM','*****Finish GRIDDM','CONNECTIVITY DATA','*****Finish GRIDDM',
-   'REGION   1  ****', '*****Finish GRIDDM','NEL   NODE NUMBERS','*****Finish GRIDDM','COORDINATES NOTES OF REGION','*****Finish GRIDDM',
-   'Характеристики сетки','*****Finish GRIDDM', '*****Start PRNTDD','*****Finish PRNTDD','*****Start PRNTDD','*****Finish PRNTDD','*****Start RENMDD','*****Start STSM in RENMDD',
-   'СТРУКТУРА СМЕЖНОСТИ', '*****Start GENRCM in RENMDD','+OLD+ +NEW+ +OLD+ +NEW+ +OLD+ +NEW+','*****Finish RENMDD','+NEW+ +OLD+ +NEW+ +OLD+ +NEW+ +OLD+','*****Finish RENMDD',
-   'НОВАЯ НУМЕРАЦИЯ УЗЛОВ (ЭЛЕМЕНТ И ЕГО УЗЛЫ)   MACCИB <<NOP>>','*****Start BOUND','*****Start REGULARIZATION in GRIDDM','*****Finish  REGULARIZATION in GRIDDM',
-   '*****Finish ESFCT in RCMSLV','*****Start  ELSLV in RCMSLV','КОНТРОЛЬНАЯ ПЕЧАТЬ ПАРАМЕТРОВ ЗАДАЧИ','*****Start FNENDD','Hello!','****good luck****',
-   ' KOOPДИHATЫ УЗЛOB','*****Start FNENDD',' NOP ПЕРЕД FORMDD','*****Finish FORMDD','*****Start BOUND','*****Finish BOUND','*****Start FORCE','PACПPEДEЛEHИE HAГPУЗOK',
-   'PACПPEДEЛEHИE HAГPУЗOK','*****Finish FORCE','Hello!','****good luck****','Hello!','****good luck****','Hello!','****good luck****',
-   '*****Finish FNENDD','begin memory','*****Finish FNENDD','begin memory','Hello!','****good luck****','Hello!','****good luck****','ПEPEMEЩEHИЯ УЗЛOB','*****Start STRSDD',
+     ('Hello!','*****Finish DATA',
+     '*****Start  GRIDDM','*****Finish GRIDDM',
+     'CONNECTIVITY DATA','*****Finish GRIDDM',
+   'REGION   1  ****', '*****Finish GRIDDM',
+   'NEL   NODE NUMBERS','*****Finish GRIDDM',
+   'COORDINATES NOTES OF REGION','*****Finish GRIDDM',
+   'Характеристики сетки','*****Finish GRIDDM',
+    '*****Start PRNTDD','*****Finish PRNTDD',
+    '*****Start PRNTDD','*****Finish PRNTDD',
+    '*****Start RENMDD','*****Start STSM in RENMDD',
+   'СТРУКТУРА СМЕЖНОСТИ', '*****Start GENRCM in RENMDD',
+   '+OLD+ +NEW+ +OLD+ +NEW+ +OLD+ +NEW+','*****Finish RENMDD',
+   '+NEW+ +OLD+ +NEW+ +OLD+ +NEW+ +OLD+','*****Finish RENMDD',
+   'НОВАЯ НУМЕРАЦИЯ УЗЛОВ (ЭЛЕМЕНТ И ЕГО УЗЛЫ)   MACCИB <<NOP>>','*****Start BOUND',
+   '*****Start REGULARIZATION in GRIDDM','*****Finish  REGULARIZATION in GRIDDM',
+   '*****Finish ESFCT in RCMSLV','*****Start  ELSLV in RCMSLV',
+   'КОНТРОЛЬНАЯ ПЕЧАТЬ ПАРАМЕТРОВ ЗАДАЧИ','*****Start FNENDD',
+   'Hello!','****good luck****',
+   ' KOOPДИHATЫ УЗЛOB','*****Start FNENDD',
+   ' NOP ПЕРЕД FORMDD','*****Finish FORMDD',
+   '*****Start BOUND','*****Finish BOUND',
+   '*****Start FORCE','PACПPEДEЛEHИE HAГPУЗOK',
+   'PACПPEДEЛEHИE HAГPУЗOK','*****Finish FORCE',
+   '*****Start SCHEMA','*****Finish SCHEMA',
+   'begin memory','end memory',
+   'Hello!','****good luck****',
+   '*****Finish FNENDD','begin memory',
+   '*****Finish FNENDD','begin memory',
+   'Hello!','****good luck****',
+   'Hello!','****good luck****',
+   'ПEPEMEЩEHИЯ УЗЛOB','*****Start STRSDD',
    '*****Start STRSDD', '*****Finish STRSDD');
      //******ИЮНЬ 2012
 {$R *.DFM}
@@ -193,37 +214,6 @@ begin
      Form1:=nil;
 end;
 
-procedure TForm1.FormResize(Sender: TObject);
-var
-dop :integer;
-cfF: TIniFile;
-SigmaLocation:string;
-i:integer;
-begin
-{c:=0;
-     top:=0;
-          //определение места расположения Сигмы
-     SigmaLocation   :=LowerCase(ExtractFilePath(ParamStr(0)));
-     i:=pos('\bin',SigmaLocation);
-     if i>0 then SetLength(SigmaLocation,i);
-     cfF:=TIniFile.Create(SigmaLocation+'bin\sforms.ini');
-
-     //      cfF:=TIniFile.Create('sforms.ini');
-      try
-                dop:=CfF.ReadInteger('Главная','Высота',top);
-                top:=dop-StatusBar1.Height-8;
-                left:=0;
-                Height:=Screen.Height-dop;
-                cfF.Free;
-      except
-                MessageDlg('Не могу прочитать файл sforms.ini!',mtError,[mbOk],0);
-      end;
-
-
-     Constraints.MaxHeight:=Screen.Height-dop;
-     top:=dop-StatusBar1.Height-8;
-         }
-end;
 
 procedure TForm1.SpeedButton2Click(Sender: TObject);
 var ttt:TPrintService;
