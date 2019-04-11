@@ -250,7 +250,6 @@ Source: "{app}\Msdev\Lib\Kernel32.lib"; DestDir: "{app}\Msdev\Lib"; Components: 
 Source: "{app}\Msdev\Lib\Libc.lib"; DestDir: "{app}\Msdev\Lib"; Components: "main"; Flags: ignoreversion 
 Source: "{app}\Msdev\Lib\Libf.lib"; DestDir: "{app}\Msdev\Lib"; Components: "main"; Flags: ignoreversion 
 Source: "{app}\Msdev\Lib\Portlib.lib"; DestDir: "{app}\Msdev\Lib"; Components: "main"; Flags: ignoreversion 
-Source: "{app}\Msdev\Lib\~errtmp"; DestDir: "{app}\Msdev\Lib"; Components: "main"; Flags: ignoreversion 
 Source: "{app}\Source\Source__sort\BOUND.for"; DestDir: "{app}\Source\Source__sort"; Components: "main"; Flags: ignoreversion 
 Source: "{app}\Source\Source__sort\DATA.for"; DestDir: "{app}\Source\Source__sort"; Components: "main"; Flags: ignoreversion 
 Source: "{app}\Source\Source__sort\DEGREE.for"; DestDir: "{app}\Source\Source__sort"; Components: "main"; Flags: ignoreversion 
