@@ -13,3 +13,4 @@ ish/{app}/bin/ExportAnsys.plg
 *.dcu
 *.~dpr
 *.cfg
+ish/{app}/editor/MainParam.~pas
