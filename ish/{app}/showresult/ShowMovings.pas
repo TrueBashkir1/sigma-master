@@ -189,7 +189,6 @@ TYPE
     ColorMinus_0: TPanel;
     Spin_0_min: TSpinEdit;
     CheckBox1: TCheckBox;
-    pl: TLabel;
     mi: TLabel;
     Edit7: TEdit;
     Label29: TLabel;
@@ -1268,6 +1267,7 @@ VAR
   ID_now,d :  INTEGER;
   x1,y1   : ARRAY [1..3] OF INTEGER;
   st : string;
+  pos1, pos2, pos3: Integer;
 
 BEGIN
   //как рисовать
@@ -1289,34 +1289,47 @@ BEGIN
   x[3]:=Xreal2Xpaint(OneNode.x);
   y[3]:=Yreal2Ypaint(OneNode.y);
   x1[3]:=x[3]; y1[3]:=y[3];
+
+  //////////////////////Федорова Е.И. 2018/////////////////////////////////////
   //Определяем номера уровней в узлах
-  //st := 'i ' + IntToStr(level_zero);
-  //ShowMessage(st);
   FOR i:=1 TO 3 DO BEGIN
     if stress[i] >= 0 then
     begin
         LevNode[i]:= abs(Trunc(stress[i]/Level_plus)) + level_zero;
-        if stress[i] >= abs(spin_0_max.Value) then LevNode[i] := 3
-        else LevNode[i] := 2;
-        //if LevNode[i] = 2 then begin
-        //st := 'p ' + IntToStr(LevNode[i]) +' '+ CurrToStr(stress[i]);
-        //ShowMessage(st);
-        //end;
     end
     else
     begin
         LevNode[i]:= abs(Trunc((Elements_Result.min[Form1.StressType.ItemIndex+1]-stress[i])/Level_minus));
-        if stress[i] <= -abs(spin_0_min.Value) then LevNode[i] := 0
-        else LevNode[i] := 1;
-        //if LevNode[i] = -1 then begin
-        //st := 'm ' + IntToStr(LevNode[i]) +' '+ CurrToStr(stress[i]);
-        //ShowMessage(st);
-        //end;
     end;
 
-
+    if (stress[i] >= spin_0_max.Value) and (stress[i] >= 0) then LevNode[i] := 3;
+    if (stress[i] >= spin_0_max.Value) and (stress[i] <= 0) then LevNode[i] := 2;
+    if (stress[i] <= spin_0_min.Value) and (stress[i] <= 0) then LevNode[i] := 0;
+    if (stress[i] <= spin_0_min.Value) and (stress[i] >= 0) then LevNode[i] := 1;
+    if (stress[i] <= spin_0_max.Value) and (stress[i] >= spin_0_min.Value) then begin
+     if (stress[i] >= 0) then LevNode[i] := 2;
+     if (stress[i] <= 0) then LevNode[i] := 1;
+    end;
 
   END;
+
+  if spin_0_max.Value >= 0 then begin
+    pos3 := spin_0_max.Value;
+    if spin_0_min.Value >= 0 then begin
+      pos2 := spin_0_min.Value;
+      pos1 := 0;
+    end
+    else begin
+      pos2 := 0;
+      pos1 := spin_0_min.Value;
+    end;
+  end
+  else begin
+    pos3 := 0;
+    pos2 := spin_0_max.Value;
+    pos1 := spin_0_min.Value;
+  end;
+
   //Заполнение координат и уровней промежуточных точек
   Kol:=3;
   ID[1]:=0;
@@ -1328,26 +1341,17 @@ BEGIN
     begin beg:= 1; off:= 2; d:= 1; end;
   FOR i:=LevNode[beg]+1 TO LevNode[off] DO BEGIN
 
-   //K_M:=Elements_Result.min[StressType.ItemIndex+1]+i*Level;
-    //K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
     if i >= level_zero then
     begin
-        //K_M:=(i-level_zero)*Level_plus;
-        if i = 2 then K_M:=0;
-        if i = 3 then K_M:=abs(spin_0_max.Value);
+        if i = 2 then K_M:=pos2;
+        if i = 3 then K_M:=pos3;
         if K_M > stress[off] then K_M:=stress[off];
-        //st := 'm3 ' + CurrToStr(K_M);
-        //ShowMessage(st);
         K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
     end
     else
     begin
-        //K_M:=Elements_Result.min[StressType.ItemIndex+1]+((i)*Level_minus);
-        if i = 1 then K_M:=-abs(spin_0_min.Value);
+        if i = 1 then K_M:=pos1;
         if i = 0 then K_M:=stress[off];
-        //if K_M < stress[off] then K_M:=stress[off];
-        //st := 'm3 ' + CurrToStr(K_M);
-        //ShowMessage(st);
         K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
     end;
 
@@ -1364,32 +1368,24 @@ BEGIN
   END;
   ID_now:=LevNode[off]-LevNode[beg]+1;
   ID[2]:=ID_now;
+
   //2
   if LevNode[2] > LevNode[3] then
     begin beg:= 3; off:= 2; d:=-1; ID_now:=ID_now + LevNode[2]-LevNode[3]+1; end
   else
     begin beg:= 2; off:= 3; d:= 1; end;
   FOR i:=LevNode[beg]+1 TO LevNode[off] DO BEGIN
-    //K_M:=Elements_Result.min[StressType.ItemIndex+1]+i*Level;
-    //K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
     if i >= level_zero then
     begin
-        //K_M:=(i-level_zero)*Level_plus;
-      if i = 2 then K_M:=0;
-        if i = 3 then K_M:=abs(spin_0_max.Value);
+        if i = 2 then K_M:=pos2;
+        if i = 3 then K_M:=pos3;
         if K_M > stress[off] then K_M:=stress[off];
-        //st := 'm4 ' + CurrToStr(K_M);
-        //ShowMessage(st);
         K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
     end
     else
     begin
-        //K_M:=Elements_Result.min[StressType.ItemIndex+1]+((i)*Level_minus);
-        if i = 1 then K_M:=-abs(spin_0_min.Value);
+        if i = 1 then K_M:=pos1;
         if i = 0 then K_M:=stress[off];
-        //if K_M < stress[off] then K_M:=stress[off];
-        //st := 'm4 ' + CurrToStr(K_M);
-        //ShowMessage(st);
         K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
     end;
 
@@ -1406,34 +1402,27 @@ BEGIN
   END;
   ID_now:=ID[2] + LevNode[off]-LevNode[beg]+1;
   ID[3]:=ID_now;
+
   //3
   if LevNode[3] > LevNode[1] then
     begin beg:= 1; off:= 3; d:=-1; ID_now:=ID_now + LevNode[3]-LevNode[1]+1; end
   else
     begin beg:= 3; off:= 1; d:= 1; end;
   FOR i:=LevNode[beg]+1 TO LevNode[off] DO BEGIN
-   //K_M:=Elements_Result.min[StressType.ItemIndex+1]+i*Level;
-    //K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
     if i >= level_zero then
     begin
-        //K_M:=(i-level_zero)*Level_plus;
-       if i = 2 then K_M:=0;
-        if i = 3 then K_M:=abs(spin_0_max.Value);
+        if i = 2 then K_M:=pos2;
+        if i = 3 then K_M:=pos3;
         if K_M > stress[off] then K_M:=stress[off];
-        //st := 'm5 ' + CurrToStr(K_M);
-        //ShowMessage(st);
         K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
     end
     else
     begin
-        //K_M:=Elements_Result.min[StressType.ItemIndex+1]+((i)*Level_minus);
-        if i = 1 then K_M:=-abs(spin_0_min.Value);
+        if i = 1 then K_M:=pos1;
         if i = 0 then K_M:=stress[off];
-        //if K_M < stress[off] then K_M:=stress[off];
-        //st := 'm5 ' + CurrToStr(K_M);
-        //ShowMessage(st);
         K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
     end;
+
     ID_now:=ID_now + d;
     x[kol+1]:=Trunc(x[beg]+ (x[off]-x[beg])*K_M);
     y[kol+1]:=Trunc(y[beg]+ (y[off]-y[beg])*K_M);
@@ -1445,6 +1434,9 @@ BEGIN
     ID[kol+2]:=ID[kol+1];
     Kol:=Kol+2;
   END;
+
+  ////////////////////////////end Fedorova///////////////////////////////
+
   //сортировка
   FOR beg:=1 TO Kol DO BEGIN
   FOR i:=1 TO Kol-1 DO BEGIN
@@ -2478,6 +2470,46 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
   END;
 
   PROCEDURE ShowLegendHintsNew(Canvas:TCanvas;Left,Top:INTEGER);
+ 
+  //////////////////////Фёдорова Е.И. 2018////////////////////////////////////
+  PROCEDURE Spin_0_Check(Spin_0_min, Spin_0_max: TSpinEdit);
+  var
+    buf,f: Integer;
+  begin
+      //если граница меньше/больше минимального/максимального знач. напряжения
+      //заменяем её на мин./макс. значение напряжение
+      f:=0;
+      if (Spin_0_min.Value < Elements_Result.min[Form1.StressType.ItemIndex+1]) then begin
+        ShowMessage('Левое введенное число меньше минимального нижнего значения данного напряжения. Значение будет исправлено.');
+        Spin_0_min.Value := trunc(Elements_Result.Min[Form1.StressType.ItemIndex+1])+1;
+        f:=1;
+      end;
+      if (Spin_0_min.Value > Elements_Result.max[Form1.StressType.ItemIndex+1]) then begin
+        ShowMessage('Левое введенное число больше максимального вернего значения данного напряжения. Значение будет исправлено.');
+        Spin_0_min.Value := trunc(Elements_Result.Min[Form1.StressType.ItemIndex+1]);
+        f:=1;
+      end;
+      if (Spin_0_max.Value > Elements_Result.Max[Form1.StressType.ItemIndex+1]) then begin
+        ShowMessage('Правое введенное число больше максимального вернего значения данного напряжения. Значение будет исправлено.');
+        Spin_0_max.Value := trunc(Elements_Result.Max[Form1.StressType.ItemIndex+1]);
+        f:=1;
+      end;
+      if (Spin_0_max.Value < Elements_Result.min[Form1.StressType.ItemIndex+1]) then begin
+        ShowMessage('Правое введенное число меньше минимального нижнего значения данного напряжения. Значение будет исправлено.');
+        Spin_0_max.Value := trunc(Elements_Result.Max[Form1.StressType.ItemIndex+1])-1;
+        f:=1;
+      end;
+
+      //При задании неверном задании интервалов, они автоматически исправляются
+      if (Spin_0_min.Value > Spin_0_max.Value) and (f=0) then begin
+        ShowMessage('Введен некорректный интервал. Значения будут исправлены.');
+        buf :=0;
+        buf := Spin_0_min.Value;
+        Spin_0_min.Value := Spin_0_max.Value;
+        Spin_0_max.Value := buf;
+      end;
+  end;
+
   VAR
     long,k              : MyReal;
     pos                 : INTEGER;
@@ -2488,15 +2520,22 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
     koef                : INTEGER;
     text,st             : STRING;
     z : integer;
+    buf: Integer;
+
   BEGIN
     if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = false) then
     begin
       ShowLegendHints(Canvas, Left, Top);
       exit;
     end;
-    z := Form1.ChangeLegend.Position;
-    if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true) then z := 4;
+    z := Form1.ChangeLegend.Position;       //z - кол-во цветовых градаций
+
+    if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true)then begin
+      z := 4;    //при Зоне 0 исп. 4 градации
+      Spin_0_Check(Spin_0_min, Spin_0_max);
+    end;
     len:=(Legend.Height- 2*Top)/z;
+
     for pos := 0 to z do
     begin
     //st := 'L ' + IntToStr(pos);
@@ -2509,17 +2548,53 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
     begin
         text:= MyFloatToStr(Elements_Result.Min[Form1.StressType.ItemIndex+1]+(pos * level_minus));
     end;
+             //Федорова Е.И. 2018                 //для 3х значений, начиная с нижнего
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (UseLines.Checked = true) and (CheckBox1.Checked = true) then
         begin
+                //если минимальное значение выбранного напряжения отрицательное, то на позицию pos=0 помещается значение напряжения
                 if (pos = 0) then begin
-                text := MyFloatToStr(Elements_Result.Min[Form1.StressType.ItemIndex+1]);
-                if -abs(Spin_0_min.Value) <= Elements_Result.min[Form1.StressType.ItemIndex+1] then
-                text:= MyFloatToStr(-abs(Spin_0_min.Value) - 100);
+                  if Elements_Result.min[Form1.StressType.ItemIndex+1] <= 0 then
+                    text := MyFloatToStr(Elements_Result.Min[Form1.StressType.ItemIndex+1])
+                  else text := '0'   //если минимальное значение выбранного напряжения положительное,
+                end;                 //то на позицию pos=0 помещается 0
+                
+
+                //если минимальное значение выбранного напряжения положительное, то на позицию pos=1 помещается значение напряжения
+                //если нижняя граница положительная, то на позицию pos=1 помещается 0
+                //если нижняя граница отрицательная, то на позицию pos=1 помещается нижняя граница
+                if (pos = 1) then begin
+                  if Elements_Result.min[Form1.StressType.ItemIndex+1] > 0 then
+                    text := MyFloatToStr(Elements_Result.Min[Form1.StressType.ItemIndex+1])
+                  else if Spin_0_min.Value > 0 then
+                    text := '0'
+                  else text := MyFloatToStr(Spin_0_min.Value);
                 end;
-                if (pos = 1) then text := '-' + MyFloatToStr(abs(Spin_0_min.Value));
-                if (pos = 2) then text := '0';
-                if (pos = 3) then text := MyFloatToStr(abs(Spin_0_max.Value));
+
+                //если минимальное значение выбранного напряжения положительное, то на позицию pos=2 помещается нижняя граница (как положительная, так и отприцательная)
+                //если нижняя граница положительная, то на позицию pos=2 помещается нижняя граница
+                //если верхняя граница отрицательная, но на позицию pos=2 помещается верхняя граница
+                //если верхняя - положительная, а нижняя - отрицательная, то на позицию pos=2 помещается 0
+                if (pos = 2) then begin
+                  if Elements_Result.min[Form1.StressType.ItemIndex+1] > 0 then
+                    text := MyFloatToStr(Spin_0_min.Value)
+                  else begin
+                    if Spin_0_min.Value > 0 then text := MyFloatToStr(Spin_0_min.Value)
+                    else if Spin_0_max.Value < 0 then text := MyFloatToStr(Spin_0_max.Value)
+                    else text := '0';
+                  end;
+                end;
+
+                //если верхняя граница отрицательная, то на позицию pos=3 помещается 0
+                //если верхняя граница положительная, то на позицию pos=3 помещается верхняя граница
+                if (pos = 3) then begin
+                  if Spin_0_max.Value < 0 then text := '0'
+                  else text := MyFloatToStr(Spin_0_max.Value);
+                end;
         end;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     Canvas.TextOut(left,Legend.Height - 2*Top + 5 - trunc(len*pos),text);
 
     end;
@@ -2527,9 +2602,16 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
     text:= MyFloatToStr(Elements_Result.Max[Form1.StressType.ItemIndex+1])
     else
     text:= '0,00';
-    if (UseLines.Checked = true) and (CheckBox1.Checked = true) and
-     (abs(Spin_0_max.Value) >= Elements_Result.Max[Form1.StressType.ItemIndex+1]) then
-        text:= MyFloatToStr(abs(Spin_0_max.Value) + 100);
+                                                //для верхнего значения  (перемещено в проверку)
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+   { if (UseLines.Checked = true) and (CheckBox1.Checked = true) and
+     (Spin_0_max.Value >= Elements_Result.Max[Form1.StressType.ItemIndex+1]) then begin
+       text:= MyFloatToStr(Spin_0_max.Value);
+    end;        }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     Canvas.TextOut(left,Legend.Height - 2*Top + 5 - trunc(len*z),text);
   END;
 
