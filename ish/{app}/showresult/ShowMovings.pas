@@ -724,8 +724,6 @@ if Form1.CheckBox2.checked = true then
       Colorminus.Caption:='1';
       Colorzero.Caption:='2';
       Colorplus.Caption:='3';
-      mi.Visible := false;
-      pl.Visible := false;
       Spin_0_max.Visible := false;
       Spin_0_min.Visible := false;
       ColorMinus_0.Visible := false;
@@ -1302,16 +1300,24 @@ BEGIN
         LevNode[i]:= abs(Trunc((Elements_Result.min[Form1.StressType.ItemIndex+1]-stress[i])/Level_minus));
     end;
 
+    if  (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
+    begin
+
     if (stress[i] >= spin_0_max.Value) and (stress[i] >= 0) then LevNode[i] := 3;
     if (stress[i] >= spin_0_max.Value) and (stress[i] <= 0) then LevNode[i] := 2;
     if (stress[i] <= spin_0_min.Value) and (stress[i] <= 0) then LevNode[i] := 0;
     if (stress[i] <= spin_0_min.Value) and (stress[i] >= 0) then LevNode[i] := 1;
-    if (stress[i] <= spin_0_max.Value) and (stress[i] >= spin_0_min.Value) then begin
+    if (stress[i] <= spin_0_max.Value) and (stress[i] >= spin_0_min.Value) then
+    begin
      if (stress[i] >= 0) then LevNode[i] := 2;
      if (stress[i] <= 0) then LevNode[i] := 1;
     end;
 
+    end;
   END;
+
+  if  (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
+  begin
 
   if spin_0_max.Value >= 0 then begin
     pos3 := spin_0_max.Value;
@@ -1328,6 +1334,7 @@ BEGIN
     pos3 := 0;
     pos2 := spin_0_max.Value;
     pos1 := spin_0_min.Value;
+  end;
   end;
 
   //«аполнение координат и уровней промежуточных точек
@@ -2271,14 +2278,10 @@ if Form1.useLines.Checked then Form1.checkbox2.Checked:=false; //ƒавыдова ё.ј.
     IF Form1.CheckBox1.Checked = false THEN BEGIN
         Spin_0_max.Visible := false;
         Spin_0_min.Visible := false;
-        mi.Visible := false;
-        pl.Visible := false;
   end
   else begin
         Spin_0_max.Visible := true;
         Spin_0_min.Visible := true;
-        mi.Visible := true;
-        pl.Visible := true;
   end;
 
   IF Form1.UseLines.Checked = true THEN BEGIN
@@ -2476,6 +2479,9 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
   var
     buf,f: Integer;
   begin
+      if (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
+      begin
+
       //если граница меньше/больше минимального/максимального знач. напр€жени€
       //замен€ем еЄ на мин./макс. значение напр€жение
       f:=0;
@@ -2507,6 +2513,8 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
         buf := Spin_0_min.Value;
         Spin_0_min.Value := Spin_0_max.Value;
         Spin_0_max.Value := buf;
+      end;
+
       end;
   end;
 
@@ -2552,6 +2560,8 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (UseLines.Checked = true) and (CheckBox1.Checked = true) then
         begin
+          if  (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
+          begin
                 //если минимальное значение выбранного напр€жени€ отрицательное, то на позицию pos=0 помещаетс€ значение напр€жени€
                 if (pos = 0) then begin
                   if Elements_Result.min[Form1.StressType.ItemIndex+1] <= 0 then
@@ -2591,6 +2601,7 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
                   if Spin_0_max.Value < 0 then text := '0'
                   else text := MyFloatToStr(Spin_0_max.Value);
                 end;
+          end;
         end;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
