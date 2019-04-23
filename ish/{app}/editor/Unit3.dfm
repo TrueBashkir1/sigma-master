@@ -1,8 +1,8 @@
 object Form3: TForm3
-  Left = 169
-  Top = 309
-  Width = 710
-  Height = 374
+  Left = 1198
+  Top = 53
+  Width = 724
+  Height = 410
   AlphaBlend = True
   Caption = #1055#1086#1089#1090#1088#1086#1077#1085#1080#1077' '#1075#1088#1072#1092#1080#1082#1086#1074' '#1089#1093#1086#1076#1080#1084#1086#1089#1090#1080
   Color = clBtnFace
@@ -21,9 +21,22 @@ object Form3: TForm3
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object GroupBox1: TGroupBox
+  object Label4: TLabel
     Left = 16
     Top = 8
+    Width = 73
+    Height = 20
+    Caption = #1055#1088#1086#1077#1082#1090': '
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -17
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object GroupBox1: TGroupBox
+    Left = 16
+    Top = 32
     Width = 313
     Height = 249
     Caption = #1054#1089#1085#1086#1074#1085#1099#1077' '#1087#1072#1088#1072#1084#1077#1090#1088#1099
@@ -214,7 +227,7 @@ object Form3: TForm3
   end
   object GroupBox2: TGroupBox
     Left = 344
-    Top = 8
+    Top = 32
     Width = 337
     Height = 249
     Caption = #1043#1088#1072#1092#1080#1082#1080' '#1089#1093#1086#1076#1080#1084#1086#1089#1090#1080
@@ -352,7 +365,7 @@ object Form3: TForm3
   end
   object Button7: TButton
     Left = 16
-    Top = 271
+    Top = 295
     Width = 209
     Height = 34
     Caption = #1055#1086#1089#1090#1088#1086#1080#1090#1100' '#1075#1088#1072#1092#1080#1082#1080
@@ -368,7 +381,7 @@ object Form3: TForm3
   end
   object Button8: TButton
     Left = 480
-    Top = 271
+    Top = 295
     Width = 209
     Height = 34
     Caption = #1047#1072#1082#1088#1099#1090#1100
@@ -392,7 +405,7 @@ object Form3: TForm3
   end
   object Button12: TButton
     Left = 248
-    Top = 272
+    Top = 296
     Width = 209
     Height = 33
     Caption = #1055#1086#1089#1090#1088#1086#1080#1090#1100' '#1075#1088#1072#1092#1080#1082#1080' '#1074' '#1045#1057#1050
@@ -408,7 +421,7 @@ object Form3: TForm3
   end
   object ComboBox1: TComboBox
     Left = 192
-    Top = 224
+    Top = 248
     Width = 97
     Height = 21
     ItemHeight = 13
