@@ -1,6 +1,6 @@
 object GrafikY: TGrafikY
-  Left = 216
-  Top = 413
+  Left = 950
+  Top = 262
   Width = 773
   Height = 541
   Caption = #1043#1088#1072#1092#1080#1082' '#1089#1093#1086#1076#1080#1084#1086#1089#1090#1080' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1103'  '#1087#1086' Y'
@@ -107,7 +107,7 @@ object GrafikY: TGrafikY
     TabOrder = 10
     object Label1: TLabel
       Left = 8
-      Top = 368
+      Top = 376
       Width = 81
       Height = 13
       Caption = #1042#1077#1088#1093#1085#1080#1081' '#1087#1088#1077#1076#1077#1083
@@ -120,7 +120,7 @@ object GrafikY: TGrafikY
     end
     object Label12: TLabel
       Left = 128
-      Top = 368
+      Top = 376
       Width = 79
       Height = 13
       Caption = #1053#1080#1078#1085#1080#1081' '#1087#1088#1077#1076#1077#1083
@@ -535,7 +535,7 @@ object GrafikY: TGrafikY
     Left = 296
     Top = 80
     Width = 435
-    Height = 337
+    Height = 353
     BackWall.Brush.Color = clWhite
     BackWall.Brush.Style = bsClear
     Title.Text.Strings = (

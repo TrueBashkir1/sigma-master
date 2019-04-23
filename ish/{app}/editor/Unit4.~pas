@@ -74,6 +74,7 @@ type
     procedure RadioButton4Click(Sender: TObject);
     procedure RadioButton5Click(Sender: TObject);
     procedure RadioButton6Click(Sender: TObject);
+//Добавил Мелешко Серафим(1 строка)
     procedure Label15Open(Sender: TObject);
   private
     { Private declarations }
@@ -570,7 +571,7 @@ GrafikY.CheckBox6.Checked:=False;
 GrafikY.CheckBox8.Checked:=False;
 GrafikY.CheckBox10.Checked:=False;
 end;
-
+//Добавил Мелешко Серафим(1 процедура)
 procedure TGrafikY.Label15Open(Sender: TObject);
 begin
    Label15.Caption:='Проект: ' +Unit2GetProjectName;

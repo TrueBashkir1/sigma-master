@@ -1,8 +1,8 @@
 object GrafikGL: TGrafikGL
-  Left = 217
-  Top = 102
-  Width = 749
-  Height = 496
+  Left = 792
+  Top = 273
+  Width = 772
+  Height = 539
   Caption = #1043#1088#1072#1092#1080#1082' '#1089#1093#1086#1076#1080#1084#1086#1089#1090#1080' 1-'#1086#1075#1086' '#1075#1083#1072#1074#1085#1086#1075#1086' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1103
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -12,24 +12,12 @@ object GrafikGL: TGrafikGL
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnCreate = Label111Open
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
-    Left = 320
-    Top = 24
-    Width = 316
-    Height = 16
-    Caption = #1043#1088#1072#1092#1080#1082' '#1089#1093#1086#1076#1080#1084#1086#1089#1090#1080' 1-'#1086#1075#1086' '#1075#1083#1072#1074#1085#1086#1075#1086' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1103
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'MS Sans Serif'
-    Font.Style = [fsItalic]
-    ParentFont = False
-  end
   object Label2: TLabel
     Left = 16
-    Top = 24
+    Top = 48
     Width = 126
     Height = 20
     Caption = #1050#1086#1086#1088#1076#1080#1085#1072#1090#1072' '#1061':'
@@ -42,7 +30,7 @@ object GrafikGL: TGrafikGL
   end
   object Label3: TLabel
     Left = 16
-    Top = 56
+    Top = 80
     Width = 126
     Height = 20
     Caption = #1050#1086#1086#1088#1076#1080#1085#1072#1090#1072' Y:'
@@ -55,7 +43,7 @@ object GrafikGL: TGrafikGL
   end
   object Label13: TLabel
     Left = 184
-    Top = 24
+    Top = 48
     Width = 6
     Height = 20
     Font.Charset = DEFAULT_CHARSET
@@ -67,7 +55,7 @@ object GrafikGL: TGrafikGL
   end
   object Label14: TLabel
     Left = 184
-    Top = 56
+    Top = 80
     Width = 6
     Height = 20
     Font.Charset = DEFAULT_CHARSET
@@ -77,23 +65,9 @@ object GrafikGL: TGrafikGL
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object Label18: TLabel
-    Left = 400
-    Top = 408
-    Width = 81
-    Height = 13
-    Caption = #1042#1077#1088#1093#1085#1080#1081' '#1087#1088#1077#1076#1077#1083
-  end
-  object Label19: TLabel
-    Left = 539
-    Top = 408
-    Width = 79
-    Height = 13
-    Caption = #1053#1080#1078#1085#1080#1081' '#1087#1088#1077#1076#1077#1083
-  end
   object Label20: TLabel
     Left = 16
-    Top = 408
+    Top = 448
     Width = 184
     Height = 13
     Caption = #1043#1088#1072#1092#1080#1082' '#1087#1086#1089#1090#1088#1086#1077#1085' '#1085#1077#1082#1086#1088#1088#1077#1082#1090#1085#1086
@@ -105,9 +79,62 @@ object GrafikGL: TGrafikGL
     ParentFont = False
     Visible = False
   end
+  object Label1: TLabel
+    Left = 288
+    Top = 16
+    Width = 68
+    Height = 20
+    Caption = #1055#1088#1086#1077#1082#1090':'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -17
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object GroupBox2: TGroupBox
+    Left = 288
+    Top = 64
+    Width = 457
+    Height = 425
+    Caption = #1043#1088#1072#1092#1080#1082' '#1089#1093#1086#1076#1080#1084#1086#1089#1090#1080' 1-'#1075#1086' '#1075#1083#1072#1074#1085#1086#1075#1086' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1103
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 10
+    object Label12: TLabel
+      Left = 8
+      Top = 376
+      Width = 81
+      Height = 13
+      Caption = #1042#1077#1088#1093#1085#1080#1081' '#1087#1088#1077#1076#1077#1083
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label15: TLabel
+      Left = 128
+      Top = 376
+      Width = 79
+      Height = 13
+      Caption = #1053#1080#1078#1085#1080#1081' '#1087#1088#1077#1076#1077#1083
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+  end
   object GroupBox1: TGroupBox
     Left = 16
-    Top = 136
+    Top = 168
     Width = 257
     Height = 265
     Caption = ' '
@@ -445,10 +472,10 @@ object GrafikGL: TGrafikGL
     end
   end
   object Chart1: TChart
-    Left = 288
-    Top = 56
+    Left = 296
+    Top = 80
     Width = 441
-    Height = 337
+    Height = 353
     BackWall.Brush.Color = clWhite
     BackWall.Brush.Style = bsClear
     Title.Text.Strings = (
@@ -500,8 +527,8 @@ object GrafikGL: TGrafikGL
   end
   object Button1: TButton
     Left = 16
-    Top = 432
-    Width = 257
+    Top = 464
+    Width = 177
     Height = 25
     Caption = 'Cancel'
     Font.Charset = DEFAULT_CHARSET
@@ -514,22 +541,22 @@ object GrafikGL: TGrafikGL
     OnClick = Button1Click
   end
   object Edit1: TEdit
-    Left = 392
-    Top = 432
+    Left = 296
+    Top = 456
     Width = 97
     Height = 21
     TabOrder = 3
   end
   object Edit2: TEdit
-    Left = 531
-    Top = 432
+    Left = 416
+    Top = 456
     Width = 97
     Height = 21
     TabOrder = 4
   end
   object Button2: TButton
-    Left = 656
-    Top = 400
+    Left = 544
+    Top = 448
     Width = 73
     Height = 25
     Caption = #1059#1089#1090#1072#1085#1086#1074#1080#1090#1100
@@ -537,18 +564,18 @@ object GrafikGL: TGrafikGL
     OnClick = Button3Click
   end
   object Ole: TOleContainer
-    Left = 288
-    Top = 408
+    Left = 216
+    Top = 440
     Width = 57
-    Height = 49
+    Height = 25
     Caption = 'Ole'
     TabOrder = 6
     Visible = False
   end
   object Button4: TButton
-    Left = 280
-    Top = 432
-    Width = 75
+    Left = 200
+    Top = 464
+    Width = 73
     Height = 25
     Caption = 'MS Word'
     Font.Charset = DEFAULT_CHARSET
@@ -561,8 +588,8 @@ object GrafikGL: TGrafikGL
     OnClick = Button4Click
   end
   object Button3: TButton
-    Left = 656
-    Top = 432
+    Left = 640
+    Top = 448
     Width = 73
     Height = 25
     Caption = #1057#1073#1088#1086#1089#1080#1090#1100
@@ -571,7 +598,7 @@ object GrafikGL: TGrafikGL
   end
   object GroupBox6: TGroupBox
     Left = 16
-    Top = 88
+    Top = 120
     Width = 257
     Height = 41
     Caption = #1048#1089#1087#1086#1083#1100#1079#1091#1077#1084#1099#1077' NRC'

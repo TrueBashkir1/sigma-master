@@ -10,13 +10,10 @@ uses
 
 type
   TGrafikPerY = class(TForm)
-    Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label13: TLabel;
     Label14: TLabel;
-    Label18: TLabel;
-    Label19: TLabel;
     GroupBox1: TGroupBox;
     Label4: TLabel;
     Label5: TLabel;
@@ -63,6 +60,10 @@ type
     RadioButton4: TRadioButton;
     RadioButton5: TRadioButton;
     RadioButton6: TRadioButton;
+    GroupBox2: TGroupBox;
+    Label1: TLabel;
+    Label12: TLabel;
+    Label15: TLabel;
     procedure  Ochistka(Sender:TObject);
     procedure Button5Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -73,7 +74,9 @@ type
     procedure RadioButton4Click(Sender: TObject);
     procedure RadioButton5Click(Sender: TObject);
     procedure RadioButton6Click(Sender: TObject);
-     private
+//Добавил Мелешко Серафим(1 строка)
+    procedure Label555Open(Sender: TObject);
+  private
     { Private declarations }
   public
     { Public declarations }
@@ -555,6 +558,11 @@ CheckBox4.Checked:=False;
 CheckBox6.Checked:=False;
 CheckBox8.Checked:=False;
 CheckBox10.Checked:=False;
+end;
+//Добавил Мелешко Серафим(1 процедура)
+procedure TGrafikPerY.Label555Open(Sender: TObject);
+begin
+   Label15.Caption:='Проект: ' +Unit2GetProjectName;
 end;
 end.
 

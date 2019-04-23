@@ -129,6 +129,7 @@ var
   MyArray1,Myarray2,MyArray3,Myarray4,MyArray5,MyArray6: TMyArray;
   NrcOld,checkmethod,Oldmethod,OldItem,MantissStress, MantissMove: Integer;
   Grdisplay:boolean;
+//Переменная Unit2GetProjectName передает имя проекта в остальные Unit-ы, добавил Мелешко Серафим(1 строка)
   FloatFormat,Unit2GetProjectName:String;
 
 
@@ -1873,6 +1874,7 @@ var
 BEGIN
           Caption:= 'Построение графиков сходимости ' +GetProjectName;
           Label4.Caption:='Проект: ' +GetProjectName;
+//Добавил Мелешко Серафим(1 строка)
           Unit2GetProjectName:=GetProjectName;
          F:=Project_GetFormFile;
          if FileExists(F) then
