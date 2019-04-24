@@ -560,7 +560,7 @@ CheckBox8.Checked:=False;
 CheckBox10.Checked:=False;
 end;
 //Добавил Мелешко Серафим(1 процедура)
-procedure TGrafikPerX.Label555Open(Sender: TObject);
+procedure TGrafikPerY.Label555Open(Sender: TObject);
 begin
    Label15.Caption:='Проект: ' +Unit2GetProjectName;
 end;

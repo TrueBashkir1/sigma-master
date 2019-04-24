@@ -1,6 +1,6 @@
 object GrafikPerX: TGrafikPerX
-  Left = 786
-  Top = 205
+  Left = 1188
+  Top = 214
   Width = 773
   Height = 537
   Caption = #1043#1088#1072#1092#1080#1082' '#1089#1093#1086#1076#1080#1084#1086#1089#1090#1080' '#1087#1077#1088#1077#1084#1077#1097#1077#1085#1080#1081' '#1087#1086' '#1086#1089#1080' '#1061
@@ -130,6 +130,21 @@ object GrafikPerX: TGrafikPerX
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
+    end
+    object CheckBox11: TCheckBox
+      Left = 8
+      Top = 352
+      Width = 289
+      Height = 17
+      Caption = #1042#1082#1083#1102#1095#1080#1090#1100' '#1080#1085#1090#1077#1088#1087#1086#1083#1103#1094#1080#1102' '#1086#1090#1088#1077#1079#1082#1072#1084#1080' '#1087#1088#1103#1084#1099#1093
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = Button2Click
     end
   end
   object GroupBox1: TGroupBox
@@ -544,7 +559,7 @@ object GrafikPerX: TGrafikPerX
     Left = 296
     Top = 80
     Width = 441
-    Height = 353
+    Height = 329
     BackWall.Brush.Color = clWhite
     BackWall.Brush.Style = bsClear
     Title.Text.Strings = (
@@ -556,14 +571,30 @@ object GrafikPerX: TGrafikPerX
     View3D = False
     BevelInner = bvLowered
     TabOrder = 8
+    object Label18: TLabel
+      Left = 144
+      Top = 8
+      Width = 173
+      Height = 13
+      Caption = #1048#1085#1090#1077#1088#1087#1086#1083#1103#1094#1080#1103' '#1086#1090#1088#1077#1079#1082#1072#1084#1080' '#1087#1088#1103#1084#1099#1093
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
     object Series1: TLineSeries
       Marks.ArrowLength = 8
       Marks.Style = smsPercent
       Marks.Visible = False
       SeriesColor = clBlue
+      LinePen.Style = psClear
       LinePen.Width = 2
+      Pointer.HorizSize = 5
       Pointer.InflateMargins = False
       Pointer.Style = psDiamond
+      Pointer.VertSize = 5
       Pointer.Visible = True
       XValues.DateTime = False
       XValues.Name = 'X'
@@ -579,11 +610,51 @@ object GrafikPerX: TGrafikPerX
       Marks.Style = smsPercent
       Marks.Visible = False
       SeriesColor = clBlue
-      LinePen.Style = psDot
-      Pointer.HorizSize = 2
+      LinePen.Style = psClear
+      Pointer.HorizSize = 1
       Pointer.InflateMargins = False
       Pointer.Style = psDiamond
-      Pointer.VertSize = 2
+      Pointer.VertSize = 1
+      Pointer.Visible = True
+      XValues.DateTime = False
+      XValues.Name = 'X'
+      XValues.Multiplier = 1.000000000000000000
+      XValues.Order = loAscending
+      YValues.DateTime = False
+      YValues.Name = 'Y'
+      YValues.Multiplier = 1.000000000000000000
+      YValues.Order = loNone
+    end
+    object Series3: TLineSeries
+      Marks.ArrowLength = 8
+      Marks.Style = smsPercent
+      Marks.Visible = False
+      SeriesColor = clBlue
+      LinePen.Width = 2
+      Pointer.HorizSize = 5
+      Pointer.InflateMargins = False
+      Pointer.Style = psDiamond
+      Pointer.VertSize = 5
+      Pointer.Visible = True
+      XValues.DateTime = False
+      XValues.Name = 'X'
+      XValues.Multiplier = 1.000000000000000000
+      XValues.Order = loAscending
+      YValues.DateTime = False
+      YValues.Name = 'Y'
+      YValues.Multiplier = 1.000000000000000000
+      YValues.Order = loNone
+    end
+    object Series4: TLineSeries
+      Marks.ArrowLength = 8
+      Marks.Style = smsPercent
+      Marks.Visible = False
+      SeriesColor = clBlue
+      LinePen.Style = psDot
+      Pointer.HorizSize = 1
+      Pointer.InflateMargins = False
+      Pointer.Style = psDiamond
+      Pointer.VertSize = 1
       Pointer.Visible = True
       XValues.DateTime = False
       XValues.Name = 'X'

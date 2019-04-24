@@ -1083,8 +1083,25 @@ begin
              GrafikGl.series2.Clear;
              GrafikGl2.series2.Clear;
              GrafikUG.series2.Clear;
-//             GrafikPerX.series2.Clear;
-//             GrafikPerY.series2.Clear;
+//Добавил Мелешко Серафим(12 строк)
+             GrafikX.series3.Clear;
+             GrafikY.series3.Clear;
+             GrafikXY.series3.Clear;
+             GrafikGl.series3.Clear;
+             GrafikGl2.series3.Clear;
+             GrafikUG.series3.Clear;
+             GrafikX.series4.Clear;
+             GrafikY.series4.Clear;
+             GrafikXY.series4.Clear;
+             GrafikGl.series4.Clear;
+             GrafikGl2.series4.Clear;
+             GrafikUG.series4.Clear;
+{             GrafikPerX.series3.Clear;
+             GrafikPerY.series3.Clear;
+             GrafikPerX.series4.Clear;
+             GrafikPerY.series4.Clear;
+             GrafikPerX.series2.Clear;
+             GrafikPerY.series2.Clear; }
  //создание форм
              GroupFormCreate(Sender);
 

@@ -65,6 +65,10 @@ type
     GroupBox1: TGroupBox;
     Label1: TLabel;
     Label15: TLabel;
+    Series3: TLineSeries;
+    CheckBox11: TCheckBox;
+    Series4: TLineSeries;
+    Label18: TLabel;
     procedure  Ochistka(Sender:TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -75,8 +79,9 @@ type
     procedure RadioButton4Click(Sender: TObject);
     procedure RadioButton5Click(Sender: TObject);
     procedure RadioButton6Click(Sender: TObject);
-//Добавил Мелешко Серафим(1 строка)
+//Добавил Мелешко Серафим(2 строки)
     procedure Label12Open(Sender: TObject);
+    procedure Inter(Sender: TObject);
   private
     { Private declarations }
   public
@@ -157,6 +162,10 @@ var MyNrc :integer;
   begin
      Series1.Clear;
      Series2.Clear;
+//Добавил Мелешко Серафим(3 строки)
+     Series3.Clear;
+     Series4.Clear;
+     Label18.Visible:=false;
         for  MyNrc:=3 to strtoint(Form3.Edit1.Text) do
         begin
         Case MyNrc of
@@ -167,7 +176,7 @@ var MyNrc :integer;
              Series1.AddXY(MyNrc,strtofloat(Edit3.Text));
              pointsX[1]:=1;
            end
-          else pointsX[1]:=0;
+          else pointsX[1]:=0;;
          end;
       4: begin;
           Series2.AddXY(MyNrc,strtofloat(Edit4.Text));
@@ -283,48 +292,96 @@ begin
          N:=strtoint(Form3.Edit1.Text);
        case N of
        3: begin
-            if    Edit3.Text='' then exit
+            if    Edit3.Text='' then exit;
+//            else
+//Добавил Мелешко Серафим(конструкция if)
+            if CheckBox11.Checked=true then
+            Inter(Sender)
             else
               Naris(Sender);
           end;
        4:  begin
-            if    Edit4.Text='' then exit
-            else Naris(Sender);
+            if    Edit4.Text='' then exit;
+//            else
+//Добавил Мелешко Серафим(конструкция if)
+            if CheckBox11.Checked=true then
+            Inter(Sender)
+            else
+              Naris(Sender);
           end;
        5:  begin
-            if    Edit5.Text='' then exit
-            else Naris(Sender);
+            if    Edit5.Text='' then exit;
+//            else
+//Добавил Мелешко Серафим(конструкция if)
+            if CheckBox11.Checked=true then
+            Inter(Sender)
+            else
+              Naris(Sender);
           end;
        6:  begin
-            if    Edit6.Text='' then exit
-            else Naris(Sender);
+            if    Edit6.Text='' then exit;
+//            else
+//Добавил Мелешко Серафим(конструкция if)
+            if CheckBox11.Checked=true then
+            Inter(Sender)
+            else
+              Naris(Sender);
           end;
        7: begin
-            if    Edit7.Text='' then exit
-            else Naris(Sender);
+            if    Edit7.Text='' then exit;
+//            else
+//Добавил Мелешко Серафим(конструкция if)
+            if CheckBox11.Checked=true then
+            Inter(Sender)
+            else
+              Naris(Sender);
           end;
 
        8:  begin
-            if    Edit8.Text='' then exit
-            else Naris(Sender);
+            if    Edit8.Text='' then exit;
+//            else
+//Добавил Мелешко Серафим(конструкция if)
+            if CheckBox11.Checked=true then
+            Inter(Sender)
+            else
+              Naris(Sender);
           end;
        9:   begin
-            if    Edit9.Text='' then exit
-            else Naris(Sender);
+            if    Edit9.Text='' then exit;
+//            else
+//Добавил Мелешко Серафим(конструкция if)
+            if CheckBox11.Checked=true then
+            Inter(Sender)
+            else
+              Naris(Sender);
           end;
        10:  begin
-            if    Edit10.Text='' then exit
-            else Naris(Sender);
+            if    Edit10.Text='' then exit;
+//            else
+//Добавил Мелешко Серафим(конструкция if)
+            if CheckBox11.Checked=true then
+            Inter(Sender)
+            else
+              Naris(Sender);
           end;
        11:   begin
-            if    Edit11.Text='' then exit
-            else Naris(Sender);
-            end;
+            if    Edit11.Text='' then exit;
+//            else
+//Добавил Мелешко Серафим(конструкция if)
+            if CheckBox11.Checked=true then
+            Inter(Sender)
+            else
+              Naris(Sender);
+          end;
         12:   begin
-            if    Edit12.Text='' then exit
-            else Naris(Sender);
-             end;
-
+            if    Edit12.Text='' then exit;
+//            else
+//Добавил Мелешко Серафим(конструкция if)
+            if CheckBox11.Checked=true then
+            Inter(Sender)
+            else
+              Naris(Sender);
+          end;
              else exit;
                 end;
 end;
@@ -570,10 +627,118 @@ CheckBox6.Checked:=False;
 CheckBox8.Checked:=False;
 CheckBox10.Checked:=False;
 end;
+
 //Добавил Мелешко Серафим(1 процедура)
 procedure TGrafikX.Label12Open(Sender: TObject);
 begin
    Label12.Caption:='Проект: ' +Unit2GetProjectName;
+end;
+
+//Добавил Мелешко Серафим(1 процедура)
+procedure TGrafikX.Inter(Sender: TObject);
+//TSH -->
+var MyNrc :integer;
+  begin
+     Series1.Clear;
+     Series2.Clear;
+     Series3.Clear;
+     Series4.Clear;
+     Label18.Visible:=true;
+        for  MyNrc:=3 to strtoint(Form3.Edit1.Text) do
+        begin
+        Case MyNrc of
+      3: begin;
+          Series4.AddXY(MyNrc,strtofloat(Edit3.Text));
+          if CheckBox1.Checked=true then
+           begin;
+             Series3.AddXY(MyNrc,strtofloat(Edit3.Text));
+             pointsX[1]:=1;
+           end
+          else pointsX[1]:=0;
+         end;
+      4: begin;
+          Series4.AddXY(MyNrc,strtofloat(Edit4.Text));
+          if CheckBox2.Checked=true then
+           begin;
+             Series3.AddXY(MyNrc,strtofloat(Edit4.Text));
+             pointsX[2]:=1;
+           end
+          else pointsX[2]:=0;
+         end;
+      5: begin;
+          Series4.AddXY(MyNrc,strtofloat(Edit5.Text));
+          if CheckBox3.Checked=true then
+           begin;
+             Series3.AddXY(MyNrc,strtofloat(Edit5.Text));
+             pointsX[3]:=1;
+           end
+          else pointsX[3]:=0;
+         end;
+      6: begin;
+          Series4.AddXY(MyNrc,strtofloat(Edit6.Text));
+          if CheckBox4.Checked=true then
+           begin;
+             Series3.AddXY(MyNrc,strtofloat(Edit6.Text));
+             pointsX[4]:=1;
+           end
+          else pointsX[4]:=0;
+         end;
+      7: begin;
+          Series4.AddXY(MyNrc,strtofloat(Edit7.Text));
+          if CheckBox5.Checked=true then
+           begin;
+             Series3.AddXY(MyNrc,strtofloat(Edit7.Text));
+             pointsX[5]:=1;
+           end
+          else pointsX[5]:=0;
+         end;
+      8: begin;
+          Series4.AddXY(MyNrc,strtofloat(Edit8.Text));
+          if CheckBox6.Checked=true then
+           begin;
+             Series3.AddXY(MyNrc,strtofloat(Edit8.Text));
+             pointsX[6]:=1;
+           end
+          else pointsX[6]:=0;
+         end;
+      9: begin;
+          Series4.AddXY(MyNrc,strtofloat(Edit9.Text));
+          if CheckBox7.Checked=true then
+           begin;
+             Series3.AddXY(MyNrc,strtofloat(Edit9.Text));
+             pointsX[7]:=1;
+           end
+          else pointsX[7]:=0;
+         end;
+     10: begin;
+          Series4.AddXY(MyNrc,strtofloat(Edit10.Text));
+          if CheckBox8.Checked=true then
+           begin;
+             Series3.AddXY(MyNrc,strtofloat(Edit10.Text));
+             pointsX[8]:=1;
+           end
+          else pointsX[8]:=0;
+         end;
+     11: begin;
+          Series4.AddXY(MyNrc,strtofloat(Edit11.Text));
+          if CheckBox9.Checked=true then
+           begin;
+             Series3.AddXY(MyNrc,strtofloat(Edit11.Text));
+             pointsX[9]:=1;
+           end
+          else pointsX[9]:=0;
+         end;
+     12: begin;
+          Series4.AddXY(MyNrc,strtofloat(Edit12.Text));
+          if CheckBox10.Checked=true then
+           begin;
+             Series3.AddXY(MyNrc,strtofloat(Edit12.Text));
+             pointsX[10]:=1;
+           end
+          else pointsX[10]:=0;
+            end;
+         end;
+            end;
 end;
 
 end.
