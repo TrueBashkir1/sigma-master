@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 815
-  Top = 1
-  Width = 417
+  Left = 885
+  Top = 0
+  Width = 488
   Height = 735
   Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1099
   Color = clBtnFace
@@ -16,7 +16,7 @@ object Form1: TForm1
   object ScrollBox1: TScrollBox
     Left = 0
     Top = 0
-    Width = 401
+    Width = 472
     Height = 696
     Align = alClient
     BevelOuter = bvRaised
@@ -27,7 +27,7 @@ object Form1: TForm1
     object GroupBox2: TGroupBox
       Left = 0
       Top = 0
-      Width = 380
+      Width = 451
       Height = 73
       Align = alTop
       Caption = #1052#1072#1089#1096#1090#1072#1073' '
@@ -41,7 +41,7 @@ object Form1: TForm1
       object LabelScale: TLabel
         Left = 2
         Top = 15
-        Width = 376
+        Width = 447
         Height = 13
         Align = alTop
         Alignment = taCenter
@@ -57,7 +57,7 @@ object Form1: TForm1
       object TrackBar1: TTrackBar
         Left = 2
         Top = 28
-        Width = 376
+        Width = 447
         Height = 37
         Align = alTop
         Max = 20
@@ -69,9 +69,9 @@ object Form1: TForm1
     object PageControl1: TPageControl
       Left = 0
       Top = 329
-      Width = 380
+      Width = 451
       Height = 420
-      ActivePage = TabSheet4
+      ActivePage = TabSheet1
       Align = alTop
       Anchors = []
       Font.Charset = DEFAULT_CHARSET
@@ -93,7 +93,7 @@ object Form1: TForm1
         object GroupBox9: TGroupBox
           Left = 0
           Top = 0
-          Width = 366
+          Width = 437
           Height = 177
           Align = alTop
           Caption = #1050#1086#1086#1088#1076#1080#1085#1072#1090#1099' '#1090#1086#1095#1082#1080' '
@@ -278,7 +278,7 @@ object Form1: TForm1
         object GroupBox4: TGroupBox
           Left = 0
           Top = 177
-          Width = 366
+          Width = 437
           Height = 80
           Align = alTop
           Caption = #1055#1077#1088#1077#1084#1077#1097#1077#1085#1080#1103' '
@@ -292,7 +292,7 @@ object Form1: TForm1
           object Mover: TTrackBar
             Left = 2
             Top = 15
-            Width = 362
+            Width = 433
             Height = 34
             Align = alTop
             Max = 100
@@ -302,7 +302,7 @@ object Form1: TForm1
           object Panel5: TPanel
             Left = 2
             Top = 49
-            Width = 362
+            Width = 433
             Height = 29
             Align = alClient
             BevelOuter = bvNone
@@ -348,7 +348,7 @@ object Form1: TForm1
         object StressType: TRadioGroup
           Left = 0
           Top = 0
-          Width = 366
+          Width = 437
           Height = 80
           Align = alTop
           Caption = #1058#1080#1087' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1081' '
@@ -376,7 +376,7 @@ object Form1: TForm1
         object GroupBox8: TGroupBox
           Left = 0
           Top = 80
-          Width = 366
+          Width = 437
           Height = 305
           Align = alTop
           Caption = #1052#1077#1090#1086#1076' '#1086#1087#1088#1077#1076#1077#1083#1077#1085#1080#1103' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1103' '#1074' '#1090#1086#1095#1082#1077' '
@@ -390,7 +390,7 @@ object Form1: TForm1
           object Panel9: TPanel
             Left = 2
             Top = 15
-            Width = 362
+            Width = 433
             Height = 288
             Align = alClient
             BevelOuter = bvNone
@@ -404,7 +404,7 @@ object Form1: TForm1
               Text = 'Edit1'
             end
             object Panel1: TPanel
-              Left = 258
+              Left = 329
               Top = 91
               Width = 104
               Height = 197
@@ -423,7 +423,7 @@ object Form1: TForm1
             object Panel6: TPanel
               Left = 0
               Top = 0
-              Width = 362
+              Width = 433
               Height = 91
               Align = alTop
               BevelOuter = bvNone
@@ -505,7 +505,7 @@ object Form1: TForm1
             object Panel7: TPanel
               Left = 0
               Top = 91
-              Width = 258
+              Width = 329
               Height = 197
               Align = alClient
               BevelOuter = bvNone
@@ -804,7 +804,7 @@ object Form1: TForm1
         object GroupBox1: TGroupBox
           Left = 0
           Top = 0
-          Width = 369
+          Width = 441
           Height = 217
           Caption = #1057#1074#1086#1081#1089#1090#1074#1072' '#1082#1086#1085#1077#1095#1085#1086#1075#1086' '#1101#1083#1077#1084#1077#1085#1090#1072
           Font.Charset = DEFAULT_CHARSET
@@ -902,7 +902,7 @@ object Form1: TForm1
         object StressType1: TRadioGroup
           Left = 0
           Top = 0
-          Width = 372
+          Width = 443
           Height = 80
           Align = alTop
           Caption = #1058#1080#1087' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1081' '
@@ -930,7 +930,7 @@ object Form1: TForm1
         object GroupBox10: TGroupBox
           Left = 0
           Top = 80
-          Width = 372
+          Width = 443
           Height = 246
           Align = alTop
           Caption = #1042#1077#1088#1093#1085#1077#1077' '#1080' '#1085#1080#1078#1085#1077#1077' '#1079#1085#1072#1095#1077#1085#1080#1077' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1103' '#1074' '#1079#1086#1085#1072#1093' '
@@ -944,10 +944,10 @@ object Form1: TForm1
           object ZoneStress: TStringGrid
             Left = 2
             Top = 15
-            Width = 368
+            Width = 439
             Height = 229
             Align = alClient
-            ColCount = 6
+            ColCount = 8
             DefaultColWidth = 36
             DefaultRowHeight = 18
             Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goEditing, goTabs]
@@ -955,10 +955,12 @@ object Form1: TForm1
             ColWidths = (
               40
               40
-              30
+              33
               60
-              30
-              60)
+              33
+              60
+              73
+              70)
             RowHeights = (
               18
               18
@@ -974,7 +976,7 @@ object Form1: TForm1
         object StressType2: TRadioGroup
           Left = 0
           Top = 0
-          Width = 372
+          Width = 443
           Height = 80
           Align = alTop
           Caption = #1058#1080#1087' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1081' '
@@ -1002,7 +1004,7 @@ object Form1: TForm1
         object GroupBox11: TGroupBox
           Left = 0
           Top = 80
-          Width = 372
+          Width = 443
           Height = 246
           Align = alTop
           Caption = #1042#1077#1088#1093#1085#1077#1077' '#1080' '#1085#1080#1078#1085#1077#1077' '#1079#1085#1072#1095#1077#1085#1080#1077' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1103' '#1074' '#1089#1074#1086#1081#1089#1090#1074#1072#1093
@@ -1044,7 +1046,7 @@ object Form1: TForm1
     object Group4: TGroupBox
       Left = 0
       Top = 73
-      Width = 380
+      Width = 451
       Height = 256
       Align = alTop
       Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '
@@ -1060,7 +1062,7 @@ object Form1: TForm1
       object GroupBox3: TGroupBox
         Left = 2
         Top = 197
-        Width = 376
+        Width = 447
         Height = 57
         Align = alBottom
         Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1094#1074#1077#1090#1086#1074#1099#1093' '#1075#1088#1072#1076#1072#1094#1080#1081
@@ -1074,7 +1076,7 @@ object Form1: TForm1
         object LevelNumber: TLabel
           Left = 2
           Top = 42
-          Width = 372
+          Width = 443
           Height = 13
           Align = alBottom
           Alignment = taCenter
@@ -1089,7 +1091,7 @@ object Form1: TForm1
         object ChangeLegend: TTrackBar
           Left = 2
           Top = 15
-          Width = 372
+          Width = 443
           Height = 27
           Align = alClient
           Anchors = [akLeft, akRight, akBottom]
@@ -1318,6 +1320,8 @@ object Form1: TForm1
         Font.Name = 'MS Sans Serif'
         Font.Style = []
         ParentFont = False
+        ParentShowHint = False
+        ShowHint = False
         TabOrder = 12
         OnClick = ZoneCheckBoxClick
       end
@@ -1340,8 +1344,8 @@ object Form1: TForm1
         OnClick = CheckBoxZonesNumClick
       end
       object GroupBox12: TGroupBox
-        Left = 184
-        Top = 48
+        Left = 232
+        Top = 40
         Width = 193
         Height = 144
         Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103

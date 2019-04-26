@@ -71,14 +71,14 @@ object FAbout: TFAbout
     Transparent = True
   end
   object Label1: TLabel
-    Left = 182
+    Left = 166
     Top = 467
     Width = 250
     Height = 22
     Alignment = taRightJustify
     Anchors = [akLeft, akBottom]
     AutoSize = False
-    Caption = '600@mai.ru; vladimir.stolyarchuk@gmail.com'
+    Caption = 'www.mai6.ru; stolyarchukva609@mail.ru'
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clNavy
     Font.Height = -11

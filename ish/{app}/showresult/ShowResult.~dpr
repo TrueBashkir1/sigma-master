@@ -26,8 +26,8 @@ uses
   Unit1 in 'Unit1.pas' {Settings};
 
 
-//{$E plg}
-//{$R *.RES}
+{$E plg}
+{$R *.RES}
 
 const
      PluginName='Графическое отображение результатов расчета';

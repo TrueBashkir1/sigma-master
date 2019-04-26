@@ -3720,6 +3720,7 @@ begin
 end;
 
  // Прокофьев 2012
+ //Zherebtsov 2019 modifed
 procedure TShowMovingsForm.LoadMaxMinStress;
 var
   i, j, zoneCout, nodeNum, k, countNodes, material : integer;
@@ -3751,8 +3752,13 @@ var
   // номер КЭ
   maxNegStressZNum : integer;
   curElemNum, curZoneNum : integer;
+  // ZHEREBTSOV, ADDED NEW VARIABLES
+  Minstresstype,Maxstresstype : double;
+  Curstress : double;
+  Const StressCount = 6;
+
 begin
-  Form1.ZoneStress.ColCount := 6;
+  //Form1.ZoneStress.ColCount := 6;
   // задать заголовок таблицы
   Form1.ZoneStress.Cells[0, 0] := 'Зона';
   Form1.ZoneStress.Cells[1, 0] := 'Св-тво';
@@ -3760,12 +3766,20 @@ begin
   Form1.ZoneStress.Cells[3, 0] := 'Верхнее';
   Form1.ZoneStress.Cells[4, 0] := '№ КЭ';
   Form1.ZoneStress.Cells[5, 0] := 'Нижнее';
+  //ZHEREBTSOV, ADDED NEW COLUMNS
+  Form1.ZoneStress.Cells[6, 0] :='Макс. в зоне';
+  Form1.ZoneStress.Cells[7, 0] :='Мин. в зоне';
 
   // Определить количество зон
   zoneCount := ZoneContour.GetNumberOfZones();
 
   for curZoneNum := 1 to zoneCount do
   begin
+  
+  //ZHEREBTSOV
+  Maxstresstype:=MinDouble;
+  Minstresstype:=MaxDouble;;
+
     i := 1;
     curElemNum :=  ElemZone[curZoneNum, i];
     curElement := Elements_Result.GetElement(curElemNum) ;
@@ -3798,7 +3812,20 @@ begin
         maxNegStressZ := stress;
         maxNegStressZNum := curElement.Number;
       end;
-
+                      //ZHEREBTSOV
+                      for k := 1 to StressCount do
+                      begin
+                      Curstress := curElement.Strain[k];
+                      if (Curstress > Maxstresstype) then
+                      begin
+                      Maxstresstype := Curstress;
+                      end;
+                      if (Curstress < Minstresstype) then
+                      begin
+                      Minstresstype := Curstress;
+                      end;
+                      end;
+                      //ZHEREBTSOV
       inc(i);
       curElemNum := ElemZone[curZoneNum, i];
     end;
@@ -3815,6 +3842,11 @@ begin
     Form1.ZoneStress.Cells[4, curZoneNum] := IntToStr(maxNegStressZNum);
     // значение отриц
     Form1.ZoneStress.Cells[5, curZoneNum] := MyFloatToStr(maxNegStressZ);
+    //ZHEREBTSOV
+    //Максимальное положительное напряжение в зоне из всех видов напряжений
+    Form1.ZoneStress.Cells[6, curZoneNum] := MyFloatToStr(Maxstresstype);
+    //Минимальное положительное напряжение в зоне из всех видов напряжений
+    Form1.ZoneStress.Cells[7, curZoneNum] := MyFloatToStr(Minstresstype);
 
   end;
 
