@@ -200,6 +200,7 @@ TYPE
     Crosscut: TCheckBox;
     Spin_0_min_2: TSpinEdit;
     Spin_0_max_2: TSpinEdit;
+    ColorMiddle: TPanel;
 
     PROCEDURE FormCreate(Sender: TObject);
     PROCEDURE FormDestroy(Sender: TObject);
@@ -535,6 +536,7 @@ DrawSelectedElement:= TRUE;
     ColorMinus.Color:=StringToColor(ReadSTRING('ColorMinus','$00FF8000'));
     ColorPlus_0.Color:=StringToColor(ReadSTRING('ColorPlus_0','clYellow'));
     ColorMinus_0.Color:=StringToColor(ReadSTRING('ColorMinus_0','clLime'));
+    ColorMiddle.Color:= StringToColor(ReadSTRING('ColorMiddle','clBlue'));  //Fedorova
     Spin_0_max.Value:=ReadInteger('Spin_0_max',500);
     Spin_0_min.Value:=ReadInteger('Spin_0_min',1);
     Spin_0_max_2.Value:=ReadInteger('Spin_0_max',-1);   //
@@ -631,9 +633,10 @@ BEGIN
     Registry.WriteString('ColorMinus_0',ColorToSTRING(ColorMinus_0.Color));
     Registry.WriteInteger('Spin_0_max',Spin_0_max.Value);
     Registry.WriteInteger('Spin_0_min',Spin_0_min.Value);
-    Registry.WriteInteger('Spin_0_max_2',Spin_0_max_2.Value);  //
-    Registry.WriteInteger('Spin_0_min_2',Spin_0_min_2.Value);  //
-    Registry.WriteBool('Crosscut',Crosscut.Checked);           //Fedorova
+    Registry.WriteInteger('Spin_0_max_2',Spin_0_max_2.Value);                //
+    Registry.WriteInteger('Spin_0_min_2',Spin_0_min_2.Value);                //
+    Registry.WriteBool('Crosscut',Crosscut.Checked);                         //
+    Registry.WriteString('ColorMiddle',ColorToSTRING(ColorMiddle.Color));  //Fedorova
     //
     //Registry.WriteString('LinesColorPlus',ColorToSTRING(LinesCPlus));
     //Registry.WriteString('LinesColorMinus',ColorToSTRING(LinesCMinus));
@@ -736,9 +739,10 @@ if Form1.CheckBox2.checked = true then
       Colorplus.Caption:='3';
       Spin_0_max.Visible := false;
       Spin_0_min.Visible := false;
-      Crosscut.Visible := false;         //Fedorova
+      Crosscut.Visible := false;      //Fedorova
       ColorMinus_0.Visible := false;
       ColorPlus_0.Visible := false;
+      ColorMiddle.Visible := false;   //Fedorova
     end
     else
     begin
@@ -1075,11 +1079,23 @@ VAR
   st : string;
 BEGIN
         if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true) then begin
+          if Crosscut.Checked = False then
+          begin
              if Value = 0 then Result:=colorminus.Color
              else if Value = 1 then Result:=colorminus_0.Color
              else if Value = 2 then Result:=colorplus_0.Color
              else if Value = 3 then Result:=colorplus.Color;
              exit;
+          end
+          else begin
+             if Value = 0 then Result:=colorminus.Color
+             else if Value = 1 then Result:=colorminus_0.Color
+             else if Value = 2 then Result:=ColorMiddle.Color
+             else if Value = 3 then Result:=colorplus_0.Color
+             else if Value = 4 then Result:=colorplus.Color;
+             exit;
+          end;
+
         end;
         if Value >= level_zero then begin
                 Value := Value - level_zero;
@@ -2281,10 +2297,15 @@ if Form1.useLines.Checked then Form1.checkbox2.Checked:=false; //Давыдова Ю.А.
   IF Form1.CheckBox1.Checked = false THEN BEGIN
         Spin_0_max.Visible := false;
         Spin_0_min.Visible := false;
+        Crosscut.Visible := False;       //
+        ColorMiddle.Visible := false;    //Fedorova
   end
   else begin
         Spin_0_max.Visible := true;
         Spin_0_min.Visible := true;
+        Crosscut.Visible := True;
+        if Crosscut.Checked = True then ColorMiddle.Visible := True  //Fedorova
+        else ColorMiddle.Visible := False;
   end;
 
   IF Form1.UseLines.Checked = true THEN BEGIN
@@ -2304,17 +2325,20 @@ if Form1.useLines.Checked then Form1.checkbox2.Checked:=false; //Давыдова Ю.А.
       ColorZero.Visible := true;
       ColorPlus_0.Visible := false;
       ColorMinus_0.Visible := false;
+      ColorMiddle.Visible := False;    //Fedorova
       Spin_0_max.Visible := false;
       Spin_0_min.Visible := false;
+      Spin_0_max_2.Visible := false;   //
+      Spin_0_min_2.Visible := false;   //
+      Crosscut.Visible := False;       //Fedorova
   END;
 
-//Fedorova E.I. 2019
-  if  Spin_0_max.Visible = false then Crosscut.Visible := false
-  else Crosscut.Visible := True;
-
-
   z := Form1.ChangeLegend.Position;
-  if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true) then z := 4;
+  if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true) then
+  begin
+   if Crosscut.Checked = true then z := 5
+   else z := 4;
+  end;
   Form1.ChangeLegend.Hint:=inttostr(z);
   Form1.LevelNumber.Caption:= Form1.ChangeLegend.Hint;
   ChengeLegendLevel;
@@ -2355,10 +2379,14 @@ BEGIN
 if (Spin_0_max.text = '') then exit;
 if (Spin_0_min.text = '') then exit;
   z := Form1.ChangeLegend.Position;
-  if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true) then z := 4;
+  if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true) then
+  begin
+    if Crosscut.Checked = True then z := 5     //Fedorova
+    else z := 4;
+  end;
 
   Form1.ChangeLegend.Hint:=inttostr(z);
-  Form1.LevelNumber.Caption:= Form1.ChangeLegend.Hint;             //теперь ползунок "количество цветовых градаций" на основной форме бессмыслененн...
+  Form1.LevelNumber.Caption:= Form1.ChangeLegend.Hint;      //теперь ползунок "количество цветовых градаций" на основной форме бессмыслененн...
   ChengeLegendLevel;
   MainRePaint;
   LegendRePaint;
@@ -2533,16 +2561,20 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
     end;
     z := Form1.ChangeLegend.Position;       //z - кол-во цветовых градаций
 
+//Fedorova E.I. 2019
     if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true)then begin
-      z := 4;    //при Зоне 0 исп. 4 градации
       Spin_0_Check(Spin_0_min, Spin_0_max);
+      if Crosscut.Checked = True then
+      begin
+        z :=5;         //при Зоне 0 с 2 промежутками исп. 5 градаций
+        Spin_0_Check(Spin_0_min_2, Spin_0_max_2);
+      end
+      else z := 4;    //при Зоне 0 с 1 промежутком исп. 4 градации
     end;
     len:=(Legend.Height- 2*Top)/z;
 
     for pos := 0 to z do
     begin
-    //st := 'L ' + IntToStr(pos);
-    //ShowMessage(st);
     if pos >= level_zero then
     begin
         text:= MyFloatToStr((pos-level_zero) * level_plus);
@@ -2633,7 +2665,11 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
     Rect.Right:=Left+Width;
     Canvas.Pen.Color:=clBlack;
     z := Form1.ChangeLegend.Position;
-    if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true) then z := 4;
+    if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true) then
+    begin
+       if Crosscut.Checked = True then z := 5
+       else z := 4;
+    end;
     FOR i:=0 TO z-1 DO BEGIN
       k:=z-1-i;
       if LinesShow = true then
@@ -2667,7 +2703,11 @@ BEGIN
       Bitmap.Height:=Legend.Height;
     END;
     z := Form1.ChangeLegend.Position;
-    if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true) then z := 4;
+    if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true) then
+    begin
+       if Crosscut.Checked = True then z := 5
+       else z := 4;
+    end;
 
     IF UseBuffer.Checked THEN BEGIN
       ShowLegend(BitMap.Canvas,paintdx,paintdy,20,(Legend.Height-paintdy*2)/z);
@@ -4464,13 +4504,15 @@ if Crosscut.Checked = true then
     begin
       Spin_0_max_2.Visible := true;
       Spin_0_min_2.Visible := true;
+      ColorMiddle.Visible := True;
     end
 else
     begin
       Spin_0_max_2.Visible := false;
       Spin_0_min_2.Visible := false;
+      ColorMiddle.Visible := false;
     end;
-    MainRepaint;
+    MainRePaint;
 end;
 end.
 
