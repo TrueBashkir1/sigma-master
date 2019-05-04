@@ -3,7 +3,7 @@ object ChooseCalcForm: TChooseCalcForm
   Top = 276
   Width = 355
   Height = 197
-  Caption = #1042#1099#1073#1077#1088#1080#1090#1077' '#1084#1077#1090#1086#1076' '#1101#1082#1089#1087#1086#1088#1090#1072' '#1074' Nastran'
+  Caption = 'Sigma 7.4 - '#1042#1099#1073#1077#1088#1080#1090#1077' '#1084#1077#1090#1086#1076' '#1101#1082#1089#1087#1086#1088#1090#1072' '#1074' Nastran'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

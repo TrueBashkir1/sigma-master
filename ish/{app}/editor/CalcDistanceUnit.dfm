@@ -3,7 +3,7 @@ object CalcDistanceForm: TCalcDistanceForm
   Top = 129
   Width = 236
   Height = 537
-  Caption = #1056#1072#1089#1095#1077#1090' '#1088#1072#1089#1089#1090#1086#1103#1085#1080#1081
+  Caption = 'Sigma 7.4 - '#1056#1072#1089#1095#1077#1090' '#1088#1072#1089#1089#1090#1086#1103#1085#1080#1081
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

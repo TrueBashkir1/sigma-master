@@ -1478,7 +1478,7 @@ begin
 // сохраняем если надо
   IF SaveSegmentF = True then SaveForm(PluginReg.SegmentsRegF.Current);
   if SegF <> nil then begin
-    MainR.ActiveWindow.Items.Delete(MainR.ActiveWindow.items.IndexOf('Сетка КЭ'));
+    MainR.ActiveWindow.Items.Delete(MainR.ActiveWindow.items.IndexOf('Grid of FE'));
     MainR.ActiveForm[3]:=-1;
     MainR.RefreshIndexes;
     SegF := nil;

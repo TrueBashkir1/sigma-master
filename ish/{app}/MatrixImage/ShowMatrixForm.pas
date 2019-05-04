@@ -214,7 +214,7 @@ procedure TMatrixForm.LoadResults(SourceFile: String);
     BitmapA.Canvas.StretchDraw(Rect(0,0,BitmapA.Width, BitmapA.Height), BitmapALarge);
     PaintBox1.Canvas.Draw(0,0,BitmapA);
 
-    Self.Caption:='Образ матрицы '+ projectName;
+    Self.Caption:='Sigma 7.4 - Образ матрицы '+ projectName;
     Label1.Caption:='Размер матрицы: '+IntToStr(matrixSize)+'x'+IntToStr(matrixSize);
 
   end;
@@ -249,7 +249,7 @@ procedure TMatrixForm.LoadResults(SourceFile: String);
 
   begin
     if (PageControl1.ActivePage=TabSheet2) And (BitmapL=nil) then begin
-      Self.Caption := Self.Caption + 'Пожалуйста, ждите...';
+      Self.Caption := Self.Caption;
       BitmapL := TBitmap.Create;
       BitmapL.Width:=PaintBox2.Width;
       BitmapL.Height:=PaintBox2.Height;

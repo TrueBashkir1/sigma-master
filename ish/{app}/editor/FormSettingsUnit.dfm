@@ -4,7 +4,7 @@ object FormSettings: TFormSettings
   Width = 236
   Height = 691
   BorderIcons = [biSystemMenu]
-  Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
+  Caption = 'Sigma 7.4 - '#1053#1072#1089#1090#1088#1086#1081#1082#1080
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,14 +18,14 @@ object FormSettings: TFormSettings
   object ScrollBox2: TScrollBox
     Left = 0
     Top = 0
-    Width = 228
-    Height = 657
+    Width = 220
+    Height = 652
     Align = alClient
     TabOrder = 0
     object GroupBox4: TGroupBox
       Left = 0
       Top = 325
-      Width = 224
+      Width = 216
       Height = 104
       Align = alTop
       Caption = #1059#1079#1077#1083
@@ -112,7 +112,7 @@ object FormSettings: TFormSettings
     object GroupBox3: TGroupBox
       Left = 0
       Top = 97
-      Width = 224
+      Width = 216
       Height = 110
       Align = alTop
       Caption = #1047#1086#1085#1072
@@ -167,7 +167,7 @@ object FormSettings: TFormSettings
     object GroupBox6: TGroupBox
       Left = 0
       Top = 429
-      Width = 224
+      Width = 216
       Height = 112
       Align = alTop
       Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1080#1079#1086#1073#1088#1072#1078#1077#1085#1080#1103' '#1092#1086#1088#1084#1099
@@ -206,7 +206,7 @@ object FormSettings: TFormSettings
     object GroupBox2: TGroupBox
       Left = 0
       Top = 207
-      Width = 224
+      Width = 216
       Height = 118
       Align = alTop
       Caption = #1054#1089#1085#1086#1074#1085#1099#1077' '#1085#1072#1089#1090#1088#1086#1081#1082#1080
@@ -259,7 +259,7 @@ object FormSettings: TFormSettings
     object GroupBox5: TGroupBox
       Left = 0
       Top = 541
-      Width = 224
+      Width = 216
       Height = 89
       Align = alTop
       Caption = #1044#1077#1081#1089#1090#1074#1080#1103
@@ -296,7 +296,7 @@ object FormSettings: TFormSettings
     object GroupBox1: TGroupBox
       Left = 0
       Top = 0
-      Width = 224
+      Width = 216
       Height = 97
       Align = alTop
       Caption = #1052#1072#1089#1096#1090#1072#1073
@@ -311,7 +311,7 @@ object FormSettings: TFormSettings
       object LabelScale: TLabel
         Left = 2
         Top = 15
-        Width = 220
+        Width = 212
         Height = 13
         Align = alTop
         Alignment = taCenter
@@ -319,7 +319,7 @@ object FormSettings: TFormSettings
       object TrackBar1: TTrackBar
         Left = 2
         Top = 28
-        Width = 220
+        Width = 212
         Height = 189
         Align = alTop
         Max = 200

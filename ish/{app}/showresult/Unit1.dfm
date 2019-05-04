@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 0
   Width = 488
   Height = 735
-  Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1099
+  Caption = 'Sigma 7.4 - '#1055#1072#1088#1072#1084#1077#1090#1088#1099
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

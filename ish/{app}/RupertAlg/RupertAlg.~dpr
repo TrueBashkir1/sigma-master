@@ -37,8 +37,8 @@ procedure InitializeDLL(Plugin:HModule;Handle:THandle);stdcall;
 begin
      OldHandle:=Application.Handle;
      Application.Handle:=Handle;
-     Menu:=RegisterMenu(Plugin,PChar(PluginName),113,4,PChar('ShowMainRupert'));
-     Button:=RegisterToolButton(Plugin,PChar(PluginName),113,PChar(PluginName),PChar('ShowMainRupert'));
+     Menu:=RegisterMenu(Plugin,'Подсистема Рапперта',113,3,PChar('ShowMainRupert'));
+     Button:=RegisterToolButton(Plugin,'Подсистема Рапперта',113,PChar('Сетка'),PChar('ShowMainRupert'));
      RegisterPlugin(Plugin,12);
      Screen.Cursors[HandAct]:=LoadCursor(HInstance, 'HANDA');
      Screen.Cursors[HandPas]:=LoadCursor(HInstance, 'HANDP');

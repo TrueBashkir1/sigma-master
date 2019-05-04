@@ -253,7 +253,6 @@ var
      Handle:TextFile;
      start:boolean;
      st,fn:string;
-     IniFile:TIniFile;
 begin
      cur:=ListBox2.ItemIndex;
 

@@ -1317,7 +1317,7 @@ BEGIN
 // Constraints.MaxHeight:=Screen.Height-dop;
   ppp:=dop*1.7;
 {<*****}
-  Constraints.MaxHeight:=Screen.Height-((dop*17)/10);//StrTOint(FloatToStr(ppp));
+  Constraints.MaxHeight:=Screen.Height;//-StrTOint(FloatToStr(ppp));
 {*****>}
   //  Constraints.MinWidth:=Screen.Width;
   Constraints.MaxWidth:=Screen.Width-200;
@@ -1690,7 +1690,7 @@ BEGIN
 {<*****}
   Action:=caFree;
   if ShowCellsForm<>nil then begin
-    MainR.ActiveWindow.Items.Delete(MainR.ActiveWindow.items.IndexOf('Отображение результатов'));
+    MainR.ActiveWindow.Items.Delete(MainR.ActiveWindow.items.IndexOf('Display of results'));
     MainR.ActiveForm[1]:=-1;MainR.RefreshIndexes;
     ShowCellsForm:=nil;
   end;

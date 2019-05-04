@@ -294,7 +294,7 @@ procedure TAlgForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Action := caFree;
   If AlgF <> nil then begin
-    MainR.ActiveWindow.Items.Delete(MainR.ActiveWindow.items.IndexOf('Алгоритмы'));
+    MainR.ActiveWindow.Items.Delete(MainR.ActiveWindow.items.IndexOf('Algorithms'));
     MainR.ActiveForm[2]:=-1;
     MainR.RefreshIndexes;
     AlgF := nil;
@@ -2189,31 +2189,37 @@ begin
   i:=Trunc(CalculateMinimumS(True));
   if i=0 then i:=1;
   OutMinS.Text:=IntToStr(i);
+  BaseMinSInNewSElement.Text:=OutMinS.Text;
 end;
 
 procedure TAlgForm.BtnFillBaseCheckTRInNewSElementsClick(Sender: TObject);
   begin
     OutMinTrS.Text:=IntToStr(Trunc(CalculateMinimumTr(True)));
+    BaseMinTrInNewSElement.Text:=OutMinTrS.Text;
   end;
 
 procedure TAlgForm.BtnFillBaseMinTruncClick(Sender: TObject);
   begin
     ForMinTr.Text:=IntToStr(Trunc(CalculateMinimumTr(True)));
+    BaseMinTrunc.Text:=ForMinTr.Text;
   end;
 
 procedure TAlgForm.BtnFillBaseMaxSClick(Sender: TObject);
   begin
     MaxS1.Text:=IntToStr(Trunc(CalculateMaximumS(True)));
+    BaseMaxS.Text:=MaxS1.Text;
   end;
 
 procedure TAlgForm.BtnFillBaseMinTrInNewElementClick(Sender: TObject);
   begin
     OutMinTrT.Text:=IntToStr(Trunc(CalculateMinimumTr(True)));
+    BaseMinTrInNewElement.Text:=OutMinTrT.Text;
   end;
 
 procedure TAlgForm.BtnFillMinTruncClick(Sender: TObject);
   begin
     MinTrForDiag.Text:=IntToStr(Trunc(CalculateMinimumTr(True)));
+    MinTrunc.Text:=MinTrForDiag.Text;
   end;
 
 

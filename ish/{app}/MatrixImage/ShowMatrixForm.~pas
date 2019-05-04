@@ -72,7 +72,7 @@ procedure TMatrixForm.ShowForm(ProjectFileName: String);
   var
     sourceFile :String;
   begin
-    sourceFile := ExtractFileDir(ProjectFileName)+'\RESULT3.BIN'
+    sourceFile := ExtractFileDir(ProjectFileName)+'\RESULT3.BIN';
     projectName := ExtractFileName(ProjectFileName);
     LoadResults(sourceFile);
     if  Error<>0 then begin
@@ -249,7 +249,7 @@ procedure TMatrixForm.LoadResults(SourceFile: String);
 
   begin
     if (PageControl1.ActivePage=TabSheet2) And (BitmapL=nil) then begin
-      Self.Caption := Self.Caption + 'Пожалуйста, ждите...';
+      Self.Caption := 'Sigma 7.4 - ' + Self.Caption;
       BitmapL := TBitmap.Create;
       BitmapL.Width:=PaintBox2.Width;
       BitmapL.Height:=PaintBox2.Height;

@@ -1,14 +1,14 @@
 object MatrixForm: TMatrixForm
-  Left = 586
-  Top = 139
+  Left = 543
+  Top = 200
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   BorderWidth = 2
-  Caption = #1054#1073#1088#1072#1079' '#1084#1072#1090#1088#1080#1094#1099'. '#1055#1086#1078#1072#1083#1091#1081#1089#1090#1072', '#1078#1076#1080#1090#1077'...'
+  Caption = 'Sigma 7.4 - '#1054#1073#1088#1072#1079' '#1084#1072#1090#1088#1080#1094#1099
   ClientHeight = 558
   ClientWidth = 512
   Color = clBtnFace
-  Constraints.MaxHeight = 600
+  Constraints.MaxHeight = 601
   Constraints.MaxWidth = 550
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

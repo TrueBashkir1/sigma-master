@@ -17,13 +17,13 @@ uses
 const
   PluginName = 'Графическое изображение образа матрицы';
 var
-  Button:Pointer;
+  Menu,Button:Pointer;
   OldHandle:THandle;
 procedure InitializeDLL(Plugin:HModule;Handle:THandle);stdcall;
 begin
   OldHandle:=Application.Handle;
   Application.Handle:=Handle;
-
+  Menu:=RegisterMenu(Plugin,PChar('Образ матрицы'),53,6,PChar('ShowForm'));
   Button:=RegisterToolButton(Plugin,PChar(PluginName),95,PChar('Результат'),PChar('ShowForm'));
   RegisterPlugin(Plugin,3);
 end;
@@ -43,9 +43,11 @@ begin
      if FileExists(ChangeFileExt(String(GetProject_FileName), '.res')) then
      begin
           SetToolButtonStatus(Button,True);
+          SetMenuStatus(Menu,True);
      end
      else begin
           SetToolButtonStatus(Button,False);
+          SetMenuStatus(Menu,False);
      end;
 end;
 

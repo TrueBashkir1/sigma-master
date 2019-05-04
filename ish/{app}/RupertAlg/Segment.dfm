@@ -50,13 +50,13 @@ object Segment: TSegment
   object Splitter1: TSplitter
     Left = 453
     Top = 0
-    Height = 534
+    Height = 531
     Align = alRight
     OnMoved = Splitter1Moved
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 534
+    Top = 531
     Width = 796
     Height = 19
     Panels = <
@@ -74,7 +74,7 @@ object Segment: TSegment
     Left = 456
     Top = 0
     Width = 340
-    Height = 534
+    Height = 531
     Align = alRight
     AutoScroll = False
     TabOrder = 1
@@ -1112,7 +1112,7 @@ object Segment: TSegment
       Left = 0
       Top = 408
       Width = 336
-      Height = 122
+      Height = 119
       Align = alClient
       Caption = #1044#1077#1081#1089#1090#1074#1080#1103
       TabOrder = 4
@@ -1120,7 +1120,7 @@ object Segment: TSegment
         Left = 2
         Top = 15
         Width = 332
-        Height = 105
+        Height = 102
         Align = alClient
         MaxLength = 9999999
         ScrollBars = ssVertical
@@ -1132,7 +1132,7 @@ object Segment: TSegment
     Left = 0
     Top = 0
     Width = 453
-    Height = 534
+    Height = 531
     Align = alClient
     BevelOuter = bvLowered
     Color = clWhite
@@ -1141,7 +1141,7 @@ object Segment: TSegment
       Left = 1
       Top = 1
       Width = 451
-      Height = 532
+      Height = 529
       Cursor = crCross
       Align = alClient
       OnClick = PaintBox1Click

@@ -194,13 +194,13 @@ TYPE
     Label29: TLabel;
     CheckBox2: TCheckBox;
     ZoneCheckBox: TCheckBox;
-    Button1: TButton;
     ColorZeroPluss: TPanel;
     ParamsButton: TSpeedButton;
     Crosscut: TCheckBox;
     Spin_0_min_2: TSpinEdit;
     Spin_0_max_2: TSpinEdit;
     ColorMiddle: TPanel;
+    TypeStressLabel: TLabel;
 
     PROCEDURE FormCreate(Sender: TObject);
     PROCEDURE FormDestroy(Sender: TObject);
@@ -1275,7 +1275,7 @@ PROCEDURE TShowMovingsForm.ShowElement(Canvas:TCanvas;OneElement:TOneElement);
 VAR
   OneNode : TOneNode;
   K_M     : MyReal;
-  i,beg,off       : INTEGER;
+  i,m,j, beg,off       : INTEGER;
   x, y    : ARRAY [1..360] OF INTEGER; //координаты узлов
   LevNode : ARRAY [1..360] OF INTEGER; //номер уровня в узлах
   ID      : ARRAY [1..360] OF INTEGER;
@@ -1286,7 +1286,7 @@ VAR
   st : string;
   pos1, pos2, pos3: Integer;
   a : ARRAY [1..6] OF MyReal;
-  buf : Integer;
+  buf : MyReal;
 
 BEGIN
   //как рисовать
@@ -1348,14 +1348,15 @@ BEGIN
         a[5] := Elements_Result.Min[Form1.StressType.ItemIndex+1];
         a[6] := Elements_Result.Max[Form1.StressType.ItemIndex+1];
 
-        for i:=1 to 5 do
-          for j:=i+1 to 6 do
-            if a[i]>a[j] then   //сортировка по возратанию
+        for m := 1 to 5 do
+          for j:=m+1 to 6 do
+            if a[m]>a[j] then   //сортировка по возратанию
             begin
-              buf:=a[i];
-              a[i]:=a[j];
+              buf:=a[m];
+              a[m]:=a[j];
               a[j]:=buf;
             end;
+
 
         if (stress[i] >= a[1]) and (stress[i] <= a[2]) then LevNode[i] := 0;
         if (stress[i] >= a[2]) and (stress[i] <= a[3]) then LevNode[i] := 1;

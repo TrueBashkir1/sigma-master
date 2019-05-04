@@ -3,7 +3,7 @@ object FAbout: TFAbout
   Top = 167
   Width = 473
   Height = 531
-  Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
+  Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077' '
   Color = clBtnFace
   Constraints.MinHeight = 506
   Constraints.MinWidth = 473
@@ -29,7 +29,7 @@ object FAbout: TFAbout
     Width = 157
     Height = 48
     AutoSize = False
-    Caption = '7.2'
+    Caption = '7.4'
     Font.Charset = ANSI_CHARSET
     Font.Color = clRed
     Font.Height = -37
@@ -61,7 +61,7 @@ object FAbout: TFAbout
     Height = 16
     Alignment = taCenter
     AutoSize = False
-    Caption = #1042#1077#1088#1089#1080#1103' '#1086#1090' 23.05.2018'
+    Caption = #1042#1077#1088#1089#1080#1103' '#1086#1090' 26.04.2019'
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clBlue
     Font.Height = -13

@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 0
   Width = 488
   Height = 735
-  Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1099
+  Caption = 'Sigma 7.4 - '#1055#1072#1088#1072#1084#1077#1090#1088#1099
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -1314,7 +1314,6 @@ object Form1: TForm1
         Height = 17
         Hint = #1055#1086#1082#1072#1079#1072#1090#1100' '#1080#1089#1093#1086#1076#1085#1086#1077' '#1088#1072#1079#1073#1080#1077#1085#1080#1077
         Caption = #1047#1086#1085#1099
-        Checked = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -1323,7 +1322,6 @@ object Form1: TForm1
         ParentFont = False
         ParentShowHint = False
         ShowHint = False
-        State = cbChecked
         TabOrder = 12
         OnClick = ZoneCheckBoxClick
       end

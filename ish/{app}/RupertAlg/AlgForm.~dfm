@@ -1,8 +1,8 @@
 object AlgForm: TAlgForm
-  Left = 180
-  Top = 99
+  Left = 79
+  Top = 52
   BorderStyle = bsSingle
-  Caption = 'Задание алгоритма и определение его параметров'
+  Caption = 'Sigma 7.4 - '#1047#1072#1076#1072#1085#1080#1077' '#1072#1083#1075#1086#1088#1080#1090#1084#1072' '#1080' '#1086#1087#1088#1077#1076#1077#1083#1077#1085#1080#1077' '#1077#1075#1086' '#1087#1072#1088#1072#1084#1077#1090#1088#1086#1074
   ClientHeight = 579
   ClientWidth = 915
   Color = clBtnFace
@@ -58,7 +58,7 @@ object AlgForm: TAlgForm
       Width = 292
       Height = 275
       Align = alLeft
-      Caption = 'Выбранные алгоритмы'
+      Caption = #1042#1099#1073#1088#1072#1085#1085#1099#1077' '#1072#1083#1075#1086#1088#1080#1090#1084#1099
       TabOrder = 0
       object ToDo: TCheckListBox
         Left = 2
@@ -75,7 +75,7 @@ object AlgForm: TAlgForm
         Top = 233
         Width = 70
         Height = 32
-        Caption = 'Удалить'
+        Caption = #1059#1076#1072#1083#1080#1090#1100
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -549,7 +549,7 @@ object AlgForm: TAlgForm
         Width = 286
         Height = 81
         Align = alTop
-        Caption = 'Основные алгоритмы'
+        Caption = #1054#1089#1085#1086#1074#1085#1099#1077' '#1072#1083#1075#1086#1088#1080#1090#1084#1099
         TabOrder = 1
         object ListMain: TListBox
           Left = 2
@@ -559,10 +559,10 @@ object AlgForm: TAlgForm
           Align = alClient
           ItemHeight = 13
           Items.Strings = (
-            'Смена диагоналей'
-            'Разбиение сегмента'
-            'Разбиение контура'
-            'Разбиение трегольника')
+            #1057#1084#1077#1085#1072' '#1076#1080#1072#1075#1086#1085#1072#1083#1077#1081
+            #1056#1072#1079#1073#1080#1077#1085#1080#1077' '#1089#1077#1075#1084#1077#1085#1090#1072
+            #1056#1072#1079#1073#1080#1077#1085#1080#1077' '#1082#1086#1085#1090#1091#1088#1072
+            #1056#1072#1079#1073#1080#1077#1085#1080#1077' '#1090#1088#1077#1075#1086#1083#1100#1085#1080#1082#1072)
           TabOrder = 0
           OnClick = ListMainClick
         end
@@ -573,7 +573,7 @@ object AlgForm: TAlgForm
         Width = 286
         Height = 56
         Align = alTop
-        Caption = 'Дополнительные алгоритмы'
+        Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1099#1077' '#1072#1083#1075#1086#1088#1080#1090#1084#1099
         TabOrder = 0
         object ListOther: TListBox
           Left = 2
@@ -582,8 +582,8 @@ object AlgForm: TAlgForm
           Height = 42
           ItemHeight = 13
           Items.Strings = (
-            'Позиционирование узлов (Грубое позиционирование)'
-            'Позиционирование узлов (По центру тяжести)')
+            #1055#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077' '#1091#1079#1083#1086#1074' ('#1043#1088#1091#1073#1086#1077' '#1087#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077')'
+            #1055#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077' '#1091#1079#1083#1086#1074' ('#1055#1086' '#1094#1077#1085#1090#1088#1091' '#1090#1103#1078#1077#1089#1090#1080')')
           TabOrder = 0
           OnClick = ListOtherClick
         end
@@ -593,7 +593,7 @@ object AlgForm: TAlgForm
         Top = 144
         Width = 252
         Height = 25
-        Caption = 'Добавить алгоритм'
+        Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1072#1083#1075#1086#1088#1080#1090#1084
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -609,7 +609,7 @@ object AlgForm: TAlgForm
         Width = 252
         Height = 25
         Anchors = [akBottom]
-        Caption = 'Применить алгоритмы к сетке КЭ'
+        Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100' '#1072#1083#1075#1086#1088#1080#1090#1084#1099' '#1082' '#1089#1077#1090#1082#1077' '#1050#1069
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -626,29 +626,29 @@ object AlgForm: TAlgForm
       Top = 1
       Width = 305
       Height = 275
-      Caption = 'Задание критериев для процедур алгоритма'
+      Caption = #1047#1072#1076#1072#1085#1080#1077' '#1082#1088#1080#1090#1077#1088#1080#1077#1074' '#1076#1083#1103' '#1087#1088#1086#1094#1077#1076#1091#1088' '#1072#1083#1075#1086#1088#1080#1090#1084#1072
       TabOrder = 2
       object Params: TPageControl
         Left = 2
         Top = 15
         Width = 301
         Height = 258
-        ActivePage = Addings
+        ActivePage = ChangeD
         Align = alClient
         MultiLine = True
         ParentShowHint = False
         ShowHint = False
         TabOrder = 0
         object BaseAlg: TTabSheet
-          Caption = 'Первичные ограничения'
+          Caption = #1055#1077#1088#1074#1080#1095#1085#1099#1077' '#1086#1075#1088#1072#1085#1080#1095#1077#1085#1080#1103
           ImageIndex = 2
           object BaseMinTR: TGroupBox
             Left = 0
             Top = 0
-            Width = 237
+            Width = 293
             Height = 51
             Align = alTop
-            Caption = 'Проверка минимального угла'
+            Caption = #1055#1088#1086#1074#1077#1088#1082#1072' '#1084#1080#1085#1080#1084#1072#1083#1100#1085#1086#1075#1086' '#1091#1075#1083#1072
             Ctl3D = True
             ParentCtl3D = False
             TabOrder = 0
@@ -657,14 +657,14 @@ object AlgForm: TAlgForm
               Top = 23
               Width = 51
               Height = 13
-              Caption = 'Значение:'
+              Caption = #1047#1085#1072#1095#1077#1085#1080#1077':'
             end
             object UseCheckBaseMinTR: TCheckBox
               Left = 8
               Top = 22
               Width = 113
               Height = 17
-              Caption = 'Делать проверку'
+              Caption = #1044#1077#1083#1072#1090#1100' '#1087#1088#1086#1074#1077#1088#1082#1091
               TabOrder = 0
               OnClick = UseCheckBaseMinTRClick
             end
@@ -731,10 +731,10 @@ object AlgForm: TAlgForm
           object BaseMaxSum: TGroupBox
             Left = 0
             Top = 51
-            Width = 237
+            Width = 293
             Height = 57
             Align = alTop
-            Caption = 'Проверка максимальной площади треугольника'
+            Caption = #1055#1088#1086#1074#1077#1088#1082#1072' '#1084#1072#1082#1089#1080#1084#1072#1083#1100#1085#1086#1081' '#1087#1083#1086#1097#1072#1076#1080' '#1090#1088#1077#1091#1075#1086#1083#1100#1085#1080#1082#1072
             Ctl3D = True
             ParentCtl3D = False
             TabOrder = 1
@@ -743,14 +743,14 @@ object AlgForm: TAlgForm
               Top = 28
               Width = 51
               Height = 13
-              Caption = 'Значение:'
+              Caption = #1047#1085#1072#1095#1077#1085#1080#1077':'
             end
             object UseBaseMaxS: TCheckBox
               Left = 7
               Top = 27
               Width = 114
               Height = 17
-              Caption = 'Делать проверку'
+              Caption = #1044#1077#1083#1072#1090#1100' '#1087#1088#1086#1074#1077#1088#1082#1091
               TabOrder = 0
               OnClick = UseBaseMaxSClick
             end
@@ -822,17 +822,18 @@ object AlgForm: TAlgForm
           object BasePosition: TGroupBox
             Left = 0
             Top = 108
-            Width = 237
+            Width = 293
             Height = 66
             Align = alTop
-            Caption = 'Позиционирование'
+            Caption = #1055#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077
             TabOrder = 2
+            Visible = False
             object BasePosRough: TRadioButton
               Left = 8
               Top = 14
               Width = 153
               Height = 17
-              Caption = 'Грубое позиционирование'
+              Caption = #1043#1088#1091#1073#1086#1077' '#1087#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077
               TabOrder = 0
             end
             object BasePosGravityCenter: TRadioButton
@@ -840,7 +841,7 @@ object AlgForm: TAlgForm
               Top = 30
               Width = 145
               Height = 17
-              Caption = 'По центру тяжести'
+              Caption = #1055#1086' '#1094#1077#1085#1090#1088#1091' '#1090#1103#1078#1077#1089#1090#1080
               TabOrder = 1
             end
             object BasePosDoNotUse: TRadioButton
@@ -848,7 +849,7 @@ object AlgForm: TAlgForm
               Top = 46
               Width = 143
               Height = 17
-              Caption = 'Без позиционирования'
+              Caption = #1041#1077#1079' '#1087#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1103
               Checked = True
               TabOrder = 2
               TabStop = True
@@ -856,28 +857,28 @@ object AlgForm: TAlgForm
           end
         end
         object Addings: TTabSheet
-          Caption = 'Вторичные ограничения'
+          Caption = #1042#1090#1086#1088#1080#1095#1085#1099#1077' '#1086#1075#1088#1072#1085#1080#1095#1077#1085#1080#1103
           ImageIndex = 3
           object CheckMinTrInNewElements: TGroupBox
             Left = 0
             Top = 24
             Width = 313
             Height = 180
-            Caption = 'Проверка мин-ого угла новых элементов (треуг.)'
+            Caption = #1055#1088#1086#1074#1077#1088#1082#1072' '#1084#1080#1085'-'#1086#1075#1086' '#1091#1075#1083#1072' '#1085#1086#1074#1099#1093' '#1101#1083#1077#1084#1077#1085#1090#1086#1074' ('#1090#1088#1077#1091#1075'.)'
             TabOrder = 0
             object Label4: TLabel
               Left = 139
               Top = 20
               Width = 51
               Height = 13
-              Caption = 'Значение:'
+              Caption = #1047#1085#1072#1095#1077#1085#1080#1077':'
             end
             object BaseCheckTRInNewElements: TCheckBox
               Left = 8
               Top = 19
               Width = 123
               Height = 17
-              Caption = 'Делать проверку'
+              Caption = #1044#1077#1083#1072#1090#1100' '#1087#1088#1086#1074#1077#1088#1082#1091
               TabOrder = 0
               OnClick = BaseCheckTRInNewElementsClick
             end
@@ -946,28 +947,28 @@ object AlgForm: TAlgForm
             Top = 80
             Width = 289
             Height = 73
-            Caption = 'Проверка новых элементов (разбиение сегмента)'
+            Caption = #1055#1088#1086#1074#1077#1088#1082#1072' '#1085#1086#1074#1099#1093' '#1101#1083#1077#1084#1077#1085#1090#1086#1074' ('#1088#1072#1079#1073#1080#1077#1085#1080#1077' '#1089#1077#1075#1084#1077#1085#1090#1072')'
             TabOrder = 1
             object Label5: TLabel
               Left = 138
               Top = 20
               Width = 51
               Height = 13
-              Caption = 'Значение:'
+              Caption = #1047#1085#1072#1095#1077#1085#1080#1077':'
             end
             object Label6: TLabel
               Left = 139
               Top = 46
               Width = 51
               Height = 13
-              Caption = 'Значение:'
+              Caption = #1047#1085#1072#1095#1077#1085#1080#1077':'
             end
             object BaseCheckTRInNewSElements: TCheckBox
               Left = 8
               Top = 19
               Width = 123
               Height = 17
-              Caption = 'Минимального угла'
+              Caption = #1052#1080#1085#1080#1084#1072#1083#1100#1085#1086#1075#1086' '#1091#1075#1083#1072
               TabOrder = 0
               OnClick = BaseCheckTRInNewSElementsClick
             end
@@ -1003,7 +1004,7 @@ object AlgForm: TAlgForm
               Top = 47
               Width = 122
               Height = 15
-              Caption = 'Миним-ой площади'
+              Caption = #1052#1080#1085#1080#1084'-'#1086#1081' '#1087#1083#1086#1097#1072#1076#1080
               TabOrder = 3
               OnClick = BaseCheckMinSInNewSElementsClick
             end
@@ -1101,7 +1102,7 @@ object AlgForm: TAlgForm
           end
         end
         object ChangeD: TTabSheet
-          Caption = 'Критерии процедуры "Смена диагоналей"'
+          Caption = #1050#1088#1080#1090#1077#1088#1080#1080' '#1087#1088#1086#1094#1077#1076#1091#1088#1099' "'#1057#1084#1077#1085#1072' '#1076#1080#1072#1075#1086#1085#1072#1083#1077#1081'"'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -1111,17 +1112,18 @@ object AlgForm: TAlgForm
           object Posiotion: TGroupBox
             Left = 0
             Top = 0
-            Width = 237
+            Width = 293
             Height = 89
             Align = alTop
-            Caption = 'Позиционирование'
+            Caption = #1055#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077
             TabOrder = 0
+            Visible = False
             object PosRough: TRadioButton
               Left = 8
               Top = 24
               Width = 153
               Height = 17
-              Caption = 'Грубое позиционирование'
+              Caption = #1043#1088#1091#1073#1086#1077' '#1087#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077
               TabOrder = 0
             end
             object PosGravityCenter: TRadioButton
@@ -1129,7 +1131,7 @@ object AlgForm: TAlgForm
               Top = 40
               Width = 145
               Height = 17
-              Caption = 'По центру тяжести'
+              Caption = #1055#1086' '#1094#1077#1085#1090#1088#1091' '#1090#1103#1078#1077#1089#1090#1080
               TabOrder = 1
             end
             object PosDoNotUse: TRadioButton
@@ -1137,7 +1139,7 @@ object AlgForm: TAlgForm
               Top = 56
               Width = 143
               Height = 17
-              Caption = 'Без позиционирования'
+              Caption = #1041#1077#1079' '#1087#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1103
               Checked = True
               TabOrder = 2
               TabStop = True
@@ -1146,10 +1148,10 @@ object AlgForm: TAlgForm
           object CheckTR: TGroupBox
             Left = 0
             Top = 89
-            Width = 237
+            Width = 293
             Height = 52
             Align = alTop
-            Caption = 'Проверка минимального угла'
+            Caption = #1055#1088#1086#1074#1077#1088#1082#1072' '#1084#1080#1085#1080#1084#1072#1083#1100#1085#1086#1075#1086' '#1091#1075#1083#1072
             Ctl3D = True
             ParentCtl3D = False
             TabOrder = 1
@@ -1158,14 +1160,14 @@ object AlgForm: TAlgForm
               Top = 20
               Width = 51
               Height = 13
-              Caption = 'Значение:'
+              Caption = #1047#1085#1072#1095#1077#1085#1080#1077':'
             end
             object UseMinTR: TCheckBox
               Left = 11
               Top = 19
               Width = 110
               Height = 17
-              Caption = 'Делать проверку'
+              Caption = #1044#1077#1083#1072#1090#1100' '#1087#1088#1086#1074#1077#1088#1082#1091
               TabOrder = 0
               OnClick = UseMinTRClick
             end
@@ -1231,7 +1233,7 @@ object AlgForm: TAlgForm
           end
         end
         object MeshNRS: TTabSheet
-          Caption = 'Неправильный треугольник'
+          Caption = #1053#1077#1087#1088#1072#1074#1080#1083#1100#1085#1099#1081' '#1090#1088#1077#1091#1075#1086#1083#1100#1085#1080#1082
           ImageIndex = 1
           TabVisible = False
           object NRS_TODO: TGroupBox
@@ -1240,14 +1242,14 @@ object AlgForm: TAlgForm
             Width = 314
             Height = 61
             Align = alTop
-            Caption = 'Eсли нашли узел, то'
+            Caption = 'E'#1089#1083#1080' '#1085#1072#1096#1083#1080' '#1091#1079#1077#1083', '#1090#1086
             TabOrder = 0
             object NRS_ChangeD: TRadioButton
               Left = 10
               Top = 20
               Width = 121
               Height = 17
-              Caption = 'Сменим диагональ'
+              Caption = #1057#1084#1077#1085#1080#1084' '#1076#1080#1072#1075#1086#1085#1072#1083#1100
               TabOrder = 0
               OnClick = NRS_ChangeDClick
             end
@@ -1256,7 +1258,7 @@ object AlgForm: TAlgForm
               Top = 40
               Width = 131
               Height = 17
-              Caption = 'Добавим новый узел'
+              Caption = #1044#1086#1073#1072#1074#1080#1084' '#1085#1086#1074#1099#1081' '#1091#1079#1077#1083
               Checked = True
               TabOrder = 1
               TabStop = True
@@ -1269,7 +1271,7 @@ object AlgForm: TAlgForm
             Width = 314
             Height = 73
             Align = alBottom
-            Caption = 'Смена диагонали'
+            Caption = #1057#1084#1077#1085#1072' '#1076#1080#1072#1075#1086#1085#1072#1083#1080
             Enabled = False
             TabOrder = 1
             object NRS_PosRough: TRadioButton
@@ -1277,7 +1279,7 @@ object AlgForm: TAlgForm
               Top = 14
               Width = 153
               Height = 17
-              Caption = 'Грубое позиционирование'
+              Caption = #1043#1088#1091#1073#1086#1077' '#1087#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077
               Enabled = False
               TabOrder = 0
             end
@@ -1286,7 +1288,7 @@ object AlgForm: TAlgForm
               Top = 30
               Width = 145
               Height = 17
-              Caption = 'По центру тяжести'
+              Caption = #1055#1086' '#1094#1077#1085#1090#1088#1091' '#1090#1103#1078#1077#1089#1090#1080
               Enabled = False
               TabOrder = 1
             end
@@ -1295,7 +1297,7 @@ object AlgForm: TAlgForm
               Top = 46
               Width = 143
               Height = 17
-              Caption = 'Без позиционирования'
+              Caption = #1041#1077#1079' '#1087#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1103
               Checked = True
               Enabled = False
               TabOrder = 2
@@ -1308,7 +1310,7 @@ object AlgForm: TAlgForm
             Width = 314
             Height = 78
             Align = alClient
-            Caption = 'Положение нового узла'
+            Caption = #1055#1086#1083#1086#1078#1077#1085#1080#1077' '#1085#1086#1074#1086#1075#1086' '#1091#1079#1083#1072
             Enabled = False
             TabOrder = 2
             object NRS_Middle: TRadioButton
@@ -1316,7 +1318,7 @@ object AlgForm: TAlgForm
               Top = 20
               Width = 131
               Height = 17
-              Caption = 'Посередине'
+              Caption = #1055#1086#1089#1077#1088#1077#1076#1080#1085#1077
               Checked = True
               Enabled = False
               TabOrder = 0
@@ -1327,7 +1329,7 @@ object AlgForm: TAlgForm
               Top = 40
               Width = 113
               Height = 17
-              Caption = 'Оптимальное'
+              Caption = #1054#1087#1090#1080#1084#1072#1083#1100#1085#1086#1077
               Enabled = False
               TabOrder = 1
             end
@@ -1383,7 +1385,7 @@ object AlgForm: TAlgForm
       Width = 290
       Height = 168
       Align = alTop
-      Caption = 'Информация о ходе выполнения алгоритма'
+      Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1086' '#1093#1086#1076#1077' '#1074#1099#1087#1086#1083#1085#1077#1085#1080#1103' '#1072#1083#1075#1086#1088#1080#1090#1084#1072
       TabOrder = 2
       object Nodes: TMemo
         Left = 2
@@ -1405,7 +1407,7 @@ object AlgForm: TAlgForm
       Top = 201
       Width = 185
       Height = 25
-      Caption = 'Очистить экран'
+      Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1101#1082#1088#1072#1085
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
@@ -1422,19 +1424,19 @@ object AlgForm: TAlgForm
     Width = 623
     Height = 302
     Align = alClient
-    Caption = 'Статистика'
+    Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
     TabOrder = 2
     object Logs: TPageControl
       Left = 2
       Top = 15
       Width = 619
       Height = 285
-      ActivePage = Statistics
+      ActivePage = LogPosition
       Align = alClient
       MultiLine = True
       TabOrder = 0
       object LogChangeD: TTabSheet
-        Caption = 'Изменение диагоналей'
+        Caption = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1076#1080#1072#1075#1086#1085#1072#1083#1077#1081
         object LogDiag: TMemo
           Left = 0
           Top = 0
@@ -1450,7 +1452,7 @@ object AlgForm: TAlgForm
         end
       end
       object LogsT: TTabSheet
-        Caption = 'Разбиение треугольников'
+        Caption = #1056#1072#1079#1073#1080#1077#1085#1080#1077' '#1090#1088#1077#1091#1075#1086#1083#1100#1085#1080#1082#1086#1074
         ImageIndex = 4
         object LogT: TMemo
           Left = 0
@@ -1464,7 +1466,7 @@ object AlgForm: TAlgForm
         end
       end
       object LogsSegments: TTabSheet
-        Caption = 'Разбиение сегментов'
+        Caption = #1056#1072#1079#1073#1080#1077#1085#1080#1077' '#1089#1077#1075#1084#1077#1085#1090#1086#1074
         ImageIndex = 5
         object LogSS: TMemo
           Left = 0
@@ -1477,7 +1479,7 @@ object AlgForm: TAlgForm
         end
       end
       object TabSheet3: TTabSheet
-        Caption = 'Разбиение контура'
+        Caption = #1056#1072#1079#1073#1080#1077#1085#1080#1077' '#1082#1086#1085#1090#1091#1088#1072
         ImageIndex = 8
         object LogSE: TMemo
           Left = 0
@@ -1490,14 +1492,14 @@ object AlgForm: TAlgForm
         end
       end
       object TabSheet2: TTabSheet
-        Caption = 'Расчет    '
+        Caption = #1056#1072#1089#1095#1077#1090'    '
         ImageIndex = 3
         object Stop: TButton
           Left = 168
           Top = 54
           Width = 193
           Height = 51
-          Caption = 'Прервать расчет'
+          Caption = #1055#1088#1077#1088#1074#1072#1090#1100' '#1088#1072#1089#1095#1077#1090
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -20
@@ -1513,7 +1515,7 @@ object AlgForm: TAlgForm
           Top = 128
           Width = 281
           Height = 41
-          Caption = 'Сохранить изменения'
+          Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -20
@@ -1529,7 +1531,7 @@ object AlgForm: TAlgForm
           Top = 128
           Width = 225
           Height = 41
-          Caption = 'Вернуть назад'
+          Caption = #1042#1077#1088#1085#1091#1090#1100' '#1085#1072#1079#1072#1076
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -20
@@ -1542,13 +1544,13 @@ object AlgForm: TAlgForm
         end
       end
       object LogPosition: TTabSheet
-        Caption = 'Позиционирование узлов'
+        Caption = #1055#1086#1079#1080#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1080#1077' '#1091#1079#1083#1086#1074
         ImageIndex = 2
         object Memo1: TMemo
           Left = 0
           Top = 0
-          Width = 559
-          Height = 218
+          Width = 611
+          Height = 239
           Align = alClient
           BevelInner = bvLowered
           BevelOuter = bvRaised
@@ -1561,7 +1563,7 @@ object AlgForm: TAlgForm
         end
       end
       object TabSheet1: TTabSheet
-        Caption = 'Углы в КЭ'
+        Caption = #1059#1075#1083#1099' '#1074' '#1050#1069
         ImageIndex = 1
         OnShow = TabSheet1Show
         object LogTR: TMemo
@@ -1579,7 +1581,7 @@ object AlgForm: TAlgForm
         end
       end
       object LogSum: TTabSheet
-        Caption = 'Площади КЭ'
+        Caption = #1055#1083#1086#1097#1072#1076#1080' '#1050#1069
         ImageIndex = 6
         OnShow = CalcSumEClick
         object LogSumm: TMemo
@@ -1594,7 +1596,7 @@ object AlgForm: TAlgForm
         end
       end
       object NodeALL: TTabSheet
-        Caption = 'Узлы сетки'
+        Caption = #1059#1079#1083#1099' '#1089#1077#1090#1082#1080
         ImageIndex = 7
         OnShow = ALLNodesClick
         object NodeA: TMemo
@@ -1609,7 +1611,7 @@ object AlgForm: TAlgForm
         end
       end
       object Statistics: TTabSheet
-        Caption = 'Сравнение и статистика'
+        Caption = #1057#1088#1072#1074#1085#1077#1085#1080#1077' '#1080' '#1089#1090#1072#1090#1080#1089#1090#1080#1082#1072
         ImageIndex = 9
         object Varinat0: TGroupBox
           Left = 0
@@ -1617,7 +1619,7 @@ object AlgForm: TAlgForm
           Width = 180
           Height = 239
           Align = alLeft
-          Caption = 'Информация по исходной сетке'
+          Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1080#1089#1093#1086#1076#1085#1086#1081' '#1089#1077#1090#1082#1077
           TabOrder = 0
           object Var0minT: TLabeledEdit
             Left = 120
@@ -1626,7 +1628,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 101
             EditLabel.Height = 13
-            EditLabel.Caption = 'Минимальный угол:'
+            EditLabel.Caption = #1052#1080#1085#1080#1084#1072#1083#1100#1085#1099#1081' '#1091#1075#1086#1083':'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1639,7 +1641,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 101
             EditLabel.Height = 13
-            EditLabel.Caption = 'Минимальная S КЭ:'
+            EditLabel.Caption = #1052#1080#1085#1080#1084#1072#1083#1100#1085#1072#1103' S '#1050#1069':'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1652,7 +1654,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 107
             EditLabel.Height = 13
-            EditLabel.Caption = 'Максимальная S КЭ:'
+            EditLabel.Caption = #1052#1072#1082#1089#1080#1084#1072#1083#1100#1085#1072#1103' S '#1050#1069':'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1665,7 +1667,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 79
             EditLabel.Height = 13
-            EditLabel.Caption = 'Количество КЭ:'
+            EditLabel.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1050#1069':'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1678,7 +1680,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 94
             EditLabel.Height = 13
-            EditLabel.Caption = 'Количество узлов:'
+            EditLabel.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1091#1079#1083#1086#1074':'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1691,7 +1693,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 111
             EditLabel.Height = 13
-            EditLabel.Caption = 'Средняя площадь КЭ:'
+            EditLabel.Caption = #1057#1088#1077#1076#1085#1103#1103' '#1087#1083#1086#1097#1072#1076#1100' '#1050#1069':'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1704,7 +1706,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 118
             EditLabel.Height = 13
-            EditLabel.Caption = 'Скорректир-ая сред. S:'
+            EditLabel.Caption = #1057#1082#1086#1088#1088#1077#1082#1090#1080#1088'-'#1072#1103' '#1089#1088#1077#1076'. S:'
             EditLabel.Transparent = True
             EditLabel.Layout = tlBottom
             LabelPosition = lpLeft
@@ -1717,7 +1719,7 @@ object AlgForm: TAlgForm
             Top = 190
             Width = 75
             Height = 25
-            Caption = 'Обновить'
+            Caption = #1054#1073#1085#1086#1074#1080#1090#1100
             TabOrder = 7
             OnClick = Var0RefreshClick
           end
@@ -1728,7 +1730,7 @@ object AlgForm: TAlgForm
           Width = 180
           Height = 239
           Align = alLeft
-          Caption = 'Информация по текущей сетке'
+          Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1090#1077#1082#1091#1097#1077#1081' '#1089#1077#1090#1082#1077
           TabOrder = 1
           object Var1numN: TLabeledEdit
             Left = 120
@@ -1737,7 +1739,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 94
             EditLabel.Height = 13
-            EditLabel.Caption = 'Количество узлов:'
+            EditLabel.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1091#1079#1083#1086#1074':'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1750,7 +1752,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 79
             EditLabel.Height = 13
-            EditLabel.Caption = 'Количество КЭ:'
+            EditLabel.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1050#1069':'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1763,7 +1765,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 101
             EditLabel.Height = 13
-            EditLabel.Caption = 'Минимальный угол:'
+            EditLabel.Caption = #1052#1080#1085#1080#1084#1072#1083#1100#1085#1099#1081' '#1091#1075#1086#1083':'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1776,7 +1778,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 101
             EditLabel.Height = 13
-            EditLabel.Caption = 'Минимальная S КЭ:'
+            EditLabel.Caption = #1052#1080#1085#1080#1084#1072#1083#1100#1085#1072#1103' S '#1050#1069':'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1789,7 +1791,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 107
             EditLabel.Height = 13
-            EditLabel.Caption = 'Максимальная S КЭ:'
+            EditLabel.Caption = #1052#1072#1082#1089#1080#1084#1072#1083#1100#1085#1072#1103' S '#1050#1069':'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1802,7 +1804,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 111
             EditLabel.Height = 13
-            EditLabel.Caption = 'Средняя площадь КЭ:'
+            EditLabel.Caption = #1057#1088#1077#1076#1085#1103#1103' '#1087#1083#1086#1097#1072#1076#1100' '#1050#1069':'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1813,7 +1815,7 @@ object AlgForm: TAlgForm
             Top = 190
             Width = 75
             Height = 25
-            Caption = 'Обновить'
+            Caption = #1054#1073#1085#1086#1074#1080#1090#1100
             TabOrder = 6
             OnClick = Var1RefreshClick
           end
@@ -1824,7 +1826,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 115
             EditLabel.Height = 13
-            EditLabel.Caption = 'Скорректир-ая сред.S:'
+            EditLabel.Caption = #1057#1082#1086#1088#1088#1077#1082#1090#1080#1088'-'#1072#1103' '#1089#1088#1077#1076'.S:'
             EditLabel.Transparent = True
             LabelPosition = lpLeft
             LabelSpacing = 4
@@ -1838,7 +1840,7 @@ object AlgForm: TAlgForm
           Width = 251
           Height = 239
           Align = alClient
-          Caption = 'Сравнительные показатели'
+          Caption = #1057#1088#1072#1074#1085#1080#1090#1077#1083#1100#1085#1099#1077' '#1087#1086#1082#1072#1079#1072#1090#1077#1083#1080
           TabOrder = 2
           object SummaryMinT: TLabeledEdit
             Left = 180
@@ -1847,7 +1849,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 158
             EditLabel.Height = 13
-            EditLabel.Caption = 'Отношение миним-ых углов, %:'
+            EditLabel.Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1084#1080#1085#1080#1084'-'#1099#1093' '#1091#1075#1083#1086#1074', %:'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1860,7 +1862,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 154
             EditLabel.Height = 13
-            EditLabel.Caption = 'Отношение миним-ых S КЭ, %:'
+            EditLabel.Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1084#1080#1085#1080#1084'-'#1099#1093' S '#1050#1069', %:'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1873,7 +1875,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 160
             EditLabel.Height = 13
-            EditLabel.Caption = 'Отношение максим-ых S КЭ, %:'
+            EditLabel.Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1084#1072#1082#1089#1080#1084'-'#1099#1093' S '#1050#1069', %:'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1886,7 +1888,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 152
             EditLabel.Height = 13
-            EditLabel.Caption = 'Отношение количества КЭ, %:'
+            EditLabel.Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1072' '#1050#1069', %:'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1899,7 +1901,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 167
             EditLabel.Height = 13
-            EditLabel.Caption = 'Отношение количества узлов, %:'
+            EditLabel.Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1072' '#1091#1079#1083#1086#1074', %:'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1912,7 +1914,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 145
             EditLabel.Height = 13
-            EditLabel.Caption = 'Отношение средних S КЭ, %:'
+            EditLabel.Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1089#1088#1077#1076#1085#1080#1093' S '#1050#1069', %:'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1925,7 +1927,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 175
             EditLabel.Height = 13
-            EditLabel.Caption = 'Отношение скорект. средних S, %:'
+            EditLabel.Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1089#1082#1086#1088#1077#1082#1090'. '#1089#1088#1077#1076#1085#1080#1093' S, %:'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1938,7 +1940,7 @@ object AlgForm: TAlgForm
             Height = 21
             EditLabel.Width = 131
             EditLabel.Height = 13
-            EditLabel.Caption = 'Отношение minS/maxS, %:'
+            EditLabel.Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' minS/maxS, %:'
             LabelPosition = lpLeft
             LabelSpacing = 2
             ReadOnly = True
@@ -1949,7 +1951,7 @@ object AlgForm: TAlgForm
             Top = 190
             Width = 75
             Height = 25
-            Caption = 'Обновить'
+            Caption = #1054#1073#1085#1086#1074#1080#1090#1100
             TabOrder = 7
             OnClick = SummaryRefreshClick
           end

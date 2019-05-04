@@ -76,7 +76,7 @@ Var
      FileName : String;
      pac      : String;
 Begin
-     Caption:='Конфигурирование проекта' + ' '+ GetProjectName;
+     Caption:='Sigma 7.4 - Конфигурирование проекта' + ' '+ GetProjectName;
      FormFileEdit.Text:=Project_GetFormFile;
      StandartFiles.Items.Clear;
      EditFiles.Items.Clear;
