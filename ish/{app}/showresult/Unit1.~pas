@@ -386,13 +386,6 @@ begin
   ShowMovingsForm.LoadMaxMinStress;
 //ZHEREBTSOV 2019
 //ADD LABEL OF STRESSTYPE IN WINDOW OF GRAPHICAL RESULT
-If StressType.ItemIndex + 1 = 1 then ShowMovingsForm.TypeStressLabel.Caption := 'Напряжение по Х';
-If StressType.ItemIndex + 1 = 2 then ShowMovingsForm.TypeStressLabel.Caption := 'Напряжение по Y';
-If StressType.ItemIndex + 1 = 3 then ShowMovingsForm.TypeStressLabel.Caption := 'Касательное';
-If StressType.ItemIndex + 1 = 4 then ShowMovingsForm.TypeStressLabel.Caption := '1-ое главное';
-If StressType.ItemIndex + 1 = 5 then ShowMovingsForm.TypeStressLabel.Caption := '2-ое главное';
-If StressType.ItemIndex + 1 = 6 then ShowMovingsForm.TypeStressLabel.Caption := 'Эквивалентное';
-If StressType.ItemIndex + 1 = 7 then ShowMovingsForm.TypeStressLabel.Caption := 'Угол наклона к оси Х';
 //END ZHEREBTSOV 
 end;
 
@@ -403,13 +396,6 @@ begin
   ShowMovingsForm.LoadMaxMinStressInMaterials;
 //ZHEREBTSOV 2019
 //ADD LABEL OF STRESSTYPE IN WINDOW OF GRAPHICAL RESULT
-If StressType.ItemIndex + 1 = 1 then ShowMovingsForm.TypeStressLabel.Caption := 'Напряжение по Х';
-If StressType.ItemIndex + 1 = 2 then ShowMovingsForm.TypeStressLabel.Caption := 'Напряжение по Y';
-If StressType.ItemIndex + 1 = 3 then ShowMovingsForm.TypeStressLabel.Caption := 'Касательное';
-If StressType.ItemIndex + 1 = 4 then ShowMovingsForm.TypeStressLabel.Caption := '1-ое главное';
-If StressType.ItemIndex + 1 = 5 then ShowMovingsForm.TypeStressLabel.Caption := '2-ое главное';
-If StressType.ItemIndex + 1 = 6 then ShowMovingsForm.TypeStressLabel.Caption := 'Эквивалентное';
-If StressType.ItemIndex + 1 = 7 then ShowMovingsForm.TypeStressLabel.Caption := 'Угол наклона к оси Х';
 //END ZHEREBTSOV
 end;
 
@@ -422,13 +408,6 @@ ShowMovingsForm.MainRePaint;
 ShowMovingsForm.LegendRePaint;
 //ZHEREBTSOV 2019
 //ADD LABEL OF STRESSTYPE IN WINDOW OF GRAPHICAL RESULT
-If StressType.ItemIndex + 1 = 1 then ShowMovingsForm.TypeStressLabel.Caption := 'Напряжение по Х';
-If StressType.ItemIndex + 1 = 2 then ShowMovingsForm.TypeStressLabel.Caption := 'Напряжение по Y';
-If StressType.ItemIndex + 1 = 3 then ShowMovingsForm.TypeStressLabel.Caption := 'Касательное';
-If StressType.ItemIndex + 1 = 4 then ShowMovingsForm.TypeStressLabel.Caption := '1-ое главное';
-If StressType.ItemIndex + 1 = 5 then ShowMovingsForm.TypeStressLabel.Caption := '2-ое главное';
-If StressType.ItemIndex + 1 = 6 then ShowMovingsForm.TypeStressLabel.Caption := 'Эквивалентное';
-If StressType.ItemIndex + 1 = 7 then ShowMovingsForm.TypeStressLabel.Caption := 'Угол наклона к оси Х';
 //END ZHEREBTSOV
 end;
 

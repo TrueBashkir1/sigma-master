@@ -189,18 +189,17 @@ TYPE
     ColorMinus_0: TPanel;
     Spin_0_min: TSpinEdit;
     CheckBox1: TCheckBox;
-    mi: TLabel;
     Edit7: TEdit;
     Label29: TLabel;
     CheckBox2: TCheckBox;
     ZoneCheckBox: TCheckBox;
+    Button1: TButton;
     ColorZeroPluss: TPanel;
     ParamsButton: TSpeedButton;
     Crosscut: TCheckBox;
     Spin_0_min_2: TSpinEdit;
     Spin_0_max_2: TSpinEdit;
     ColorMiddle: TPanel;
-    TypeStressLabel: TLabel;
 
     PROCEDURE FormCreate(Sender: TObject);
     PROCEDURE FormDestroy(Sender: TObject);
@@ -1077,7 +1076,11 @@ VAR
   HM,LM,SM :INTEGER;
   HP,LP,SP :INTEGER;
   st : string;
+  a : ARRAY [1..6] OF MyReal;
+  i,j : Integer;
+  buf : MyReal;
 BEGIN
+//////////////////////Fedorova E.I. 2019//////////////////////////////////////////////////////////
         if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true) then begin
           if Crosscut.Checked = False then
           begin
@@ -1085,6 +1088,27 @@ BEGIN
              else if Value = 1 then Result:=colorminus_0.Color
              else if Value = 2 then Result:=colorplus_0.Color
              else if Value = 3 then Result:=colorplus.Color;
+
+             if (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
+             begin
+               if Abs(Spin_0_min.Value - Elements_Result.min[Form1.StressType.ItemIndex+1]) <= 2 then
+                 if Value = 1 then Result:=colorminus.Color;
+               if Abs(Spin_0_max.Value - Elements_Result.max[Form1.StressType.ItemIndex+1]) <= 2 then
+                 if Value = 2 then Result:=colorplus.Color;
+               if (Spin_0_min.Value = 0) then begin
+                 if Value = 1 then Result:=colorminus.Color;
+                 if (Spin_0_max.Value = 0) then
+                   if Value = 2 then Result:=colorminus.Color;
+               end
+               else begin
+                 if (Spin_0_max.Value = 0) then
+                   if Value = 2 then Result:=colorplus.Color;
+               end;
+               if (Spin_0_max.Value = Spin_0_min.Value) and (Spin_0_max.Value > 0) then
+                 if Value = 2 then Result:=colorminus_0.Color;
+               if (Spin_0_max.Value = Spin_0_min.Value) and (Spin_0_max.Value < 0) then
+                 if Value = 1 then Result:=colorplus_0.Color;
+             end;
              exit;
           end
           else begin
@@ -1093,10 +1117,88 @@ BEGIN
              else if Value = 2 then Result:=ColorMiddle.Color
              else if Value = 3 then Result:=colorplus_0.Color
              else if Value = 4 then Result:=colorplus.Color;
+
+             if (spin_0_max_2.Text <> '-') and (spin_0_min_2.Text <> '-') then
+             begin
+                 a[1] := Spin_0_max.Value;
+                 a[2] := Spin_0_min.Value;
+                 a[3] := Spin_0_max_2.Value;
+                 a[4] := Spin_0_min_2.Value;
+                 a[5] := Elements_Result.Min[Form1.StressType.ItemIndex+1];
+                 a[6] := Elements_Result.Max[Form1.StressType.ItemIndex+1];
+
+                 for i:=1 to 5 do
+                  for j:=i+1 to 6 do
+                    if a[i]>a[j] then   //сортировка по возратанию
+                    begin
+                      buf:=a[i];
+                      a[i]:=a[j];
+                      a[j]:=buf;
+                    end;
+
+                 if Abs(a[1] - a[2]) <= 2 then
+                   if Value = 1 then Result:=colorminus.Color;
+                 if Abs(a[5] - a[6]) <= 2 then
+                   if Value = 3 then Result:=colorplus.Color;
+
+                 if (a[2] = a[3]) and  (a[3] = a[4]) and (a[4] = a[5]) then
+                 begin
+                   if Value = 1 then Result:=colorminus.Color;
+                   if Value = 2 then Result:=colorminus.Color;
+                   if Value = 3 then Result:=colorminus.Color;
+                   if Abs(a[1] - a[2]) <= 2 then
+                     if Value = 0 then Result:=colorminus.Color;
+                   if Abs(a[5] - a[6]) <= 2 then
+                     if Value = 4 then Result:=colorminus.Color;
+                 end
+                 else begin
+                   if (a[2] = a[3]) and  (a[3] = a[4]) then begin
+                     if Value = 2 then Result:=colorminus_0.Color;
+                     if Value = 3 then Result:=colorminus_0.Color;
+                     if Abs(a[5] - a[6]) <= 2 then
+                       if Value = 4 then Result:=colorminus_0.Color;
+                   end
+                   else if (a[4] = a[5]) and  (a[3] = a[4]) then begin
+                     if Value = 1 then Result:=colorplus_0.Color;
+                     if Value = 2 then Result:=colorplus_0.Color;
+                     if Abs(a[1] - a[2]) <= 2 then
+                       if Value = 0 then Result:=colorplus_0.Color;
+                   end
+                   else if (a[2] = a[3]) and  (a[4] = a[5]) then begin
+                     if Value = 1 then Result:=colorplus_0.Color;
+                     if Value = 2 then Result:=colorplus_0.Color;
+                     if Value = 3 then Result:=colorplus_0.Color;
+                     if Abs(a[1] - a[2]) <= 2 then
+                       if Value = 0 then Result:=colorplus_0.Color;
+                     if Abs(a[5] - a[6]) <= 2 then
+                       if Value = 4 then Result:=colorplus_0.Color;
+                   end
+                   else if (a[2] = a[3]) then begin
+                     if Value = 1 then Result:=colorminus_0.Color;
+                     if Value = 2 then Result:=colorminus_0.Color;
+                     if Abs(a[1] - a[2]) <= 2 then
+                       if Value = 0 then Result:=colorminus_0.Color;
+                   end
+                   else if (a[3] = a[4]) then begin
+                     if Value = 3 then Result:=ColorMiddle.Color;
+                     if Abs(a[5] - a[6]) <= 2 then
+                       if Value = 4 then Result:=ColorMiddle.Color;
+                   end
+                   else if (a[4] = a[5]) then begin
+                     if Value = 2 then Result:=colorplus_0.Color;
+                     if Value = 3 then Result:=colorplus_0.Color;
+                     if Abs(a[5] - a[6]) <= 2 then
+                       if Value = 4 then Result:=colorplus_0.Color;
+                   end;
+
+                 end;
+
+             end;
              exit;
           end;
-
         end;
+ ////////////////////////////////end Fedorova////////////////////////////////////////////////
+
         if Value >= level_zero then begin
                 Value := Value - level_zero;
                 RGBtoHLS(ColorPlus.Color,HP,LP,SP);
@@ -1275,7 +1377,7 @@ PROCEDURE TShowMovingsForm.ShowElement(Canvas:TCanvas;OneElement:TOneElement);
 VAR
   OneNode : TOneNode;
   K_M     : MyReal;
-  i,m,j, beg,off       : INTEGER;
+  i,beg,off       : INTEGER;
   x, y    : ARRAY [1..360] OF INTEGER; //координаты узлов
   LevNode : ARRAY [1..360] OF INTEGER; //номер уровня в узлах
   ID      : ARRAY [1..360] OF INTEGER;
@@ -1284,8 +1386,9 @@ VAR
   ID_now,d :  INTEGER;
   x1,y1   : ARRAY [1..3] OF INTEGER;
   st : string;
-  pos1, pos2, pos3: Integer;
+  pos1, pos2, pos3, pos4: MyReal;
   a : ARRAY [1..6] OF MyReal;
+  j,k : Integer;
   buf : MyReal;
 
 BEGIN
@@ -1348,15 +1451,14 @@ BEGIN
         a[5] := Elements_Result.Min[Form1.StressType.ItemIndex+1];
         a[6] := Elements_Result.Max[Form1.StressType.ItemIndex+1];
 
-        for m := 1 to 5 do
-          for j:=m+1 to 6 do
-            if a[m]>a[j] then   //сортировка по возратанию
+        for k:=1 to 5 do
+          for j:=k+1 to 6 do
+            if a[k]>a[j] then   //сортировка по возратанию
             begin
-              buf:=a[m];
-              a[m]:=a[j];
+              buf:=a[k];
+              a[k]:=a[j];
               a[j]:=buf;
             end;
-
 
         if (stress[i] >= a[1]) and (stress[i] <= a[2]) then LevNode[i] := 0;
         if (stress[i] >= a[2]) and (stress[i] <= a[3]) then LevNode[i] := 1;
@@ -1392,10 +1494,10 @@ BEGIN
   end
   else begin
 
-     //   pos1 := a[2];
-     //   pos2 := a[3];
-     //   pos3 := a[4];
-     //   pos4 := a[5];
+     pos1 := a[2];
+     pos2 := a[3];
+     pos3 := a[4];
+     pos4 := a[5];
 
   end;
 
@@ -1415,6 +1517,7 @@ BEGIN
     begin
         if i = 2 then K_M:=pos2;
         if i = 3 then K_M:=pos3;
+        if i = 4 then K_M:=pos4;
         if K_M > stress[off] then K_M:=stress[off];
         K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
     end
@@ -1449,6 +1552,7 @@ BEGIN
     begin
         if i = 2 then K_M:=pos2;
         if i = 3 then K_M:=pos3;
+        if i = 4 then K_M:=pos4;
         if K_M > stress[off] then K_M:=stress[off];
         K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
     end
@@ -1483,6 +1587,7 @@ BEGIN
     begin
         if i = 2 then K_M:=pos2;
         if i = 3 then K_M:=pos3;
+        if i = 4 then K_M:=pos4;
         if K_M > stress[off] then K_M:=stress[off];
         K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
     end
@@ -2682,6 +2787,7 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
                       a[i]:=a[j];
                       a[j]:=buf;
                     end;
+
                  for i:=0 to 5 do
                   if pos = i then text := MyFloatToStr(a[i+1]);  //заполнение шкалы
 
@@ -4562,19 +4668,24 @@ ChangedFromNodeInput:=TRUE;
 //Fedorova E.I. 2019
 procedure TShowMovingsForm.CrosscutClick(Sender: TObject);
 begin
-if Crosscut.Checked = true then
-    begin
-      Spin_0_max_2.Visible := true;
-      Spin_0_min_2.Visible := true;
-      ColorMiddle.Visible := True;
-    end
-else
-    begin
-      Spin_0_max_2.Visible := false;
-      Spin_0_min_2.Visible := false;
-      ColorMiddle.Visible := false;
-    end;
-    MainRePaint;
+if Spin_0_min.Visible = True then Crosscut.Visible := True;
+if Crosscut.Visible = true then
+  begin
+   // Crosscut.Caption := 'Пересечение';
+    if Crosscut.Checked = true then
+       begin
+         Spin_0_max_2.Visible := true;
+         Spin_0_min_2.Visible := true;
+         ColorMiddle.Visible := True;
+       end
+    else
+       begin
+         Spin_0_max_2.Visible := false;
+         Spin_0_min_2.Visible := false;
+         ColorMiddle.Visible := false;
+       end;
+  end;
+  MainRePaint;
+  LegendRePaint;
 end;
 end.
-
