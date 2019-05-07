@@ -200,6 +200,7 @@ TYPE
     Spin_0_min_2: TSpinEdit;
     Spin_0_max_2: TSpinEdit;
     ColorMiddle: TPanel;
+    TypeStress: TLabel;
 
     PROCEDURE FormCreate(Sender: TObject);
     PROCEDURE FormDestroy(Sender: TObject);
@@ -3216,6 +3217,7 @@ BEGIN
     Form1.DopNapr1.Caption   := MyFloatToStr(Materials[OneElement.Material].Sg);
     Form1.DopNapr2.Caption   := MyFloatToStr(Materials[OneElement.Material].free4);
     Form1.Thickness1.Caption := MyFloatToStr(Materials[OneElement.Material].Thickness);
+    Form1.PropNum.Caption := IntToStr(OneElement.Material);
 
     DrawSelectedPoint := True;
     Result := True;

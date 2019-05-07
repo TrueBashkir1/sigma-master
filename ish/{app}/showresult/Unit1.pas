@@ -135,6 +135,8 @@ type
     KENumber1: TEdit;
     Label1: TLabel;
     DopNapr2: TLabel;
+    CaptPropNum: TLabel;
+    PropNum: TLabel;
     procedure ZoneCheckBoxClick(Sender: TObject);
     procedure UseLegendClick(Sender: TObject);
     procedure UseForceClick(Sender: TObject);
@@ -381,21 +383,39 @@ end;
 
 procedure TForm1.StressType1Click(Sender: TObject);
 begin
-  StressType.ItemIndex := StressType1.ItemIndex;
   //ShowMovingsForm.StressType.ItemIndex := StressType1.ItemIndex;
   ShowMovingsForm.LoadMaxMinStress;
 //ZHEREBTSOV 2019
 //ADD LABEL OF STRESSTYPE IN WINDOW OF GRAPHICAL RESULT
-//END ZHEREBTSOV 
+StressType.ItemIndex := StressType1.ItemIndex;
+StressType2.ItemIndex := StressType1.ItemIndex;
+
+If StressType1.ItemIndex + 1 = 1 then ShowMovingsForm.TypeStress.Caption := 'Напряжение по Х';
+If StressType1.ItemIndex + 1 = 2 then ShowMovingsForm.TypeStress.Caption := 'Напряжение по Y';
+If StressType1.ItemIndex + 1 = 3 then ShowMovingsForm.TypeStress.Caption := 'Касательное';
+If StressType1.ItemIndex + 1 = 4 then ShowMovingsForm.TypeStress.Caption := '1-ое главное';
+If StressType1.ItemIndex + 1 = 5 then ShowMovingsForm.TypeStress.Caption := '2-ое главное';
+If StressType1.ItemIndex + 1 = 6 then ShowMovingsForm.TypeStress.Caption := 'Эквивалентное';
+If StressType1.ItemIndex + 1 = 7 then ShowMovingsForm.TypeStress.Caption := 'Угол наклона к оси Х';
+//END ZHEREBTSOV
 end;
 
 procedure TForm1.StressType2Click(Sender: TObject);
 begin
-  StressType.ItemIndex := StressType2.ItemIndex;
   //ShowMovingsForm.StressType.ItemIndex := StressType1.ItemIndex;
   ShowMovingsForm.LoadMaxMinStressInMaterials;
 //ZHEREBTSOV 2019
 //ADD LABEL OF STRESSTYPE IN WINDOW OF GRAPHICAL RESULT
+  StressType.ItemIndex := StressType2.ItemIndex;
+  StressType1.ItemIndex := StressType2.ItemIndex;
+
+If StressType2.ItemIndex + 1 = 1 then ShowMovingsForm.TypeStress.Caption := 'Напряжение по Х';
+If StressType2.ItemIndex + 1 = 2 then ShowMovingsForm.TypeStress.Caption := 'Напряжение по Y';
+If StressType2.ItemIndex + 1 = 3 then ShowMovingsForm.TypeStress.Caption := 'Касательное';
+If StressType2.ItemIndex + 1 = 4 then ShowMovingsForm.TypeStress.Caption := '1-ое главное';
+If StressType2.ItemIndex + 1 = 5 then ShowMovingsForm.TypeStress.Caption := '2-ое главное';
+If StressType2.ItemIndex + 1 = 6 then ShowMovingsForm.TypeStress.Caption := 'Эквивалентное';
+If StressType2.ItemIndex + 1 = 7 then ShowMovingsForm.TypeStress.Caption := 'Угол наклона к оси Х';
 //END ZHEREBTSOV
 end;
 
@@ -408,6 +428,16 @@ ShowMovingsForm.MainRePaint;
 ShowMovingsForm.LegendRePaint;
 //ZHEREBTSOV 2019
 //ADD LABEL OF STRESSTYPE IN WINDOW OF GRAPHICAL RESULT
+StressType1.ItemIndex := StressType.ItemIndex;
+StressType2.ItemIndex := StressType.ItemIndex;
+
+If StressType.ItemIndex + 1 = 1 then ShowMovingsForm.TypeStress.Caption := 'Напряжение по Х';
+If StressType.ItemIndex + 1 = 2 then ShowMovingsForm.TypeStress.Caption := 'Напряжение по Y';
+If StressType.ItemIndex + 1 = 3 then ShowMovingsForm.TypeStress.Caption := 'Касательное';
+If StressType.ItemIndex + 1 = 4 then ShowMovingsForm.TypeStress.Caption := '1-ое главное';
+If StressType.ItemIndex + 1 = 5 then ShowMovingsForm.TypeStress.Caption := '2-ое главное';
+If StressType.ItemIndex + 1 = 6 then ShowMovingsForm.TypeStress.Caption := 'Эквивалентное';
+If StressType.ItemIndex + 1 = 7 then ShowMovingsForm.TypeStress.Caption := 'Угол наклона к оси Х';
 //END ZHEREBTSOV
 end;
 

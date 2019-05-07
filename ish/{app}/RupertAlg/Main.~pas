@@ -211,15 +211,15 @@ begin
       else ShowCellsForm.LoadForm(PluginReg.ShowFormReg.Default);
     ShowCellsForm.BestFitActionClick(nil);
     IF LoadShowForm = False then ShowCellsForm.Start;
-    ActiveWindow.Items.Add('Отображение результатов');
-    ActiveForm[1]:=ActiveWindow.items.IndexOf('Отображение результатов')+1;
-    ActiveWindow.ItemIndex:=ActiveWindow.items.IndexOf('Отображение результатов');
+    ActiveWindow.Items.Add('Display of results');
+    ActiveForm[1]:=ActiveWindow.items.IndexOf('Display of results')+1;
+    ActiveWindow.ItemIndex:=ActiveWindow.items.IndexOf('Display of results');
     ActiveWindowClick(Sender);
   end
   else begin
     IF SaveShowForm = True then ShowCellsForm.SaveForm(PluginReg.ShowFormReg.Current);
     //Если форма уже открыта, то делаем её активной.
-    ActiveWindow.ItemIndex:=ActiveWindow.items.IndexOf('Отображение результатов');
+    ActiveWindow.ItemIndex:=ActiveWindow.items.IndexOf('Display of results');
     ActiveWindowClick(Sender);
     ShowCellsForm.FormResize(nil);
   end;
@@ -233,14 +233,14 @@ begin
   begin
     AlgF:=TAlgForm.Create(nil);
     AlgF.Show;
-    ActiveWindow.Items.Add('Алгоритмы');
-    ActiveForm[2]:=ActiveWindow.items.IndexOf('Алгоритмы')+1;
-    ActiveWindow.ItemIndex:=ActiveWindow.items.IndexOf('Алгоритмы');
+    ActiveWindow.Items.Add('Algorithms');
+    ActiveForm[2]:=ActiveWindow.items.IndexOf('Algorithms')+1;
+    ActiveWindow.ItemIndex:=ActiveWindow.items.IndexOf('Algorithms');
     ActiveWindowClick(Sender);
   end
   else begin
     //Если форма уже открыта, то делаем её активной.
-    ActiveWindow.ItemIndex:=ActiveWindow.items.IndexOf('Алгоритмы');
+    ActiveWindow.ItemIndex:=ActiveWindow.items.IndexOf('Algorithms');
     ActiveWindowClick(Sender);
   end;
 end;
@@ -256,15 +256,15 @@ begin
     IF LoadSegmentF = True then SegF.LoadForm(PluginReg.SegmentsRegF.Current)
       else SegF.LoadForm(PluginReg.SegmentsRegF.Default);
     SegF.ShowForm;
-    ActiveWindow.Items.Add('Сетка КЭ');
-    ActiveForm[3]:=ActiveWindow.items.IndexOf('Сетка КЭ')+1;
-    ActiveWindow.ItemIndex:=ActiveWindow.items.IndexOf('Сетка КЭ');
+    ActiveWindow.Items.Add('Grid of FE');
+    ActiveForm[3]:=ActiveWindow.items.IndexOf('Grid of FE')+1;
+    ActiveWindow.ItemIndex:=ActiveWindow.items.IndexOf('Grid of FE');
     ActiveWindowClick(Sender);
   end
   else begin
     IF SaveSegmentF = True then SegF.SaveForm(PluginReg.SegmentsRegF.Current);
     //Если форма уже открыта, то делаем её активной.
-    ActiveWindow.ItemIndex:=ActiveWindow.items.IndexOf('Сетка КЭ');
+    ActiveWindow.ItemIndex:=ActiveWindow.items.IndexOf('Grid of FE');
     ActiveWindowClick(Sender);
   end;
 end;
@@ -277,14 +277,14 @@ begin
   begin
     SysSettingF:=TSysSettings.Create(nil);
     SysSettingF.Show;
-    ActiveWindow.Items.Add('Системные настройки');
-    ActiveForm[5]:=ActiveWindow.items.IndexOf('Системные настройки')+1;
-    ActiveWindow.ItemIndex:=ActiveWindow.items.IndexOf('Системные настройки');
+    ActiveWindow.Items.Add('System settings');
+    ActiveForm[5]:=ActiveWindow.items.IndexOf('System settings')+1;
+    ActiveWindow.ItemIndex:=ActiveWindow.items.IndexOf('System settings');
     ActiveWindowClick(Sender);
   end
   else begin
   //Если форма уже открыта, то делаем её активной.
-    ActiveWindow.ItemIndex:=ActiveWindow.items.IndexOf('Системные настройки');
+    ActiveWindow.ItemIndex:=ActiveWindow.items.IndexOf('System settings');
     ActiveWindowClick(Sender);
   end;
 end;
@@ -364,11 +364,11 @@ end;
 
 procedure TMainForm.RefreshIndexes;
 begin
-  if ActiveForm[1]>0 then ActiveForm[1]:=ActiveWindow.items.IndexOf('Отображение результатов')+1;
-  if ActiveForm[2]>0 then ActiveForm[2]:=ActiveWindow.items.IndexOf('Алгоритмы')+1;
-  if ActiveForm[3]>0 then ActiveForm[3]:=ActiveWindow.items.IndexOf('Сетка КЭ')+1;
+  if ActiveForm[1]>0 then ActiveForm[1]:=ActiveWindow.items.IndexOf('Display of results')+1;
+  if ActiveForm[2]>0 then ActiveForm[2]:=ActiveWindow.items.IndexOf('Algorithms')+1;
+  if ActiveForm[3]>0 then ActiveForm[3]:=ActiveWindow.items.IndexOf('Grid of FE')+1;
   if ActiveForm[4]>0 then ActiveForm[4]:=ActiveWindow.items.IndexOf('')+1;
-  if ActiveForm[5]>0 then ActiveForm[5]:=ActiveWindow.items.IndexOf('Системные настройки')+1;
+  if ActiveForm[5]>0 then ActiveForm[5]:=ActiveWindow.items.IndexOf('System settings')+1;
 end;
 
 procedure TMainForm.ActiveWindowClick(Sender: TObject);
@@ -429,7 +429,7 @@ begin
   Upload.CreateNewVariant;
   Inc(CountVar);
   Upload.CopyToVariant(CheckPoint.Items.Count+1);
-  CheckPoint.Items.Add('%s',new_name.text);
+  CheckPoint.Items.Add(new_name.text);
 //  Upload.SetNameOfVariant(CheckPoint.Items.Count+1,format('Вариант №%d',[CountVar]));
   CheckPoint.ItemIndex:=CheckPoint.Items.Count-1;
   MainVariant:=CheckPoint.ItemIndex+1;

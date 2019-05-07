@@ -71,7 +71,7 @@ object Form1: TForm1
       Top = 329
       Width = 451
       Height = 420
-      ActivePage = TabSheet2
+      ActivePage = TabSheet4
       Align = alTop
       Anchors = []
       Font.Charset = DEFAULT_CHARSET
@@ -805,7 +805,7 @@ object Form1: TForm1
           Left = 0
           Top = 0
           Width = 441
-          Height = 217
+          Height = 249
           Caption = #1057#1074#1086#1081#1089#1090#1074#1072' '#1082#1086#1085#1077#1095#1085#1086#1075#1086' '#1101#1083#1077#1084#1077#1085#1090#1072
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -883,6 +883,19 @@ object Form1: TForm1
           object DopNapr2: TLabel
             Left = 208
             Top = 152
+            Width = 3
+            Height = 13
+          end
+          object CaptPropNum: TLabel
+            Left = 8
+            Top = 216
+            Width = 87
+            Height = 13
+            Caption = #1053#1086#1084#1077#1088' '#1089#1074#1086#1081#1089#1090#1074#1072':'
+          end
+          object PropNum: TLabel
+            Left = 208
+            Top = 216
             Width = 3
             Height = 13
           end

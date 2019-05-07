@@ -4,7 +4,7 @@ object MainForm: TMainForm
   Anchors = []
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
-  Caption = #1043#1083#1072#1074#1085#1086#1077' '#1086#1082#1085#1086
+  Caption = 'Sigma 7.4 - '#1043#1083#1072#1074#1085#1086#1077' '#1086#1082#1085#1086
   ClientHeight = 521
   ClientWidth = 186
   Color = clBtnFace

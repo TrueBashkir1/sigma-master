@@ -200,6 +200,7 @@ TYPE
     Spin_0_min_2: TSpinEdit;
     Spin_0_max_2: TSpinEdit;
     ColorMiddle: TPanel;
+    TypeStress: TLabel;
 
     PROCEDURE FormCreate(Sender: TObject);
     PROCEDURE FormDestroy(Sender: TObject);
@@ -3209,6 +3210,7 @@ BEGIN
     Form1.InfoMoveX.Caption:=MyFloatToStr_2(move_st[1]);
     Form1.InfoMoveY.Caption:=MyFloatToStr_2(move_st[2]);
     // Показываем св-ва КЭ
+    //Zherebtsov 2018
     OneElement:=Elements_Result.GetElement(Element);
     Form1.KENumber1.Text  := IntToStr(Element);
     Form1.MUprug1.Caption    := MyFloatToStr(Materials[OneElement.Material].E);
@@ -3216,6 +3218,8 @@ BEGIN
     Form1.DopNapr1.Caption   := MyFloatToStr(Materials[OneElement.Material].Sg);
     Form1.DopNapr2.Caption   := MyFloatToStr(Materials[OneElement.Material].free4);
     Form1.Thickness1.Caption := MyFloatToStr(Materials[OneElement.Material].Thickness);
+    Form1.PropNum.Caption := IntToStr(OneElement.Material);
+    //end Zherebtsov 2018
 
     DrawSelectedPoint := True;
     Result := True;
