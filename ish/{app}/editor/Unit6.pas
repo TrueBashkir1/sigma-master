@@ -78,7 +78,7 @@ type
     procedure RadioButton4Click(Sender: TObject);
     procedure RadioButton5Click(Sender: TObject);
     procedure RadioButton6Click(Sender: TObject);
-//Добавил Мелешко Серафим(2 строки)
+//Dobavil Serafim Meleshko(2 stroki)
     procedure Label111Open(Sender: TObject);
     procedure Inter(Sender: TObject);
   private
@@ -155,8 +155,8 @@ procedure TGrafikGl.Naris(Sender: TObject);
 var MyNrc :integer;
   begin
      Series1.Clear;
-     Series2.Clear;
-//Добавил Мелешко Серафим(3 строки)
+//     Series2.Clear;
+//Dobavil Serafim Meleshko(3 stroki)
      Series3.Clear;
      Series4.Clear;
      Label18.Visible:=false;
@@ -266,7 +266,7 @@ begin
        3: begin
             if    Edit3.Text='' then exit;
 //            else
-//Добавил Мелешко Серафим(конструкция if)
+//Dobavil Serafim Meleshko(konstrukciya "if")
             if CheckBox11.Checked=true then
             Inter(Sender)
             else
@@ -275,7 +275,7 @@ begin
        4:  begin
             if    Edit4.Text='' then exit;
 //            else
-//Добавил Мелешко Серафим(конструкция if)
+//Dobavil Serafim Meleshko(konstrukciya "if")
             if CheckBox11.Checked=true then
             Inter(Sender)
             else
@@ -284,7 +284,7 @@ begin
        5:  begin
             if    Edit5.Text='' then exit;
 //            else
-//Добавил Мелешко Серафим(конструкция if)
+//Dobavil Serafim Meleshko(konstrukciya "if")
             if CheckBox11.Checked=true then
             Inter(Sender)
             else
@@ -293,7 +293,7 @@ begin
        6:  begin
             if    Edit6.Text='' then exit;
 //            else
-//Добавил Мелешко Серафим(конструкция if)
+//Dobavil Serafim Meleshko(konstrukciya "if")
             if CheckBox11.Checked=true then
             Inter(Sender)
             else
@@ -302,7 +302,7 @@ begin
        7: begin
             if    Edit7.Text='' then exit;
 //            else
-//Добавил Мелешко Серафим(конструкция if)
+//Dobavil Serafim Meleshko(konstrukciya "if")
             if CheckBox11.Checked=true then
             Inter(Sender)
             else
@@ -312,7 +312,7 @@ begin
        8:  begin
             if    Edit8.Text='' then exit;
 //            else
-//Добавил Мелешко Серафим(конструкция if)
+//Dobavil Serafim Meleshko(konstrukciya "if")
             if CheckBox11.Checked=true then
             Inter(Sender)
             else
@@ -321,7 +321,7 @@ begin
        9:   begin
             if    Edit9.Text='' then exit;
 //            else
-//Добавил Мелешко Серафим(конструкция if)
+//Dobavil Serafim Meleshko(konstrukciya "if")
             if CheckBox11.Checked=true then
             Inter(Sender)
             else
@@ -330,7 +330,7 @@ begin
        10:  begin
             if    Edit10.Text='' then exit;
 //            else
-//Добавил Мелешко Серафим(конструкция if)
+//Dobavil Serafim Meleshko(konstrukciya "if")
             if CheckBox11.Checked=true then
             Inter(Sender)
             else
@@ -339,7 +339,7 @@ begin
        11:   begin
             if    Edit11.Text='' then exit;
 //            else
-//Добавил Мелешко Серафим(конструкция if)
+//Dobavil Serafim Meleshko(konstrukciya "if")
             if CheckBox11.Checked=true then
             Inter(Sender)
             else
@@ -348,7 +348,7 @@ begin
         12:   begin
             if    Edit12.Text='' then exit;
 //            else
-//Добавил Мелешко Серафим(конструкция if)
+//Dobavil Serafim Meleshko(konstrukciya "if")
             if CheckBox11.Checked=true then
             Inter(Sender)
             else
@@ -528,19 +528,19 @@ CheckBox8.Checked:=False;
 CheckBox10.Checked:=False;
 end;
 
-//Добавил Мелешко Серафим(1 процедура)
+//Dobavil Serafim Meleshko(1 procedura)
 procedure TGrafikGl.Label111Open(Sender: TObject);
 begin
    Label1.Caption:='Проект: ' +Unit2GetProjectName;
 end;
 
-//Добавил Мелешко Серафим(1 процедура)
+//Dobavil Serafim Meleshko(1 procedura)
 procedure TGrafikGL.Inter(Sender: TObject);
 //TSH -->
 var MyNrc :integer;
   begin
      Series1.Clear;
-     Series2.Clear;
+//     Series2.Clear;
      Series3.Clear;
      Series4.Clear;
      Label18.Visible:=true;

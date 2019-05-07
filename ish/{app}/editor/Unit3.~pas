@@ -129,7 +129,7 @@ var
   MyArray1,Myarray2,MyArray3,Myarray4,MyArray5,MyArray6: TMyArray;
   NrcOld,checkmethod,Oldmethod,OldItem,MantissStress, MantissMove: Integer;
   Grdisplay:boolean;
-//Переменная Unit2GetProjectName передает имя проекта в остальные Unit-ы, добавил Мелешко Серафим(1 строка)
+//Peremennaya Unit2GetProjectName peredayet imya proecta v ostalniye Unit-ы, dobavil Meleshko Serafim(1 stroka)
   FloatFormat,Unit2GetProjectName:String;
 
 
@@ -1034,12 +1034,17 @@ var i,j,k:integer;
 Procedure Tform3.Vichisl(Sender:Tobject;Var NrcMy:integer;Var n:integer);
 var
         Ret: Integer;
+//Dobavil Serafim Meleshko(1 stroka)
+        abcd: String;
 Begin
 
              Form3.UstanovkaNRC(Form3,NrcMy);//записываем NRC
 
              MainForm1.RunClick(Form3);// Расчет
-             WaitForm1.StartShow('Построение графиков сходимости...');
+//             WaitForm1.StartShow('Построение графиков сходимости...');
+//Dobavil Serafim Meleshko(2 stroki)
+             abcd:=IntToStr(NrcMy);
+             WaitForm1.StartShow2('Построение графиков сходимости...',abcd);
              Repeat
                 Application.ProcessMessages;
              Until WaitForm1.FileExecuted=false;
@@ -1083,7 +1088,7 @@ begin
              GrafikGl.series2.Clear;
              GrafikGl2.series2.Clear;
              GrafikUG.series2.Clear;
-//Добавил Мелешко Серафим(16 строк)
+//Dobavil Serafim Meleshko(12 strok)
              GrafikX.series3.Clear;
              GrafikY.series3.Clear;
              GrafikXY.series3.Clear;
@@ -1183,6 +1188,13 @@ begin
              grafikGL.Series1.Clear;
              grafikGL2.Series1.Clear;
              grafikUg.Series1.Clear;
+
+             grafikx.Series4.Clear;
+             grafikY.Series4.Clear;
+             grafikXY.Series4.Clear;
+             grafikGL.Series4.Clear;
+             grafikGL2.Series4.Clear;
+             grafikUg.Series4.Clear;
 
              {grafikX.Ochistka(GrafikX);
              grafikY.Ochistka(GrafikY);
@@ -1864,9 +1876,9 @@ if(ComboBoxEx1.Items.Count >= 4) then Form11.Edit7.Visible:=true;
 if(ComboBoxEx1.Items.Count >= 4) then Form11.Edit8.Visible:=true;
 if(ComboBoxEx1.Items.Count >= 5) then Form11.Edit9.Visible:=true;
 if(ComboBoxEx1.Items.Count >= 5) then Form11.Edit10.Visible:=true;
-
-Form11.ClientHeight:=420;
-Form11.ClientWidth:=294;
+//Dobavil Meleshko Serafim(1 stroka)
+Form11.ClientHeight:=450;
+Form11.ClientWidth:=300;
 
 for i:=1 to 5 do Form11.checkedpoints[i]:=0;
 
@@ -1891,7 +1903,7 @@ var
 BEGIN
           Caption:= 'Построение графиков сходимости ' +GetProjectName;
           Label4.Caption:='Проект: ' +GetProjectName;
-//Добавил Мелешко Серафим(1 строка)
+//Dobavil Serafim Meleshko(1 stroka)
           Unit2GetProjectName:=GetProjectName;
          F:=Project_GetFormFile;
          if FileExists(F) then

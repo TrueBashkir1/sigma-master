@@ -1,7 +1,7 @@
 object Form11: TForm11
-  Left = 211
-  Top = 233
-  Width = 913
+  Left = 156
+  Top = 319
+  Width = 313
   Height = 490
   Caption = #1055#1086#1089#1090#1088#1086#1077#1085#1080#1077' '#1075#1088#1072#1092#1080#1082#1086#1074' '#1074' '#1045#1057#1050
   Color = clBtnFace
@@ -13,18 +13,32 @@ object Form11: TForm11
   OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
+  OnCreate = Label6Open
   PixelsPerInch = 96
   TextHeight = 13
   object Label5: TLabel
     Left = 16
-    Top = 264
+    Top = 296
     Width = 85
     Height = 13
     Caption = #1042#1099#1073#1086#1088' '#1075#1088#1072#1092#1080#1082#1086#1074
   end
+  object Label6: TLabel
+    Left = 64
+    Top = 16
+    Width = 68
+    Height = 20
+    Caption = #1055#1088#1086#1077#1082#1090':'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -17
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   object Button1: TButton
     Left = 88
-    Top = 208
+    Top = 256
     Width = 81
     Height = 25
     Caption = #1055#1086#1089#1090#1088#1086#1080#1090#1100
@@ -33,7 +47,7 @@ object Form11: TForm11
   end
   object Button2: TButton
     Left = 200
-    Top = 208
+    Top = 256
     Width = 81
     Height = 25
     Caption = 'Cancel'
@@ -42,7 +56,7 @@ object Form11: TForm11
   end
   object CheckBox1: TCheckBox
     Left = 8
-    Top = 40
+    Top = 72
     Width = 73
     Height = 17
     Caption = #1058#1086#1095#1082#1072' '#8470'1'
@@ -52,7 +66,7 @@ object Form11: TForm11
   end
   object CheckBox2: TCheckBox
     Left = 8
-    Top = 72
+    Top = 104
     Width = 73
     Height = 17
     Caption = #1058#1086#1095#1082#1072' '#8470'2'
@@ -62,7 +76,7 @@ object Form11: TForm11
   end
   object CheckBox3: TCheckBox
     Left = 8
-    Top = 104
+    Top = 136
     Width = 73
     Height = 17
     Caption = #1058#1086#1095#1082#1072' '#8470'3'
@@ -72,7 +86,7 @@ object Form11: TForm11
   end
   object CheckBox4: TCheckBox
     Left = 8
-    Top = 136
+    Top = 168
     Width = 73
     Height = 17
     Caption = #1058#1086#1095#1082#1072' '#8470'4'
@@ -82,7 +96,7 @@ object Form11: TForm11
   end
   object CheckBox5: TCheckBox
     Left = 8
-    Top = 168
+    Top = 200
     Width = 73
     Height = 17
     Caption = #1058#1086#1095#1082#1072' '#8470'5'
@@ -92,7 +106,7 @@ object Form11: TForm11
   end
   object GroupBox1: TGroupBox
     Left = 88
-    Top = 8
+    Top = 48
     Width = 193
     Height = 193
     Caption = #1050#1086#1086#1088#1076#1080#1085#1072#1090#1099
@@ -226,7 +240,7 @@ object Form11: TForm11
   end
   object Ole: TOleContainer
     Left = 64
-    Top = 200
+    Top = 256
     Width = 17
     Height = 9
     Caption = 'Ole'
@@ -330,7 +344,7 @@ object Form11: TForm11
     object Series5: TLineSeries
       Marks.ArrowLength = 8
       Marks.Visible = False
-      SeriesColor = clWhite
+      SeriesColor = clFuchsia
       LinePen.Width = 2
       Pointer.HorizSize = 3
       Pointer.InflateMargins = True
@@ -463,7 +477,7 @@ object Form11: TForm11
     object LineSeries5: TLineSeries
       Marks.ArrowLength = 8
       Marks.Visible = False
-      SeriesColor = clWhite
+      SeriesColor = clFuchsia
       LinePen.Width = 2
       Pointer.HorizSize = 3
       Pointer.InflateMargins = True
@@ -596,7 +610,7 @@ object Form11: TForm11
     object LineSeries11: TLineSeries
       Marks.ArrowLength = 8
       Marks.Visible = False
-      SeriesColor = clWhite
+      SeriesColor = clFuchsia
       LinePen.Width = 2
       Pointer.HorizSize = 3
       Pointer.InflateMargins = True
@@ -729,7 +743,7 @@ object Form11: TForm11
     object LineSeries17: TLineSeries
       Marks.ArrowLength = 8
       Marks.Visible = False
-      SeriesColor = clWhite
+      SeriesColor = clFuchsia
       LinePen.Width = 2
       Pointer.HorizSize = 3
       Pointer.InflateMargins = True
@@ -862,7 +876,7 @@ object Form11: TForm11
     object LineSeries23: TLineSeries
       Marks.ArrowLength = 8
       Marks.Visible = False
-      SeriesColor = clWhite
+      SeriesColor = clFuchsia
       LinePen.Width = 2
       Pointer.HorizSize = 3
       Pointer.InflateMargins = True
@@ -996,7 +1010,7 @@ object Form11: TForm11
     object LineSeries29: TLineSeries
       Marks.ArrowLength = 8
       Marks.Visible = False
-      SeriesColor = clWhite
+      SeriesColor = clMaroon
       LinePen.Width = 2
       Pointer.HorizSize = 3
       Pointer.InflateMargins = True
@@ -1110,7 +1124,7 @@ object Form11: TForm11
   end
   object ComboBox1: TComboBox
     Left = 120
-    Top = 260
+    Top = 292
     Width = 161
     Height = 21
     Style = csDropDownList
@@ -1125,7 +1139,7 @@ object Form11: TForm11
   end
   object GroupBox3: TGroupBox
     Left = 8
-    Top = 296
+    Top = 328
     Width = 273
     Height = 113
     Caption = #1059#1089#1090#1072#1085#1086#1074#1082#1072' '#1087#1088#1077#1076#1077#1083#1086#1074' '#1076#1083#1103' '#1075#1088#1072#1092#1080#1082#1086#1074

@@ -24,6 +24,8 @@ Type
                Panel2: TPanel;
                Termenate: TBitBtn;
     Bar: TProgressBar;
+    Label2: TLabel;
+    Label3: TLabel;
                Procedure PaintBox1Paint(Sender: TObject);
                Procedure Timer1Timer(Sender: TObject);
                Procedure TermenateClick(Sender: TObject);
@@ -37,6 +39,8 @@ Type
                FileExecuted : boolean;
                FileName     : String;
                Procedure StartShow(text:String);
+//Dobavil Serafim Meleshko(1 stroka)
+               Procedure StartShow2(text1:String; text2: String);
      End;
 
 Var
@@ -65,8 +69,23 @@ Begin
      Caption:=text;
      Label1.Caption:=text;
      Timer1.Enabled:=true;
+//Dobavil Serafim Meleshko(2 stroki)
+     Label2.Visible:=false;
+     Label3.Visible:=false;
      Show;
 End;
+//Dobavil Serafim Meleshko(1 procedura)
+Procedure TWaitForm1.StartShow2;
+Begin
+     Caption:=text1;
+     Label1.Caption:=text1;
+     Label2.Caption:=text2;
+     Label2.Visible:=true;
+     Label3.Visible:=true;
+     Timer1.Enabled:=true;
+     Show;
+End;
+
 Procedure TWaitForm1.PaintBox1Paint(Sender: TObject);
 const
      PI_2=pi/2;
