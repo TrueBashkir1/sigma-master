@@ -156,7 +156,7 @@ procedure TGrafikGl2.Naris(Sender: TObject);
 var MyNrc :integer;
   begin
      Series1.Clear;
-     Series2.Clear;
+//     Series2.Clear;
 //Dobavil Serafim Meleshko(3 stroki)
      Series3.Clear;
      Series4.Clear;
@@ -635,7 +635,7 @@ procedure TGrafikGL2.Inter(Sender: TObject);
 var MyNrc :integer;
   begin
      Series1.Clear;
-     Series2.Clear;
+//     Series2.Clear;
      Series3.Clear;
      Series4.Clear;
      Label18.Visible:=true;

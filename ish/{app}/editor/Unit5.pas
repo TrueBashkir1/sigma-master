@@ -160,7 +160,7 @@ procedure TGrafikXY.Naris(Sender: TObject);
 var MyNrc :integer;
   begin
      Series1.Clear;
-//     Series2.Clear;
+     Series2.Clear;
 //Dobavil Serafim Meleshko(3 stroki)
      Series3.Clear;
      Series4.Clear;

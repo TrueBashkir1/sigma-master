@@ -161,11 +161,8 @@ procedure TGrafikX.Naris(Sender: TObject);
 var MyNrc :integer;
   begin
      Series1.Clear;
+     Series2.Clear;
 //Dobavil Serafim Meleshko(3 stroki)
-{     Series3.Active:=false;
-     Series4.Active:=false;
-     Series1.Active:=true;
-     Series2.Active:=true;}
      Series3.Clear;
      Series4.Clear;
      Label18.Visible:=false;
@@ -419,7 +416,7 @@ end;
 
 procedure TGrafikX.Button4Click(Sender: TObject);
 //TSH -->
-var ole_doc, ole_r, ole_p, ole_s, ole_t, ole_tc, ole_c: Variant;
+var ole_doc, ole_r,ole_r1, ole_p, ole_s, ole_t, ole_tc, ole_c: Variant;
     N, i, nrc,count,checknrc,j: integer;
     S: String;
 begin
@@ -497,8 +494,8 @@ for i:=1 to N-2 do begin
     ole_s:=ole_doc.application.Selection;
     Str(Series2.YValues.Value[i-1]:15:MantissStress,S);
     ole_s.TypeText(S);
-end;
 
+end;
 
 ole_doc.Application.Visible := True;
 
@@ -645,10 +642,6 @@ var MyNrc :integer;
      Series1.Clear;
      Series3.Clear;
      Series4.Clear;
-     {Series3.Active:=true;
-     Series4.Active:=true;
-     Series1.Active:=false;
-     Series2.Active:=false;}
      Label18.Visible:=true;
         for  MyNrc:=3 to strtoint(Form3.Edit1.Text) do
         begin
