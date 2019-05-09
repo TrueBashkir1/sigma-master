@@ -1,8 +1,8 @@
 object GrafikX: TGrafikX
-  Left = 759
-  Top = 65
+  Left = 706
+  Top = 293
   Width = 766
-  Height = 542
+  Height = 539
   Caption = #1043#1088#1072#1092#1080#1082' '#1089#1093#1086#1076#1080#1084#1086#1089#1090#1080' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1103' '#1087#1086' '#1061
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -539,7 +539,7 @@ object GrafikX: TGrafikX
     Left = 296
     Top = 80
     Width = 433
-    Height = 329
+    Height = 313
     BackWall.Brush.Color = clWhite
     BackWall.Brush.Style = bsClear
     Title.Text.Strings = (
@@ -564,6 +564,19 @@ object GrafikX: TGrafikX
       ParentFont = False
       Visible = False
     end
+    object Label19: TLabel
+      Left = 144
+      Top = 8
+      Width = 181
+      Height = 13
+      Caption = #1048#1085#1090#1077#1088#1087#1086#1083#1103#1094#1080#1103' '#1092#1086#1088#1084#1091#1083#1086#1081' '#1051#1072#1075#1088#1072#1085#1078#1072
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
     object Series1: TLineSeries
       Marks.ArrowLength = 8
       Marks.Style = smsPercent
@@ -573,7 +586,7 @@ object GrafikX: TGrafikX
       LinePen.Width = 2
       Pointer.HorizSize = 5
       Pointer.InflateMargins = False
-      Pointer.Style = psDiamond
+      Pointer.Style = psCircle
       Pointer.VertSize = 5
       Pointer.Visible = True
       XValues.DateTime = False
@@ -593,7 +606,7 @@ object GrafikX: TGrafikX
       LinePen.Style = psClear
       Pointer.HorizSize = 1
       Pointer.InflateMargins = False
-      Pointer.Style = psDiamond
+      Pointer.Style = psCircle
       Pointer.VertSize = 1
       Pointer.Visible = True
       XValues.DateTime = False
@@ -613,7 +626,7 @@ object GrafikX: TGrafikX
       LinePen.Width = 2
       Pointer.HorizSize = 5
       Pointer.InflateMargins = False
-      Pointer.Style = psDiamond
+      Pointer.Style = psCircle
       Pointer.VertSize = 5
       Pointer.Visible = True
       XValues.DateTime = False
@@ -633,8 +646,53 @@ object GrafikX: TGrafikX
       LinePen.Style = psDot
       Pointer.HorizSize = 1
       Pointer.InflateMargins = False
-      Pointer.Style = psDiamond
+      Pointer.Style = psCircle
       Pointer.VertSize = 1
+      Pointer.Visible = True
+      XValues.DateTime = False
+      XValues.Name = 'X'
+      XValues.Multiplier = 1.000000000000000000
+      XValues.Order = loAscending
+      YValues.DateTime = False
+      YValues.Name = 'Y'
+      YValues.Multiplier = 1.000000000000000000
+      YValues.Order = loNone
+    end
+    object Series5: TLineSeries
+      Marks.ArrowLength = 8
+      Marks.Style = smsPercent
+      Marks.Visible = False
+      SeriesColor = clBlue
+      LinePen.Width = 2
+      Pointer.Dark3D = False
+      Pointer.Draw3D = False
+      Pointer.HorizSize = 1
+      Pointer.InflateMargins = False
+      Pointer.Style = psCircle
+      Pointer.VertSize = 1
+      Pointer.Visible = True
+      XValues.DateTime = False
+      XValues.Name = 'X'
+      XValues.Multiplier = 1.000000000000000000
+      XValues.Order = loAscending
+      YValues.DateTime = False
+      YValues.Name = 'Y'
+      YValues.Multiplier = 1.000000000000000000
+      YValues.Order = loNone
+    end
+    object Series6: TLineSeries
+      Marks.ArrowLength = 8
+      Marks.Style = smsPercent
+      Marks.Visible = False
+      SeriesColor = clBlue
+      LinePen.Style = psClear
+      Pointer.Brush.Color = clYellow
+      Pointer.Dark3D = False
+      Pointer.Draw3D = False
+      Pointer.HorizSize = 6
+      Pointer.InflateMargins = False
+      Pointer.Style = psCircle
+      Pointer.VertSize = 6
       Pointer.Visible = True
       XValues.DateTime = False
       XValues.Name = 'X'
@@ -703,6 +761,21 @@ object GrafikX: TGrafikX
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 11
+    OnClick = Button2Click
+  end
+  object CheckBox12: TCheckBox
+    Left = 296
+    Top = 400
+    Width = 417
+    Height = 17
+    Caption = #1042#1082#1083#1102#1095#1080#1090#1100' '#1080#1085#1090#1077#1088#1087#1086#1083#1103#1094#1080#1102' '#1080#1085#1090#1077#1088#1087#1086#1083#1103#1094#1080#1086#1085#1085#1086#1081' '#1092#1086#1088#1084#1091#1083#1086#1081' '#1051#1072#1075#1088#1072#1085#1078#1072
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 12
     OnClick = Button2Click
   end
 end

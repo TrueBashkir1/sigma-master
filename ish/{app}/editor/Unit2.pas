@@ -69,6 +69,10 @@ type
     CheckBox11: TCheckBox;
     Series4: TLineSeries;
     Label18: TLabel;
+    CheckBox12: TCheckBox;
+    Series5: TLineSeries;
+    Label19: TLabel;
+    Series6: TLineSeries;
     procedure  Ochistka(Sender:TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -79,9 +83,10 @@ type
     procedure RadioButton4Click(Sender: TObject);
     procedure RadioButton5Click(Sender: TObject);
     procedure RadioButton6Click(Sender: TObject);
-//Dobavil Serafim Meleshko(2 stroki)
+//Dobavil Serafim Meleshko(3 stroki)
     procedure Label12Open(Sender: TObject);
     procedure Inter(Sender: TObject);
+    procedure Inter2(Sender: TObject);
   private
     { Private declarations }
   public
@@ -162,10 +167,13 @@ var MyNrc :integer;
   begin
      Series1.Clear;
      Series2.Clear;
-//Dobavil Serafim Meleshko(3 stroki)
+//Dobavil Serafim Meleshko(6 strok)
      Series3.Clear;
      Series4.Clear;
+     Series5.Clear;
+     Series6.Clear;
      Label18.Visible:=false;
+     Label19.Visible:=false;
         for  MyNrc:=3 to strtoint(Form3.Edit1.Text) do
         begin
         Case MyNrc of
@@ -298,6 +306,9 @@ begin
             if CheckBox11.Checked=true then
             Inter(Sender)
             else
+            if  CheckBox12.Checked=true then
+            Inter2(Sender)
+            else
               Naris(Sender);
           end;
        4:  begin
@@ -306,6 +317,9 @@ begin
 //Dobavil Serafim Meleshko(konstrukciya "if")
             if CheckBox11.Checked=true then
             Inter(Sender)
+            else
+            if  CheckBox12.Checked=true then
+            Inter2(Sender)
             else
               Naris(Sender);
           end;
@@ -316,6 +330,9 @@ begin
             if CheckBox11.Checked=true then
             Inter(Sender)
             else
+            if  CheckBox12.Checked=true then
+            Inter2(Sender)
+            else
               Naris(Sender);
           end;
        6:  begin
@@ -325,6 +342,9 @@ begin
             if CheckBox11.Checked=true then
             Inter(Sender)
             else
+            if  CheckBox12.Checked=true then
+            Inter2(Sender)
+            else
               Naris(Sender);
           end;
        7: begin
@@ -333,6 +353,9 @@ begin
 //Dobavil Serafim Meleshko(konstrukciya "if")
             if CheckBox11.Checked=true then
             Inter(Sender)
+            else
+            if  CheckBox12.Checked=true then
+            Inter2(Sender)
             else
               Naris(Sender);
           end;
@@ -344,6 +367,9 @@ begin
             if CheckBox11.Checked=true then
             Inter(Sender)
             else
+            if  CheckBox12.Checked=true then
+            Inter2(Sender)
+            else
               Naris(Sender);
           end;
        9:   begin
@@ -352,6 +378,9 @@ begin
 //Dobavil Serafim Meleshko(konstrukciya "if")
             if CheckBox11.Checked=true then
             Inter(Sender)
+            else
+            if  CheckBox12.Checked=true then
+            Inter2(Sender)
             else
               Naris(Sender);
           end;
@@ -362,6 +391,9 @@ begin
             if CheckBox11.Checked=true then
             Inter(Sender)
             else
+            if  CheckBox12.Checked=true then
+            Inter2(Sender)
+            else
               Naris(Sender);
           end;
        11:   begin
@@ -371,6 +403,9 @@ begin
             if CheckBox11.Checked=true then
             Inter(Sender)
             else
+            if  CheckBox12.Checked=true then
+            Inter2(Sender)
+            else
               Naris(Sender);
           end;
         12:   begin
@@ -379,6 +414,9 @@ begin
 //Dobavil Serafim Meleshko(konstrukciya "if")
             if CheckBox11.Checked=true then
             Inter(Sender)
+            else
+            if  CheckBox12.Checked=true then
+            Inter2(Sender)
             else
               Naris(Sender);
           end;
@@ -642,7 +680,10 @@ var MyNrc :integer;
      Series1.Clear;
      Series3.Clear;
      Series4.Clear;
+     Series5.Clear;
+     Series6.Clear;
      Label18.Visible:=true;
+     Label19.Visible:=false;
         for  MyNrc:=3 to strtoint(Form3.Edit1.Text) do
         begin
         Case MyNrc of
@@ -738,6 +779,113 @@ var MyNrc :integer;
             end;
          end;
             end;
+end;
+
+
+//Dobavil Serafim Meleshko(1 procedura)
+procedure TGrafikX.Inter2(Sender: TObject);
+//TSH -->
+var MyNrc,i,j,m,z,k :integer;
+prir,toch,pw :real;
+znachNRC: array[0..9] of real;
+znachNapr: array[0..9] of real;
+prome: array[0..1000] of real;
+Pmas: array[0..1000] of real;
+  begin
+     Series1.Clear;
+     Series3.Clear;
+     Series4.Clear;
+     Series5.Clear;
+     Series6.Clear;
+     Label18.Visible:=false;
+     Label19.Visible:=true;
+     m:=0;
+//Zapolnenie massivov
+        for i:=0 to strtoint(Form3.Edit1.Text)-3 do
+        begin;
+        m:=m+1;
+        znachNRC[i]:=i+3
+        end;
+        if (Edit3.Text<>'') then
+        znachNapr[0]:=strtofloat(Edit3.Text)
+        else
+        znachNapr[0]:=0;
+        if (Edit4.Text<>'') then
+        znachNapr[1]:=strtofloat(Edit4.Text)
+        else
+        znachNapr[1]:=0;
+        if (Edit5.Text<>'') then
+        znachNapr[2]:=strtofloat(Edit5.Text)
+        else
+        znachNapr[2]:=0;
+        if (Edit6.Text<>'') then
+        znachNapr[3]:=strtofloat(Edit6.Text)
+        else
+        znachNapr[3]:=0;
+        if (Edit7.Text<>'') then
+        znachNapr[4]:=strtofloat(Edit7.Text)
+        else
+        znachNapr[4]:=0;
+        if (Edit8.Text<>'') then
+        znachNapr[5]:=strtofloat(Edit8.Text)
+        else
+        znachNapr[5]:=0;
+        if (Edit9.Text<>'') then
+        znachNapr[6]:=strtofloat(Edit9.Text)
+        else
+        znachNapr[6]:=0;
+        if (Edit10.Text<>'') then
+        znachNapr[7]:=strtofloat(Edit10.Text)
+        else
+        znachNapr[7]:=0;
+        if (Edit11.Text<>'') then
+        znachNapr[8]:=strtofloat(Edit11.Text)
+        else
+        znachNapr[8]:=0;
+        if (Edit12.Text<>'') then
+        znachNapr[9]:=strtofloat(Edit12.Text)
+        else
+        znachNapr[9]:=0;
+//Podgotovka k postroeniyu grafika interpolyazii
+          pw:= 1;
+      for j := 0 to m-1 do
+        begin
+              pw := 1;
+              for i := 0 to m-1 do
+                begin
+                  IF( (i <> j) and (znachNRC[i] <> 0) and (znachNRC[j] <> 0) )THEN pw := pw * ( 1 / (znachNRC[j] - znachNRC[i]) );
+                end;
+              prome[j] := pw * znachNapr[j];
+        end;
+
+       prir := znachNRC[0] - 0.01;
+//Postroeniye grafika interpolyazii
+     for z := 0 to m-1 do
+       begin
+         while (prir < znachNRC[m-1]) do
+           begin
+             prir := prir + 0.01;
+                toch:=0;
+             for j := 0 to m-1 do
+               begin
+                 pw := 1;
+                 for i := 0 to m-1 Do
+                   begin
+                     if (i <> j) then pw := pw  * (prir - znachNRC[i]);
+                   end;
+                 Pmas[j] :=  pw * prome[j]; //Polucheniye mnogochlenov
+               end;
+               for k := 0 to m-1 do
+                 begin
+                   toch := toch + Pmas[k]; //Summa mnogochlenov
+                 end;
+               Series5.AddXY(prir, toch);  //Vivod na grafik
+           end;
+       end;
+       for i:=0 to strtoint(Form3.Edit1.Text)-3 do
+        begin
+        Series6.AddXY(znachNRC[i],znachNapr[i])
+        end;
 end;
 
 end.

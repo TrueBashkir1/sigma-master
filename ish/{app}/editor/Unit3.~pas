@@ -121,7 +121,7 @@ uses
     GRPoint: array[1..5] of integer;
   published
  
-//TSH
+//TSH               
   end;
 
 var
@@ -1088,7 +1088,7 @@ begin
              GrafikGl.series2.Clear;
              GrafikGl2.series2.Clear;
              GrafikUG.series2.Clear;
-//Dobavil Serafim Meleshko(12 strok)
+//Dobavil Serafim Meleshko(22 strok)
              GrafikX.series3.Clear;
              GrafikY.series3.Clear;
              GrafikXY.series3.Clear;
@@ -1101,6 +1101,16 @@ begin
              GrafikGl.series4.Clear;
              GrafikGl2.series4.Clear;
              GrafikUG.series4.Clear;
+             GrafikX.series5.Clear;
+             GrafikX.series6.Clear;
+             GrafikY.series5.Clear;
+             GrafikY.series6.Clear;
+             GrafikXY.series5.Clear;
+             GrafikXY.series6.Clear;
+             GrafikGl.series5.Clear;
+             GrafikGl.series6.Clear;
+             GrafikGl2.series5.Clear;
+             GrafikGl2.series6.Clear;
 {             GrafikPerX.series3.Clear;
              GrafikPerY.series3.Clear;
              GrafikPerX.series4.Clear;

@@ -1,6 +1,6 @@
 object GrafikPerY: TGrafikPerY
-  Left = 391
-  Top = 253
+  Left = 499
+  Top = 321
   Width = 773
   Height = 538
   Caption = #1043#1088#1072#1092#1080#1082' '#1089#1093#1086#1076#1080#1084#1086#1089#1090#1080' '#1087#1077#1088#1077#1084#1077#1097#1077#1085#1080#1081' '#1087#1086' '#1086#1089#1080' Y'
@@ -146,6 +146,21 @@ object GrafikPerY: TGrafikPerY
       TabOrder = 0
       OnClick = Button2Click
     end
+    object CheckBox12: TCheckBox
+      Left = 8
+      Top = 336
+      Width = 409
+      Height = 17
+      Caption = #1042#1082#1083#1102#1095#1080#1090#1100' '#1080#1085#1090#1077#1088#1087#1086#1083#1103#1094#1080#1102' '#1080#1085#1090#1077#1088#1087#1086#1083#1103#1094#1080#1086#1085#1085#1086#1081' '#1092#1086#1088#1084#1091#1083#1086#1081' '#1051#1072#1075#1088#1072#1085#1078#1072
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnClick = Button2Click
+    end
   end
   object GroupBox1: TGroupBox
     Left = 16
@@ -155,7 +170,7 @@ object GrafikPerY: TGrafikPerY
     TabOrder = 0
     object Label4: TLabel
       Left = 32
-      Top = 24
+      Top = 16
       Width = 49
       Height = 16
       Caption = 'NRC=3'
@@ -169,7 +184,7 @@ object GrafikPerY: TGrafikPerY
     end
     object Label5: TLabel
       Left = 32
-      Top = 48
+      Top = 40
       Width = 49
       Height = 16
       Caption = 'NRC=4'
@@ -183,7 +198,7 @@ object GrafikPerY: TGrafikPerY
     end
     object Label6: TLabel
       Left = 32
-      Top = 72
+      Top = 64
       Width = 49
       Height = 16
       Caption = 'NRC=5'
@@ -197,7 +212,7 @@ object GrafikPerY: TGrafikPerY
     end
     object Label7: TLabel
       Left = 32
-      Top = 96
+      Top = 88
       Width = 49
       Height = 16
       Caption = 'NRC=6'
@@ -211,7 +226,7 @@ object GrafikPerY: TGrafikPerY
     end
     object Label8: TLabel
       Left = 32
-      Top = 120
+      Top = 112
       Width = 49
       Height = 16
       Caption = 'NRC=7'
@@ -225,7 +240,7 @@ object GrafikPerY: TGrafikPerY
     end
     object Label9: TLabel
       Left = 32
-      Top = 144
+      Top = 136
       Width = 49
       Height = 16
       Caption = 'NRC=8'
@@ -239,7 +254,7 @@ object GrafikPerY: TGrafikPerY
     end
     object Label10: TLabel
       Left = 32
-      Top = 168
+      Top = 160
       Width = 49
       Height = 16
       Caption = 'NRC=9'
@@ -253,7 +268,7 @@ object GrafikPerY: TGrafikPerY
     end
     object Label11: TLabel
       Left = 32
-      Top = 192
+      Top = 184
       Width = 57
       Height = 16
       Caption = 'NRC=10'
@@ -267,7 +282,7 @@ object GrafikPerY: TGrafikPerY
     end
     object Label16: TLabel
       Left = 32
-      Top = 216
+      Top = 208
       Width = 57
       Height = 16
       Caption = 'NRC=11'
@@ -281,7 +296,7 @@ object GrafikPerY: TGrafikPerY
     end
     object Label17: TLabel
       Left = 32
-      Top = 240
+      Top = 232
       Width = 57
       Height = 16
       Caption = 'NRC=12'
@@ -385,7 +400,7 @@ object GrafikPerY: TGrafikPerY
     end
     object CheckBox1: TCheckBox
       Left = 16
-      Top = 24
+      Top = 16
       Width = 17
       Height = 17
       Caption = 'CheckBox1'
@@ -395,7 +410,7 @@ object GrafikPerY: TGrafikPerY
     end
     object CheckBox2: TCheckBox
       Left = 16
-      Top = 48
+      Top = 40
       Width = 17
       Height = 17
       Caption = 'CheckBox2'
@@ -405,7 +420,7 @@ object GrafikPerY: TGrafikPerY
     end
     object CheckBox3: TCheckBox
       Left = 16
-      Top = 72
+      Top = 64
       Width = 17
       Height = 17
       Caption = 'CheckBox3'
@@ -415,7 +430,7 @@ object GrafikPerY: TGrafikPerY
     end
     object CheckBox4: TCheckBox
       Left = 16
-      Top = 96
+      Top = 88
       Width = 17
       Height = 17
       Caption = 'CheckBox4'
@@ -425,7 +440,7 @@ object GrafikPerY: TGrafikPerY
     end
     object CheckBox5: TCheckBox
       Left = 16
-      Top = 120
+      Top = 112
       Width = 17
       Height = 17
       Caption = 'CheckBox5'
@@ -435,7 +450,7 @@ object GrafikPerY: TGrafikPerY
     end
     object CheckBox6: TCheckBox
       Left = 16
-      Top = 144
+      Top = 136
       Width = 17
       Height = 17
       Caption = 'CheckBox6'
@@ -445,7 +460,7 @@ object GrafikPerY: TGrafikPerY
     end
     object CheckBox7: TCheckBox
       Left = 16
-      Top = 168
+      Top = 160
       Width = 17
       Height = 17
       Caption = 'CheckBox7'
@@ -455,7 +470,7 @@ object GrafikPerY: TGrafikPerY
     end
     object CheckBox8: TCheckBox
       Left = 16
-      Top = 192
+      Top = 184
       Width = 17
       Height = 17
       Caption = 'CheckBox8'
@@ -465,7 +480,7 @@ object GrafikPerY: TGrafikPerY
     end
     object CheckBox9: TCheckBox
       Left = 16
-      Top = 216
+      Top = 208
       Width = 17
       Height = 17
       Caption = 'CheckBox9'
@@ -475,7 +490,7 @@ object GrafikPerY: TGrafikPerY
     end
     object CheckBox10: TCheckBox
       Left = 16
-      Top = 240
+      Top = 232
       Width = 17
       Height = 17
       Caption = 'CheckBox10'
@@ -559,7 +574,7 @@ object GrafikPerY: TGrafikPerY
     Left = 296
     Top = 80
     Width = 441
-    Height = 329
+    Height = 305
     BackWall.Brush.Color = clWhite
     BackWall.Brush.Style = bsClear
     Title.Text.Strings = (
@@ -584,6 +599,19 @@ object GrafikPerY: TGrafikPerY
       Font.Style = []
       ParentFont = False
     end
+    object Label19: TLabel
+      Left = 136
+      Top = 8
+      Width = 181
+      Height = 13
+      Caption = #1048#1085#1090#1077#1088#1087#1086#1083#1103#1094#1080#1103' '#1092#1086#1088#1084#1091#1083#1086#1081' '#1051#1072#1075#1088#1072#1085#1078#1072
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
     object Series1: TLineSeries
       Marks.ArrowLength = 8
       Marks.Style = smsPercent
@@ -593,7 +621,7 @@ object GrafikPerY: TGrafikPerY
       LinePen.Width = 2
       Pointer.HorizSize = 5
       Pointer.InflateMargins = False
-      Pointer.Style = psDiamond
+      Pointer.Style = psCircle
       Pointer.VertSize = 5
       Pointer.Visible = True
       XValues.DateTime = False
@@ -613,7 +641,7 @@ object GrafikPerY: TGrafikPerY
       LinePen.Style = psClear
       Pointer.HorizSize = 1
       Pointer.InflateMargins = False
-      Pointer.Style = psDiamond
+      Pointer.Style = psCircle
       Pointer.VertSize = 1
       Pointer.Visible = True
       XValues.DateTime = False
@@ -633,7 +661,7 @@ object GrafikPerY: TGrafikPerY
       LinePen.Width = 2
       Pointer.HorizSize = 5
       Pointer.InflateMargins = False
-      Pointer.Style = psDiamond
+      Pointer.Style = psCircle
       Pointer.VertSize = 5
       Pointer.Visible = True
       XValues.DateTime = False
@@ -653,8 +681,50 @@ object GrafikPerY: TGrafikPerY
       LinePen.Style = psDot
       Pointer.HorizSize = 1
       Pointer.InflateMargins = False
-      Pointer.Style = psDiamond
+      Pointer.Style = psCircle
       Pointer.VertSize = 1
+      Pointer.Visible = True
+      XValues.DateTime = False
+      XValues.Name = 'X'
+      XValues.Multiplier = 1.000000000000000000
+      XValues.Order = loAscending
+      YValues.DateTime = False
+      YValues.Name = 'Y'
+      YValues.Multiplier = 1.000000000000000000
+      YValues.Order = loNone
+    end
+    object Series5: TLineSeries
+      Marks.ArrowLength = 8
+      Marks.Style = smsPercent
+      Marks.Visible = False
+      SeriesColor = clBlue
+      LinePen.Width = 2
+      Pointer.HorizSize = 1
+      Pointer.InflateMargins = False
+      Pointer.Style = psCircle
+      Pointer.VertSize = 1
+      Pointer.Visible = True
+      XValues.DateTime = False
+      XValues.Name = 'X'
+      XValues.Multiplier = 1.000000000000000000
+      XValues.Order = loAscending
+      YValues.DateTime = False
+      YValues.Name = 'Y'
+      YValues.Multiplier = 1.000000000000000000
+      YValues.Order = loNone
+    end
+    object Series6: TLineSeries
+      Marks.ArrowLength = 8
+      Marks.Style = smsPercent
+      Marks.Visible = False
+      SeriesColor = clBlue
+      LinePen.Style = psClear
+      LinePen.Width = 2
+      Pointer.Brush.Color = clYellow
+      Pointer.HorizSize = 6
+      Pointer.InflateMargins = False
+      Pointer.Style = psCircle
+      Pointer.VertSize = 6
       Pointer.Visible = True
       XValues.DateTime = False
       XValues.Name = 'X'
