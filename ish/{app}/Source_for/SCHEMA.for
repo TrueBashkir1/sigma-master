@@ -15,11 +15,11 @@ C ===================================================================
 
       subroutine SCHEMA (DIAG, ENV, XENV, SIZ)
 
-      REAL LN2, LNZ3, DIAG3, tmp1, tmp2
+      REAL LN2, LNZ3, DIAG3
       INTEGER XENV1
       INTEGER XENV, CIP2, RI2, NZ3, NZSUB3, XNZSUB3, XL2, NZ2, PD,XLNZ3
       DIMENSION DIAG(1),ENV(1),XENV(1)
-      DIMENSION TMP(100000)
+      DIMENSION TMP(1000000)
       DIMENSION SCHEMA1(10000)
       DIMENSION VE2(10000),RI2(10000),CIP2(10000)
       DIMENSION VE3(10000),LD3(10000)
@@ -27,18 +27,18 @@ C ===================================================================
       DIMENSION BAND(10000,10000)
       DIMENSION DIAG2(10000),NZ2(10000),LN2(10000),XL2(10000)
       DIMENSION DIAG3(10000),LNZ3(10000),XLNZ3(10000),NZSUB3(10000)
-      DIMENSION XNZSUB3(10000),NZ3(10000)
+      DIMENSION XNZSUB3(10000),NZSUBtmp(10000)
       DIMENSION DIAG1(10000), ENV1(10000), XENV1(10000)
       INTEGER k,l,m,n,BANDSIZ
       INTEGER SIZ
       INTEGER row_number, col_number
-      INTEGER nzsubsize, xnzsubsize,iln,nullInVe
+      INTEGER iln,nullInVe
 C Представления:
 C Массив TMP - для представления матрицы в виде длинной строки
 C Массив SCHEMA1 - для представления матрицы в виде Схемы 1
 C Массивы VE2, RI2, CIP2 - для представления матрицы в виде Схемы 2
 C Массивы VE3 и LD3 - для представления матрицы в виде Схемы 3
-C Массивы DIAG3, XLNZ3, NZSUB3, XNZSUB3, LNZ3 - для представления в виде компактной схемы. NZ3 - вспомогательный массив для построения компактной схемы (используется аналогично массиву NZ2 в обычной схеме)
+C Массивы DIAG3, XLNZ3, NZSUB3,NZSUBtmp, XNZSUB3, LNZ3 - для представления в виде компактной схемы.
 C Массивы DIAG2, NZ2, LN2, XL2 - для представления в виде обычной схемы
 C Массив BAND для представления в виде диагональной схемы. BANDSIZ - вспомогательная переменная для оценки размера профиля
 C Массивы VE и PD - для представления профильной схемы
@@ -91,8 +91,8 @@ C Вывод в файл
       WRITE(6,*)
       WRITE(6,110)
 110   FORMAT ("******Схема хранения 1*****")
-      WRITE(6,*) "Затраты памяти = ", k
       WRITE(6,*) "Число ненулевых элементов = ", (k/2)-1-SIZ
+      WRITE(6,*) "Общие затраты памяти = ", k
 
 C Далее идет преобразование к схеме 2
       k=1
@@ -112,10 +112,10 @@ C Далее идет вывод матрицы в виде схемы 2
       WRITE(6,*)
       WRITE(6,210)
 210   FORMAT ("******Схема хранения 2*****")
-      WRITE(6,*) "Общие затраты памяти = ", SIZ+k*2
       WRITE(6,*) "Затраты памяти на массив VE = ", k
       WRITE(6,*) "Затраты памяти на массив RI = ", k
       WRITE(6,*) "Затраты памяти на массив CIP = ", SIZ
+      WRITE(6,*) "Общие затраты памяти = ", SIZ+k*2
 
 C Далее идет преобразование к схеме 3
       k=1
@@ -133,80 +133,93 @@ C Вывод в файл
       WRITE(6,*)
       WRITE(6,310)
 310   FORMAT ("******Схема хранения 3*****")
-      WRITE(6,*) "Общие затраты памяти = ", k*2
       WRITE(6,*) "Затраты памяти на массив VE = ", k
       WRITE(6,*) "Затраты памяти на массив LD = ", k
+      WRITE(6,*) "Общие затраты памяти = ", k*2
 
 C Далее идет преобразование в компактную схему
-      k=1
+      k=1  ! позиция в LNZ3
+      m=0  ! позиция в NZSUB3
+      n=0  ! позиция в XNZSUB3
+      im_old=0
+      iln=0 ! Число ненулевых элементов массива LN
       do col_number=1,SIZ
-      XLNZ3(col_number)=k
+      if(col_number.ne.SIZ) then
+        XLNZ3(col_number)=k
+      endif
       l=0
+      ! m_delta - смещение по NZSUB3 для столбца на прошлом шаге
+      ! m_old - позиция m перед заполнением нового столбца
+      im_delta= m-im_old
+      im_old=m
       do row_number=col_number,SIZ
-      if(col_number.eq.row_number) then
-      DIAG3(col_number)=TMP((col_number-1)*SIZ +row_number)
-      else if (abs(TMP((col_number-1)*SIZ + row_number))
-     &.gt.0.005) then
-      LNZ3(k)=TMP((col_number-1)*SIZ + row_number)
-      NZ3(k)=row_number
+        if(col_number.eq.row_number) then
+          DIAG3(col_number)=TMP((row_number-1)*SIZ + col_number)
+      else if (ABS(TMP((row_number-1)*SIZ + col_number)).gt.0.005)then
+      LNZ3(k)=TMP((row_number-1)*SIZ + col_number)
+      iln=iln+1
+      m=m+1
+      NZSUB3(m)=row_number
       k=k+1
       l=1
       endif
       enddo
+      isame=0  ! флаг совпадения подпоследовательностей смежных столбцов
+      if(col_number.lt.SIZ) then
+      if(m-im_old.eq.im_delta) then
+      isame=1
+      ! если в двух последних столбцах одинаковое число ненулевых элементов
+      ! проверяем их строчные индексы
+      do i= im_old-im_delta+1,im_old
+        if (NZSUB3(i).ne.NZSUB3(i+im_delta)) then
+          ! если подпоследовательности не совпали - ничего не делаем
+          isame=0
+          goto 212
+        endif
+      ENDDO
+      if (isame.eq.1) then
+          ! если совпали - перезаписываем NZSUB3, исключая последние добавленные элементы
+        do j=1,im_old
+          NZSUBtmp(j)=NZSUB3(j)
+        ENDDO
+        NZSUB3=NZSUBtmp
+        ! возвращаем счетчики на позицию предыдущих элементов
+        m=im_old
+        im_old=m-im_delta
+      endif
+212       endif
+        endif
+        n=n+1
+        if(n.eq.1)   then
+          XNZSUB3(n) = 1
+        else if(isame.eq.1) then
+          ! если подпоследовательности совпали - записываем предыдущий индекс
+          XNZSUB3(n) =   XNZSUB3(n-1)
+        else
+    ! иначе записываем индекс начала столбца
+      XNZSUB3(n) = im_old+1
+      endif
+
       if (l.eq.0) then
-      LNZ3(k)=0
-      NZ3(k)=NZ3(k-1)
-      k=k+1
+        if(col_number.ne.SIZ) then
+          LNZ3(k)=0
+          k=k+1
+        endif
       endif
       enddo
-      k=k-2
-
-      XNZSUB3(1) = 1
-      nzsubsize=k-1
-      do i=1,k
-        NZSUB3(i)=NZ3(i)
-      enddo
-      m=1
-      do i = 1, SIZ
-        l=0
-        do j=i,SIZ
-          if (j.gt.i+1) then
-            tmp1=TMP((j)*SIZ + i)
-            tmp2=TMP((j)*SIZ + i+1)
-          else
-            tmp1=0
-            tmp2=0
-          endif
-          if ((tmp1.gt.0.005).and.(tmp2.gt.0.005)) then
-          else if ((tmp1.lt.0.005).and.(tmp2.lt.0.005)) then
-          else
-            l=1
-          endif
-        enddo
-        if (l.eq.1)then
-          XNZSUB3(m)=XLNZ3(i)
-          m=m+1
-        else
-          if (m.gt.1) then
-            XNZSUB3(m)=XNZSUB3(m-1)
-          endif
-          m=m+1
-          do n=1,k-XLNZ3(j)
-            NZSUB3(n)=NZSUB3(n+1)
-          enddo
-          if (XLNZ3(i+1).ne.0) then
-            nzsubsize=nzsubsize-(XLNZ3(i+1)-XLNZ3(i))
-          endif
-        endif
-      enddo
-      k=k-1
-        i=nzsubsize+(SIZ*3)+(k*2)
 
 C Вывод в файл
       WRITE(6,410)
 410   FORMAT ("******Компактная схема хранения*****")
-      WRITE(6,*) "NOT DONE"
-      WRITE(6,*) "Затраты памяти = ", i
+      WRITE(6,*)
+      WRITE(6,*) "Размер DIAG= ", SIZ
+      WRITE(6,*) "Размер LNZ= ", k-1
+      WRITE(6,*) "Число ненулевых элементов LNZ= ", iln
+      WRITE(6,*) "Размер XLNZ= ", SIZ-1
+      WRITE(6,*) "Размер NZSUB= ", m
+      WRITE(6,*) "Размер XNZSUB= ", n
+      i=n+k-2+m+(SIZ*2)
+      WRITE(6,*) "Общие затраты памяти = ", i
       WRITE(6,*)
 
 C Далее идет преобразование в обычную схему
@@ -229,18 +242,19 @@ C Далее идет преобразование в обычную схему
 
       if (l.eq.0) then
         LN2(k)=0
+        if(col_number.ne.SIZ) then
         NZ2(k) = NZ2(k-1)
         k=k+1
       endif
+      endif
       enddo
-      k=k-1
 C Вывод в файл
       WRITE(6,*)
       WRITE(6,510)
 510   FORMAT ("******Обычная схема хранения*****")
-      WRITE(6,*) "Затраты памяти = ", (k-1)+k + SIZ*2
       WRITE(6,*) "Размер массива DIAG = ", SIZ
       WRITE(6,*) "Число ненулевых элементов массива LN = ", iln
+      WRITE(6,*) "Общие затраты памяти = ", (k-1)+k + SIZ*2
 
 C Далее идет преобразование в профильную схему
       k=1
@@ -274,7 +288,7 @@ C Вывод в файл
       WRITE(6,*) "Размер VE =", k
       WRITE(6,*) "Число ненулевых элементов в массиве VE =",k-nullInVe
       WRITE(6,*) "Размер PD =", SIZ
-      WRITE(6,*) "Затраты памяти = ", k + SIZ
+      WRITE(6,*) "Общие затраты памяти = ", k + SIZ
 
 C Далее идет преобразование в диагональную схему
       k=1
@@ -282,7 +296,7 @@ C Далее идет преобразование в диагональную схему
       iln=0
       DO row_number=2, SIZ
         DO col_number=1, row_number
-          if(( TMP((row_number-1)*SIZ + col_number).ne.0)
+          if(( abs(TMP((row_number-1)*SIZ + col_number)).gt.0.005)
      &.and.(BANDSIZ.le.(row_number-col_number))) then
       BANDSIZ = row_number-col_number
       endif
@@ -303,9 +317,9 @@ C Вывод в файл
       WRITE(6,*)
       WRITE(6,710)
 710   FORMAT ("******Диагональная схема хранения*****")
-      WRITE(6,*) "Затраты памяти = ", SIZ*(BANDSIZ+1)
       WRITE(6,*) "Ширина ленты = ", BANDSIZ
       WRITE(6,*) "Число ненулевых элементов  = ", SIZ*(BANDSIZ+1)-iln
+      WRITE(6,*) "Общие затраты памяти = ", SIZ*(BANDSIZ+1)
 
 C Далее идет преобразование в модифицированную профильную схему
       do row_number=1,SIZ
@@ -313,10 +327,9 @@ C Далее идет преобразование в модифицированную профильную схему
       enddo
       iln=0;
       k=1
-      XENV1(1)=1
       do row_number = 1, SIZ
         XENV1(row_number)=k
-        do col_number = 1, row_number
+        do col_number = 1, row_number-1
           if ((abs(TMP((row_number-1)*SIZ + col_number)).gt.0.005)
      &.and.(col_number.ne.row_number)) then
       do l = col_number,row_number-1
@@ -338,6 +351,7 @@ C Вывод в файл
       WRITE(6,*) "Число ненулевых элементов ENV = ",k-iln
       WRITE(6,*) "Размер ENV =", k
       WRITE(6,*) "Размер XENV =", SIZ+1
+      WRITE(6,*) "Размер DIAG =", SIZ
       WRITE(6,*) "Общие затраты памяти = ",SIZ*2+k+1
 
       RETURN
