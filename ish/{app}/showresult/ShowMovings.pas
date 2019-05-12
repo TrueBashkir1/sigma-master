@@ -298,7 +298,7 @@ TYPE
     PROCEDURE ShowElementOld(Canvas:TCanvas;OneElement:TOneElement);
     PROCEDURE ShowMaterialColoredElement(Canvas:TCanvas;OneElement:TOneElement);
     procedure ShowOneElement(Element: TOneElement; Canvas : TCanvas);
-    procedure ShowOneElementInfo(Canvas:TCanvas);
+    procedure ShowOneElementInfo(Canvas:TCanvas;ElementToPaint: String);
     FUNCTION StressInElement(OneElement : TOneElement;VAR stress: ElStressArray):BOOLEAN;
     PROCEDURE ShowArrow(Canvas:TCanvas;x,y,long:INTEGER;Alfa:MyReal);
     PROCEDURE ShowBoundForce(Canvas:TCanvas);
@@ -2225,7 +2225,7 @@ BEGIN
 
   PaintZonesContour(Canvas);
   ShowBoundForce(Canvas);
-  IF (Form1.InfoFiniteElementNumber.Text<>'')  then ShowOneElementInfo(Canvas);
+  IF (Form1.InfoFiniteElementNumber.Text<>'')  then ShowOneElementInfo(Canvas,Form1.InfoFiniteElementNumber.text);
   ShowAxes(Canvas);
   ShowSelectedPoint(Canvas);
 END;
@@ -3179,7 +3179,7 @@ begin
      Result:=FormatFloat('0.0000E+00',X);
 end;
 
-// вывод рультатов в окошки
+// вывод результатов в окошки
 FUNCTION TShowMovingsForm.SolveInPoint : Boolean;
 VAR
   st,move_st:TStressArray;
@@ -4113,10 +4113,20 @@ begin
   Form1.ZoneStress.Cells[0, zoneCount + 1] := 'Макс';
   // номер кэ с макс положит напряж
   Form1.ZoneStress.Cells[2, zoneCount + 1] := IntToStr(maxPosStressPNum);
+  //ZHEREBTSOV
+  If Form1.StressType.ItemIndex + 1 <> 7 then
+  Form1.KonElNumMaxNapr.Caption:= IntToStr(maxPosStressPNum)
+  else Form1.KonElNumMaxNapr.Caption:='';
+  //ZHEREBTSOV
   // значение положит
   Form1.ZoneStress.Cells[3, zoneCount + 1] := MyFloatToStr(maxPosStressP);
   // номер кэ с макс отриц напряж
   Form1.ZoneStress.Cells[4, zoneCount + 1] := IntToStr(maxNegStressPNum);
+  //ZHEREBTSOV
+   If Form1.StressType.ItemIndex + 1 <> 7 then
+  Form1.KonElNumMinNapr.Caption:= IntToStr(maxNegStressPNum)
+  else Form1.KonElNumMinNapr.Caption:='';
+  //ZHEREBTSOV
   // значение отриц
   Form1.ZoneStress.Cells[5, zoneCount + 1] := MyFloatToStr(maxNegStressP);
 
@@ -4125,10 +4135,18 @@ begin
   Form1.ZoneStress.Cells[0, zoneCount + 2] := 'ПЛАСТ';
   // номер кэ с макс положит напряж
   Form1.ZoneStress.Cells[2, zoneCount + 2] := IntToStr(maxPosStressAllNum);
+  //ZHEREBTSOV
+   Form1.MaxNaprPlast.Caption:= IntToStr(maxPosStressAllNum);
+   Form1.MaxNaprPlast1.Caption:= IntToStr(maxPosStressAllNum);
+  //ZHEREBTSOV
   // значение положит
   Form1.ZoneStress.Cells[3, zoneCount + 2] := MyFloatToStr(maxPosStressAll);
   // номер кэ с макс отриц напряж
   Form1.ZoneStress.Cells[4, zoneCount + 2] := IntToStr(maxNegStressAllNum);
+  //ZHEREBTSOV
+  Form1.MinNaprPlast.Caption:= IntToStr(maxNegStressAllNum);
+  Form1.MinNaprPlast1.Caption:= IntToStr(maxNegStressAllNum);
+  //ZHEREBTSOV
   // значение отриц
   Form1.ZoneStress.Cells[5, zoneCount + 2] := MyFloatToStr(maxNegStressAll);
   Form1.ZoneStress.RowCount := zoneCount + 3;
@@ -4593,7 +4611,7 @@ begin
 ElementToFind:=-1;
 TRY
 // считываем значение поля Номер КЭ
-       ElementToFind :=  StrToInt(Form1.InfoFiniteElementNumber.text);
+       ElementToFind :=  StrToInt(ElementToPaint);
  except
   on Exception : EConvertError do
   ShowMessage(Exception.Message);
@@ -4644,10 +4662,12 @@ procedure TShowMovingsForm.InfoFiniteElementNumberChange(Sender: TObject);
 begin
 DrawSelectedElement:=TRUE;
 Pointed:=False;
-ShowOneElementInfo(Canvas);
+ShowOneElementInfo(Canvas,Form1.InfoFiniteElementNumber.text);
 DrawSelectedPoint:=false;
 MainRePaint;
 end;
+
+
 
 
 // поиск узла по номеру

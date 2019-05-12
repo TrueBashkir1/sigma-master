@@ -137,6 +137,18 @@ type
     DopNapr2: TLabel;
     CaptPropNum: TLabel;
     PropNum: TLabel;
+    LabelMaxZnach: TLabel;
+    LabelMinZhach: TLabel;
+    KonElNumMaxNapr: TLabel;
+    KonElNumMinNapr: TLabel;
+    MaxZnachPlast: TLabel;
+    MinZnachPlast: TLabel;
+    MaxNaprPlast: TLabel;
+    MinNaprPlast: TLabel;
+    MaxNaprPlast1: TLabel;
+    MinNaprPlast1: TLabel;
+    MaxZnachPlast2: TLabel;
+    MinZnachPlast2: TLabel;
     procedure ZoneCheckBoxClick(Sender: TObject);
     procedure UseLegendClick(Sender: TObject);
     procedure UseForceClick(Sender: TObject);
@@ -173,7 +185,7 @@ type
     procedure NodeEditInputChange(Sender: TObject);
     procedure KENumber1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
- 
+
 
 
 
@@ -529,7 +541,6 @@ begin
     ShowMovingsForm.InfoFiniteElementNumberChange(Sender);
     end;
 end;
-
 
 
 end.
