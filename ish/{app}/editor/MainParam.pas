@@ -1456,6 +1456,5 @@ begin
   CheckBox2.Checked:=false;
   genrzn.Checked:=false;
 end;
-//test
-//test2
-End.
+//test for VKR
+End.
