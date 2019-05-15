@@ -1088,7 +1088,7 @@ begin
              GrafikGl.series2.Clear;
              GrafikGl2.series2.Clear;
              GrafikUG.series2.Clear;
-//Dobavil Serafim Meleshko(22 strok)
+//Dobavil Serafim Meleshko(24 strok)
              GrafikX.series3.Clear;
              GrafikY.series3.Clear;
              GrafikXY.series3.Clear;
@@ -1111,6 +1111,8 @@ begin
              GrafikGl.series6.Clear;
              GrafikGl2.series5.Clear;
              GrafikGl2.series6.Clear;
+             GrafikUG.series5.Clear;
+             GrafikUG.series6.Clear;
 {             GrafikPerX.series3.Clear;
              GrafikPerY.series3.Clear;
              GrafikPerX.series4.Clear;
