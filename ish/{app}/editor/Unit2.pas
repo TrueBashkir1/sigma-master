@@ -787,7 +787,8 @@ procedure TGrafikX.Inter2(Sender: TObject);
 //TSH -->
 var MyNrc,i,j,m,z,k :integer;
 prir,toch,pw :real;
-znachNRC: array[0..9] of real;
+znachNRC: array[0..13] of real;
+//iznachalno bilo [0...9]!!!!!!!!!!!!!!!!!!!!!!!
 znachNapr: array[0..9] of real;
 prome: array[0..1000] of real;
 Pmas: array[0..1000] of real;
@@ -801,7 +802,8 @@ Pmas: array[0..1000] of real;
      Label19.Visible:=true;
      m:=0;
 //Zapolnenie massivov
-        for i:=0 to strtoint(Form3.Edit1.Text)-3 do
+        for i:=0 to strtoint(Form3.Edit1.Text)+1 do
+//otnimaly 3 iznachalno!!!!!!!!!!!!!!!!!!!!!!!
         begin;
         m:=m+1;
         znachNRC[i]:=i+3
@@ -848,10 +850,12 @@ Pmas: array[0..1000] of real;
         znachNapr[9]:=0;
 //Podgotovka k postroeniyu grafika interpolyazii
           pw:= 1;
-      for j := 0 to m-1 do
+      for j := 0 to m-5 do
+//iznachalno m-1 bilo!!!!!!!!!!!!!!!!!!!!!!!
         begin
               pw := 1;
-              for i := 0 to m-1 do
+              for i := 0 to m-5 do
+              //iznachalno m-1 bilo!!!!!!!!!!!!!!!!!!!!!!!
                 begin
                   IF( (i <> j) and (znachNRC[i] <> 0) and (znachNRC[j] <> 0) )THEN pw := pw * ( 1 / (znachNRC[j] - znachNRC[i]) );
                 end;
@@ -866,16 +870,19 @@ Pmas: array[0..1000] of real;
            begin
              prir := prir + 0.01;
                 toch:=0;
-             for j := 0 to m-1 do
+             for j := 0 to m-5 do
+             //iznachalno m-1 bilo!!!!!!!!!!!!!!!!!!!!!!!
                begin
                  pw := 1;
-                 for i := 0 to m-1 Do
+                 for i := 0 to m-5 Do
+                 //iznachalno m-1 bilo!!!!!!!!!!!!!!!!!!!!!!!
                    begin
                      if (i <> j) then pw := pw  * (prir - znachNRC[i]);
                    end;
                  Pmas[j] :=  pw * prome[j]; //Polucheniye mnogochlenov
                end;
-               for k := 0 to m-1 do
+               for k := 0 to m-5 do
+               //iznachalno m-1 bilo!!!!!!!!!!!!!!!!!!!!!!!
                  begin
                    toch := toch + Pmas[k]; //Summa mnogochlenov
                  end;
