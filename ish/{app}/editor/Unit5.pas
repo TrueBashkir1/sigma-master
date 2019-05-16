@@ -787,7 +787,7 @@ procedure TGrafikXY.Inter2(Sender: TObject);
 //TSH -->
 var MyNrc,i,j,m,z,k :integer;
 prir,toch,pw :real;
-znachNRC: array[0..9] of real;
+znachNRC: array[0..13] of real;
 znachNapr: array[0..9] of real;
 prome: array[0..1000] of real;
 Pmas: array[0..1000] of real;
@@ -801,51 +801,20 @@ Pmas: array[0..1000] of real;
      Label19.Visible:=true;
      m:=0;
 //Zapolnenie massivov
-        for i:=0 to strtoint(Form3.Edit1.Text)-3 do
-        begin;
-        m:=m+1;
-        znachNRC[i]:=i+3
-        end;
-        if (Edit3.Text<>'') then
-        znachNapr[0]:=strtofloat(Edit3.Text)
-        else
-        znachNapr[0]:=0;
-        if (Edit4.Text<>'') then
-        znachNapr[1]:=strtofloat(Edit4.Text)
-        else
-        znachNapr[1]:=0;
-        if (Edit5.Text<>'') then
-        znachNapr[2]:=strtofloat(Edit5.Text)
-        else
-        znachNapr[2]:=0;
-        if (Edit6.Text<>'') then
-        znachNapr[3]:=strtofloat(Edit6.Text)
-        else
-        znachNapr[3]:=0;
-        if (Edit7.Text<>'') then
-        znachNapr[4]:=strtofloat(Edit7.Text)
-        else
-        znachNapr[4]:=0;
-        if (Edit8.Text<>'') then
-        znachNapr[5]:=strtofloat(Edit8.Text)
-        else
-        znachNapr[5]:=0;
-        if (Edit9.Text<>'') then
-        znachNapr[6]:=strtofloat(Edit9.Text)
-        else
-        znachNapr[6]:=0;
-        if (Edit10.Text<>'') then
-        znachNapr[7]:=strtofloat(Edit10.Text)
-        else
-        znachNapr[7]:=0;
-        if (Edit11.Text<>'') then
-        znachNapr[8]:=strtofloat(Edit11.Text)
-        else
-        znachNapr[8]:=0;
-        if (Edit12.Text<>'') then
-        znachNapr[9]:=strtofloat(Edit12.Text)
-        else
-        znachNapr[9]:=0;
+     k:=3;
+     for i:=1 to 10 do
+     begin;
+     if (TCheckBox(FindComponent('CheckBox'+IntToStr(i))).Checked=true)  then
+     begin;
+     znachNRC[m]:=k;
+     znachNapr[m]:=strtofloat(TEdit(FindComponent('Edit'+IntToStr(k))).Text);
+     m:=m+1;
+     end;
+     k:=k+1;
+     end;
+     if (m=1) then exit;
+     if (m=0) then exit;
+
 //Podgotovka k postroeniyu grafika interpolyazii
           pw:= 1;
       for j := 0 to m-1 do
@@ -859,10 +828,10 @@ Pmas: array[0..1000] of real;
         end;
 
        prir := znachNRC[0] - 0.01;
-//Postroeniye grafika interpolyazii
+//Postroeniye grafika interpolyacii
      for z := 0 to m-1 do
        begin
-         while (prir < znachNRC[m-1]) do
+         while (prir < 16) do
            begin
              prir := prir + 0.01;
                 toch:=0;
@@ -882,9 +851,10 @@ Pmas: array[0..1000] of real;
                Series5.AddXY(prir, toch);  //Vivod na grafik
            end;
        end;
-       for i:=0 to strtoint(Form3.Edit1.Text)-3 do
-        begin
-        Series6.AddXY(znachNRC[i],znachNapr[i])
+       for i:=0 to m-1 do
+        begin;
+        if (znachNRC[i]<3) then Continue;
+        Series6.AddXY(znachNRC[i],znachNapr[i]);
         end;
 end;
 end.
