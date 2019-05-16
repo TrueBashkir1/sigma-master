@@ -182,11 +182,12 @@ begin
        end
 end;
 //ѕроверка количества выбранных точек
+//Izmenil Serafim Meleshko, vozmojnost rasschitivat 1 tochku
 count:=0;
  for i:=1 to 5 do   if(checkedpoints[i] = 0 ) then count:=count+1;
- if(count > 3) then
+ if(count > 4) then
   begin;
-    MessageDlg(' оличество используемых точек должно быть не менее 2.',mtError,[mbYes],0);
+    MessageDlg(' оличество используемых точек должно быть не менее 1.',mtError,[mbYes],0);
     exit;
   end;
 
@@ -217,8 +218,9 @@ grafikXY.Series1.Clear;
 grafikGL.Series1.Clear;
 grafikGL2.Series1.Clear;
 grafikUg.Series1.Clear;
-grafikPerX.Series1.Clear;
-grafikPerY.Series1.Clear;
+//Ubral Serafim Meleshko
+//grafikPerX.Series1.Clear;
+//grafikPerY.Series1.Clear;
 LineSeries1.clear;
 LineSeries2.clear;
 LineSeries3.clear;

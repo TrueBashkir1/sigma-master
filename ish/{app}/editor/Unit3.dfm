@@ -1,6 +1,6 @@
 object Form3: TForm3
-  Left = 1066
-  Top = 434
+  Left = 1155
+  Top = 405
   Width = 724
   Height = 410
   AlphaBlend = True

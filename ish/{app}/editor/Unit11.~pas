@@ -181,12 +181,12 @@ begin
        MinMax[i,1]:=temp;
        end
 end;
-//Проверка количества выбранных точек
+//Проверка количества выбранных точек, изменил Мелешко Серафим чтобы была 1 точка
 count:=0;
  for i:=1 to 5 do   if(checkedpoints[i] = 0 ) then count:=count+1;
- if(count > 3) then
+ if(count > 4) then
   begin;
-    MessageDlg('Количество используемых точек должно быть не менее 2.',mtError,[mbYes],0);
+    MessageDlg('Количество используемых точек должно быть не менее 1.',mtError,[mbYes],0);
     exit;
   end;
 
@@ -217,8 +217,9 @@ grafikXY.Series1.Clear;
 grafikGL.Series1.Clear;
 grafikGL2.Series1.Clear;
 grafikUg.Series1.Clear;
-grafikPerX.Series1.Clear;
-grafikPerY.Series1.Clear;
+//Убрал Серафим Мелешко
+//grafikPerX.Series1.Clear;
+//grafikPerY.Series1.Clear;
 LineSeries1.clear;
 LineSeries2.clear;
 LineSeries3.clear;

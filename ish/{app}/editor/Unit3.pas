@@ -1726,6 +1726,8 @@ button6.Enabled:=False;
 button9.Enabled:=False;
 button13.Enabled:=False;
 button14.Enabled:=False;
+//Dobavil Meleshko Serafim(1 stroka)
+button12.Enabled:=true;
  end;
 end;
 
@@ -1855,9 +1857,9 @@ Form11.Edit7.Visible:=false;
 Form11.Edit8.Visible:=false;
 Form11.Edit9.Visible:=false;
 Form11.Edit10.Visible:=false;
-
-if(ComboBoxEx1.Items.Count >= 2) then Form11.CheckBox1.Visible:=true;
-if(ComboBoxEx1.Items.Count >= 2) then Form11.CheckBox1.Checked:=false;
+//Izmenil Serafim Meleshko
+if(ComboBoxEx1.Items.Count >= 1) then Form11.CheckBox1.Visible:=true;
+if(ComboBoxEx1.Items.Count >= 1) then Form11.CheckBox1.Checked:=false;
 if(ComboBoxEx1.Items.Count >= 2) then Form11.CheckBox2.Visible:=true;
 if(ComboBoxEx1.Items.Count >= 2) then Form11.CheckBox2.Checked:=false;
 if(ComboBoxEx1.Items.Count >= 3) then Form11.CheckBox3.Visible:=true;
@@ -1866,9 +1868,9 @@ if(ComboBoxEx1.Items.Count >= 4) then Form11.CheckBox4.Visible:=true;
 if(ComboBoxEx1.Items.Count >= 4) then Form11.CheckBox4.Checked:=false;
 if(ComboBoxEx1.Items.Count >= 5) then Form11.CheckBox5.Visible:=true;
 if(ComboBoxEx1.Items.Count >= 5) then Form11.CheckBox5.Checked:=false;
-
-if(ComboBoxEx1.Items.Count >= 2) then Form11.Edit1.Text:=floattostr(SelectedPointsX[1]);
-if(ComboBoxEx1.Items.Count >= 2) then Form11.Edit2.Text:=floattostr(SelectedPointsY[1]);
+//Izmenil Serafim Meleshko
+if(ComboBoxEx1.Items.Count >= 1) then Form11.Edit1.Text:=floattostr(SelectedPointsX[1]);
+if(ComboBoxEx1.Items.Count >= 1) then Form11.Edit2.Text:=floattostr(SelectedPointsY[1]);
 if(ComboBoxEx1.Items.Count >= 2) then Form11.Edit3.Text:=floattostr(SelectedPointsX[2]);
 if(ComboBoxEx1.Items.Count >= 2) then Form11.Edit4.Text:=floattostr(SelectedPointsY[2]);
 if(ComboBoxEx1.Items.Count >= 3) then Form11.Edit5.Text:=floattostr(SelectedPointsX[3]);
@@ -1877,9 +1879,9 @@ if(ComboBoxEx1.Items.Count >= 4) then Form11.Edit7.Text:=floattostr(SelectedPoin
 if(ComboBoxEx1.Items.Count >= 4) then Form11.Edit8.Text:=floattostr(SelectedPointsY[4]);
 if(ComboBoxEx1.Items.Count >= 5) then Form11.Edit9.Text:=floattostr(SelectedPointsX[5]);
 if(ComboBoxEx1.Items.Count >= 5) then Form11.Edit10.Text:=floattostr(SelectedPointsY[5]);
-
-if(ComboBoxEx1.Items.Count >= 2) then Form11.Edit1.Visible:=true;
-if(ComboBoxEx1.Items.Count >= 2) then Form11.Edit2.Visible:=true;
+//Izmenil Serafim Meleshko
+if(ComboBoxEx1.Items.Count >= 1) then Form11.Edit1.Visible:=true;
+if(ComboBoxEx1.Items.Count >= 1) then Form11.Edit2.Visible:=true;
 if(ComboBoxEx1.Items.Count >= 2) then Form11.Edit3.Visible:=true;
 if(ComboBoxEx1.Items.Count >= 2) then Form11.Edit4.Visible:=true;
 if(ComboBoxEx1.Items.Count >= 3) then Form11.Edit5.Visible:=true;
@@ -2019,11 +2021,12 @@ procedure TForm3.FormClose(Sender: TObject; var Action: TCloseAction);
 var   n,i:Integer;
 begin
   n:=130;
-        if button1.Enabled=True  then
+  //Ubral Serafim Meleshko(ne nujno!!!!)
+        {if button1.Enabled=True  then
           begin
           Vichisl(Form3,NrcOld,n);
           Application.ProcessMessages;
-          end;
+          end; }
           for i:=1 to 5 do
           begin
            SelectedPointsX[i]:=0;
