@@ -72,7 +72,7 @@ object Form1: TForm1
       Top = 298
       Width = 451
       Height = 420
-      ActivePage = TabSheet1
+      ActivePage = TabSheet2
       Align = alTop
       Anchors = []
       Font.Charset = DEFAULT_CHARSET
@@ -1425,7 +1425,7 @@ object Form1: TForm1
         Width = 81
         Height = 17
         TabStop = False
-        Caption = #1047#1086#1085#1072' '#1085#1091#1083#1103
+        Caption = #1054#1073#1083#1072#1089#1090#1080
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
