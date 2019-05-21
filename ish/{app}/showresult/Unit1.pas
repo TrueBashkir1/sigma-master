@@ -189,7 +189,6 @@ type
 
 
 
-
   private
     { Private declarations }
   public
@@ -395,6 +394,14 @@ end;
 
 procedure TForm1.StressType1Click(Sender: TObject);
 begin
+  //Fedorova 2019
+ { If (((StressType1.ItemIndex + 1 = 8) or (StressType1.ItemIndex + 1 = 9)) and  CheckBox1.Checked = false) then
+  begin
+    ShowMessage('Пересечение и объединение областей можно использовать только при включении опции "Области"');
+    StressType1.ItemIndex := 0;
+  end;                      }
+  //end Fedorova
+
   //ShowMovingsForm.StressType.ItemIndex := StressType1.ItemIndex;
   ShowMovingsForm.LoadMaxMinStress;
 //ZHEREBTSOV 2019
@@ -409,11 +416,21 @@ If StressType1.ItemIndex + 1 = 4 then ShowMovingsForm.TypeStress.Caption := '1-о
 If StressType1.ItemIndex + 1 = 5 then ShowMovingsForm.TypeStress.Caption := '2-ое главное';
 If StressType1.ItemIndex + 1 = 6 then ShowMovingsForm.TypeStress.Caption := 'Эквивалентное';
 If StressType1.ItemIndex + 1 = 7 then ShowMovingsForm.TypeStress.Caption := 'Угол наклона к оси Х';
+If StressType1.ItemIndex + 1 = 8 then ShowMovingsForm.TypeStress.Caption := 'Пересечение';  //Fedorova 2019
+If StressType1.ItemIndex + 1 = 9 then ShowMovingsForm.TypeStress.Caption := 'Объединение';  //Fedorova 2019
 //END ZHEREBTSOV
 end;
 
 procedure TForm1.StressType2Click(Sender: TObject);
 begin
+  //Fedorova 2019
+ { If (((StressType2.ItemIndex + 1 = 8) or (StressType2.ItemIndex + 1 = 9)) and  CheckBox1.Checked = false) then
+  begin
+    ShowMessage('Пересечение и объединение областей можно использовать только при включении опции "Области"');
+    StressType2.ItemIndex := 0;
+  end;                }
+  //end Fedorova
+
   //ShowMovingsForm.StressType.ItemIndex := StressType1.ItemIndex;
   ShowMovingsForm.LoadMaxMinStressInMaterials;
 //ZHEREBTSOV 2019
@@ -428,11 +445,21 @@ If StressType2.ItemIndex + 1 = 4 then ShowMovingsForm.TypeStress.Caption := '1-о
 If StressType2.ItemIndex + 1 = 5 then ShowMovingsForm.TypeStress.Caption := '2-ое главное';
 If StressType2.ItemIndex + 1 = 6 then ShowMovingsForm.TypeStress.Caption := 'Эквивалентное';
 If StressType2.ItemIndex + 1 = 7 then ShowMovingsForm.TypeStress.Caption := 'Угол наклона к оси Х';
-//END ZHEREBTSOV
+If StressType2.ItemIndex + 1 = 8 then ShowMovingsForm.TypeStress.Caption := 'Пересечение';  //Fedorova 2019
+If StressType2.ItemIndex + 1 = 9 then ShowMovingsForm.TypeStress.Caption := 'Объединение';  //Fedorova 2019//END ZHEREBTSOV
 end;
 
 procedure TForm1.StressTypeClick(Sender: TObject);
 begin
+
+  //Fedorova 2019
+ { If (((StressType.ItemIndex + 1 = 8) or (StressType.ItemIndex + 1 = 9)) and  CheckBox1.Checked = false) then
+  begin
+    ShowMessage('Пересечение и объединение областей можно использовать только при включении опции "Области"');
+    StressType.ItemIndex := 0;
+  end;              }
+  //end Fedorova
+
 ShowMovingsForm.ChengeLegendLevel;
 ShowMovingsForm.LoadMaxMinStress;
 ShowMovingsForm.LoadMaxMinStressInMaterials;
@@ -440,6 +467,7 @@ ShowMovingsForm.MainRePaint;
 ShowMovingsForm.LegendRePaint;
 //ZHEREBTSOV 2019
 //ADD LABEL OF STRESSTYPE IN WINDOW OF GRAPHICAL RESULT
+
 StressType1.ItemIndex := StressType.ItemIndex;
 StressType2.ItemIndex := StressType.ItemIndex;
 
@@ -450,9 +478,11 @@ If StressType.ItemIndex + 1 = 4 then ShowMovingsForm.TypeStress.Caption := '1-ое
 If StressType.ItemIndex + 1 = 5 then ShowMovingsForm.TypeStress.Caption := '2-ое главное';
 If StressType.ItemIndex + 1 = 6 then ShowMovingsForm.TypeStress.Caption := 'Эквивалентное';
 If StressType.ItemIndex + 1 = 7 then ShowMovingsForm.TypeStress.Caption := 'Угол наклона к оси Х';
+If StressType.ItemIndex + 1 = 8 then ShowMovingsForm.TypeStress.Caption := 'Пересечение';  //Fedorova 2019
+If StressType.ItemIndex + 1 = 9 then ShowMovingsForm.TypeStress.Caption := 'Объединение';  //Fedorova 2019
 //END ZHEREBTSOV
-end;
 
+end;
 
 
 
@@ -541,7 +571,4 @@ begin
     ShowMovingsForm.InfoFiniteElementNumberChange(Sender);
     end;
 end;
-
-
 end.
-

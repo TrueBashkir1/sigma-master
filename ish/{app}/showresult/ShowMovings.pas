@@ -295,11 +295,14 @@ TYPE
     PROCEDURE ShowElement(Canvas:TCanvas;OneElement:TOneElement);
     PROCEDURE ShowElement1(Canvas:TCanvas;OneElement:TOneElement);
     PROCEDURE ShowElement2(Canvas:TCanvas;OneElement:TOneElement);
+    PROCEDURE ShowElement3(Canvas:TCanvas;OneElement:TOneElement);    //Fedorova
+    PROCEDURE ShowElement4(Canvas:TCanvas;OneElement:TOneElement);    //Fedorova
     PROCEDURE ShowElementOld(Canvas:TCanvas;OneElement:TOneElement);
     PROCEDURE ShowMaterialColoredElement(Canvas:TCanvas;OneElement:TOneElement);
     procedure ShowOneElement(Element: TOneElement; Canvas : TCanvas);
     procedure ShowOneElementInfo(Canvas:TCanvas;ElementToPaint: String);
     FUNCTION StressInElement(OneElement : TOneElement;VAR stress: ElStressArray):BOOLEAN;
+    FUNCTION StressInElement2(OneElement : TOneElement; n : Byte; VAR stress: ElStressArray):BOOLEAN;  //Fedorova
     PROCEDURE ShowArrow(Canvas:TCanvas;x,y,long:INTEGER;Alfa:MyReal);
     PROCEDURE ShowBoundForce(Canvas:TCanvas);
     PROCEDURE ShowText(Canvas:TCanvas;x,y:INTEGER;S:STRING);
@@ -1395,9 +1398,13 @@ VAR
 BEGIN
   //как рисовать
   Canvas.Pen.Style:=psClear;
-
+  if  (Form1.StressType.ItemIndex+1 = 8) or (Form1.StressType.ItemIndex+1 = 9) then
+  begin
+    ShowElement3(Canvas,OneElement);
+    Exit;
+  end;
   //находим напряжения в узлах в текущем элементе
-  StressInElement(OneElement,stress);
+   StressInElement(OneElement,stress);
   //Координаты узлов элемента
   K_M:=Form1.Mover.Position*MoverK;
   OneNode:=Nodes_Result.GetMovedNode(OneElement.Node1,K_M);
@@ -1424,7 +1431,6 @@ BEGIN
     begin
         LevNode[i]:= abs(Trunc((Elements_Result.min[Form1.StressType.ItemIndex+1]-stress[i])/Level_minus));
     end;
-
 
     if Crosscut.Checked = false then begin
       if  (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
@@ -1494,12 +1500,10 @@ BEGIN
      end;
   end
   else begin
-
      pos1 := a[2];
      pos2 := a[3];
      pos3 := a[4];
      pos4 := a[5];
-
   end;
 
 
@@ -2103,8 +2107,7 @@ BEGIN
   Node[2]:=Nodes_Result.GetNode(OneElement.Node2);
   Node[3]:=Nodes_Result.GetNode(OneElement.Node3);
 
-  j:= Form1.StressType.ItemIndex+1;
-
+  j:= Form1.StressType.ItemIndex+1;  //ТИП НАПРЯЖЕНИЯ
   FOR i:=1 TO 3 DO BEGIN
     Strain[i]:=0;
     Count[i]:=0;
@@ -2662,11 +2665,14 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
   var
     buf,f: Integer;
   begin
-      if (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
+    if (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
+    begin
+      if  (Form1.StressType.ItemIndex+1 <> 8) and (Form1.StressType.ItemIndex+1 <> 9) then
       begin
       //если граница меньше/больше минимального/максимального знач. напряжения
       //заменяем её на мин./макс. значение напряжение
       f:=0;
+      
       if (Spin_0_min.Value < Elements_Result.min[Form1.StressType.ItemIndex+1]) then begin
         ShowMessage('Левое введенное число меньше минимального нижнего значения данного напряжения. Значение будет исправлено.');
         Spin_0_min.Value := trunc(Elements_Result.Min[Form1.StressType.ItemIndex+1])+1;
@@ -2687,6 +2693,7 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
         Spin_0_max.Value := trunc(Elements_Result.Max[Form1.StressType.ItemIndex+1])-1;
         f:=1;
       end;
+      end;
 
       //При задании неверном задании интервалов, они автоматически исправляются
       if (Spin_0_min.Value > Spin_0_max.Value) and (f=0) then begin
@@ -2697,7 +2704,7 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
         Spin_0_max.Value := buf;
       end;
 
-      end;
+    end;
   end;
 
   VAR
@@ -2736,15 +2743,16 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
 
     for pos := 0 to z do
     begin
-    if pos >= level_zero then
-    begin
-        text:= MyFloatToStr((pos-level_zero) * level_plus);
-    end
-    else
-    begin
-        text:= MyFloatToStr(Elements_Result.Min[Form1.StressType.ItemIndex+1]+(pos * level_minus));
-    end;
-             //Федорова Е.И. 2018                 //для 3х значений, начиная с нижнего
+      if pos >= level_zero then
+      begin
+          text:= MyFloatToStr((pos-level_zero) * level_plus);
+      end
+      else
+      begin
+          text:= MyFloatToStr(Elements_Result.Min[Form1.StressType.ItemIndex+1]+(pos * level_minus));
+      end;
+
+            //Федорова Е.И. 2018                 //для 3х значений, начиная с нижнего
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (UseLines.Checked = true) and (CheckBox1.Checked = true) then
         begin
@@ -2752,6 +2760,8 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
           begin
             if Crosscut.Checked = false then
             begin
+              if  (Form1.StressType.ItemIndex+1 <> 8) and (Form1.StressType.ItemIndex+1 <> 9) then
+              begin
                  a[1] := Spin_0_max.Value;
                  a[2] := Spin_0_min.Value;
                  a[3] := Elements_Result.Min[Form1.StressType.ItemIndex+1];
@@ -2768,6 +2778,27 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
                     end;
                  for i:=0 to 5 do
                   if pos = i then text := MyFloatToStr(a[i+1]);  //заполнение шкалы
+              end
+              else begin
+                 a[1] := Spin_0_max.Value;
+                 a[2] := Spin_0_min.Value;
+                 a[3] := Elements_Result.Min[2];
+                 a[4] := Elements_Result.Max[2];
+                 a[5] := 0;
+             //    ShowMessage(MyFloatToStr(a[3]));
+             //   ShowMessage(MyFloatToStr(a[4]));
+             
+                 for i:=1 to 4 do
+                  for j:=i+1 to 5 do
+                    if a[i]>a[j] then   //сортировка по возратанию
+                    begin
+                      buf:=a[i];
+                      a[i]:=a[j];
+                      a[j]:=buf;
+                    end;
+                 for i:=0 to 5 do
+                  if pos = i then text := MyFloatToStr(a[i+1]);  //заполнение шкалы
+              end;
             end
             else begin
                 if  (Spin_0_max_2.Text <> '-') and (Spin_0_min_2.Text <> '-') then
@@ -2800,22 +2831,13 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    Canvas.TextOut(left,Legend.Height - 2*Top + 5 - trunc(len*pos),text);
+     Canvas.TextOut(left,Legend.Height - 2*Top + 5 - trunc(len*pos),text);
 
     end;
-    if Elements_Result.Max[Form1.StressType.ItemIndex+1] >= 0 then
-    text:= MyFloatToStr(Elements_Result.Max[Form1.StressType.ItemIndex+1])
-    else
-    text:= '0,00';
-                                                //для верхнего значения  (перемещено в проверку)
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-   { if (UseLines.Checked = true) and (CheckBox1.Checked = true) and
-     (Spin_0_max.Value >= Elements_Result.Max[Form1.StressType.ItemIndex+1]) then begin
-       text:= MyFloatToStr(Spin_0_max.Value);
-    end;        }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//    if Elements_Result.Max[Form1.StressType.ItemIndex+1] >= 0 then
+//    text:= MyFloatToStr(Elements_Result.Max[Form1.StressType.ItemIndex+1])
+//    else text:= '0,00';
 
     Canvas.TextOut(left,Legend.Height - 2*Top + 5 - trunc(len*z),text);
   END;
@@ -3886,8 +3908,8 @@ procedure TShowMovingsForm.Spin_0_Exit(Sender: TObject);
 begin
         if (Spin_0_max.text = '') then Spin_0_max.Value := 1;
         if (Spin_0_min.text = '') then Spin_0_min.Value := 1;
-        if (Spin_0_max_2.text = '') then Spin_0_max.Value := 1;
-        if (Spin_0_min_2.text = '') then Spin_0_min.Value := 1;
+        if (Spin_0_max_2.text = '') then Spin_0_max_2.Value := 1;
+        if (Spin_0_min_2.text = '') then Spin_0_min_2.Value := 1;
 end;
 
 procedure TShowMovingsForm.UseNumZoneClick(Sender: TObject);
@@ -4653,8 +4675,6 @@ TRY
     Form1.InfoMin1.caption:=MyFloatToStr(st[5]);
     Form1.InfoConer1.caption:=MyFloatToStr(st[7]);
     Form1.InfoEcv1.caption:=MyFloatToStr(st[6]);
-
-
 end;
 
 // Если изменилось значение в строке и нажат Enter, то выводим инф-ю по данному КЭ
@@ -4666,7 +4686,6 @@ ShowOneElementInfo(Canvas,Form1.InfoFiniteElementNumber.text);
 DrawSelectedPoint:=false;
 MainRePaint;
 end;
-
 
 
 
@@ -4712,4 +4731,644 @@ if Crosscut.Visible = true then
   MainRePaint;
   LegendRePaint;
 end;
+
+
+//Fedorova E.I. 2019
+//значение текущего напряжения в узлах элемента для пересечения и объединения
+FUNCTION TShowMovingsForm.StressInElement2(OneElement : TOneElement; n : Byte ;VAR stress : ElStressArray):BOOLEAN;
+VAR
+  Count      : ARRAY [1..3] OF BYTE;
+  K          : ARRAY [1..3] OF MyReal;
+  Node       : ARRAY [1..3] OF TOneNode;
+  Strain     : ARRAY [1..3] OF MyReal;
+  X,Y,X_OPT,Y_OPT        : MyReal;
+  RX,RY      : MyReal;
+  i,j        : BYTE;
+  z,Num      : INTEGER;
+
+BEGIN
+  // Определяем координаты узлов, которые образуют КЭ.
+  Node[1]:=Nodes_Result.GetNode(OneElement.Node1);
+  Node[2]:=Nodes_Result.GetNode(OneElement.Node2);
+  Node[3]:=Nodes_Result.GetNode(OneElement.Node3);
+
+ // j:= Form1.StressType.ItemIndex+1;  //ТИП НАПРЯЖЕНИЯ
+  j:=n;
+  FOR i:=1 TO 3 DO BEGIN
+    Strain[i]:=0;
+    Count[i]:=0;
+  END;
+  // Определяем сумму напряжений в каждом из 3-х узлов.
+  Num := Elements_Result.GetNumElements;
+  FOR z:=1 TO Num DO BEGIN
+    OneElement:=Elements_Result.GetElement(z);
+    FOR i:=1 TO 3 DO BEGIN
+      IF (OneElement.Node1=Node[i].Number) OR (OneElement.Node2=Node[i].Number) OR (OneElement.Node3=Node[i].Number) THEN BEGIN
+        Strain[i]:=Strain[i]+OneElement.Strain[j];
+        INC(Count[i]);
+      END;
+    END;
+  END;
+  // Определяем среднее напряжение в каждом из 3-х узлов.
+  FOR i:=1 TO 3 DO Strain[i]:=MyDiv(Strain[i], Count[i]);
+  // Определяем точку равнодействующей напряжний в 3-х узлах.
+  RX:=MyDiv(Node[1].X*Strain[1]+Node[2].X*Strain[2]+Node[3].X*Strain[3], Strain[1]+Strain[2]+Strain[3]);
+  RY:=MyDiv(Node[1].Y*Strain[1]+Node[2].Y*Strain[2]+Node[3].Y*Strain[3], Strain[1]+Strain[2]+Strain[3]);
+  // Средняя точка
+  X_OPT:=(node[1].x+node[2].x+node[3].x)/3;
+  Y_OPT:=(node[1].y+node[2].y+node[3].y)/3;
+  FOR z:=1 to 3 do begin
+    X:=node[z].x + (X_OPT-node[z].x)/10000;
+    Y:=node[z].y + (Y_OPT-node[z].y)/10000;
+    // Для каждой из 3-х вершин определяем коэффициент ее влияния на напряжение в ТОЧКЕ.
+    FOR i:=1 TO 3 DO K[i]:=MyDiv(SQRT(SQR(RX-Node[i].X)+SQR(RY-Node[i].Y)), SQRT(SQR(X-Node[i].X)+SQR(Y-Node[i].Y)));
+    // Определяем напряжение в ТОЧКЕ.
+    stress[z]:=MyDiv(Strain[1]*K[1]+Strain[2]*K[2]+Strain[3]*K[3], K[1]+K[2]+K[3]);
+  end;
+  Result:=TRUE;
+END;
+
+//Fedorova E.I. 2019
+//показывает один элемент для пересечения и объединения
+PROCEDURE TShowMovingsForm.ShowElement3(Canvas:TCanvas;OneElement:TOneElement);
+VAR
+  OneNode : TOneNode;
+  K_M     : MyReal;
+  i,beg,off       : INTEGER;
+  x, y    : ARRAY [1..360] OF INTEGER; //координаты узлов
+  LevNode : ARRAY [1..360] OF INTEGER; //номер уровня в узлах
+  ID      : ARRAY [1..360] OF INTEGER;
+  stress  : ElStressArray; //текущее напряжение в узлах
+  Kol     : INTEGER; //количество записей
+  ID_now,d :  INTEGER;
+  x1,y1   : ARRAY [1..3] OF INTEGER;
+  st : string;
+  pos1, pos2, pos3, pos4: MyReal;
+  a : ARRAY [1..6] OF MyReal;
+  j,k,n : Integer;
+  buf : MyReal;
+
+BEGIN
+  //как рисовать
+  Canvas.Pen.Style:=psClear;
+
+  FOR n:=0 to 5 DO
+  BEGIN
+    if n = 0 then begin
+      ShowElement4(Canvas,OneElement);
+      exit;
+    end;
+    //находим напряжения в узлах в текущем элементе
+    StressInElement2(OneElement,n,stress);
+    //Координаты узлов элемента
+    K_M:=Form1.Mover.Position*MoverK;
+    OneNode:=Nodes_Result.GetMovedNode(OneElement.Node1,K_M);
+    x[1]:=Xreal2Xpaint(OneNode.x);
+    y[1]:=Yreal2Ypaint(OneNode.y);
+    x1[1]:=x[1]; y1[1]:=y[1];
+    OneNode:=Nodes_Result.GetMovedNode(OneElement.Node2,K_M);
+    x[2]:=Xreal2Xpaint(OneNode.x);
+    y[2]:=Yreal2Ypaint(OneNode.y);
+    x1[2]:=x[2]; y1[2]:=y[2];
+    OneNode:=Nodes_Result.GetMovedNode(OneElement.Node3,K_M);
+    x[3]:=Xreal2Xpaint(OneNode.x);
+    y[3]:=Yreal2Ypaint(OneNode.y);
+    x1[3]:=x[3]; y1[3]:=y[3];
+
+    //Определяем номера уровней в узлах
+    FOR i:=1 TO 3 DO BEGIN
+
+      //ПЕРЕСЕЧЕНИЕ
+      if (Form1.StressType.ItemIndex + 1 = 8) then
+      begin
+        if Crosscut.Checked = false then
+        begin
+          if  (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
+          begin
+              if (stress[i] > spin_0_max.Value) or (stress[i] < spin_0_min.Value) then
+              begin
+               if (stress[i] > 0) then LevNode[i] := 3;
+               if (stress[i] < 0) then LevNode[i] := 0;
+              end;
+          end;
+        end;
+      end
+      else begin
+      {  if  (Spin_0_max_2.Text <> '-') and (Spin_0_min_2.Text <> '-') then
+         begin
+         //  a[1] := 0;
+          a[1] := Spin_0_max.Value;
+          a[2] := Spin_0_min.Value;
+          a[3] := Spin_0_max_2.Value;
+          a[4] := Spin_0_min_2.Value;
+          a[5] := Elements_Result.Min[Form1.StressType.ItemIndex+1];
+          a[6] := Elements_Result.Max[Form1.StressType.ItemIndex+1];
+
+          for k:=1 to 5 do
+            for j:=k+1 to 6 do
+              if a[k]>a[j] then   //сортировка по возратанию
+              begin
+                buf:=a[k];
+                a[k]:=a[j];
+                a[j]:=buf;
+              end;
+
+          if (stress[i] >= a[1]) and (stress[i] <= a[2]) then LevNode[i] := 0;
+          if (stress[i] >= a[2]) and (stress[i] <= a[3]) then LevNode[i] := 1;
+          if (stress[i] >= a[3]) and (stress[i] <= a[4]) then LevNode[i] := 2;
+          if (stress[i] >= a[4]) and (stress[i] <= a[5]) then LevNode[i] := 3;
+          if (stress[i] >= a[5]) and (stress[i] <= a[6]) then LevNode[i] := 4;
+         end;
+        end;}
+      end;
+    END;
+  END;
+
+  if Crosscut.Checked = false then begin
+     if  (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
+     begin
+
+      if spin_0_max.Value >= 0 then begin
+        pos3 := spin_0_max.Value;
+        if spin_0_min.Value >= 0 then begin
+          pos2 := spin_0_min.Value;
+          pos1 := 0;
+        end
+        else begin
+          pos2 := 0;
+          pos1 := spin_0_min.Value;
+        end;
+      end
+      else begin
+        pos3 := 0;
+        pos2 := spin_0_max.Value;
+        pos1 := spin_0_min.Value;
+      end;
+     end;
+  end
+  else begin
+    { pos1 := a[2];
+     pos2 := a[3];
+     pos3 := a[4];
+     pos4 := a[5];    }
+  end;
+
+
+  //Заполнение координат и уровней промежуточных точек
+  Kol:=3;
+  ID[1]:=0;
+  ID_now:=0;
+  //1
+  if LevNode[1] > LevNode[2] then
+    begin beg:= 2; off:= 1; d:=-1; ID_now:=LevNode[1]-LevNode[2]+1; end
+  else
+    begin beg:= 1; off:= 2; d:= 1; end;
+  FOR i:=LevNode[beg]+1 TO LevNode[off] DO BEGIN
+
+    if i >= level_zero then
+    begin
+        if i = 2 then K_M:=pos2;
+        if i = 3 then K_M:=pos3;
+        if i = 4 then K_M:=pos4;
+        if K_M > stress[off] then K_M:=stress[off];
+        K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
+    end
+    else
+    begin
+        if i = 1 then K_M:=pos1;
+        if i = 0 then K_M:=stress[off];
+        K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
+    end;
+
+    ID_now:=ID_now + d;
+    x[kol+1]:=Trunc(x[beg]+ (x[off]-x[beg])*K_M);
+    y[kol+1]:=Trunc(y[beg]+ (y[off]-y[beg])*K_M);
+    LevNode[kol+1]:=i-1;
+    ID[kol+1]:=ID_now;
+    x[kol+2]:=x[kol+1];
+    y[kol+2]:=y[kol+1];
+    LevNode[kol+2]:=i;
+    ID[kol+2]:=ID[kol+1];
+    Kol:=Kol+2;
+  END;
+  ID_now:=LevNode[off]-LevNode[beg]+1;
+  ID[2]:=ID_now;
+
+  //2
+  if LevNode[2] > LevNode[3] then
+    begin beg:= 3; off:= 2; d:=-1; ID_now:=ID_now + LevNode[2]-LevNode[3]+1; end
+  else
+    begin beg:= 2; off:= 3; d:= 1; end;
+  FOR i:=LevNode[beg]+1 TO LevNode[off] DO BEGIN
+    if i >= level_zero then
+    begin
+        if i = 2 then K_M:=pos2;
+        if i = 3 then K_M:=pos3;
+        if i = 4 then K_M:=pos4;
+        if K_M > stress[off] then K_M:=stress[off];
+        K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
+    end
+    else
+    begin
+        if i = 1 then K_M:=pos1;
+        if i = 0 then K_M:=stress[off];
+        K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
+    end;
+
+    ID_now:=ID_now + d;
+    x[kol+1]:=Trunc(x[beg]+ (x[off]-x[beg])*K_M);
+    y[kol+1]:=Trunc(y[beg]+ (y[off]-y[beg])*K_M);
+    LevNode[kol+1]:=i-1;
+    ID[kol+1]:=ID_now;
+    x[kol+2]:=x[kol+1];
+    y[kol+2]:=y[kol+1];
+    LevNode[kol+2]:=i;
+    ID[kol+2]:=ID[kol+1];
+    Kol:=Kol+2;
+  END;
+  ID_now:=ID[2] + LevNode[off]-LevNode[beg]+1;
+  ID[3]:=ID_now;
+
+  //3
+  if LevNode[3] > LevNode[1] then
+    begin beg:= 1; off:= 3; d:=-1; ID_now:=ID_now + LevNode[3]-LevNode[1]+1; end
+  else
+    begin beg:= 3; off:= 1; d:= 1; end;
+  FOR i:=LevNode[beg]+1 TO LevNode[off] DO BEGIN
+    if i >= level_zero then
+    begin
+        if i = 2 then K_M:=pos2;
+        if i = 3 then K_M:=pos3;
+        if i = 4 then K_M:=pos4;
+        if K_M > stress[off] then K_M:=stress[off];
+        K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
+    end
+    else
+    begin
+        if i = 1 then K_M:=pos1;
+        if i = 0 then K_M:=stress[off];
+        K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
+    end;
+
+    ID_now:=ID_now + d;
+    x[kol+1]:=Trunc(x[beg]+ (x[off]-x[beg])*K_M);
+    y[kol+1]:=Trunc(y[beg]+ (y[off]-y[beg])*K_M);
+    LevNode[kol+1]:=i-1;
+    ID[kol+1]:=ID_now;
+    x[kol+2]:=x[kol+1];
+    y[kol+2]:=y[kol+1];
+    LevNode[kol+2]:=i;
+    ID[kol+2]:=ID[kol+1];
+    Kol:=Kol+2;
+  END;
+
+  //сортировка
+  FOR beg:=1 TO Kol DO BEGIN
+  FOR i:=1 TO Kol-1 DO BEGIN
+    if LevNode[i] > LevNode[i+1] then
+    begin
+      off:=LevNode[i]; LevNode[i]:=LevNode[i+1]; LevNode[i+1]:=off;
+      off:=x[i]; x[i]:=x[i+1]; x[i+1]:=off;
+      off:=y[i]; y[i]:=y[i+1]; y[i+1]:=off;
+      off:=ID[i]; ID[i]:=ID[i+1]; ID[i+1]:=off;
+    end;
+    if (LevNode[i] = LevNode[i+1]) and (ID[i]>ID[i+1]) then
+    begin
+      off:=LevNode[i]; LevNode[i]:=LevNode[i+1]; LevNode[i+1]:=off;
+      off:=x[i]; x[i]:=x[i+1]; x[i+1]:=off;
+      off:=y[i]; y[i]:=y[i+1]; y[i+1]:=off;
+      off:=ID[i]; ID[i]:=ID[i+1]; ID[i+1]:=off;
+    end;
+  end;
+  end;
+  //Рисование элементов
+  LevNode[Kol+1]:=-1;
+  off:=LevNode[1];
+  beg:=0;
+  for i:=1 to Kol+1 do begin
+    inc(beg);
+    //if LevNode[i] = 0 then begin
+    //st := 'm1 ' + IntToStr(LevNode[i]);
+    //ShowMessage(st);
+    //end;
+    if off<>LevNode[i] then begin
+      Canvas.Brush.Color:=GenerateColor(LevNode[i-1]);
+      if beg = 4 then
+        Canvas.Polygon([point(x[i-3],y[i-3]),point(x[i-2],y[i-2]),point(x[i-1],y[i-1])]);
+      if beg = 5 then begin
+        Canvas.Polygon([point(x[i-4],y[i-4]),point(x[i-3],y[i-3]),point(x[i-2],y[i-2]),point(x[i-1],y[i-1])]);
+      end;
+      if beg = 6 then begin
+        Canvas.Polygon([point(x[i-5],y[i-5]),point(x[i-4],y[i-4]),point(x[i-3],y[i-3]),point(x[i-2],y[i-2]),point(x[i-1],y[i-1])]);
+      end;
+      off:=LevNode[i];
+      beg:=1;
+    end;
+  end;
+  Canvas.Pen.Style:=psSolid;
+  Canvas.PolyLine([point(x1[1],y1[1]),point(x1[2],y1[2]),point(x1[3],y1[3]),point(x1[1],y1[1])]);
+  IF UseNumZone.Checked THEN ShowText(Canvas,ROUND((x1[1]+x1[2]+x1[3])/3),ROUND((y1[1]+y1[2]+y1[3])/3),inttostr(OneElement.Number));
+
+  IF UseNumMater.Checked THEN begin
+   Canvas.Brush.Style:=bsClear;
+   ShowText(Canvas,ROUND((x1[1]+x1[2]+x1[3])/3),ROUND((y1[1]+y1[2]+y1[3])/3),inttostr(OneElement.Material));
+  END;
+END;
+
+
+//Fedorova E.I. 2019
+//показывает один элемент для пересечения и объединения (для вывода первого напряжения)
+PROCEDURE TShowMovingsForm.ShowElement4(Canvas:TCanvas;OneElement:TOneElement);
+VAR
+  OneNode : TOneNode;
+  K_M     : MyReal;
+  i,beg,off       : INTEGER;
+  x, y    : ARRAY [1..360] OF INTEGER; //координаты узлов
+  LevNode : ARRAY [1..360] OF INTEGER; //номер уровня в узлах
+  ID      : ARRAY [1..360] OF INTEGER;
+  stress  : ElStressArray; //текущее напряжение в узлах
+  Kol     : INTEGER; //количество записей
+  ID_now,d :  INTEGER;
+  x1,y1   : ARRAY [1..3] OF INTEGER;
+  st : string;
+  pos1, pos2, pos3, pos4: MyReal;
+  a : ARRAY [1..6] OF MyReal;
+  j,k : Integer;
+  buf : MyReal;
+
+BEGIN
+  //как рисовать
+  Canvas.Pen.Style:=psClear;
+
+  //находим напряжения в узлах в текущем элементе
+   StressInElement2(OneElement,0,stress);
+  //Координаты узлов элемента
+  K_M:=Form1.Mover.Position*MoverK;
+  OneNode:=Nodes_Result.GetMovedNode(OneElement.Node1,K_M);
+  x[1]:=Xreal2Xpaint(OneNode.x);
+  y[1]:=Yreal2Ypaint(OneNode.y);
+  x1[1]:=x[1]; y1[1]:=y[1];
+  OneNode:=Nodes_Result.GetMovedNode(OneElement.Node2,K_M);
+  x[2]:=Xreal2Xpaint(OneNode.x);
+  y[2]:=Yreal2Ypaint(OneNode.y);
+  x1[2]:=x[2]; y1[2]:=y[2];
+  OneNode:=Nodes_Result.GetMovedNode(OneElement.Node3,K_M);
+  x[3]:=Xreal2Xpaint(OneNode.x);
+  y[3]:=Yreal2Ypaint(OneNode.y);
+  x1[3]:=x[3]; y1[3]:=y[3];
+
+  //Определяем номера уровней в узлах
+  FOR i:=1 TO 3 DO BEGIN
+    if stress[i] >= 0 then
+    begin
+        LevNode[i]:= abs(Trunc(stress[i]/Level_plus)) + level_zero;
+    end
+    else
+    begin
+        LevNode[i]:= abs(Trunc((Elements_Result.min[Form1.StressType.ItemIndex+1]-stress[i])/Level_minus));
+    end;
+
+    if Crosscut.Checked = false then begin
+      if  (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
+      begin
+
+      if (stress[i] >= spin_0_max.Value) and (stress[i] >= 0) then LevNode[i] := 3;
+      if (stress[i] >= spin_0_max.Value) and (stress[i] <= 0) then LevNode[i] := 2;
+      if (stress[i] <= spin_0_min.Value) and (stress[i] <= 0) then LevNode[i] := 0;
+      if (stress[i] <= spin_0_min.Value) and (stress[i] >= 0) then LevNode[i] := 1;
+      if (stress[i] <= spin_0_max.Value) and (stress[i] >= spin_0_min.Value) then
+        begin
+         if (stress[i] >= 0) then LevNode[i] := 2;
+         if (stress[i] <= 0) then LevNode[i] := 1;
+        end;
+      end;
+    end
+    else begin
+      if  (Spin_0_max_2.Text <> '-') and (Spin_0_min_2.Text <> '-') then
+      begin
+        //  a[1] := 0;
+        a[1] := Spin_0_max.Value;
+        a[2] := Spin_0_min.Value;
+        a[3] := Spin_0_max_2.Value;
+        a[4] := Spin_0_min_2.Value;
+        a[5] := Elements_Result.Min[Form1.StressType.ItemIndex+1];
+        a[6] := Elements_Result.Max[Form1.StressType.ItemIndex+1];
+
+        for k:=1 to 5 do
+          for j:=k+1 to 6 do
+            if a[k]>a[j] then   //сортировка по возратанию
+            begin
+              buf:=a[k];
+              a[k]:=a[j];
+              a[j]:=buf;
+            end;
+
+        if (stress[i] >= a[1]) and (stress[i] <= a[2]) then LevNode[i] := 0;
+        if (stress[i] >= a[2]) and (stress[i] <= a[3]) then LevNode[i] := 1;
+        if (stress[i] >= a[3]) and (stress[i] <= a[4]) then LevNode[i] := 2;
+        if (stress[i] >= a[4]) and (stress[i] <= a[5]) then LevNode[i] := 3;
+        if (stress[i] >= a[5]) and (stress[i] <= a[6]) then LevNode[i] := 4;
+       end;
+    end;
+
+  END;
+
+  if Crosscut.Checked = false then begin
+     if  (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
+     begin
+
+      if spin_0_max.Value >= 0 then begin
+        pos3 := spin_0_max.Value;
+        if spin_0_min.Value >= 0 then begin
+          pos2 := spin_0_min.Value;
+          pos1 := 0;
+        end
+        else begin
+          pos2 := 0;
+          pos1 := spin_0_min.Value;
+        end;
+      end
+      else begin
+        pos3 := 0;
+        pos2 := spin_0_max.Value;
+        pos1 := spin_0_min.Value;
+      end;
+     end;
+  end
+  else begin
+     pos1 := a[2];
+     pos2 := a[3];
+     pos3 := a[4];
+     pos4 := a[5];
+  end;
+
+
+  //Заполнение координат и уровней промежуточных точек
+  Kol:=3;
+  ID[1]:=0;
+  ID_now:=0;
+  //1
+  if LevNode[1] > LevNode[2] then
+    begin beg:= 2; off:= 1; d:=-1; ID_now:=LevNode[1]-LevNode[2]+1; end
+  else
+    begin beg:= 1; off:= 2; d:= 1; end;
+  FOR i:=LevNode[beg]+1 TO LevNode[off] DO BEGIN
+
+    if i >= level_zero then
+    begin
+        if i = 2 then K_M:=pos2;
+        if i = 3 then K_M:=pos3;
+        if i = 4 then K_M:=pos4;
+        if K_M > stress[off] then K_M:=stress[off];
+        K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
+    end
+    else
+    begin
+        if i = 1 then K_M:=pos1;
+        if i = 0 then K_M:=stress[off];
+        K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
+    end;
+
+    ID_now:=ID_now + d;
+    x[kol+1]:=Trunc(x[beg]+ (x[off]-x[beg])*K_M);
+    y[kol+1]:=Trunc(y[beg]+ (y[off]-y[beg])*K_M);
+    LevNode[kol+1]:=i-1;
+    ID[kol+1]:=ID_now;
+    x[kol+2]:=x[kol+1];
+    y[kol+2]:=y[kol+1];
+    LevNode[kol+2]:=i;
+    ID[kol+2]:=ID[kol+1];
+    Kol:=Kol+2;
+  END;
+  ID_now:=LevNode[off]-LevNode[beg]+1;
+  ID[2]:=ID_now;
+
+  //2
+  if LevNode[2] > LevNode[3] then
+    begin beg:= 3; off:= 2; d:=-1; ID_now:=ID_now + LevNode[2]-LevNode[3]+1; end
+  else
+    begin beg:= 2; off:= 3; d:= 1; end;
+  FOR i:=LevNode[beg]+1 TO LevNode[off] DO BEGIN
+    if i >= level_zero then
+    begin
+        if i = 2 then K_M:=pos2;
+        if i = 3 then K_M:=pos3;
+        if i = 4 then K_M:=pos4;
+        if K_M > stress[off] then K_M:=stress[off];
+        K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
+    end
+    else
+    begin
+        if i = 1 then K_M:=pos1;
+        if i = 0 then K_M:=stress[off];
+        K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
+    end;
+
+    ID_now:=ID_now + d;
+    x[kol+1]:=Trunc(x[beg]+ (x[off]-x[beg])*K_M);
+    y[kol+1]:=Trunc(y[beg]+ (y[off]-y[beg])*K_M);
+    LevNode[kol+1]:=i-1;
+    ID[kol+1]:=ID_now;
+    x[kol+2]:=x[kol+1];
+    y[kol+2]:=y[kol+1];
+    LevNode[kol+2]:=i;
+    ID[kol+2]:=ID[kol+1];
+    Kol:=Kol+2;
+  END;
+  ID_now:=ID[2] + LevNode[off]-LevNode[beg]+1;
+  ID[3]:=ID_now;
+
+  //3
+  if LevNode[3] > LevNode[1] then
+    begin beg:= 1; off:= 3; d:=-1; ID_now:=ID_now + LevNode[3]-LevNode[1]+1; end
+  else
+    begin beg:= 3; off:= 1; d:= 1; end;
+  FOR i:=LevNode[beg]+1 TO LevNode[off] DO BEGIN
+    if i >= level_zero then
+    begin
+        if i = 2 then K_M:=pos2;
+        if i = 3 then K_M:=pos3;
+        if i = 4 then K_M:=pos4;
+        if K_M > stress[off] then K_M:=stress[off];
+        K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
+    end
+    else
+    begin
+        if i = 1 then K_M:=pos1;
+        if i = 0 then K_M:=stress[off];
+        K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
+    end;
+
+    ID_now:=ID_now + d;
+    x[kol+1]:=Trunc(x[beg]+ (x[off]-x[beg])*K_M);
+    y[kol+1]:=Trunc(y[beg]+ (y[off]-y[beg])*K_M);
+    LevNode[kol+1]:=i-1;
+    ID[kol+1]:=ID_now;
+    x[kol+2]:=x[kol+1];
+    y[kol+2]:=y[kol+1];
+    LevNode[kol+2]:=i;
+    ID[kol+2]:=ID[kol+1];
+    Kol:=Kol+2;
+  END;
+
+  //сортировка
+  FOR beg:=1 TO Kol DO BEGIN
+  FOR i:=1 TO Kol-1 DO BEGIN
+    if LevNode[i] > LevNode[i+1] then
+    begin
+      off:=LevNode[i]; LevNode[i]:=LevNode[i+1]; LevNode[i+1]:=off;
+      off:=x[i]; x[i]:=x[i+1]; x[i+1]:=off;
+      off:=y[i]; y[i]:=y[i+1]; y[i+1]:=off;
+      off:=ID[i]; ID[i]:=ID[i+1]; ID[i+1]:=off;
+    end;
+    if (LevNode[i] = LevNode[i+1]) and (ID[i]>ID[i+1]) then
+    begin
+      off:=LevNode[i]; LevNode[i]:=LevNode[i+1]; LevNode[i+1]:=off;
+      off:=x[i]; x[i]:=x[i+1]; x[i+1]:=off;
+      off:=y[i]; y[i]:=y[i+1]; y[i+1]:=off;
+      off:=ID[i]; ID[i]:=ID[i+1]; ID[i+1]:=off;
+    end;
+  end;
+  end;
+  //Рисование элементов
+  LevNode[Kol+1]:=-1;
+  off:=LevNode[1];
+  beg:=0;
+  for i:=1 to Kol+1 do begin
+    inc(beg);
+    //if LevNode[i] = 0 then begin
+    //st := 'm1 ' + IntToStr(LevNode[i]);
+    //ShowMessage(st);
+    //end;
+    if off<>LevNode[i] then begin
+      Canvas.Brush.Color:=GenerateColor(LevNode[i-1]);
+      if beg = 4 then
+        Canvas.Polygon([point(x[i-3],y[i-3]),point(x[i-2],y[i-2]),point(x[i-1],y[i-1])]);
+      if beg = 5 then begin
+        Canvas.Polygon([point(x[i-4],y[i-4]),point(x[i-3],y[i-3]),point(x[i-2],y[i-2]),point(x[i-1],y[i-1])]);
+      end;
+      if beg = 6 then begin
+        Canvas.Polygon([point(x[i-5],y[i-5]),point(x[i-4],y[i-4]),point(x[i-3],y[i-3]),point(x[i-2],y[i-2]),point(x[i-1],y[i-1])]);
+      end;
+      off:=LevNode[i];
+      beg:=1;
+    end;
+  end;
+  Canvas.Pen.Style:=psSolid;
+  Canvas.PolyLine([point(x1[1],y1[1]),point(x1[2],y1[2]),point(x1[3],y1[3]),point(x1[1],y1[1])]);
+  IF UseNumZone.Checked THEN ShowText(Canvas,ROUND((x1[1]+x1[2]+x1[3])/3),ROUND((y1[1]+y1[2]+y1[3])/3),inttostr(OneElement.Number));
+
+  IF UseNumMater.Checked THEN begin
+   Canvas.Brush.Style:=bsClear;
+   ShowText(Canvas,ROUND((x1[1]+x1[2]+x1[3])/3),ROUND((y1[1]+y1[2]+y1[3])/3),inttostr(OneElement.Material));
+  END;
+END;
+
+
+
+
+
+
+
+
 end.
