@@ -4852,8 +4852,19 @@ BEGIN
       begin
         if (stress[i] <= spin_0_max.Value) and (stress[i] >= spin_0_min.Value) then f1:=f1+1;
       end;
-      if (f1 = 3) then goto label1;
-      if (f2 <> 1) then goto label1;
+
+     //ПЕРЕСЕЧЕНИЕ
+      if (Form1.StressType.ItemIndex + 1 = 8) then
+      begin
+        if (f1 = 3) then goto label1;
+        if (f2 <> 1) then goto label1;
+      end;
+
+     //ОБЪЕДИНЕНИЕ
+      if (Form1.StressType.ItemIndex + 1 = 9) then
+      begin
+        if (f1 <> 3) then goto label1;
+      end;
 
       //Координаты узлов элемента
       K_M:=Form1.Mover.Position*MoverK;
@@ -4873,9 +4884,6 @@ BEGIN
       //Определяем номера уровней в узлах
       FOR i:=1 TO 3 DO BEGIN
 
-        //ПЕРЕСЕЧЕНИЕ
-        if (Form1.StressType.ItemIndex + 1 = 8) then
-        begin
           if Crosscut.Checked = false then
           begin
             if  (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
@@ -4919,13 +4927,8 @@ BEGIN
             if (stress[i] >= a[5]) and (stress[i] <= a[6]) then LevNode[i] := 4;
            end;
           end;
-        end;
+
       end;
-
-        //ОБЪЕДИНЕНИЕ
-
-        ////////////////
-
 
     if Crosscut.Checked = false then begin
        if  (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
