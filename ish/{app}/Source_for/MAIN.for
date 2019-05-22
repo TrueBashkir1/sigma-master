@@ -352,6 +352,16 @@ C ================================================================
        IF (IPR(26)) WRITE(6,1006)
 1006   FORMAT(/,5X,'*****Finish FORMDD')
 
+1009   FORMAT(/,5X,'*****Start SCHEMA')
+1010   FORMAT(/,5X,'*Расчет затрат памяти для матрицы А')
+1011   FORMAT(/,5X,'*****Finish SCHEMA')
+
+       IF(IPR(26)) WRITE(6,1009)
+        IF(IPR(26)) WRITE(6,1010)
+              SIZ=NSZF
+       CALL SCHEMA (DIAG, ENV, XENV, SIZ)
+       IF(IPR(26)) WRITE(6,1011)
+
 C   ==============================================================
 C   ПEЧATЬ MATPИЦЫ B BИДE:ECЛИ * ,TO ЭЛEMEHT MATPИЦЫ HEHУЛEBOЙ
 C   ==============================================================
@@ -462,13 +472,7 @@ C ================================================================
        CALL STRSDD ( 3,NP,NE,NCN,NDF,DD,NOP,R,ESIGMA,IPR,BBB)
        IF(IPR(26)) WRITE(6,1008)
 1008   FORMAT(/,5X,'*****Finish STRSDD')
-1009   FORMAT(/,5X,'*****Start SCHEMA')
-1010   FORMAT(/,5X,'*****Finish SCHEMA')
 
-       IF(IPR(26)) WRITE(6,1009)
-              SIZ=NSZF
-       CALL SCHEMA (DIAG, ENV, XENV, SIZ)
-       IF(IPR(26)) WRITE(6,1010)
 c Записываем в файл 2 значения напряжений к КЭ.
 
        DO 669 I=1,NE
