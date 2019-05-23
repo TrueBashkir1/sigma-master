@@ -395,11 +395,12 @@ end;
 procedure TForm1.StressType1Click(Sender: TObject);
 begin
   //Fedorova 2019
- { If (((StressType1.ItemIndex + 1 = 8) or (StressType1.ItemIndex + 1 = 9)) and  CheckBox1.Checked = false) then
+  If (StressType1.ItemIndex + 1 = 8) or (StressType1.ItemIndex + 1 = 9) then
+  if CheckBox1.Checked = false then
   begin
-    ShowMessage('Пересечение и объединение областей можно использовать только при включении опции "Области"');
-    StressType1.ItemIndex := 0;
-  end;                      }
+    ShowMessage('Пересечение и объединение областей возможно только при включении опции "Области"');
+    StressType1.ItemIndex:=0;
+  end;
   //end Fedorova
 
   //ShowMovingsForm.StressType.ItemIndex := StressType1.ItemIndex;
@@ -424,11 +425,12 @@ end;
 procedure TForm1.StressType2Click(Sender: TObject);
 begin
   //Fedorova 2019
- { If (((StressType2.ItemIndex + 1 = 8) or (StressType2.ItemIndex + 1 = 9)) and  CheckBox1.Checked = false) then
+  If (StressType1.ItemIndex + 1 = 8) or (StressType1.ItemIndex + 1 = 9) then
+  if CheckBox1.Checked = false then
   begin
-    ShowMessage('Пересечение и объединение областей можно использовать только при включении опции "Области"');
-    StressType2.ItemIndex := 0;
-  end;                }
+    ShowMessage('Пересечение и объединение областей возможно только при включении опции "Области"');
+    StressType1.ItemIndex:=0;
+  end;
   //end Fedorova
 
   //ShowMovingsForm.StressType.ItemIndex := StressType1.ItemIndex;
@@ -453,11 +455,12 @@ procedure TForm1.StressTypeClick(Sender: TObject);
 begin
 
   //Fedorova 2019
- { If (((StressType.ItemIndex + 1 = 8) or (StressType.ItemIndex + 1 = 9)) and  CheckBox1.Checked = false) then
+  If (StressType1.ItemIndex + 1 = 8) or (StressType1.ItemIndex + 1 = 9) then
+  if CheckBox1.Checked = false then
   begin
-    ShowMessage('Пересечение и объединение областей можно использовать только при включении опции "Области"');
-    StressType.ItemIndex := 0;
-  end;              }
+    ShowMessage('Пересечение и объединение областей возможно только при включении опции "Области"');
+    StressType1.ItemIndex:=0;
+  end;
   //end Fedorova
 
 ShowMovingsForm.ChengeLegendLevel;

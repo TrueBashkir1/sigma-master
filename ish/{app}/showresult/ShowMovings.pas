@@ -4849,7 +4849,7 @@ BEGIN
 
       f1:=0;
       for i:=1 to 3 do
-      begin
+      begin                //если входит в интервал
         if (stress[i] <= spin_0_max.Value) and (stress[i] >= spin_0_min.Value) then f1:=f1+1;
       end;
 
@@ -4863,7 +4863,7 @@ BEGIN
      //ОБЪЕДИНЕНИЕ
       if (Form1.StressType.ItemIndex + 1 = 9) then
       begin
-        if (f1 <> 3) then goto label1;
+        if (f1 < 3) then goto label1;
       end;
 
       //Координаты узлов элемента
