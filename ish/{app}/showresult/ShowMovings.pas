@@ -540,15 +540,16 @@ DrawSelectedElement:= TRUE;
     ColorPlus_0.Color:=StringToColor(ReadSTRING('ColorPlus_0','clYellow'));
     ColorMinus_0.Color:=StringToColor(ReadSTRING('ColorMinus_0','clLime'));
     ColorMiddle.Color:= StringToColor(ReadSTRING('ColorMiddle','clBlue'));  //Fedorova
-    Spin_0_max.Value:=ReadInteger('Spin_0_max',500);
-    Spin_0_min.Value:=ReadInteger('Spin_0_min',1);
-    Spin_0_max_2.Value:=ReadInteger('Spin_0_max',-1);   //
-    Spin_0_min_2.Value:=ReadInteger('Spin_0_min',-500); //
-    Crosscut.Checked:=ReadBool('Crosscut',FALSE);       //Fedorova
+    Spin_0_max.Text:='';   //Fedorova
+    Spin_0_min.Text:='';   //Fedorova
+    Spin_0_max_2.Text:=''; //Fedorova
+    Spin_0_min_2.Text:='';    //Fedorova
+    Crosscut.Checked:=FALSE;   //Fedorova
+    Crosscut.Visible:=FALSE;   //Fedorova
     //
     //LinesCPlus:=StringToColor(ReadSTRING('LinesColorPlus','clRed'));
     //LinesCMinus:=StringToColor(ReadSTRING('LinesColorMinus','clGreen'));
-    UseLines.Checked:=ReadBool('UseLines',FALSE);
+    UseLines.Checked:=FALSE;
 
     Force:=StringToColor(ReadSTRING('Force','clBlue'));
     BackGR:=StringToColor(ReadSTRING('BackGROUND','clWhite'));
@@ -634,11 +635,11 @@ BEGIN
     Registry.WriteString('ColorMinus',ColorToSTRING(ColorMinus.Color));
     Registry.WriteString('ColorPlus_0',ColorToSTRING(ColorPlus_0.Color));
     Registry.WriteString('ColorMinus_0',ColorToSTRING(ColorMinus_0.Color));
-    Registry.WriteInteger('Spin_0_max',Spin_0_max.Value);
-    Registry.WriteInteger('Spin_0_min',Spin_0_min.Value);
-    Registry.WriteInteger('Spin_0_max_2',Spin_0_max_2.Value);                //
-    Registry.WriteInteger('Spin_0_min_2',Spin_0_min_2.Value);                //
-    Registry.WriteBool('Crosscut',Crosscut.Checked);                         //
+ //   Registry.WriteInteger('Spin_0_max',Spin_0_max.Value);
+ //   Registry.WriteInteger('Spin_0_min',Spin_0_min.Value);
+ //   Registry.WriteInteger('Spin_0_max_2',Spin_0_max_2.Value);                //
+ //   Registry.WriteInteger('Spin_0_min_2',Spin_0_min_2.Value);                //
+ //   Registry.WriteBool('Crosscut',Crosscut.Checked);                         //
     Registry.WriteString('ColorMiddle',ColorToSTRING(ColorMiddle.Color));  //Fedorova
     //
     //Registry.WriteString('LinesColorPlus',ColorToSTRING(LinesCPlus));
@@ -1093,7 +1094,7 @@ BEGIN
              else if Value = 2 then Result:=colorplus_0.Color
              else if Value = 3 then Result:=colorplus.Color;
 
-             if (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
+             if (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') and (spin_0_max.Text <> '') and (spin_0_min.Text <> '') then
              begin
                if Abs(Spin_0_min.Value - Elements_Result.min[Form1.StressType.ItemIndex+1]) <= 2 then
                  if Value = 1 then Result:=colorminus.Color;
@@ -1122,7 +1123,7 @@ BEGIN
              else if Value = 3 then Result:=colorplus_0.Color
              else if Value = 4 then Result:=colorplus.Color;
 
-             if (spin_0_max_2.Text <> '-') and (spin_0_min_2.Text <> '-') then
+             if (spin_0_max_2.Text <> '-') and (spin_0_min_2.Text <> '-') and (spin_0_max_2.Text <> '') and (spin_0_min_2.Text <> '') then
              begin
                  a[1] := Spin_0_max.Value;
                  a[2] := Spin_0_min.Value;
@@ -1437,7 +1438,7 @@ BEGIN
     end;
 
     if Crosscut.Checked = false then begin
-      if  (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
+      if  (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') and (spin_0_max.Text <> '') and (spin_0_min.Text <> '') then
       begin
 
       if (stress[i] >= spin_0_max.Value) and (stress[i] >= 0) then LevNode[i] := 3;
@@ -1452,7 +1453,7 @@ BEGIN
       end;
     end
     else begin
-      if  (Spin_0_max_2.Text <> '-') and (Spin_0_min_2.Text <> '-') then
+      if  (Spin_0_max_2.Text <> '-') and (Spin_0_min_2.Text <> '-') and (spin_0_max_2.Text <> '') and (spin_0_min_2.Text <> '') then
       begin
         //  a[1] := 0;
         a[1] := Spin_0_max.Value;
@@ -1482,7 +1483,7 @@ BEGIN
   END;
 
   if Crosscut.Checked = false then begin
-     if  (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
+     if  (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') and (spin_0_max.Text <> '') and (spin_0_min.Text <> '') then
      begin
 
       if spin_0_max.Value >= 0 then begin
@@ -2503,6 +2504,21 @@ if Form1.useLines.Checked then Form1.checkbox2.Checked:=false; //Давыдова Ю.А.
    LegendRePaint;
    MainRePaint;
   end;
+
+  if (Form1.StressType.ItemIndex+1 = 8) or (Form1.StressType.ItemIndex+1 = 9) then
+  begin
+    if Form1.UseLines.Checked = false then
+    begin
+       ShowMessage('Пересечение и объединение областей возможно только при включении опции "Области"');
+       Form1.UseLines.Checked := True;
+    end;
+    if Form1.CheckBox1.Checked = false then
+    begin
+       ShowMessage('Пересечение и объединение областей возможно только при включении опции "Области"');
+       Form1.CheckBox1.Checked := True;
+    end;
+  end;
+
   Form1.ChangeLegend.Hint:=inttostr(z);
   Form1.LevelNumber.Caption:= Form1.ChangeLegend.Hint;
   ChengeLegendLevel;
@@ -2666,47 +2682,18 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
   //////////////////////Фёдорова Е.И. 2018////////////////////////////////////
   PROCEDURE Spin_0_Check(Spin_0_min, Spin_0_max: TSpinEdit);
   var
-    buf,f: Integer;
+    buf: Integer;
   begin
-    if (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
+    if (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') and (spin_0_max.Text <> '') and (spin_0_min.Text <> '') then
     begin
-      if  (Form1.StressType.ItemIndex+1 <> 8) and (Form1.StressType.ItemIndex+1 <> 9) then
-      begin
-      //если граница меньше/больше минимального/максимального знач. напряжения
-      //заменяем её на мин./макс. значение напряжение
-      f:=0;
-      
-      if (Spin_0_min.Value < Elements_Result.min[Form1.StressType.ItemIndex+1]) then begin
-        ShowMessage('Левое введенное число меньше минимального нижнего значения данного напряжения. Значение будет исправлено.');
-        Spin_0_min.Value := trunc(Elements_Result.Min[Form1.StressType.ItemIndex+1])+1;
-        f:=1;
-      end;
-      if (Spin_0_min.Value > Elements_Result.max[Form1.StressType.ItemIndex+1]) then begin
-        ShowMessage('Левое введенное число больше максимального вернего значения данного напряжения. Значение будет исправлено.');
-        Spin_0_min.Value := trunc(Elements_Result.Min[Form1.StressType.ItemIndex+1]);
-        f:=1;
-      end;
-      if (Spin_0_max.Value > Elements_Result.Max[Form1.StressType.ItemIndex+1]) then begin
-        ShowMessage('Правое введенное число больше максимального вернего значения данного напряжения. Значение будет исправлено.');
-        Spin_0_max.Value := trunc(Elements_Result.Max[Form1.StressType.ItemIndex+1]);
-        f:=1;
-      end;
-      if (Spin_0_max.Value < Elements_Result.min[Form1.StressType.ItemIndex+1]) then begin
-        ShowMessage('Правое введенное число меньше минимального нижнего значения данного напряжения. Значение будет исправлено.');
-        Spin_0_max.Value := trunc(Elements_Result.Max[Form1.StressType.ItemIndex+1])-1;
-        f:=1;
-      end;
-      end;
-
       //При задании неверном задании интервалов, они автоматически исправляются
-      if (Spin_0_min.Value > Spin_0_max.Value) and (f=0) then begin
+      if (Spin_0_min.Value > Spin_0_max.Value) then begin
         ShowMessage('Введен некорректный интервал. Значения будут исправлены.');
         buf :=0;
         buf := Spin_0_min.Value;
         Spin_0_min.Value := Spin_0_max.Value;
         Spin_0_max.Value := buf;
       end;
-
     end;
   end;
 
@@ -2759,7 +2746,7 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (UseLines.Checked = true) and (CheckBox1.Checked = true) then
         begin
-          if  (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') then
+          if  (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') and (spin_0_max.Text <> '') and (spin_0_min.Text <> '') then
           begin
             if Crosscut.Checked = false then
             begin
@@ -2802,7 +2789,7 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
               end;
             end
             else begin
-              if  (Spin_0_max_2.Text <> '-') and (Spin_0_min_2.Text <> '-') then
+              if  (Spin_0_max_2.Text <> '-') and (Spin_0_min_2.Text <> '-') and (spin_0_max_2.Text <> '') and (spin_0_min_2.Text <> '') then
               begin
                 if  (Form1.StressType.ItemIndex+1 <> 8) and (Form1.StressType.ItemIndex+1 <> 9) then
                 begin
