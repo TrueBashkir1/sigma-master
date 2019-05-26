@@ -13,7 +13,7 @@
 {                     Цветаев Борис Михайлович 2004                   }
 {                                                                     }
 {*********************************************************************}
- 
+                             
 UNIT ShowMovings;
 
 INTERFACE
@@ -3248,7 +3248,8 @@ BEGIN
     Form1.MUprug1.Caption    := MyFloatToStr(Materials[OneElement.Material].E);
     Form1.KoefPuas1.Caption  := MyFloatToStr(Materials[OneElement.Material].Mu);
     Form1.DopNapr1.Caption   := MyFloatToStr(Materials[OneElement.Material].Sg);
-    Form1.DopNapr2.Caption   := MyFloatToStr(Materials[OneElement.Material].free4);
+    //Ne zapolnyaetsya free4
+    //Form1.DopNapr2.Caption   := MyFloatToStr(Materials[OneElement.Material].free4);
     Form1.Thickness1.Caption := MyFloatToStr(Materials[OneElement.Material].Thickness);
     Form1.PropNum.Caption := IntToStr(OneElement.Material);
     //end Zherebtsov 2018
@@ -3273,7 +3274,7 @@ BEGIN
     Form1.KoefPuas1.Caption  := '';
     Form1.DopNapr1.Caption   := '';
     //-----------------------------
-    Form1.DopNapr2.Caption   := '';
+  //  Form1.DopNapr2.Caption   := '';
     Form1.Thickness1.Caption := '';
     Result := False;
   END;

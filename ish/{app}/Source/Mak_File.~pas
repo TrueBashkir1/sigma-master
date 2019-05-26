@@ -84,7 +84,7 @@ end;
 function Win2Dos(const aStr: String): String;
 begin
  Result := aStr;
- if Result <> "" then
+ if Result <> '' then
    CharToOem(PChar(Result),PChar(Result));
 end;
 //создание файла последовательности компил€ции проекта

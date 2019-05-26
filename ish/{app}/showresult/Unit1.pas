@@ -133,8 +133,6 @@ type
     Label32: TLabel;
     Label39: TLabel;
     KENumber1: TEdit;
-    Label1: TLabel;
-    DopNapr2: TLabel;
     CaptPropNum: TLabel;
     PropNum: TLabel;
     LabelMaxZnach: TLabel;

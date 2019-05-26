@@ -29,7 +29,7 @@ object FAbout: TFAbout
     Width = 157
     Height = 48
     AutoSize = False
-    Caption = '7.2'
+    Caption = '7.4'
     Font.Charset = ANSI_CHARSET
     Font.Color = clRed
     Font.Height = -37
