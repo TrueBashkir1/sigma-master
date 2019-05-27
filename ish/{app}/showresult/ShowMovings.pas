@@ -540,10 +540,10 @@ DrawSelectedElement:= TRUE;
     ColorPlus_0.Color:=StringToColor(ReadSTRING('ColorPlus_0','clYellow'));
     ColorMinus_0.Color:=StringToColor(ReadSTRING('ColorMinus_0','clLime'));
     ColorMiddle.Color:= StringToColor(ReadSTRING('ColorMiddle','clBlue'));  //Fedorova
-    Spin_0_max.Text:='';   //Fedorova
-    Spin_0_min.Text:='';   //Fedorova
-    Spin_0_max_2.Text:=''; //Fedorova
-    Spin_0_min_2.Text:='';    //Fedorova
+    Spin_0_max.Value:=0;   //Fedorova
+    Spin_0_min.Value:=0;   //Fedorova
+    Spin_0_max_2.Value:=0; //Fedorova
+    Spin_0_min_2.Value:=0;    //Fedorova
     Crosscut.Checked:=FALSE;   //Fedorova
     Crosscut.Visible:=FALSE;   //Fedorova
     //
