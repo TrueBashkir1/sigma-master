@@ -400,9 +400,10 @@ begin
       ShowMessage('Пересечение и объединение областей возможно только при включении опции "Области"');
       StressType1.ItemIndex:=0;
     end;
+    ShowMovingsForm.Crosscut.Checked := False;
     ShowMovingsForm.Crosscut.Visible := False;
   end
-  else ShowMovingsForm.Crosscut.Visible := true;
+  else if CheckBox1.Checked = True then ShowMovingsForm.Crosscut.Visible := true;
   //end Fedorova
 
   //ShowMovingsForm.StressType.ItemIndex := StressType1.ItemIndex;
@@ -434,9 +435,10 @@ begin
       ShowMessage('Пересечение и объединение областей возможно только при включении опции "Области"');
       StressType1.ItemIndex:=0;
     end;
+    ShowMovingsForm.Crosscut.Checked := False;
     ShowMovingsForm.Crosscut.Visible := False;
   end
-  else ShowMovingsForm.Crosscut.Visible := true;
+  else if CheckBox1.Checked = True then ShowMovingsForm.Crosscut.Visible := true;
   //end Fedorova
 
   //ShowMovingsForm.StressType.ItemIndex := StressType1.ItemIndex;
@@ -467,9 +469,10 @@ begin
       ShowMessage('Пересечение и объединение областей возможно только при включении опции "Области"');
       StressType1.ItemIndex:=0;
     end;
+    ShowMovingsForm.Crosscut.Checked := False;
     ShowMovingsForm.Crosscut.Visible := False;
   end
-  else ShowMovingsForm.Crosscut.Visible := true;
+  else if CheckBox1.Checked = True then ShowMovingsForm.Crosscut.Visible := true;
   //end Fedorova
 
 ShowMovingsForm.ChengeLegendLevel;

@@ -2454,7 +2454,8 @@ if Form1.useLines.Checked then Form1.checkbox2.Checked:=false; //Давыдова Ю.А.
   IF Form1.CheckBox1.Checked = false THEN BEGIN
         Spin_0_max.Visible := false;
         Spin_0_min.Visible := false;
-        Crosscut.Visible := False;       //
+        Crosscut.Checked := false;       //Fedorova
+        Crosscut.Visible := False;       //Fedorova
         ColorMiddle.Visible := false;    //Fedorova
         LegendRePaint;
         MainRePaint;
@@ -2462,7 +2463,8 @@ if Form1.useLines.Checked then Form1.checkbox2.Checked:=false; //Давыдова Ю.А.
   else begin
         Spin_0_max.Visible := true;
         Spin_0_min.Visible := true;
-        Crosscut.Visible := True;
+        Crosscut.Checked := false;                                   //Fedorova
+        Crosscut.Visible := True;                                    //Fedorova
         if Crosscut.Checked = True then ColorMiddle.Visible := True  //Fedorova
         else ColorMiddle.Visible := False;
         LegendRePaint;
@@ -2489,8 +2491,9 @@ if Form1.useLines.Checked then Form1.checkbox2.Checked:=false; //Давыдова Ю.А.
       ColorMiddle.Visible := False;    //Fedorova
       Spin_0_max.Visible := false;
       Spin_0_min.Visible := false;
-      Spin_0_max_2.Visible := false;   //
-      Spin_0_min_2.Visible := false;   //
+      Crosscut.Checked := false;       //Fedorova
+      Spin_0_max_2.Visible := false;   //Fedorova
+      Spin_0_min_2.Visible := false;   //Fedorova
       Crosscut.Visible := False;       //Fedorova
       LegendRePaint;
       MainRePaint;
@@ -2517,6 +2520,8 @@ if Form1.useLines.Checked then Form1.checkbox2.Checked:=false; //Давыдова Ю.А.
        ShowMessage('Пересечение и объединение областей возможно только при включении опции "Области"');
        Form1.CheckBox1.Checked := True;
     end;
+    Crosscut.Checked := false;
+    Crosscut.Visible := false;
   end;
 
   Form1.ChangeLegend.Hint:=inttostr(z);
@@ -2678,7 +2683,7 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
   END;
 
   PROCEDURE ShowLegendHintsNew(Canvas:TCanvas;Left,Top:INTEGER);
- 
+
   //////////////////////Фёдорова Е.И. 2018////////////////////////////////////
   PROCEDURE Spin_0_Check(Spin_0_min, Spin_0_max: TSpinEdit);
   var
@@ -2696,6 +2701,7 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
       end;
     end;
   end;
+  //end Fedorova
 
   VAR
     long,k              : MyReal;
@@ -4151,15 +4157,23 @@ begin
   Form1.KonElNumMaxNapr.Caption:= IntToStr(maxPosStressPNum)
   else Form1.KonElNumMaxNapr.Caption:='';
   //ZHEREBTSOV
+  //Fedorova
+  If (Form1.StressType.ItemIndex + 1 = 8) or (Form1.StressType.ItemIndex + 1 = 9) then
+    Form1.KonElNumMaxNapr.Caption:='';
+  //end Fedorova
   // значение положит
   Form1.ZoneStress.Cells[3, zoneCount + 1] := MyFloatToStr(maxPosStressP);
   // номер кэ с макс отриц напряж
   Form1.ZoneStress.Cells[4, zoneCount + 1] := IntToStr(maxNegStressPNum);
   //ZHEREBTSOV
-   If Form1.StressType.ItemIndex + 1 <> 7 then
+  If Form1.StressType.ItemIndex + 1 <> 7 then
   Form1.KonElNumMinNapr.Caption:= IntToStr(maxNegStressPNum)
   else Form1.KonElNumMinNapr.Caption:='';
   //ZHEREBTSOV
+  //Fedorova
+  If (Form1.StressType.ItemIndex + 1 = 8) or (Form1.StressType.ItemIndex + 1 = 9) then
+    Form1.KonElNumMinNapr.Caption:='';
+  //end Fedorova
   // значение отриц
   Form1.ZoneStress.Cells[5, zoneCount + 1] := MyFloatToStr(maxNegStressP);
 
@@ -4725,15 +4739,13 @@ begin
 if Spin_0_min.Visible = True then Crosscut.Visible := True;
 if Crosscut.Visible = true then
   begin
-   // Crosscut.Caption := 'Пересечение';
     if Crosscut.Checked = true then
        begin
          Spin_0_max_2.Visible := true;
          Spin_0_min_2.Visible := true;
          ColorMiddle.Visible := True;
        end
-    else
-       begin
+    else begin
          Spin_0_max_2.Visible := false;
          Spin_0_min_2.Visible := false;
          ColorMiddle.Visible := false;
@@ -4763,7 +4775,6 @@ BEGIN
   Node[2]:=Nodes_Result.GetNode(OneElement.Node2);
   Node[3]:=Nodes_Result.GetNode(OneElement.Node3);
 
- // j:= Form1.StressType.ItemIndex+1;  //ТИП НАПРЯЖЕНИЯ  (старое)
   j:=n;                                //ТИП НАПРЯЖЕНИЯ
 
   FOR i:=1 TO 3 DO BEGIN
@@ -5391,10 +5402,4 @@ BEGIN
 END;
 
 
-
-
-
-
-
-
-end.
+end.
