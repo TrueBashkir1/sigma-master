@@ -1,8 +1,8 @@
 object GrafikX: TGrafikX
-  Left = 1110
-  Top = 282
-  Width = 766
-  Height = 539
+  Left = 1035
+  Top = 168
+  Width = 787
+  Height = 580
   Caption = #1043#1088#1072#1092#1080#1082' '#1089#1093#1086#1076#1080#1084#1086#1089#1090#1080' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1103' '#1087#1086' '#1061
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -67,7 +67,7 @@ object GrafikX: TGrafikX
   end
   object Label20: TLabel
     Left = 16
-    Top = 448
+    Top = 464
     Width = 184
     Height = 13
     Caption = #1043#1088#1072#1092#1080#1082' '#1087#1086#1089#1090#1088#1086#1077#1085' '#1085#1077#1082#1086#1088#1088#1077#1082#1090#1085#1086
@@ -95,8 +95,8 @@ object GrafikX: TGrafikX
   object GroupBox1: TGroupBox
     Left = 288
     Top = 64
-    Width = 449
-    Height = 425
+    Width = 465
+    Height = 465
     Caption = #1043#1088#1072#1092#1080#1082' '#1089#1093#1086#1076#1080#1084#1086#1089#1090#1080' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1103' '#1087#1086' X'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -107,7 +107,7 @@ object GrafikX: TGrafikX
     TabOrder = 10
     object Label1: TLabel
       Left = 8
-      Top = 376
+      Top = 408
       Width = 81
       Height = 13
       Caption = #1042#1077#1088#1093#1085#1080#1081' '#1087#1088#1077#1076#1077#1083
@@ -120,7 +120,7 @@ object GrafikX: TGrafikX
     end
     object Label15: TLabel
       Left = 128
-      Top = 376
+      Top = 408
       Width = 79
       Height = 13
       Caption = #1053#1080#1078#1085#1080#1081' '#1087#1088#1077#1076#1077#1083
@@ -130,6 +130,21 @@ object GrafikX: TGrafikX
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
+    end
+    object CheckBox13: TCheckBox
+      Left = 8
+      Top = 384
+      Width = 249
+      Height = 17
+      Caption = #1055#1086#1083#1080#1085#1086#1084#1080#1072#1083#1100#1085#1072#1103' '#1072#1087#1087#1088#1086#1082#1089#1080#1084#1072#1094#1080#1103
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = Button2Click
     end
   end
   object Panel1: TPanel
@@ -473,7 +488,7 @@ object GrafikX: TGrafikX
   end
   object Button2: TButton
     Left = 16
-    Top = 464
+    Top = 496
     Width = 177
     Height = 25
     BiDiMode = bdLeftToRight
@@ -490,21 +505,21 @@ object GrafikX: TGrafikX
   end
   object Edit1: TEdit
     Left = 296
-    Top = 456
+    Top = 496
     Width = 97
     Height = 21
     TabOrder = 2
   end
   object Edit2: TEdit
     Left = 416
-    Top = 456
+    Top = 496
     Width = 97
     Height = 21
     TabOrder = 3
   end
   object Button1: TButton
-    Left = 544
-    Top = 448
+    Left = 560
+    Top = 488
     Width = 73
     Height = 25
     Caption = #1059#1089#1090#1072#1085#1086#1074#1080#1090#1100
@@ -513,7 +528,7 @@ object GrafikX: TGrafikX
   end
   object Ole: TOleContainer
     Left = 216
-    Top = 440
+    Top = 472
     Width = 57
     Height = 25
     Caption = 'Ole'
@@ -522,7 +537,7 @@ object GrafikX: TGrafikX
   end
   object Button4: TButton
     Left = 200
-    Top = 464
+    Top = 496
     Width = 75
     Height = 25
     Caption = 'MS Word'
@@ -538,8 +553,8 @@ object GrafikX: TGrafikX
   object Chart1: TChart
     Left = 296
     Top = 80
-    Width = 433
-    Height = 313
+    Width = 449
+    Height = 329
     BackWall.Brush.Color = clWhite
     BackWall.Brush.Style = bsClear
     Title.Text.Strings = (
@@ -551,7 +566,7 @@ object GrafikX: TGrafikX
     BevelInner = bvLowered
     TabOrder = 7
     object Label18: TLabel
-      Left = 144
+      Left = 160
       Top = 8
       Width = 173
       Height = 13
@@ -565,7 +580,7 @@ object GrafikX: TGrafikX
       Visible = False
     end
     object Label19: TLabel
-      Left = 144
+      Left = 152
       Top = 8
       Width = 181
       Height = 13
@@ -576,6 +591,20 @@ object GrafikX: TGrafikX
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
+    end
+    object Label21: TLabel
+      Left = 160
+      Top = 8
+      Width = 171
+      Height = 13
+      Caption = #1055#1086#1083#1080#1085#1086#1084#1080#1072#1083#1100#1085#1072#1103' '#1072#1087#1087#1088#1086#1082#1089#1080#1084#1072#1094#1080#1103
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      Visible = False
     end
     object Series1: TLineSeries
       Marks.ArrowLength = 8
@@ -705,8 +734,8 @@ object GrafikX: TGrafikX
     end
   end
   object Button3: TButton
-    Left = 640
-    Top = 448
+    Left = 656
+    Top = 488
     Width = 73
     Height = 25
     Caption = #1057#1073#1088#1086#1089#1080#1090#1100
@@ -750,7 +779,7 @@ object GrafikX: TGrafikX
   end
   object CheckBox11: TCheckBox
     Left = 296
-    Top = 400
+    Top = 416
     Width = 289
     Height = 17
     Caption = #1048#1085#1090#1077#1088#1087#1086#1083#1103#1094#1080#1103' '#1086#1090#1088#1077#1079#1082#1072#1084#1080' '#1087#1088#1103#1084#1099#1093
@@ -765,7 +794,7 @@ object GrafikX: TGrafikX
   end
   object CheckBox12: TCheckBox
     Left = 296
-    Top = 416
+    Top = 432
     Width = 417
     Height = 17
     Caption = #1048#1085#1090#1077#1088#1087#1086#1083#1103#1094#1080#1103' '#1087#1086' '#1051#1072#1075#1088#1072#1085#1078#1091
