@@ -493,6 +493,7 @@ PROCEDURE TShowMovingsForm.LoadForm(Name:STRING);
 VAR
   Registry:TRegistry;
   error : integer;
+  max,min: Real;
 
   FUNCTION ReadSTRING(Name:STRING;Def:STRING):STRING;
   BEGIN
@@ -540,13 +541,31 @@ DrawSelectedElement:= TRUE;
     ColorPlus_0.Color:=StringToColor(ReadSTRING('ColorPlus_0','clYellow'));
     ColorMinus_0.Color:=StringToColor(ReadSTRING('ColorMinus_0','clLime'));
     ColorMiddle.Color:= StringToColor(ReadSTRING('ColorMiddle','clBlue'));  //Fedorova
-    Spin_0_max.Value:=0;   //Fedorova
-    Spin_0_min.Value:=0;   //Fedorova
-    Spin_0_max_2.Value:=0; //Fedorova
-    Spin_0_min_2.Value:=0;    //Fedorova
-    Crosscut.Checked:=FALSE;   //Fedorova
-    Crosscut.Visible:=FALSE;   //Fedorova
-    //
+
+   //Fedorova E.I. 2019
+    if (Form1.StressType.ItemIndex+1 <> 8) and (Form1.StressType.ItemIndex+1 <> 9) then
+    begin
+      max := Elements_Result.Max[Form1.StressType.ItemIndex+1];
+      min := Elements_Result.Min[Form1.StressType.ItemIndex+1];
+      if (min < 0) and (max > 0) then
+      begin
+        Spin_0_max.Value := Round(max/2);
+        Spin_0_min.Value := Round(min/2);
+      end;
+      if (min > 0) or (max < 0) then
+      begin
+        Spin_0_max.Value := Round(max - ((max - min)/3));
+        Spin_0_min.Value := Round(min + ((max - min)/3));
+      end;
+    end;
+
+    Spin_0_max_2.Value:=0;
+    Spin_0_min_2.Value:=0;
+
+    Crosscut.Checked:=FALSE;
+    Crosscut.Visible:=FALSE;
+    //end Fedorova
+
     //LinesCPlus:=StringToColor(ReadSTRING('LinesColorPlus','clRed'));
     //LinesCMinus:=StringToColor(ReadSTRING('LinesColorMinus','clGreen'));
     UseLines.Checked:=FALSE;
@@ -1096,23 +1115,59 @@ BEGIN
 
              if (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') and (spin_0_max.Text <> '') and (spin_0_min.Text <> '') then
              begin
-               if Abs(Spin_0_min.Value - Elements_Result.min[Form1.StressType.ItemIndex+1]) <= 2 then
-                 if Value = 1 then Result:=colorminus.Color;
-               if Abs(Spin_0_max.Value - Elements_Result.max[Form1.StressType.ItemIndex+1]) <= 2 then
-                 if Value = 2 then Result:=colorplus.Color;
-               if (Spin_0_min.Value = 0) then begin
-                 if Value = 1 then Result:=colorminus.Color;
-                 if (Spin_0_max.Value = 0) then
-                   if Value = 2 then Result:=colorminus.Color;
+               if (Form1.StressType.ItemIndex+1 <> 8) and (Form1.StressType.ItemIndex+1 <> 9) then
+               begin
+                 if  Spin_0_min.Value < Elements_Result.min[Form1.StressType.ItemIndex+1] then
+                  a[1] := Elements_Result.min[Form1.StressType.ItemIndex+1] + 1
+                 else a[1] := Spin_0_min.Value;
+                 if  Spin_0_max.Value > Elements_Result.max[Form1.StressType.ItemIndex+1] then
+                  a[2] := Elements_Result.max[Form1.StressType.ItemIndex+1] - 1
+                 else a[2] := Spin_0_max.Value;
+
+                 if Abs(a[1] - Elements_Result.min[Form1.StressType.ItemIndex+1]) <= 2 then
+                   if Value = 1 then Result:=colorminus.Color;
+                 if Abs(a[2] - Elements_Result.max[Form1.StressType.ItemIndex+1]) <= 2 then
+                   if Value = 2 then Result:=colorplus.Color;
+                 if (a[1] = 0) then begin
+                   if Value = 1 then Result:=colorminus.Color;
+                   if (a[2] = 0) then
+                     if Value = 2 then Result:=colorminus.Color;
+                 end
+                 else begin
+                   if (a[2] = 0) then
+                     if Value = 2 then Result:=colorplus.Color;
+                 end;
+                 if (a[2] = a[1]) and (a[2] > 0) then
+                   if Value = 2 then Result:=colorminus_0.Color;
+                 if (a[2] = a[1]) and (a[2] < 0) then
+                   if Value = 1 then Result:=colorplus_0.Color;
                end
                else begin
-                 if (Spin_0_max.Value = 0) then
+                 if  Spin_0_min.Value < Elements_Result.min[1] then
+                  a[1] := Elements_Result.min[1] + 1
+                 else a[1] := Spin_0_min.Value;
+                 if  Spin_0_max.Value > Elements_Result.max[1] then
+                  a[2] := Elements_Result.max[1] - 1
+                 else a[2] := Spin_0_max.Value;
+
+                 if Abs(a[1] - Elements_Result.min[1]) <= 2 then
+                   if Value = 1 then Result:=colorminus.Color;
+                 if Abs(a[2] - Elements_Result.max[1]) <= 2 then
                    if Value = 2 then Result:=colorplus.Color;
+                 if (a[1] = 0) then begin
+                   if Value = 1 then Result:=colorminus.Color;
+                   if (a[2] = 0) then
+                     if Value = 2 then Result:=colorminus.Color;
+                 end
+                 else begin
+                   if (a[2] = 0) then
+                     if Value = 2 then Result:=colorplus.Color;
+                 end;
+                 if (a[2] = a[1]) and (a[2] > 0) then
+                   if Value = 2 then Result:=colorminus_0.Color;
+                 if (a[2] = a[1]) and (a[2] < 0) then
+                   if Value = 1 then Result:=colorplus_0.Color;
                end;
-               if (Spin_0_max.Value = Spin_0_min.Value) and (Spin_0_max.Value > 0) then
-                 if Value = 2 then Result:=colorminus_0.Color;
-               if (Spin_0_max.Value = Spin_0_min.Value) and (Spin_0_max.Value < 0) then
-                 if Value = 1 then Result:=colorplus_0.Color;
              end;
              exit;
           end
@@ -1125,10 +1180,20 @@ BEGIN
 
              if (spin_0_max_2.Text <> '-') and (spin_0_min_2.Text <> '-') and (spin_0_max_2.Text <> '') and (spin_0_min_2.Text <> '') then
              begin
-                 a[1] := Spin_0_max.Value;
-                 a[2] := Spin_0_min.Value;
-                 a[3] := Spin_0_max_2.Value;
-                 a[4] := Spin_0_min_2.Value;
+                 if  Spin_0_min.Value < Elements_Result.min[Form1.StressType.ItemIndex+1] then
+                  a[1] := Elements_Result.min[Form1.StressType.ItemIndex+1] + 1
+                 else a[1] := Spin_0_min.Value;
+                 if  Spin_0_max.Value > Elements_Result.max[Form1.StressType.ItemIndex+1] then
+                  a[2] := Elements_Result.max[Form1.StressType.ItemIndex+1] - 1
+                 else a[2] := Spin_0_max.Value;
+
+                 if  Spin_0_min_2.Value < Elements_Result.min[Form1.StressType.ItemIndex+1] then
+                  a[3] := Elements_Result.min[Form1.StressType.ItemIndex+1] + 1
+                 else a[3] := Spin_0_min_2.Value;
+                 if  Spin_0_max_2.Value > Elements_Result.max[Form1.StressType.ItemIndex+1] then
+                  a[4] := Elements_Result.max[Form1.StressType.ItemIndex+1] - 1
+                 else a[4] := Spin_0_max_2.Value;
+
                  a[5] := Elements_Result.Min[Form1.StressType.ItemIndex+1];
                  a[6] := Elements_Result.Max[Form1.StressType.ItemIndex+1];
 
@@ -1195,9 +1260,7 @@ BEGIN
                      if Abs(a[5] - a[6]) <= 2 then
                        if Value = 4 then Result:=colorplus_0.Color;
                    end;
-
                  end;
-
              end;
              exit;
           end;
@@ -2758,11 +2821,20 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
             begin
               if  (Form1.StressType.ItemIndex+1 <> 8) and (Form1.StressType.ItemIndex+1 <> 9) then
               begin
-                 a[1] := Spin_0_max.Value;
-                 a[2] := Spin_0_min.Value;
+                 if Spin_0_max.Value > Elements_Result.Max[Form1.StressType.ItemIndex+1] then
+                   a[1] := Elements_Result.Max[Form1.StressType.ItemIndex+1] - 1
+                 else a[1] := Spin_0_max.Value;
+                 if Spin_0_min.Value < Elements_Result.Min[Form1.StressType.ItemIndex+1] then
+                   a[2] := Elements_Result.Min[Form1.StressType.ItemIndex+1] + 1
+                 else a[2] := Spin_0_min.Value;
                  a[3] := Elements_Result.Min[Form1.StressType.ItemIndex+1];
                  a[4] := Elements_Result.Max[Form1.StressType.ItemIndex+1];
-                 a[5] := 0;
+
+                 if Elements_Result.Min[Form1.StressType.ItemIndex+1] > 0 then
+                   a[5] := Elements_Result.Min[Form1.StressType.ItemIndex+1] + 1
+                 else if Elements_Result.max[Form1.StressType.ItemIndex+1] < 0 then
+                   a[5] := Elements_Result.max[Form1.StressType.ItemIndex+1] - 1
+                 else a[5] := 0;
 
                  for i:=1 to 4 do
                   for j:=i+1 to 5 do
@@ -2776,11 +2848,20 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
                   if pos = i then text := MyFloatToStr(a[i+1]);  //заполнение шкалы
               end
               else begin
-                 a[1] := Spin_0_max.Value;
-                 a[2] := Spin_0_min.Value;
+                 if Spin_0_max.Value > Elements_Result.Max[1] then
+                   a[1] := Elements_Result.Max[1] - 1
+                 else a[1] := Spin_0_max.Value;
+                 if Spin_0_min.Value < Elements_Result.Min[1] then
+                   a[2] := Elements_Result.Min[1] + 1
+                 else a[2] := Spin_0_min.Value;
                  a[3] := Elements_Result.Min[1];
                  a[4] := Elements_Result.Max[1];
-                 a[5] := 0;
+                 if Elements_Result.Min[1] > 0 then
+                   a[5] := Elements_Result.Min[1] + 1
+                 else a[5] := 0;
+                 if Elements_Result.max[1] < 0 then
+                   a[5] := Elements_Result.max[1] - 1
+                 else a[5] := 0;
 
                  for i:=1 to 4 do
                   for j:=i+1 to 5 do
@@ -2797,13 +2878,18 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
             else begin
               if  (Spin_0_max_2.Text <> '-') and (Spin_0_min_2.Text <> '-') and (spin_0_max_2.Text <> '') and (spin_0_min_2.Text <> '') then
               begin
-                if  (Form1.StressType.ItemIndex+1 <> 8) and (Form1.StressType.ItemIndex+1 <> 9) then
-                begin
-                 //  a[1] := 0;
-                 a[1] := Spin_0_max.Value;
-                 a[2] := Spin_0_min.Value;
-                 a[3] := Spin_0_max_2.Value;
-                 a[4] := Spin_0_min_2.Value;
+                 if Spin_0_max.Value > Elements_Result.Max[Form1.StressType.ItemIndex+1] then
+                   a[1] := Elements_Result.Max[Form1.StressType.ItemIndex+1] - 1
+                 else a[1] := Spin_0_max.Value;
+                 if Spin_0_min.Value < Elements_Result.Min[Form1.StressType.ItemIndex+1] then
+                   a[2] := Elements_Result.Min[Form1.StressType.ItemIndex+1] + 1
+                 else a[2] := Spin_0_min.Value;
+                 if Spin_0_max_2.Value > Elements_Result.Max[Form1.StressType.ItemIndex+1] then
+                   a[3] := Elements_Result.Max[Form1.StressType.ItemIndex+1] - 1
+                 else a[3] := Spin_0_max_2.Value;
+                 if Spin_0_min_2.Value < Elements_Result.Min[Form1.StressType.ItemIndex+1] then
+                   a[4] := Elements_Result.Min[Form1.StressType.ItemIndex+1] + 1
+                 else a[4] := Spin_0_min_2.Value;
                  a[5] := Elements_Result.Min[Form1.StressType.ItemIndex+1];
                  a[6] := Elements_Result.Max[Form1.StressType.ItemIndex+1];
 
@@ -2818,28 +2904,7 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
 
                  for i:=0 to 5 do
                   if pos = i then text := MyFloatToStr(a[i+1]);  //заполнение шкалы
-                end
-                else begin
-                  a[1] := Spin_0_max.Value;
-                  a[2] := Spin_0_min.Value;
-                  a[3] := Spin_0_max_2.Value;
-                  a[4] := Spin_0_min_2.Value;
-                  a[5] := Elements_Result.Min[1];
-                  a[6] := Elements_Result.Max[1];
-
-                  for i:=1 to 5 do
-                   for j:=i+1 to 6 do
-                     if a[i]>a[j] then   //сортировка по возратанию
-                     begin
-                       buf:=a[i];
-                       a[i]:=a[j];
-                       a[j]:=buf;
-                     end;
-
-                  for i:=0 to 5 do
-                   if pos = i then text := MyFloatToStr(a[i+1]);  //заполнение шкалы
                 end;
-              end;
             end;
 
           end;
