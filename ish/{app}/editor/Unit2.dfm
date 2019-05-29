@@ -131,10 +131,31 @@ object GrafikX: TGrafikX
       Font.Style = []
       ParentFont = False
     end
+    object Label22: TLabel
+      Left = 256
+      Top = 352
+      Width = 56
+      Height = 16
+      Caption = 'Label22'
+    end
+    object Label23: TLabel
+      Left = 256
+      Top = 376
+      Width = 56
+      Height = 16
+      Caption = 'Label23'
+    end
+    object Label24: TLabel
+      Left = 256
+      Top = 400
+      Width = 56
+      Height = 16
+      Caption = 'Label24'
+    end
     object CheckBox13: TCheckBox
       Left = 8
       Top = 384
-      Width = 249
+      Width = 225
       Height = 17
       Caption = #1055#1086#1083#1080#1085#1086#1084#1080#1072#1083#1100#1085#1072#1103' '#1072#1087#1087#1088#1086#1082#1089#1080#1084#1072#1094#1080#1103
       Font.Charset = DEFAULT_CHARSET
@@ -780,7 +801,7 @@ object GrafikX: TGrafikX
   object CheckBox11: TCheckBox
     Left = 296
     Top = 416
-    Width = 289
+    Width = 233
     Height = 17
     Caption = #1048#1085#1090#1077#1088#1087#1086#1083#1103#1094#1080#1103' '#1086#1090#1088#1077#1079#1082#1072#1084#1080' '#1087#1088#1103#1084#1099#1093
     Font.Charset = DEFAULT_CHARSET
@@ -795,7 +816,7 @@ object GrafikX: TGrafikX
   object CheckBox12: TCheckBox
     Left = 296
     Top = 432
-    Width = 417
+    Width = 201
     Height = 17
     Caption = #1048#1085#1090#1077#1088#1087#1086#1083#1103#1094#1080#1103' '#1087#1086' '#1051#1072#1075#1088#1072#1085#1078#1091
     Font.Charset = DEFAULT_CHARSET

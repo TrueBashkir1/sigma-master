@@ -75,6 +75,9 @@ type
     Series6: TLineSeries;
     CheckBox13: TCheckBox;
     Label21: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
     procedure  Ochistka(Sender:TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -897,14 +900,13 @@ end;
 //Dobavil Serafim Meleshko(1 procedura)
 procedure TGrafikX.Inter3(Sender: TObject);
 //TSH -->
-var i,m,k,j,n,ste :integer;
+var i,m,k,j,n :integer;
 prome,h,g,prir :real;
-znachNRC: array[0..13] of real;
+znachNRC: array[0..9] of real;
 znachNapr: array[0..9] of real;
-Fx: array[1..9,1..9] of real; //Matriza znacheniy summ
-//Proverka: array[1..9,1..9] of real; //Matriza dlya proverki
-Fy: array[1..9] of real;    //Massiv svobodnich chlenov
-rezul: array[1..9] of Extended;
+Fx: array[1..10,1..10] of real; //Matriza znacheniy summ
+Fy: array[1..10] of real;    //Massiv svobodnich chlenov
+rezul: array[1..10] of double;
   begin
      Series1.Clear;
      Series3.Clear;
@@ -929,56 +931,63 @@ rezul: array[1..9] of Extended;
      end;
      if (m<2) then exit;
      k:=m-1; //Stepen polinoma
+     Label24.Caption:=IntToStr(k);
 //Zapolnenie massiva svobodnich chlenov
      Fy[1]:=0;
      for j:=0 to k do
      Fy[1]:=Fy[1]+znachNapr[j];
-     Fx[1][1]:=m;
-     for i:=2 to m do
+     Fx[1][1]:=m;      //izmenil m
+     for i:=2 to m do   //izmenil m
      for j:=0 to k do
      Fy[i]:=Fy[i]+exp((i-1)*ln(znachNRC[j]))*znachNapr[j];
-     for i:=1 to m do
-     for j:=1 to m do
+     for i:=1 to m do       //izmenil m
+     for j:=1 to m do       //izmenil m
      begin;
      prome:=0;
      if ((i=1) and (j=1)) then Continue;
      for n:=0 to k do
+     begin
      prome:=prome+exp((j+i-2)*ln(znachNRC[n]));
+     end;
      Fx[i][j]:=prome;
      end;
-     ste:=k; //Stepen polinoma
 //Method Gaussa
-//     Proverka:=Fx;  //Zapominayem dlya proverki
 //Privedeniye matrizi k treugolnomu vidu
      h:=0;
-     for k:=1 to m do
+     for n:=1 to m do       //izmenil m
      begin
-     for j:=k+1 to m do
+     for j:=n+1 to m do      //izmenil m
      begin
-     h:=Fx[j,k]/Fx[k,k];
-     for i:=k to m do
-     Fx[j,i]:=Fx[j,i]-h*Fx[k,i];
-     Fy[j]:=Fy[j]-h*Fy[k];
+     h:=Fx[j][n]/Fx[n][n];
+     for i:=n to m do       //izmenil m
+     begin
+     Fx[j][i]:=Fx[j][i]-h*Fx[n][i];
+     end;
+     Fy[j]:=Fy[j]-h*Fy[n];
      end;
      end;
+
 //Vichisleniye korney
-     for k:=m downto 1 do
+     for n:=m downto 1 do            //izmenil m
      begin
      h:=0;
-     for j:=k+1 to m do
+     for j:=n+1 to m do           //izmenil m
      begin
-     g:=Fx[k,j]*rezul[j];
+     g:=Fx[n,j]*rezul[j];
      h:=h+g;
      end;
-     rezul[k]:=(Fy[k]-h)/Fx[k,k];
+     rezul[n]:=(Fy[n]-h)/Fx[n,n];
      end;
+     Label22.Caption:=FloatToStr(rezul[1]);
+        Label23.Caption:=FloatToStr(rezul[2]);
+
 //Vivod
      g:=0;
      prir := znachNRC[0] - 0.01;
      while (prir < 16) do
            begin
              prir := prir + 0.01;
-             for j := 1 to m do   
+             for j := 1 to m do    //izmenil m
              begin
              if (j=1) then
              g:=g+rezul[j];
@@ -992,6 +1001,7 @@ rezul: array[1..9] of Extended;
         if (znachNRC[i]<3) then Continue;
         Series6.AddXY(znachNRC[i],znachNapr[i]);
         end;
+
 end;
 
 end.
