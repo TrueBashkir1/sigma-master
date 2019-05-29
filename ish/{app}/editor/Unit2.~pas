@@ -311,14 +311,12 @@ begin
 //            else
 //Dobavil Serafim Meleshko(konstrukciya "if")
             if CheckBox11.Checked=true then
-            Inter(Sender)
-            else
+            Inter(Sender);
             if  CheckBox12.Checked=true then
-            Inter2(Sender)
-            else
+            Inter2(Sender);
             if  CheckBox13.Checked=true then
-            Inter3(Sender)
-            else
+            Inter3(Sender);
+            if ((CheckBox11.Checked=false)and(CheckBox12.Checked=false)and(CheckBox13.Checked=false)) then
               Naris(Sender);
           end;
        4:  begin
@@ -326,14 +324,12 @@ begin
 //            else
 //Dobavil Serafim Meleshko(konstrukciya "if")
             if CheckBox11.Checked=true then
-            Inter(Sender)
-            else
+            Inter(Sender);
             if  CheckBox12.Checked=true then
-            Inter2(Sender)
-            else
+            Inter2(Sender);
             if  CheckBox13.Checked=true then
-            Inter3(Sender)
-            else
+            Inter3(Sender);
+            if ((CheckBox11.Checked=false)and(CheckBox12.Checked=false)and(CheckBox13.Checked=false)) then
               Naris(Sender);
           end;
        5:  begin
@@ -341,14 +337,12 @@ begin
 //            else
 //Dobavil Serafim Meleshko(konstrukciya "if")
             if CheckBox11.Checked=true then
-            Inter(Sender)
-            else
+            Inter(Sender);
             if  CheckBox12.Checked=true then
-            Inter2(Sender)
-            else
+            Inter2(Sender);
             if  CheckBox13.Checked=true then
-            Inter3(Sender)
-            else
+            Inter3(Sender);
+            if ((CheckBox11.Checked=false)and(CheckBox12.Checked=false)and(CheckBox13.Checked=false)) then
               Naris(Sender);
           end;
        6:  begin
@@ -900,8 +894,8 @@ end;
 //Dobavil Serafim Meleshko(1 procedura)
 procedure TGrafikX.Inter3(Sender: TObject);
 //TSH -->
-var i,m,k,j,n :integer;
-prome,h,g,prir :real;
+var i,m,k,j,n,z :integer;
+prome,h,g,prir,dop :real;
 znachNRC: array[0..9] of real;
 znachNapr: array[0..9] of real;
 Fx: array[1..10,1..10] of real; //Matriza znacheniy summ
@@ -931,8 +925,7 @@ rezul: array[1..10] of double;
      end;
      if (m<2) then exit;
      k:=m-1; //Stepen polinoma
-     Label24.Caption:=IntToStr(k);
-//Zapolnenie massiva svobodnich chlenov
+     //Zapolnenie massiva svobodnich chlenov
      Fy[1]:=0;
      for j:=0 to k do
      Fy[1]:=Fy[1]+znachNapr[j];
@@ -978,24 +971,31 @@ rezul: array[1..10] of double;
      end;
      rezul[n]:=(Fy[n]-h)/Fx[n,n];
      end;
-     Label22.Caption:=FloatToStr(rezul[1]);
-        Label23.Caption:=FloatToStr(rezul[2]);
 
 //Vivod
-     g:=0;
      prir := znachNRC[0] - 0.01;
+     Label22.Caption:=FloatToStr(prir);
+     for z := 0 to m do
+       begin
      while (prir < 16) do
            begin
+             g:=0;
              prir := prir + 0.01;
              for j := 1 to m do    //izmenil m
              begin
+             dop:=0;
              if (j=1) then
+             begin
              g:=g+rezul[j];
-             g:=g+exp((j-1)*ln(prir))*rezul[j];
+             Continue;
+             end;
+             dop:=exp((j-1)*ln(prir));
+             g:=g+rezul[j]*dop;
              end;
              Series5.AddXY(prir, g);  //Vivod na grafik
-             g:=0;
            end;
+           end;
+       Label23.Caption:=FloatToStr(g);
      for i:=0 to m-1 do
         begin;
         if (znachNRC[i]<3) then Continue;
