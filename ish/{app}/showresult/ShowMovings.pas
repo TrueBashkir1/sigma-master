@@ -543,21 +543,6 @@ DrawSelectedElement:= TRUE;
     ColorMiddle.Color:= StringToColor(ReadSTRING('ColorMiddle','clBlue'));  //Fedorova
 
    //Fedorova E.I. 2019
-    if (Form1.StressType.ItemIndex+1 <> 8) and (Form1.StressType.ItemIndex+1 <> 9) then
-    begin
-      max := Elements_Result.Max[Form1.StressType.ItemIndex+1];
-      min := Elements_Result.Min[Form1.StressType.ItemIndex+1];
-      if (min < 0) and (max > 0) then
-      begin
-        Spin_0_max.Value := Round(max/2);
-        Spin_0_min.Value := Round(min/2);
-      end;
-      if (min > 0) or (max < 0) then
-      begin
-        Spin_0_max.Value := Round(max - ((max - min)/3));
-        Spin_0_min.Value := Round(min + ((max - min)/3));
-      end;
-    end;
 
     Spin_0_max_2.Value:=0;
     Spin_0_min_2.Value:=0;
@@ -2500,6 +2485,7 @@ END;
 PROCEDURE TShowMovingsForm.UseLinesClick(Sender: TObject);
 VAR
   z : integer;
+  min, max: Real;
 BEGIN
 
 if (Form1.UseLines.Checked) then Form1.TestElements.Checked:=false;
@@ -2526,10 +2512,35 @@ if Form1.useLines.Checked then Form1.checkbox2.Checked:=false; //Давыдова Ю.А.
   else begin
         Spin_0_max.Visible := true;
         Spin_0_min.Visible := true;
-        Crosscut.Checked := false;                                   //Fedorova
-        Crosscut.Visible := True;                                    //Fedorova
-        if Crosscut.Checked = True then ColorMiddle.Visible := True  //Fedorova
+
+        //Fedorova E.I. 2019
+        if (Form1.StressType.ItemIndex+1 <> 8) and (Form1.StressType.ItemIndex+1 <> 9) then
+        begin
+          max := Elements_Result.Max[Form1.StressType.ItemIndex+1];
+          min := Elements_Result.Min[Form1.StressType.ItemIndex+1]
+        end
+        else begin
+          max := Elements_Result.Max[1];
+          min := Elements_Result.Min[1]
+        end;
+
+        if (min < 0) and (max > 0) then
+        begin
+          Spin_0_max.Value := Round(max/2);
+          Spin_0_min.Value := Round(min/2);
+        end;
+        if (min > 0) or (max < 0) then
+        begin
+          Spin_0_max.Value := Round(max - ((max - min)/3));
+          Spin_0_min.Value := Round(min + ((max - min)/3));
+        end;
+
+        Crosscut.Checked := false;
+        Crosscut.Visible := True;
+        if Crosscut.Checked = True then ColorMiddle.Visible := True
         else ColorMiddle.Visible := False;
+       //end Fedorova
+
         LegendRePaint;
         MainRePaint;
   end;
