@@ -1110,9 +1110,11 @@ BEGIN
                  else a[2] := Spin_0_max.Value;
 
                  if Abs(a[1] - Elements_Result.min[Form1.StressType.ItemIndex+1]) <= 2 then
-                   if Value = 1 then Result:=colorminus.Color;
+                   if Value = 0 then Result:=colorminus_0.Color;
+
                  if Abs(a[2] - Elements_Result.max[Form1.StressType.ItemIndex+1]) <= 2 then
-                   if Value = 2 then Result:=colorplus.Color;
+                   if Value = 3 then Result:=colorplus_0.Color;
+
                  if (a[1] = 0) then begin
                    if Value = 1 then Result:=colorminus.Color;
                    if (a[2] = 0) then
@@ -1122,6 +1124,7 @@ BEGIN
                    if (a[2] = 0) then
                      if Value = 2 then Result:=colorplus.Color;
                  end;
+
                  if (a[2] = a[1]) and (a[2] > 0) then
                    if Value = 2 then Result:=colorminus_0.Color;
                  if (a[2] = a[1]) and (a[2] < 0) then
@@ -1136,9 +1139,9 @@ BEGIN
                  else a[2] := Spin_0_max.Value;
 
                  if Abs(a[1] - Elements_Result.min[1]) <= 2 then
-                   if Value = 1 then Result:=colorminus.Color;
+                   if Value = 0 then Result:=colorminus_0.Color;
                  if Abs(a[2] - Elements_Result.max[1]) <= 2 then
-                   if Value = 2 then Result:=colorplus.Color;
+                   if Value = 3 then Result:=colorplus_0.Color;
                  if (a[1] = 0) then begin
                    if Value = 1 then Result:=colorminus.Color;
                    if (a[2] = 0) then
@@ -1192,9 +1195,9 @@ BEGIN
                     end;
 
                  if Abs(a[1] - a[2]) <= 2 then
-                   if Value = 1 then Result:=colorminus.Color;
+                   if Value = 0 then Result:=colorminus_0.Color;
                  if Abs(a[5] - a[6]) <= 2 then
-                   if Value = 3 then Result:=colorplus.Color;
+                   if Value = 4 then Result:=colorplus_0.Color;
 
                  if (a[2] = a[3]) and  (a[3] = a[4]) and (a[4] = a[5]) then
                  begin
