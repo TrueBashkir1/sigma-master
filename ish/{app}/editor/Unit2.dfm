@@ -1,6 +1,6 @@
 object GrafikX: TGrafikX
-  Left = 1035
-  Top = 168
+  Left = 1038
+  Top = 151
   Width = 787
   Height = 580
   Caption = #1043#1088#1072#1092#1080#1082' '#1089#1093#1086#1076#1080#1084#1086#1089#1090#1080' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1103' '#1087#1086' '#1061
@@ -130,27 +130,6 @@ object GrafikX: TGrafikX
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
-    end
-    object Label22: TLabel
-      Left = 256
-      Top = 352
-      Width = 56
-      Height = 16
-      Caption = 'Label22'
-    end
-    object Label23: TLabel
-      Left = 256
-      Top = 376
-      Width = 56
-      Height = 16
-      Caption = 'Label23'
-    end
-    object Label24: TLabel
-      Left = 256
-      Top = 400
-      Width = 56
-      Height = 16
-      Caption = 'Label24'
     end
     object CheckBox13: TCheckBox
       Left = 8
