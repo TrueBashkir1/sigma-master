@@ -1131,12 +1131,8 @@ BEGIN
                    if Value = 1 then Result:=colorplus_0.Color;
                end
                else begin
-                 if  Spin_0_min.Value < Elements_Result.min[1] then
-                  a[1] := Elements_Result.min[1] + 1
-                 else a[1] := Spin_0_min.Value;
-                 if  Spin_0_max.Value > Elements_Result.max[1] then
-                  a[2] := Elements_Result.max[1] - 1
-                 else a[2] := Spin_0_max.Value;
+                 a[1] := Spin_0_min.Value;
+                 a[2] := Spin_0_max.Value;
 
                  if Abs(a[1] - Elements_Result.min[1]) <= 2 then
                    if Value = 0 then Result:=colorminus_0.Color;
@@ -2862,12 +2858,8 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
                   if pos = i then text := MyFloatToStr(a[i+1]);  //заполнение шкалы
               end
               else begin
-                 if Spin_0_max.Value > Elements_Result.Max[1] then
-                   a[1] := Elements_Result.Max[1] - 1
-                 else a[1] := Spin_0_max.Value;
-                 if Spin_0_min.Value < Elements_Result.Min[1] then
-                   a[2] := Elements_Result.Min[1] + 1
-                 else a[2] := Spin_0_min.Value;
+                 a[1] := Spin_0_max.Value;
+                 a[2] := Spin_0_min.Value;
                  a[3] := Elements_Result.Min[1];
                  a[4] := Elements_Result.Max[1];
                  if Elements_Result.Min[1] > 0 then
