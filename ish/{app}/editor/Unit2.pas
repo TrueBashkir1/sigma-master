@@ -106,7 +106,6 @@ implementation
 Uses strfunc, MainInterface,ResultsArrays, TSigmaForm,ShowMovings,
   WaitForm, Unit3;
 {$R *.dfm}
-
 // log;
   //Подпрограмма извлечения значения напряжения в точке
 
