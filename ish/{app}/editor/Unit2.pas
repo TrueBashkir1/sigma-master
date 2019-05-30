@@ -106,7 +106,6 @@ implementation
 Uses strfunc, MainInterface,ResultsArrays, TSigmaForm,ShowMovings,
   WaitForm, Unit3;
 {$R *.dfm}
-
 // log;
   //Подпрограмма извлечения значения напряжения в точке
 
@@ -273,29 +272,6 @@ var MyNrc :integer;
             end;
          end;
             end;
-//TSH --<
-
-// Old version
-{var MyNrc :integer;
-  begin
-     Series1.Clear;
-        for  MyNrc:=3 to strtoint(Form3.Edit1.Text) do
-        begin
-        Case MyNrc of
-      3:  Series1.AddXY(MyNrc,strtofloat(Edit3.Text));
-      4:  Series1.AddXY(MyNrc,strtofloat(Edit4.Text));
-      5:  Series1.AddXY(MyNrc,strtofloat(Edit5.Text));
-      6:  Series1.AddXY(MyNrc,strtofloat(Edit6.Text));
-      7:  Series1.AddXY(MyNrc,strtofloat(Edit7.Text));
-      8:  Series1.AddXY(MyNrc,strtofloat(Edit8.Text));
-      9:  Series1.AddXY(MyNrc,strtofloat(Edit9.Text));
-     10:  Series1.AddXY(MyNrc,strtofloat(Edit10.Text));
-     11:  Series1.AddXY(MyNrc,strtofloat(Edit11.Text));
-     12:  Series1.AddXY(MyNrc,strtofloat(Edit12.Text));
-            end;
-
-            end;
-}
 end;
 
 procedure TGrafikX.Button2Click(Sender: TObject);
@@ -641,6 +617,7 @@ procedure TGrafikX.Inter(Sender: TObject);
 var MyNrc :integer;
   begin
      Series1.Clear;
+     Series2.Clear;   //Proverka
      Series3.Clear;
      Series4.Clear;
      Series5.Clear;
@@ -757,6 +734,7 @@ prome: array[0..1000] of real;
 Pmas: array[0..1000] of real;
   begin
      Series1.Clear;
+     Series2.Clear;       //Proverka
      Series3.Clear;
      Series4.Clear;
      Series5.Clear;
@@ -765,14 +743,16 @@ Pmas: array[0..1000] of real;
      Label19.Visible:=true;
      Label21.Visible:=false;
      m:=0;
+//Zpolnenie massivov nulyami
      for i:=0 to 13 do
      znachNRC[i]:=0;
      for i:=0 to 9 do
      znachNapr[i]:=0;
      for i:=0 to 1000 do
+     begin
      prome[i]:=0;
-     for i:=0 to 1000 do
      Pmas[i]:=0;
+     end;
 //Zapolnenie massivov
      k:=3;
      for i:=1 to 10 do
@@ -785,8 +765,7 @@ Pmas: array[0..1000] of real;
      end;
      k:=k+1;
      end;
-     if (m=1) then exit;
-     if (m=0) then exit;
+     if (m<2) then exit;
 //Podgotovka k postroeniyu grafika interpolyazii
           pw:= 1;
       for j := 0 to m-1 do
@@ -843,6 +822,7 @@ Fy: array[1..10] of Extended;    //Massiv svobodnich chlenov
 rezul: array[1..10] of Extended;
   begin
      Series1.Clear;
+     Series2.Clear;  //Proverka
      Series3.Clear;
      Series4.Clear;
      Series5.Clear;
@@ -858,7 +838,12 @@ rezul: array[1..10] of Extended;
      znachNapr[i]:=0;
      end;
      for i:=1 to 10 do
+     begin
+     for j:=1 to 10 do
+     Fx[i][j]:=0;
+     Fy[i]:=0;
      rezul[i]:=0;
+     end;
      k:=3;
      for i:=1 to 10 do
      begin;
@@ -872,12 +857,6 @@ rezul: array[1..10] of Extended;
      end;
      if (m<2) then exit;
      k:=m-1; //Stepen polinoma
-     for i:=1 to 10 do
-     begin   //izmenil m
-     for j:=1 to 10 do
-     Fx[i][j]:=0;
-     Fy[i]:=0;
-     end;
      //Zapolnenie massiva svobodnich chlenov
      Fy[1]:=0;
      for j:=0 to k do
@@ -930,30 +909,30 @@ rezul: array[1..10] of Extended;
      prir := znachNRC[0] - 0.01;
      z:=0;
      for z := 0 to m-1 do
-       begin
+     begin
      while (prir < 16) do
-           begin
-             g:=0;
-             prir := prir + 0.01;
-             for j := 1 to m do
-             begin
-             dop:=0;
-             if (j=1) then
-             begin
-             g:=g+rezul[j];
-             Continue;
-             end;
-             dop:=exp((j-1)*ln(prir));
-             g:=g+rezul[j]*dop;
-             end;
-             Series5.AddXY(prir, g);  //Vivod na grafik
-           end;
-           end;
+     begin
+     g:=0;
+     prir := prir + 0.01;
+     for j := 1 to m do
+     begin
+     dop:=0;
+     if (j=1) then
+     begin
+     g:=g+rezul[j];
+     Continue;
+     end;
+     dop:=exp((j-1)*ln(prir));
+     g:=g+rezul[j]*dop;
+     end;
+     Series5.AddXY(prir, g);  //Vivod na grafik
+     end;
+     end;
      for i:=0 to m-1 do
-        begin;
-        if (znachNRC[i]<3) then Continue;
-        Series6.AddXY(znachNRC[i],znachNapr[i]);
-        end;
+     begin;
+     if (znachNRC[i]<3) then Continue;
+     Series6.AddXY(znachNRC[i],znachNapr[i]);
+     end;
 
 end;
 
