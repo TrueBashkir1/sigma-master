@@ -165,7 +165,7 @@ end;
 
 procedure TGrafikX.Naris(Sender: TObject);
 //TSH -->
-var MyNrc,i :integer;
+var MyNrc :integer;
   begin
      Series1.Clear;
      Series2.Clear;
@@ -177,8 +177,6 @@ var MyNrc,i :integer;
      Label18.Visible:=false;
      Label19.Visible:=false;
      Label21.Visible:=false;
-     for i:=1 to 10 do
-     pointsX[i]:=0;
         for  MyNrc:=3 to strtoint(Form3.Edit1.Text) do
         begin
         Case MyNrc of
@@ -616,10 +614,10 @@ end;
 //Dobavil Serafim Meleshko(1 procedura)
 procedure TGrafikX.Inter(Sender: TObject);
 //TSH -->
-var MyNrc,i :integer;
+var MyNrc :integer;
   begin
      Series1.Clear;
-     Series2.Clear;   //Proverka
+//     Series2.Clear;   //Proverka
      Series3.Clear;
      Series4.Clear;
      Series5.Clear;
@@ -627,8 +625,6 @@ var MyNrc,i :integer;
      Label18.Visible:=true;
      Label19.Visible:=false;
      Label21.Visible:=false;
-     for i:=1 to 10 do
-     pointsX[i]:=0;
         for  MyNrc:=3 to strtoint(Form3.Edit1.Text) do
         begin
         Case MyNrc of
@@ -738,7 +734,7 @@ prome: array[0..1000] of real;
 Pmas: array[0..1000] of real;
   begin
      Series1.Clear;
-     Series2.Clear;       //Proverka
+//     Series2.Clear;       //Proverka
      Series3.Clear;
      Series4.Clear;
      Series5.Clear;
@@ -751,27 +747,23 @@ Pmas: array[0..1000] of real;
      for i:=0 to 13 do
      znachNRC[i]:=0;
      for i:=0 to 9 do
-     znachNapr[i]:=0;
+     znachNapr[i]:=0.01;
      for i:=0 to 1000 do
      begin
-     prome[i]:=0;
-     Pmas[i]:=0;
+     prome[i]:=0.01;
+     Pmas[i]:=0.01;
      end;
-     for i:=1 to 10 do
-     pointsX[i]:=0;
 //Zapolnenie massivov
+     j:=strtoint(Form3.Edit1.Text)-3;
      k:=3;
-     for i:=1 to 10 do
+     for i:=1 to j do
      begin;
      if (TCheckBox(FindComponent('CheckBox'+IntToStr(i))).Checked=true)  then
      begin;
-     pointsX[i]:=1;
      znachNRC[m]:=k;
      znachNapr[m]:=strtofloat(TEdit(FindComponent('Edit'+IntToStr(k))).Text);
      m:=m+1;
-     end
-     else
-     pointsX[i]:=0;
+     end;
      k:=k+1;
      end;
      if (m<2) then exit;
@@ -831,7 +823,7 @@ Fy: array[1..10] of Extended;    //Massiv svobodnich chlenov
 rezul: array[1..10] of Extended;
   begin
      Series1.Clear;
-     Series2.Clear;  //Proverka
+//     Series2.Clear;  //Proverka
      Series3.Clear;
      Series4.Clear;
      Series5.Clear;
@@ -841,31 +833,28 @@ rezul: array[1..10] of Extended;
      Label21.Visible:=true;
      m:=0;//Chiclo tochek
 //Zapolnenie massivov
-     for i:=1 to 10 do
-     pointsX[i]:=0;
      for i:=0 to 9 do
      begin
      znachNRC[i]:=0;
-     znachNapr[i]:=0;
+     znachNapr[i]:=0.01;
      end;
      for i:=1 to 10 do
      begin
      for j:=1 to 10 do
-     Fx[i][j]:=0;
-     Fy[i]:=0;
-     rezul[i]:=0;
+     Fx[i][j]:=0.01;
+     Fy[i]:=0.01;
+     rezul[i]:=0.01;
      end;
+     j:=strtoint(Form3.Edit1.Text)-3;
      k:=3;
-     for i:=1 to 10 do
+     for i:=1 to j do
      begin;
      if (TCheckBox(FindComponent('CheckBox'+IntToStr(i))).Checked=true)  then
      begin;
-     pointsX[i]:=1;
      znachNRC[m]:=k;
      znachNapr[m]:=strtofloat(TEdit(FindComponent('Edit'+IntToStr(k))).Text);
      m:=m+1;
-     end
-     else pointsX[i]:=0;
+     end;
      k:=k+1;
      end;
      if (m<2) then exit;

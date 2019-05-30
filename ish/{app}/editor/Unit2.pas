@@ -617,7 +617,7 @@ procedure TGrafikX.Inter(Sender: TObject);
 var MyNrc :integer;
   begin
      Series1.Clear;
-     Series2.Clear;   //Proverka
+//     Series2.Clear;   //Proverka
      Series3.Clear;
      Series4.Clear;
      Series5.Clear;
@@ -734,7 +734,7 @@ prome: array[0..1000] of real;
 Pmas: array[0..1000] of real;
   begin
      Series1.Clear;
-     Series2.Clear;       //Proverka
+//     Series2.Clear;       //Proverka
      Series3.Clear;
      Series4.Clear;
      Series5.Clear;
@@ -747,15 +747,16 @@ Pmas: array[0..1000] of real;
      for i:=0 to 13 do
      znachNRC[i]:=0;
      for i:=0 to 9 do
-     znachNapr[i]:=0;
+     znachNapr[i]:=0.01;
      for i:=0 to 1000 do
      begin
-     prome[i]:=0;
-     Pmas[i]:=0;
+     prome[i]:=0.01;
+     Pmas[i]:=0.01;
      end;
 //Zapolnenie massivov
+     j:=strtoint(Form3.Edit1.Text)-2;
      k:=3;
-     for i:=1 to 10 do
+     for i:=1 to j do
      begin;
      if (TCheckBox(FindComponent('CheckBox'+IntToStr(i))).Checked=true)  then
      begin;
@@ -822,7 +823,7 @@ Fy: array[1..10] of Extended;    //Massiv svobodnich chlenov
 rezul: array[1..10] of Extended;
   begin
      Series1.Clear;
-     Series2.Clear;  //Proverka
+//     Series2.Clear;  //Proverka
      Series3.Clear;
      Series4.Clear;
      Series5.Clear;
@@ -835,17 +836,18 @@ rezul: array[1..10] of Extended;
      for i:=0 to 9 do
      begin
      znachNRC[i]:=0;
-     znachNapr[i]:=0;
+     znachNapr[i]:=0.01;
      end;
      for i:=1 to 10 do
      begin
      for j:=1 to 10 do
-     Fx[i][j]:=0;
-     Fy[i]:=0;
-     rezul[i]:=0;
+     Fx[i][j]:=0.01;
+     Fy[i]:=0.01;
+     rezul[i]:=0.01;
      end;
+     j:=strtoint(Form3.Edit1.Text)-2;
      k:=3;
-     for i:=1 to 10 do
+     for i:=1 to j do
      begin;
      if (TCheckBox(FindComponent('CheckBox'+IntToStr(i))).Checked=true)  then
      begin;
