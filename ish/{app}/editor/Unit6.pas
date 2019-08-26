@@ -72,6 +72,8 @@ type
     Label19: TLabel;
     Series5: TLineSeries;
     Series6: TLineSeries;
+    CheckBox13: TCheckBox;
+    Label21: TLabel;
      procedure  Ochistka(Sender:TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -82,10 +84,11 @@ type
     procedure RadioButton4Click(Sender: TObject);
     procedure RadioButton5Click(Sender: TObject);
     procedure RadioButton6Click(Sender: TObject);
-//Dobavil Serafim Meleshko(3 stroki)
+//Dobavil Serafim Meleshko(4 stroki)
     procedure Label111Open(Sender: TObject);
     procedure Inter(Sender: TObject);
     procedure Inter2(Sender: TObject);
+    procedure Inter3(Sender: TObject);
   private
     { Private declarations }
   public
@@ -161,11 +164,12 @@ var MyNrc :integer;
   begin
      Series1.Clear;
      Series2.Clear;
-//Dobavil Serafim Meleshko(6 strok)
+//Dobavil Serafim Meleshko(7 strok)
      Series3.Clear;
      Series4.Clear;
      Label18.Visible:=false;
      Label19.Visible:=false;
+     Label21.Visible:=false;
      Series5.Clear;
      Series6.Clear;
         for  MyNrc:=3 to strtoint(Form3.Edit1.Text) do
@@ -281,6 +285,9 @@ begin
             if  CheckBox12.Checked=true then
             Inter2(Sender)
             else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
+            else
               Naris(Sender);
           end;
        4:  begin
@@ -292,6 +299,9 @@ begin
             else
             if  CheckBox12.Checked=true then
             Inter2(Sender)
+            else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
             else
               Naris(Sender);
           end;
@@ -305,6 +315,9 @@ begin
             if  CheckBox12.Checked=true then
             Inter2(Sender)
             else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
+            else
               Naris(Sender);
           end;
        6:  begin
@@ -317,6 +330,9 @@ begin
             if  CheckBox12.Checked=true then
             Inter2(Sender)
             else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
+            else
               Naris(Sender);
           end;
        7: begin
@@ -328,6 +344,9 @@ begin
             else
             if  CheckBox12.Checked=true then
             Inter2(Sender)
+            else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
             else
               Naris(Sender);
           end;
@@ -342,6 +361,9 @@ begin
             if  CheckBox12.Checked=true then
             Inter2(Sender)
             else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
+            else
               Naris(Sender);
           end;
        9:   begin
@@ -353,6 +375,9 @@ begin
             else
             if  CheckBox12.Checked=true then
             Inter2(Sender)
+            else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
             else
               Naris(Sender);
           end;
@@ -366,6 +391,9 @@ begin
             if  CheckBox12.Checked=true then
             Inter2(Sender)
             else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
+            else
               Naris(Sender);
           end;
        11:   begin
@@ -378,6 +406,9 @@ begin
             if  CheckBox12.Checked=true then
             Inter2(Sender)
             else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
+            else
               Naris(Sender);
           end;
         12:   begin
@@ -389,6 +420,9 @@ begin
             else
             if  CheckBox12.Checked=true then
             Inter2(Sender)
+            else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
             else
               Naris(Sender);
           end;
@@ -585,6 +619,7 @@ var MyNrc :integer;
      Series5.Clear;
      Series6.Clear;
      Label19.Visible:=false;
+     Label21.Visible:=false;
         for  MyNrc:=3 to strtoint(Form3.Edit1.Text) do
         begin
         Case MyNrc of
@@ -685,7 +720,7 @@ end;
 //Dobavil Serafim Meleshko(1 procedura)
 procedure TGrafikGL.Inter2(Sender: TObject);
 //TSH -->
-var MyNrc,i,j,m,z,k :integer;
+var i,j,m,z,k :integer;
 prir,toch,pw :real;
 znachNRC: array[0..13] of real;
 znachNapr: array[0..9] of real;
@@ -699,10 +734,22 @@ Pmas: array[0..1000] of real;
      Series6.Clear;
      Label18.Visible:=false;
      Label19.Visible:=true;
+     Label21.Visible:=false;
      m:=0;
+//Zpolnenie massivov nulyami
+     for i:=0 to 13 do
+     znachNRC[i]:=0;
+     for i:=0 to 9 do
+     znachNapr[i]:=0.01;
+     for i:=0 to 1000 do
+     begin
+     prome[i]:=0.01;
+     Pmas[i]:=0.01;
+     end;
 //Zapolnenie massivov
+     j:=strtoint(Form3.Edit1.Text)-2;
      k:=3;
-     for i:=1 to 10 do
+     for i:=1 to j do
      begin;
      if (TCheckBox(FindComponent('CheckBox'+IntToStr(i))).Checked=true)  then
      begin;
@@ -712,9 +759,7 @@ Pmas: array[0..1000] of real;
      end;
      k:=k+1;
      end;
-     if (m=1) then exit;
-     if (m=0) then exit;
-
+     if (m<2) then exit;
 //Podgotovka k postroeniyu grafika interpolyazii
           pw:= 1;
       for j := 0 to m-1 do
@@ -756,6 +801,133 @@ Pmas: array[0..1000] of real;
         if (znachNRC[i]<3) then Continue;
         Series6.AddXY(znachNRC[i],znachNapr[i]);
         end;
+end;
+
+//Dobavil Serafim Meleshko(1 procedura)
+procedure TGrafikGl.Inter3(Sender: TObject);
+//TSH -->
+var i,m,k,j,n,z :integer;
+prome,h,g,prir,dop :real;
+znachNRC: array[0..9] of real;
+znachNapr: array[0..9] of real;
+Fx: array[1..10,1..10] of Extended; //Matriza znacheniy summ
+Fy: array[1..10] of Extended;    //Massiv svobodnich chlenov
+rezul: array[1..10] of Extended;
+  begin
+     Series1.Clear;
+//     Series2.Clear;  //Proverka
+     Series3.Clear;
+     Series4.Clear;
+     Series5.Clear;
+     Series6.Clear;
+     Label19.Visible:=false;
+     Label18.Visible:=false;
+     Label21.Visible:=true;
+     m:=0;//Chiclo tochek
+//Zapolnenie massivov
+     for i:=0 to 9 do
+     begin
+     znachNRC[i]:=0;
+     znachNapr[i]:=0.01;
+     end;
+     for i:=1 to 10 do
+     begin
+     for j:=1 to 10 do
+     Fx[i][j]:=0.01;
+     Fy[i]:=0.01;
+     rezul[i]:=0.01;
+     end;
+     j:=strtoint(Form3.Edit1.Text)-2;
+     k:=3;
+     for i:=1 to j do
+     begin;
+     if (TCheckBox(FindComponent('CheckBox'+IntToStr(i))).Checked=true)  then
+     begin;
+     znachNRC[m]:=k;
+     znachNapr[m]:=strtofloat(TEdit(FindComponent('Edit'+IntToStr(k))).Text);
+     m:=m+1;
+     end;
+     k:=k+1;
+     end;
+     if (m<2) then exit;
+     k:=m-1; //Stepen polinoma
+//Zapolnenie massiva svobodnich chlenov
+     Fy[1]:=0;
+     for j:=0 to k do
+     Fy[1]:=Fy[1]+znachNapr[j];
+     Fx[1][1]:=m;
+     Fy[2]:=0;
+     for i:=2 to m do
+     for j:=0 to k do
+     Fy[i]:=Fy[i]+exp((i-1)*ln(znachNRC[j]))*znachNapr[j];
+     for i:=1 to m do
+     for j:=1 to m do     
+     begin;
+     prome:=0;
+     if ((i=1) and (j=1)) then Continue;
+     for n:=0 to k do
+     begin
+     prome:=prome+exp((j+i-2)*ln(znachNRC[n]));
+     end;
+     Fx[i][j]:=prome;
+     end;
+//Method Gaussa
+//Privedeniye matrizi k treugolnomu vidu
+     h:=0;
+     for n:=1 to m do
+     begin
+     for j:=n+1 to m do
+     begin
+     h:=Fx[j][n]/Fx[n][n];
+     for i:=n to m do
+     begin
+     Fx[j][i]:=Fx[j][i]-h*Fx[n][i];
+     end;
+     Fy[j]:=Fy[j]-h*Fy[n];
+     end;
+     end;
+
+//Vichisleniye korney
+     for n:=m downto 1 do
+     begin
+     h:=0;
+     for j:=n+1 to m do
+     begin
+     g:=Fx[n,j]*rezul[j];
+     h:=h+g;
+     end;
+     rezul[n]:=(Fy[n]-h)/Fx[n,n];
+     end;
+
+//Vivod
+     prir := znachNRC[0] - 0.01;
+     z:=0;
+     for z := 0 to m-1 do
+     begin
+     while (prir < 16) do
+     begin
+     g:=0;
+     prir := prir + 0.01;
+     for j := 1 to m do
+     begin
+     dop:=0;
+     if (j=1) then
+     begin
+     g:=g+rezul[j];
+     Continue;
+     end;
+     dop:=exp((j-1)*ln(prir));
+     g:=g+rezul[j]*dop;
+     end;
+     Series5.AddXY(prir, g);  //Vivod na grafik
+     end;
+     end;
+     for i:=0 to m-1 do
+     begin;
+     if (znachNRC[i]<3) then Continue;
+     Series6.AddXY(znachNRC[i],znachNapr[i]);
+     end;
+
 end;
 end.
 

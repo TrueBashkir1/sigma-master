@@ -72,6 +72,8 @@ type
     Series5: TLineSeries;
     Series6: TLineSeries;
     Label19: TLabel;
+    CheckBox13: TCheckBox;
+    Label21: TLabel;
      procedure  Ochistka(Sender:TObject);
      procedure Button2Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
@@ -82,10 +84,11 @@ type
     procedure RadioButton4Click(Sender: TObject);
     procedure RadioButton5Click(Sender: TObject);
     procedure RadioButton6Click(Sender: TObject);
-//Dobavil Serafim Meleshko(3 stroki)
+//Dobavil Serafim Meleshko(4 stroki)
     procedure Label1Open(Sender: TObject);
     procedure Inter(Sender: TObject);
     procedure Inter2(Sender: TObject);
+    procedure Inter3(Sender: TObject);
   private
     { Private declarations }
   public
@@ -171,6 +174,7 @@ var MyNrc :integer;
      Series4.Clear;
      Label18.Visible:=false;
      Label19.Visible:=false;
+     Label21.Visible:=false;
      Series5.Clear;
      Series6.Clear;
         for  MyNrc:=3 to strtoint(Form3.Edit1.Text) do
@@ -269,28 +273,6 @@ var MyNrc :integer;
          end;
             end;
 //TSH --<
-
-// Old version
-{var MyNrc :integer;
-  begin
-     Series1.Clear;
-        for  MyNrc:=3 to strtoint(Form3.Edit1.Text) do
-        begin
-        Case MyNrc of
-     3:  Series1.AddXY(MyNrc,strtofloat(Edit3.Text));
-      4:  Series1.AddXY(MyNrc,strtofloat(Edit4.Text));
-      5:  Series1.AddXY(MyNrc,strtofloat(Edit5.Text));
-      6:  Series1.AddXY(MyNrc,strtofloat(Edit6.Text));
-      7:  Series1.AddXY(MyNrc,strtofloat(Edit7.Text));
-      8:  Series1.AddXY(MyNrc,strtofloat(Edit8.Text));
-      9:  Series1.AddXY(MyNrc,strtofloat(Edit9.Text));
-     10:  Series1.AddXY(MyNrc,strtofloat(Edit10.Text));
-     11:  Series1.AddXY(MyNrc,strtofloat(Edit11.Text));
-     12:  Series1.AddXY(MyNrc,strtofloat(Edit12.Text));
-            end;
-
-            end;
-}
      end;
 
 procedure TGrafikXY.Button2Click(Sender: TObject);
@@ -308,6 +290,9 @@ begin
             if  CheckBox12.Checked=true then
             Inter2(Sender)
             else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
+            else
               Naris(Sender);
           end;
        4:  begin
@@ -319,6 +304,9 @@ begin
             else
             if  CheckBox12.Checked=true then
             Inter2(Sender)
+            else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
             else
               Naris(Sender);
           end;
@@ -332,6 +320,9 @@ begin
             if  CheckBox12.Checked=true then
             Inter2(Sender)
             else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
+            else
               Naris(Sender);
           end;
        6:  begin
@@ -344,6 +335,9 @@ begin
             if  CheckBox12.Checked=true then
             Inter2(Sender)
             else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
+            else
               Naris(Sender);
           end;
        7: begin
@@ -355,6 +349,9 @@ begin
             else
             if  CheckBox12.Checked=true then
             Inter2(Sender)
+            else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
             else
               Naris(Sender);
           end;
@@ -369,6 +366,9 @@ begin
             if  CheckBox12.Checked=true then
             Inter2(Sender)
             else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
+            else
               Naris(Sender);
           end;
        9:   begin
@@ -380,6 +380,9 @@ begin
             else
             if  CheckBox12.Checked=true then
             Inter2(Sender)
+            else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
             else
               Naris(Sender);
           end;
@@ -393,6 +396,9 @@ begin
             if  CheckBox12.Checked=true then
             Inter2(Sender)
             else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
+            else
               Naris(Sender);
           end;
        11:   begin
@@ -405,6 +411,9 @@ begin
             if  CheckBox12.Checked=true then
             Inter2(Sender)
             else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
+            else
               Naris(Sender);
           end;
         12:   begin
@@ -416,6 +425,9 @@ begin
             else
             if  CheckBox12.Checked=true then
             Inter2(Sender)
+            else
+            if  CheckBox13.Checked=true then
+            Inter3(Sender)
             else
               Naris(Sender);
           end;
@@ -540,79 +552,6 @@ ole_doc.Application.Visible := True;
            MessageDlg('Ошибка при попытке экспорта информации в MS Word.',mtError,[mbYes],0);
      END;
 //TSH --<
-
-// Old version
-{var ole_doc, ole_r, ole_p, ole_s, ole_t, ole_tc, ole_c: Variant;
-    N, i, nrc: integer;
-    S: String;
-begin
-N:=strtoint(Form3.Edit1.Text);
-     TRY
-ole.CreateObject('word.application', true);
-ole.OleObject.documents.Add;
-ole_doc := ole.OleObject.ActiveDocument;
-
-ole_r := ole_doc.Content;
-Chart1.CopyToClipboardBitmap;
-ole_r.Paste;
-
-ole_p := ole_r.Paragraphs.Item(1);
-ole_p.Alignment:=1;
-ole_r.Collapse(0);
-ole_r.Paragraphs.Add(ole_r);
-ole_r.Collapse(0);
-ole_r.Paragraphs.Add(ole_r);
-ole_r.Collapse(0);
-    ole_r := ole_doc.Content;
-    ole_r.Collapse(0);
-    ole_r.Select;
-    ole_s:=ole_doc.application.Selection;
-    S:='X = ' + Label13.Caption + '    Y = ' + Label14.Caption;
-    ole_s.TypeText(S);
-    ole_r := ole_doc.Content;
-    ole_r.Collapse(0);
-    ole_r.Paragraphs.Add(ole_r);
-    ole_r.Collapse(0);
-    ole_r.Paragraphs.Add(ole_r);
-    ole_r.Collapse(0);
-ole_t:=ole_doc.Tables.Add(ole_r,N-1,2);
-ole_tc:=ole_t.Columns.Item(1);
-ole_tc.Width:=50;
-ole_tc:=ole_t.Columns.Item(2);
-ole_tc.Width:=150;
-
-    ole_c:=ole_t.Cell(1,1);
-    ole_c.Select;
-    ole_s:=ole_doc.application.Selection;
-    ole_s.TypeText('NRC');
-
-    ole_c:=ole_t.Cell(1,2);
-    ole_c.Select;
-    ole_s:=ole_doc.application.Selection;
-    ole_s.TypeText('Касательное напряжение');
-
-for i:=1 to N-2 do begin
-    ole_c:=ole_t.Cell(i+1,1);
-    ole_c.Select;
-    ole_s:=ole_doc.application.Selection;
-    nrc:=i+2;
-    Str(nrc,S);
-    ole_s.TypeText(S);
-
-    ole_c:=ole_t.Cell(i+1,2);
-    ole_c.Select;
-    ole_s:=ole_doc.application.Selection;
-    Str(Series1.YValues.Value[i-1]:1:8,S);
-    ole_s.TypeText(S);
-end;
-
-ole_doc.Application.Visible := True;
-
-     EXCEPT
-           MessageDlg('Ошибка при попытке экспорта информации в MS Word.',mtError,[mbYes],0);
-     END;
-
-}
 end;
 
 // TSH -->
@@ -685,6 +624,7 @@ var MyNrc :integer;
      Series5.Clear;
      Series6.Clear;
      Label19.Visible:=false;
+     Label21.Visible:=false;
         for  MyNrc:=3 to strtoint(Form3.Edit1.Text) do
         begin
         Case MyNrc of
@@ -785,12 +725,9 @@ end;
 //Dobavil Serafim Meleshko(1 procedura)
 procedure TGrafikXY.Inter2(Sender: TObject);
 //TSH -->
-var MyNrc,i,j,m,z,k :integer;
+var i,j,m,z,k :integer;
 prir,toch,pw :real;
 znachNRC: array[0..13] of real;
-{iznachalno bilo [0...9]!!!!!!!!!!!!!!!!!!!!!!!
-interpolyazia sdelana max po 9 tochkam, dalshe prosto idet podstanovka v formulu
-interpolyazii dlya max znach nrc 12 drugich znacheniy nrc a imenno s 12 do 16}
 znachNapr: array[0..9] of real;
 prome: array[0..1000] of real;
 Pmas: array[0..1000] of real;
@@ -802,62 +739,38 @@ Pmas: array[0..1000] of real;
      Series6.Clear;
      Label18.Visible:=false;
      Label19.Visible:=true;
+     Label21.Visible:=false;
      m:=0;
+//Zpolnenie massivov nulyami
+     for i:=0 to 13 do
+     znachNRC[i]:=0;
+     for i:=0 to 9 do
+     znachNapr[i]:=0.01;
+     for i:=0 to 1000 do
+     begin
+     prome[i]:=0.01;
+     Pmas[i]:=0.01;
+     end;
 //Zapolnenie massivov
-        for i:=0 to strtoint(Form3.Edit1.Text)+1 do
-//otnimaly 3 iznachalno!!!!!!!!!!!!!!!!!!!!!!!
-        begin;
-        m:=m+1;
-        znachNRC[i]:=i+3
-        end;
-        if (Edit3.Text<>'') then
-        znachNapr[0]:=strtofloat(Edit3.Text)
-        else
-        znachNapr[0]:=0;
-        if (Edit4.Text<>'') then
-        znachNapr[1]:=strtofloat(Edit4.Text)
-        else
-        znachNapr[1]:=0;
-        if (Edit5.Text<>'') then
-        znachNapr[2]:=strtofloat(Edit5.Text)
-        else
-        znachNapr[2]:=0;
-        if (Edit6.Text<>'') then
-        znachNapr[3]:=strtofloat(Edit6.Text)
-        else
-        znachNapr[3]:=0;
-        if (Edit7.Text<>'') then
-        znachNapr[4]:=strtofloat(Edit7.Text)
-        else
-        znachNapr[4]:=0;
-        if (Edit8.Text<>'') then
-        znachNapr[5]:=strtofloat(Edit8.Text)
-        else
-        znachNapr[5]:=0;
-        if (Edit9.Text<>'') then
-        znachNapr[6]:=strtofloat(Edit9.Text)
-        else
-        znachNapr[6]:=0;
-        if (Edit10.Text<>'') then
-        znachNapr[7]:=strtofloat(Edit10.Text)
-        else
-        znachNapr[7]:=0;
-        if (Edit11.Text<>'') then
-        znachNapr[8]:=strtofloat(Edit11.Text)
-        else
-        znachNapr[8]:=0;
-        if (Edit12.Text<>'') then
-        znachNapr[9]:=strtofloat(Edit12.Text)
-        else
-        znachNapr[9]:=0;
+     j:=strtoint(Form3.Edit1.Text)-2;
+     k:=3;
+     for i:=1 to j do
+     begin;
+     if (TCheckBox(FindComponent('CheckBox'+IntToStr(i))).Checked=true)  then
+     begin;
+     znachNRC[m]:=k;
+     znachNapr[m]:=strtofloat(TEdit(FindComponent('Edit'+IntToStr(k))).Text);
+     m:=m+1;
+     end;
+     k:=k+1;
+     end;
+     if (m<2) then exit;
 //Podgotovka k postroeniyu grafika interpolyazii
           pw:= 1;
-      for j := 0 to m-5 do
-//iznachalno m-1 bilo!!!!!!!!!!!!!!!!!!!!!!!
+      for j := 0 to m-1 do
         begin
               pw := 1;
-              for i := 0 to m-5 do
-              //iznachalno m-1 bilo!!!!!!!!!!!!!!!!!!!!!!!
+              for i := 0 to m-1 do
                 begin
                   IF( (i <> j) and (znachNRC[i] <> 0) and (znachNRC[j] <> 0) )THEN pw := pw * ( 1 / (znachNRC[j] - znachNRC[i]) );
                 end;
@@ -865,36 +778,161 @@ Pmas: array[0..1000] of real;
         end;
 
        prir := znachNRC[0] - 0.01;
-//Postroeniye grafika interpolyazii
+//Postroeniye grafika interpolyacii
      for z := 0 to m-1 do
        begin
-         while (prir < znachNRC[m-1]) do
+         while (prir < 16) do
            begin
              prir := prir + 0.01;
                 toch:=0;
-             for j := 0 to m-5 do
-             //iznachalno m-1 bilo!!!!!!!!!!!!!!!!!!!!!!!
+             for j := 0 to m-1 do
                begin
                  pw := 1;
-                 for i := 0 to m-5 Do
-                 //iznachalno m-1 bilo!!!!!!!!!!!!!!!!!!!!!!!
+                 for i := 0 to m-1 Do
                    begin
                      if (i <> j) then pw := pw  * (prir - znachNRC[i]);
                    end;
                  Pmas[j] :=  pw * prome[j]; //Polucheniye mnogochlenov
                end;
-               for k := 0 to m-5 do
-               //iznachalno m-1 bilo!!!!!!!!!!!!!!!!!!!!!!!
+               for k := 0 to m-1 do
                  begin
                    toch := toch + Pmas[k]; //Summa mnogochlenov
                  end;
                Series5.AddXY(prir, toch);  //Vivod na grafik
            end;
        end;
-       for i:=0 to strtoint(Form3.Edit1.Text)-3 do
-        begin
-        Series6.AddXY(znachNRC[i],znachNapr[i])
+       for i:=0 to m-1 do
+        begin;
+        if (znachNRC[i]<3) then Continue;
+        Series6.AddXY(znachNRC[i],znachNapr[i]);
         end;
+end;
+
+//Dobavil Serafim Meleshko(1 procedura)
+procedure TGrafikXY.Inter3(Sender: TObject);
+//TSH -->
+var i,m,k,j,n,z :integer;
+prome,h,g,prir,dop :real;
+znachNRC: array[0..9] of real;
+znachNapr: array[0..9] of real;
+Fx: array[1..10,1..10] of Extended; //Matriza znacheniy summ
+Fy: array[1..10] of Extended;    //Massiv svobodnich chlenov
+rezul: array[1..10] of Extended;
+  begin
+     Series1.Clear;
+//     Series2.Clear;  //Proverka
+     Series3.Clear;
+     Series4.Clear;
+     Series5.Clear;
+     Series6.Clear;
+     Label19.Visible:=false;
+     Label18.Visible:=false;
+     Label21.Visible:=true;
+     m:=0;//Chiclo tochek
+//Zapolnenie massivov
+     for i:=0 to 9 do
+     begin
+     znachNRC[i]:=0;
+     znachNapr[i]:=0.01;
+     end;
+     for i:=1 to 10 do
+     begin
+     for j:=1 to 10 do
+     Fx[i][j]:=0.01;
+     Fy[i]:=0.01;
+     rezul[i]:=0.01;
+     end;
+     j:=strtoint(Form3.Edit1.Text)-2;
+     k:=3;
+     for i:=1 to j do
+     begin;
+     if (TCheckBox(FindComponent('CheckBox'+IntToStr(i))).Checked=true)  then
+     begin;
+     znachNRC[m]:=k;
+     znachNapr[m]:=strtofloat(TEdit(FindComponent('Edit'+IntToStr(k))).Text);
+     m:=m+1;
+     end;
+     k:=k+1;
+     end;
+     if (m<2) then exit;
+     k:=m-1; //Stepen polinoma
+//Zapolnenie massiva svobodnich chlenov
+     Fy[1]:=0;
+     for j:=0 to k do
+     Fy[1]:=Fy[1]+znachNapr[j];
+     Fx[1][1]:=m;
+     Fy[2]:=0;
+     for i:=2 to m do
+     for j:=0 to k do
+     Fy[i]:=Fy[i]+exp((i-1)*ln(znachNRC[j]))*znachNapr[j];
+     for i:=1 to m do
+     for j:=1 to m do     
+     begin;
+     prome:=0;
+     if ((i=1) and (j=1)) then Continue;
+     for n:=0 to k do
+     begin
+     prome:=prome+exp((j+i-2)*ln(znachNRC[n]));
+     end;
+     Fx[i][j]:=prome;
+     end;
+//Method Gaussa
+//Privedeniye matrizi k treugolnomu vidu
+     h:=0;
+     for n:=1 to m do
+     begin
+     for j:=n+1 to m do
+     begin
+     h:=Fx[j][n]/Fx[n][n];
+     for i:=n to m do
+     begin
+     Fx[j][i]:=Fx[j][i]-h*Fx[n][i];
+     end;
+     Fy[j]:=Fy[j]-h*Fy[n];
+     end;
+     end;
+
+//Vichisleniye korney
+     for n:=m downto 1 do
+     begin
+     h:=0;
+     for j:=n+1 to m do
+     begin
+     g:=Fx[n,j]*rezul[j];
+     h:=h+g;
+     end;
+     rezul[n]:=(Fy[n]-h)/Fx[n,n];
+     end;
+
+//Vivod
+     prir := znachNRC[0] - 0.01;
+     z:=0;
+     for z := 0 to m-1 do
+     begin
+     while (prir < 16) do
+     begin
+     g:=0;
+     prir := prir + 0.01;
+     for j := 1 to m do
+     begin
+     dop:=0;
+     if (j=1) then
+     begin
+     g:=g+rezul[j];
+     Continue;
+     end;
+     dop:=exp((j-1)*ln(prir));
+     g:=g+rezul[j]*dop;
+     end;
+     Series5.AddXY(prir, g);  //Vivod na grafik
+     end;
+     end;
+     for i:=0 to m-1 do
+     begin;
+     if (znachNRC[i]<3) then Continue;
+     Series6.AddXY(znachNRC[i],znachNapr[i]);
+     end;
+
 end;
 end.
 

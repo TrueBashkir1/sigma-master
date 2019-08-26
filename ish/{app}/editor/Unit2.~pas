@@ -754,7 +754,7 @@ Pmas: array[0..1000] of real;
      Pmas[i]:=0.01;
      end;
 //Zapolnenie massivov
-     j:=strtoint(Form3.Edit1.Text)-3;
+     j:=strtoint(Form3.Edit1.Text)-2;
      k:=3;
      for i:=1 to j do
      begin;
@@ -845,7 +845,7 @@ rezul: array[1..10] of Extended;
      Fy[i]:=0.01;
      rezul[i]:=0.01;
      end;
-     j:=strtoint(Form3.Edit1.Text)-3;
+     j:=strtoint(Form3.Edit1.Text)-2;
      k:=3;
      for i:=1 to j do
      begin;

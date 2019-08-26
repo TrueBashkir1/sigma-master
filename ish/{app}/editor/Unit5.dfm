@@ -1,8 +1,8 @@
 object GrafikXY: TGrafikXY
-  Left = 270
-  Top = 211
-  Width = 764
-  Height = 541
+  Left = 112
+  Top = 141
+  Width = 788
+  Height = 578
   Caption = #1043#1088#1072#1092#1080#1082'  '#1089#1093#1086#1076#1080#1084#1086#1089#1090#1080' '#1082#1072#1089#1072#1090#1077#1083#1100#1085#1086#1075#1086' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1103
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -68,7 +68,7 @@ object GrafikXY: TGrafikXY
   end
   object Label20: TLabel
     Left = 16
-    Top = 448
+    Top = 464
     Width = 184
     Height = 13
     Caption = #1043#1088#1072#1092#1080#1082' '#1087#1086#1089#1090#1088#1086#1077#1085' '#1085#1077#1082#1086#1088#1088#1077#1082#1090#1085#1086
@@ -96,8 +96,8 @@ object GrafikXY: TGrafikXY
   object GroupBox2: TGroupBox
     Left = 288
     Top = 64
-    Width = 449
-    Height = 425
+    Width = 465
+    Height = 465
     Caption = #1043#1088#1072#1092#1080#1082' '#1089#1093#1086#1076#1080#1084#1086#1089#1090#1080' '#1082#1072#1089#1072#1090#1077#1083#1100#1085#1086#1075#1086' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1103
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -108,7 +108,7 @@ object GrafikXY: TGrafikXY
     TabOrder = 10
     object Label12: TLabel
       Left = 8
-      Top = 376
+      Top = 408
       Width = 81
       Height = 13
       Caption = #1042#1077#1088#1093#1085#1080#1081' '#1087#1088#1077#1076#1077#1083
@@ -121,7 +121,7 @@ object GrafikXY: TGrafikXY
     end
     object Label15: TLabel
       Left = 120
-      Top = 376
+      Top = 408
       Width = 79
       Height = 13
       Caption = #1053#1080#1078#1085#1080#1081' '#1087#1088#1077#1076#1077#1083
@@ -134,7 +134,7 @@ object GrafikXY: TGrafikXY
     end
     object CheckBox11: TCheckBox
       Left = 8
-      Top = 336
+      Top = 352
       Width = 289
       Height = 17
       Caption = #1048#1085#1090#1077#1088#1087#1086#1083#1103#1094#1080#1103' '#1086#1090#1088#1077#1079#1082#1072#1084#1080' '#1087#1088#1103#1084#1099#1093
@@ -149,7 +149,7 @@ object GrafikXY: TGrafikXY
     end
     object CheckBox12: TCheckBox
       Left = 8
-      Top = 352
+      Top = 368
       Width = 417
       Height = 17
       Caption = #1048#1085#1090#1077#1088#1087#1086#1083#1103#1094#1080#1103' '#1087#1086' '#1051#1072#1075#1088#1072#1085#1078#1091
@@ -160,6 +160,21 @@ object GrafikXY: TGrafikXY
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 1
+      OnClick = Button2Click
+    end
+    object CheckBox13: TCheckBox
+      Left = 8
+      Top = 384
+      Width = 225
+      Height = 17
+      Caption = #1055#1086#1083#1080#1085#1086#1084#1080#1072#1083#1100#1085#1072#1103' '#1072#1087#1087#1088#1086#1082#1089#1080#1084#1072#1094#1080#1103
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
       OnClick = Button2Click
     end
   end
@@ -503,7 +518,7 @@ object GrafikXY: TGrafikXY
   end
   object Button1: TButton
     Left = 16
-    Top = 464
+    Top = 496
     Width = 177
     Height = 25
     Caption = 'Cancel'
@@ -518,21 +533,21 @@ object GrafikXY: TGrafikXY
   end
   object Edit1: TEdit
     Left = 296
-    Top = 456
+    Top = 496
     Width = 94
     Height = 21
     TabOrder = 2
   end
   object Edit2: TEdit
     Left = 408
-    Top = 456
+    Top = 496
     Width = 99
     Height = 21
     TabOrder = 3
   end
   object Button2: TButton
-    Left = 544
-    Top = 448
+    Left = 552
+    Top = 488
     Width = 73
     Height = 25
     Caption = #1059#1089#1090#1072#1085#1086#1074#1080#1090#1100
@@ -541,7 +556,7 @@ object GrafikXY: TGrafikXY
   end
   object Ole: TOleContainer
     Left = 218
-    Top = 440
+    Top = 472
     Width = 57
     Height = 25
     Caption = 'Ole'
@@ -550,7 +565,7 @@ object GrafikXY: TGrafikXY
   end
   object Button4: TButton
     Left = 200
-    Top = 464
+    Top = 496
     Width = 73
     Height = 25
     Caption = 'MS Word'
@@ -566,8 +581,8 @@ object GrafikXY: TGrafikXY
   object Chart1: TChart
     Left = 296
     Top = 80
-    Width = 433
-    Height = 313
+    Width = 449
+    Height = 329
     BackWall.Brush.Color = clWhite
     BackWall.Brush.Style = bsClear
     Title.Text.Strings = (
@@ -603,6 +618,13 @@ object GrafikXY: TGrafikXY
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
+    end
+    object Label21: TLabel
+      Left = 144
+      Top = 8
+      Width = 177
+      Height = 13
+      Caption = #1055#1086#1083#1080#1085#1086#1084#1080#1072#1083#1100#1085#1072#1103' '#1072#1087#1087#1088#1086#1082#1089#1080#1084#1072#1094#1080#1103
     end
     object Series1: TLineSeries
       Marks.ArrowLength = 8
@@ -730,8 +752,8 @@ object GrafikXY: TGrafikXY
     end
   end
   object Button3: TButton
-    Left = 640
-    Top = 448
+    Left = 656
+    Top = 488
     Width = 73
     Height = 25
     Caption = #1057#1073#1088#1086#1089#1080#1090#1100

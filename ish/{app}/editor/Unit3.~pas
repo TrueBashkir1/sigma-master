@@ -1726,6 +1726,8 @@ button6.Enabled:=False;
 button9.Enabled:=False;
 button13.Enabled:=False;
 button14.Enabled:=False;
+//Dobavil Meleshko Serafim(1 stroka)
+button12.Enabled:=true;
  end;
 end;
 

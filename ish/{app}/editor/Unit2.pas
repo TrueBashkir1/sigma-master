@@ -187,7 +187,7 @@ var MyNrc :integer;
              Series1.AddXY(MyNrc,strtofloat(Edit3.Text));
              pointsX[1]:=1;
            end
-          else pointsX[1]:=0;;
+          else pointsX[1]:=0;
          end;
       4: begin;
           Series2.AddXY(MyNrc,strtofloat(Edit4.Text));
@@ -734,7 +734,6 @@ prome: array[0..1000] of real;
 Pmas: array[0..1000] of real;
   begin
      Series1.Clear;
-//     Series2.Clear;       //Proverka
      Series3.Clear;
      Series4.Clear;
      Series5.Clear;
