@@ -71,7 +71,9 @@ begin
           ShowMovingsForm.Icon.Handle:=LoadIcon(HInstance,'MAINICON');
           ShowMovingsForm.ShowForm(ChangeFileExt(GetProject_FileName, '.res'));
      end;
+         ShowMovingsForm.UseLines.Checked := true;
          ShowMovingsForm.ShowForm(ChangeFileExt(GetProject_FileName, '.res'));
+
    IF ShowMovingsForm.Error<>0 THEN
     BEGIN
       ShowMessage('Открытие "Графического отображения результатов расчета" невозможно');

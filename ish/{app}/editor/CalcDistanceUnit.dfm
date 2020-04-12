@@ -3,7 +3,7 @@ object CalcDistanceForm: TCalcDistanceForm
   Top = 129
   Width = 236
   Height = 537
-  Caption = 'Sigma 7.4 - '#1056#1072#1089#1095#1077#1090' '#1088#1072#1089#1089#1090#1086#1103#1085#1080#1081
+  Caption = 'Sigma 7.4.4 - '#1056#1072#1089#1095#1077#1090' '#1088#1072#1089#1089#1090#1086#1103#1085#1080#1081
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,14 +18,14 @@ object CalcDistanceForm: TCalcDistanceForm
   object ScrollBox1: TScrollBox
     Left = 0
     Top = 0
-    Width = 220
-    Height = 498
+    Width = 228
+    Height = 503
     Align = alClient
     TabOrder = 0
     object pnlButtons: TGroupBox
       Left = 0
       Top = 0
-      Width = 216
+      Width = 224
       Height = 81
       Align = alTop
       TabOrder = 0
@@ -51,7 +51,7 @@ object CalcDistanceForm: TCalcDistanceForm
     object pnlLinear: TGroupBox
       Left = 0
       Top = 353
-      Width = 216
+      Width = 224
       Height = 128
       Align = alTop
       Caption = #1056#1072#1089#1089#1090#1086#1103#1085#1080#1077' '#1087#1086' '#1087#1088#1103#1084#1086#1081
@@ -125,7 +125,7 @@ object CalcDistanceForm: TCalcDistanceForm
     object pnlArc: TGroupBox
       Left = 0
       Top = 81
-      Width = 216
+      Width = 224
       Height = 272
       Align = alTop
       Caption = #1056#1072#1089#1089#1090#1086#1103#1085#1080#1077' '#1087#1086' '#1076#1091#1075#1077' '#1084#1077#1078#1076#1091' '#1091#1079#1083#1072#1084#1080

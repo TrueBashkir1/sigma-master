@@ -3,7 +3,7 @@
 {                    Московский Авиационный Институт                  }
 {                                                                     }
 {                               кафедра 609                           }
-{                                                                     }                       
+{                                                                     }
 {                    Копылов Антон Анатольевич 2001                   }
 {                                                                     }
 {                               изменения:                           }
@@ -13,7 +13,8 @@
 {                     Цветаев Борис Михайлович 2004                   }
 {                                                                     }
 {*********************************************************************}
-                             
+ // есть панель где назначаются цвета, на форме "цветных квадратикрв" (их 4 штуки 2 зелёных, красный и белый с ноликом),
+ // но на самом деле их 7, чтобы их увидеть необходимо эту манель увеличить (выбрать и растянуть (да, это не совсем просто сделать))                            
 UNIT ShowMovings;
 
 INTERFACE
@@ -68,10 +69,7 @@ TYPE
     ZoomAreaAction : TToolButton;
     BestFitAction  : TToolButton;
     Panel4         : TPanel;
-    ColorMinus     : TPanel;
-    ColorPlus      : TPanel;
     ColorDialog1   : TColorDialog;
-    ColorZero      : TPanel;
     CheckColor     : TPopupMenu;
     PlusM          : TMenuItem;
     MinusM         : TMenuItem;
@@ -185,8 +183,6 @@ TYPE
     Label25: TLabel;
     UseNumMater: TCheckBox;
     Spin_0_max: TSpinEdit;
-    ColorPlus_0: TPanel;
-    ColorMinus_0: TPanel;
     Spin_0_min: TSpinEdit;
     CheckBox1: TCheckBox;
     Edit7: TEdit;
@@ -194,13 +190,20 @@ TYPE
     CheckBox2: TCheckBox;
     ZoneCheckBox: TCheckBox;
     Button1: TButton;
-    ColorZeroPluss: TPanel;
     ParamsButton: TSpeedButton;
     Crosscut: TCheckBox;
     Spin_0_min_2: TSpinEdit;
     Spin_0_max_2: TSpinEdit;
-    ColorMiddle: TPanel;
-    TypeStress: TLabel;
+    GroupBox10_raschet_obedin_peresech: TGroupBox;
+    BitBtn1_Raschet: TBitBtn;
+    Panel3: TPanel;
+    ColorPlus_0_: TPanel;
+    ColorMinus_: TPanel;
+    ColorPlus_: TPanel;
+    ColorZero_: TPanel;
+    ColorMinus_0_: TPanel;
+    ColorZeroPluss_: TPanel;
+    ColorMiddle_: TPanel;
 
     PROCEDURE FormCreate(Sender: TObject);
     PROCEDURE FormDestroy(Sender: TObject);
@@ -266,6 +269,7 @@ TYPE
     procedure NodeEditInputChange(Sender: TObject);
     procedure InfoFiniteElementNumberChange(Sender: TObject);
     procedure CrosscutClick(Sender: TObject);
+    procedure BitBtn1_RaschetClick(Sender: TObject);
 
 
   PUBLIC
@@ -515,12 +519,13 @@ VAR
     IF Registry.ValueExists(Name) THEN Result:=Registry.ReadBool(Name) ELSE Result:=def;
   END;
 
-BEGIN
+BEGIN                                         
 DrawSelectedElement:= TRUE;
   Form1.Visible := true;
   // заполнение поля числа зон, узлов, элементов и свойств в окне настроек
    Form1.ZonesNumLbl.Caption := IntToStr(ZoneContour.GetNumberOfZones());
    Form1.NodesNumLbl.Caption := IntToStr(Nodes_result.GetCountOfNodes);
+  // Form1.NodesNumLbl.Caption := IntToStr(15);
    Form1.ElemNumLbl.Caption :=   IntToStr(Elements_Result.GetNumElements);
    Form1.PropNumLbl.Caption := IntToStr(LoadCountMaterial(error));
    
@@ -537,12 +542,12 @@ DrawSelectedElement:= TRUE;
     IF ReadBool('Maximized',FALSE) THEN WindowState:=wsMaximized ELSE WindowState:=wsNormal;
 
    //Fedorova E.I. 2019
-    ColorZero.color:=StringToColor('clWhite');
-    ColorPlus.Color:=StringToColor('clRed');
-    ColorMinus.Color:=StringToColor('$00FF8000');
-    ColorPlus_0.Color:=StringToColor('clYellow');
-    ColorMinus_0.Color:=StringToColor('clLime');
-    ColorMiddle.Color:= StringToColor('$ffd500');
+      ColorZero_.color:=StringToColor('clWhite');    // Zhigarev
+      ColorPlus_.Color:=StringToColor('clRed');      // Zhigarev
+      ColorMinus_.Color:=StringToColor('$00FF8000'); // Zhigarev
+      ColorPlus_0_.Color:=StringToColor('clYellow'); // Zhigarev
+      ColorMinus_0_.Color:=StringToColor('clLime');  // Zhigarev
+      ColorMiddle_.Color:= StringToColor('$ffd500'); // Zhigarev
 
     Spin_0_max_2.Value:=0;
     Spin_0_min_2.Value:=0;
@@ -711,7 +716,7 @@ BEGIN                                                                //refering 
   IF Scale>=1 THEN Form1.TrackBar1.Position:=ROUND(Half+Value-1)
   ELSE Form1.TrackBar1.Position:=ROUND(Half-Value+1);
   Scaling;
-END;
+END;                       
 
 
 PROCEDURE TShowMovingsForm.ChangeDrawSize;
@@ -723,7 +728,10 @@ END;
 PROCEDURE TShowMovingsForm.MainRePaint;
 BEGIN
   IF OnlyUpdate THEN exit;
-  IF UseBuffer.Checked THEN PaintBox1Paint(Nil) ELSE PaintBox1.Repaint;
+  IF UseBuffer.Checked THEN
+    PaintBox1Paint(Nil)
+  ELSE
+    PaintBox1.Repaint;
 END;
 
 
@@ -739,24 +747,27 @@ if Form1.CheckBox2.checked = true then
     begin
       Form1.UseNumMater.Checked:=false;
       Form1.UseLines.Checked:=false;
-      Form1.CheckBox1.Checked:=false;
+    //  Form1.CheckBox1.Checked:=false;
       Form1.TestElements.Checked:=false;
       Form1.Checkbox2.Checked:=true;
-      Colorminus.Caption:='1';
-      Colorzero.Caption:='2';
-      Colorplus.Caption:='3';
+
+        ColorMinus_.Caption:='1';       //Zhigarev
+        Colorzero_.Caption:='2';        //Zhigarev
+        Colorplus_.Caption:='3';        //Zhigarev
+        
       Spin_0_max.Visible := false;
       Spin_0_min.Visible := false;
-      Crosscut.Visible := false;      //Fedorova
-      ColorMinus_0.Visible := false;
-      ColorPlus_0.Visible := false;
-      ColorMiddle.Visible := false;   //Fedorova
+      Crosscut.Visible := false;     //Fedorova
+
+        ColorMinus_0_.Visible := false;   //Zhigarev
+        ColorPlus_0_.Visible := false;    //Zhigarev
+        ColorMiddle_.Visible := false;    //Zhigarev
     end
     else
     begin
-    Colorzero.Caption:='0';
-    Colorminus.Caption:='-';
-    Colorplus.Caption:='+';
+      Colorzero_.Caption:='0';  //Zhigarev
+      ColorMinus_.Caption:='-'; //Zhigarev
+      Colorplus_.Caption:='+';  //Zhigarev
     end;
 
   MainRepaint;
@@ -1088,15 +1099,20 @@ VAR
   a : ARRAY [1..6] OF MyReal;
   i,j : Integer;
   buf : MyReal;
+  r1,r0,g1,g0,b1,b0,r2,b2,g2 : BYTE;
+  FUNCTION Gradient(color1,color2,pos:BYTE):BYTE;
+  BEGIN
+    Result:=ROUND(Color1+(Color2-Color1)*pos/255);
+  END;
 BEGIN
 //////////////////////Fedorova E.I. 2019//////////////////////////////////////////////////////////
         if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true) then begin
           if Crosscut.Checked = False then
           begin
-             if Value = 0 then Result:=colorminus.Color
-             else if Value = 1 then Result:=colorminus_0.Color
-             else if Value = 2 then Result:=colorplus_0.Color
-             else if Value = 3 then Result:=colorplus.Color;
+             if Value = 0 then      begin Result := ColorMinus_.Color; end
+             else if Value = 1 then begin Result := ColorMinus_0_.Color; end
+             else if Value = 2 then begin Result := ColorPlus_0_.Color; end
+             else if Value = 3 then begin Result := ColorPlus_.Color; end;
 
              if (spin_0_max.Text <> '-') and (spin_0_min.Text <> '-') and (spin_0_max.Text <> '') and (spin_0_min.Text <> '') then
              begin
@@ -1115,64 +1131,64 @@ BEGIN
                  else a[2] := Spin_0_max.Value;
 
                  if Abs(a[1] - Elements_Result.min[Form1.StressType.ItemIndex+1]) <= 3 then
-                   if Value = 0 then Result:=colorminus_0.Color;
+                   if Value = 0 then begin Result := ColorMinus_0_.Color; end;
 
                  if Abs(a[2] - Elements_Result.max[Form1.StressType.ItemIndex+1]) <= 3 then
-                   if Value = 3 then Result:=colorplus_0.Color;
+                   if Value = 3 then begin Result:=ColorPlus_0_.Color; end;
 
                  if Abs(a[1] - Elements_Result.max[Form1.StressType.ItemIndex+1]) <= 3 then
-                   if Value = 1 then Result:=colorplus_0.Color;
+                   if Value = 1 then begin Result:=ColorPlus_0_.Color; end;
 
                  if Abs(a[2] - Elements_Result.min[Form1.StressType.ItemIndex+1]) <= 3 then
-                   if Value = 2 then Result:=colorminus_0.Color;
+                   if Value = 2 then begin Result := ColorMinus_0_.Color; end;
 
 
                  if (a[1] = 0) then begin
-                   if Value = 1 then Result:=colorminus.Color;
+                   if Value = 1 then begin Result := ColorMinus_.Color; end;
                    if (a[2] = 0) then
-                     if Value = 2 then Result:=colorminus.Color;
+                     if Value = 2 then begin Result := ColorMinus_.Color; end;
                  end
                  else begin
                    if (a[2] = 0) then
-                     if Value = 2 then Result:=colorplus.Color;
+                     if Value = 2 then begin Result:=ColorPlus_.Color; end;
                  end;
 
                  if (a[2] = a[1]) and (a[2] > 0) then
-                   if Value = 2 then Result:=colorminus_0.Color;
+                   if Value = 2 then begin Result:=ColorMinus_0_.Color; end;
                  if (a[2] = a[1]) and (a[2] < 0) then
-                   if Value = 1 then Result:=colorplus_0.Color;
+                   if Value = 1 then begin Result:=ColorPlus_0_.Color; end;
                end
                else begin
                  a[1] := Spin_0_min.Value;
                  a[2] := Spin_0_max.Value;
 
                  if Abs(a[1] - Elements_Result.min[1]) <= 2 then
-                   if Value = 0 then Result:=colorminus_0.Color;
+                   if Value = 0 then begin   Result := ColorMinus_0_.Color; end;
                  if Abs(a[2] - Elements_Result.max[1]) <= 2 then
-                   if Value = 3 then Result:=colorplus_0.Color;
+                   if Value = 3 then begin   Result := ColorPlus_0_.Color; end;
                  if (a[1] = 0) then begin
-                   if Value = 1 then Result:=colorminus.Color;
+                   if Value = 1 then begin   Result := ColorMinus_.Color; end;
                    if (a[2] = 0) then
-                     if Value = 2 then Result:=colorminus.Color;
+                     if Value = 2 then begin Result := ColorMinus_.Color; end;
                  end
                  else begin
                    if (a[2] = 0) then
-                     if Value = 2 then Result:=colorplus.Color;
+                     if Value = 2 then begin Result:=ColorPlus_.Color; end;
                  end;
                  if (a[2] = a[1]) and (a[2] > 0) then
-                   if Value = 2 then Result:=colorminus_0.Color;
+                   if Value = 2 then begin Result := ColorMinus_0_.Color; end;
                  if (a[2] = a[1]) and (a[2] < 0) then
-                   if Value = 1 then Result:=colorplus_0.Color;
+                   if Value = 1 then begin Result := ColorPlus_0_.Color; end;
                end;
              end;
              exit;
           end
           else begin
-             if Value = 0 then Result:=colorminus.Color
-             else if Value = 1 then Result:=colorminus_0.Color
-             else if Value = 2 then Result:=ColorMiddle.Color
-             else if Value = 3 then Result:=colorplus_0.Color
-             else if Value = 4 then Result:=colorplus.Color;
+             if Value = 0      then begin  Result := ColorMinus_.Color;   end
+             else if Value = 1 then begin  Result := ColorMinus_0_.Color; end
+             else if Value = 2 then begin  Result := ColorMiddle_.Color;  end
+             else if Value = 3 then begin  Result := ColorPlus_0_.Color;  end
+             else if Value = 4 then begin  Result := ColorPlus_.Color;    end;
 
              if (spin_0_max_2.Text <> '-') and (spin_0_min_2.Text <> '-') and (spin_0_max_2.Text <> '') and (spin_0_min_2.Text <> '') then
              begin
@@ -1213,70 +1229,70 @@ BEGIN
                     end;
 
                  if Abs(a[1] - a[2]) <= 3 then
-                   if Value = 0 then Result:=colorminus_0.Color;
+                   if Value = 0 then begin Result := ColorMinus_0_.Color; end;
                  if Abs(a[5] - a[6]) <= 3 then
-                   if Value = 4 then Result:=colorplus_0.Color;
+                   if Value = 4 then begin Result := ColorPlus_0_.Color;  end;
 
                  if Abs(a[3] - a[2]) <= 3 then
                  begin
-                   if Value = 0 then Result:=ColorMiddle.Color;
-                   if Value = 1 then Result:=ColorMiddle.Color;
+                   if Value = 0 then begin  Result := ColorMiddle_.Color; end;
+                   if Value = 1 then begin  Result := ColorMiddle_.Color; end;
                  end;
 
                  if Abs(a[5] - a[4]) <= 3 then
                  begin
-                   if Value = 3 then Result:=ColorMiddle.Color;
-                   if Value = 4 then Result:=ColorMiddle.Color;
+                   if Value = 3 then begin  Result := ColorMiddle_.Color; end;
+                   if Value = 4 then begin  Result := ColorMiddle_.Color; end;
                  end;
 
                  if (a[2] = a[3]) and  (a[3] = a[4]) and (a[4] = a[5]) then
                  begin
-                   if Value = 1 then Result:=colorminus.Color;
-                   if Value = 2 then Result:=colorminus.Color;
-                   if Value = 3 then Result:=colorminus.Color;
+                   if Value = 1 then begin    Result := ColorMinus_.Color; end;
+                   if Value = 2 then begin    Result := ColorMinus_.Color; end;
+                   if Value = 3 then begin    Result := ColorMinus_.Color; end;
                    if Abs(a[1] - a[2]) <= 2 then
-                     if Value = 0 then Result:=colorminus.Color;
+                     if Value = 0 then begin    Result := ColorMinus_.Color; end;
                    if Abs(a[5] - a[6]) <= 2 then
-                     if Value = 4 then Result:=colorminus.Color;
+                     if Value = 4 then begin    Result := ColorMinus_.Color; end;
                  end
                  else begin
                    if (a[2] = a[3]) and  (a[3] = a[4]) then begin
-                     if Value = 2 then Result:=colorminus_0.Color;
-                     if Value = 3 then Result:=colorminus_0.Color;
+                     if Value = 2 then begin    Result := ColorMinus_0_.Color; end;
+                     if Value = 3 then begin    Result := ColorMinus_0_.Color; end;
                      if Abs(a[5] - a[6]) <= 2 then
-                       if Value = 4 then Result:=colorminus_0.Color;
+                       if Value = 4 then begin  Result := ColorMinus_0_.Color; end;
                    end
                    else if (a[4] = a[5]) and  (a[3] = a[4]) then begin
-                     if Value = 1 then Result:=colorplus_0.Color;
-                     if Value = 2 then Result:=colorplus_0.Color;
+                     if Value = 1 then begin  Result := ColorPlus_0_.Color; end;
+                     if Value = 2 then begin  Result := ColorPlus_0_.Color; end;
                      if Abs(a[1] - a[2]) <= 2 then
-                       if Value = 0 then Result:=colorplus_0.Color;
+                       if Value = 0 then begin Result := ColorPlus_0_.Color; end;
                    end
                    else if (a[2] = a[3]) and  (a[4] = a[5]) then begin
-                     if Value = 1 then Result:=colorplus_0.Color;
-                     if Value = 2 then Result:=colorplus_0.Color;
-                     if Value = 3 then Result:=colorplus_0.Color;
+                     if Value = 1 then begin  Result := ColorPlus_0_.Color; end;
+                     if Value = 2 then begin  Result := ColorPlus_0_.Color; end;
+                     if Value = 3 then begin  Result := ColorPlus_0_.Color; end;
                      if Abs(a[1] - a[2]) <= 2 then
-                       if Value = 0 then Result:=colorplus_0.Color;
+                       if Value = 0 then begin Result := ColorPlus_0_.Color; end;
                      if Abs(a[5] - a[6]) <= 2 then
-                       if Value = 4 then Result:=colorplus_0.Color;
+                       if Value = 4 then begin Result := ColorPlus_0_.Color; end;
                    end
                    else if (a[2] = a[3]) then begin
-                     if Value = 1 then Result:=colorminus_0.Color;
-                     if Value = 2 then Result:=colorminus_0.Color;
+                     if Value = 1 then begin    Result := ColorMinus_0_.Color; end;
+                     if Value = 2 then begin    Result := ColorMinus_0_.Color; end;
                      if Abs(a[1] - a[2]) <= 2 then
-                       if Value = 0 then Result:=colorminus_0.Color;
+                       if Value = 0 then begin  Result := ColorMinus_0_.Color; end;
                    end
                    else if (a[3] = a[4]) then begin
-                     if Value = 3 then Result:=ColorMiddle.Color;
+                     if Value = 3 then begin   Result := ColorMiddle_.Color; end;
                      if Abs(a[5] - a[6]) <= 2 then
-                       if Value = 4 then Result:=ColorMiddle.Color;
+                       if Value = 4 then begin Result := ColorMiddle_.Color; end;
                    end
                    else if (a[4] = a[5]) then begin
-                     if Value = 2 then Result:=colorplus_0.Color;
-                     if Value = 3 then Result:=colorplus_0.Color;
+                     if Value = 2 then begin   Result := ColorPlus_0_.Color; end;
+                     if Value = 3 then begin   Result := ColorPlus_0_.Color; end;
                      if Abs(a[5] - a[6]) <= 2 then
-                       if Value = 4 then Result:=colorplus_0.Color;
+                       if Value = 4 then begin Result := ColorPlus_0_.Color; end;
                    end;
                  end;
              end;
@@ -1285,32 +1301,48 @@ BEGIN
         end;
  ////////////////////////////////end Fedorova////////////////////////////////////////////////
 
-        if Value >= level_zero then begin
-                Value := Value - level_zero;
-                RGBtoHLS(ColorPlus.Color,HP,LP,SP);
-                RGBtoHLS(ColorPlus_0.Color,HM,LM,SM);
-                if level_zero <> 0 then begin
-                HM:=HM + Trunc((HP-HM)*Value/(level_zero));
-                LM:=LM + Trunc((LP-LM)*Value/(level_zero));
-                SM:=SM + Trunc((SP-SM)*Value/(level_zero));
-                end
-                else
+       /// закрашиваине пластины "линиями уровня"/////////////////////
+                if(Value = 0)then
                 begin
-                HM:=HM + Trunc((HP-HM)*Value/(Form1.ChangeLegend.Position-1));
-                LM:=LM + Trunc((LP-LM)*Value/(Form1.ChangeLegend.Position-1));
-                SM:=SM + Trunc((SP-SM)*Value/(Form1.ChangeLegend.Position-1));
+                  r1:=GetRValue(ColorMinus_.Color);  //Zhigarev
+                  g1:=GetGValue(ColorMinus_.Color);  //Zhigarev
+                  b1:=GetBValue(ColorMinus_.Color);  //Zhigarev
+                  Result:=RGB(r1,g1,b1);
                 end;
-                Result:=HLStoRGB(HM,LM,SM);
-        end
-        else
-        begin
-                RGBtoHLS(ColorMinus_0.Color,HP,LP,SP);
-                RGBtoHLS(ColorMinus.Color,HM,LM,SM);
-                HM:=HM + Trunc((HP-HM)*Value/(level_zero-1));
-                LM:=LM + Trunc((LP-LM)*Value/(level_zero-1));
-                SM:=SM + Trunc((SP-SM)*Value/(level_zero-1));
-                Result:=HLStoRGB(HM,LM,SM);
-        end;
+                if(Value = 1)then
+                begin
+                  r1:=GetRValue(ColorMinus_0_.Color);  //Zhigarev
+                  g1:=GetGValue(ColorMinus_0_.Color);  //Zhigarev
+                  b1:=GetBValue(ColorMinus_0_.Color);  //Zhigarev
+                  Result:=RGB(r1,g1,b1);
+                end;
+                if(Value = 3)then
+                begin
+                  r1:=GetRValue(ColorPlus_.Color);  //Zhigarev
+                  g1:=GetGValue(ColorPlus_.Color);  //Zhigarev
+                  b1:=GetBValue(ColorPlus_.Color);  //Zhigarev
+                  Result:=RGB(r1,g1,b1);
+                end;
+                if(Value = 2)then
+                begin
+                  r1:=GetRValue(ColorPlus_0_.Color);  //Zhigarev
+                  g1:=GetGValue(ColorPlus_0_.Color);  //Zhigarev
+                  b1:=GetBValue(ColorPlus_0_.Color);  //Zhigarev
+                  Result:=RGB(r1,g1,b1);
+                end;
+                if(Value >= 4)then
+                begin
+                   r0 := 175;//GetRValue(ColorPlus_0_.Color);      // Zhigarev
+                   g0 := 60;//GetGValue(ColorPlus_0_.Color);      // Zhigarev
+                   b0 := 219;//GetBValue(ColorPlus_0_.Color);      // Zhigarev
+                  color:=ROUND(MyDiv((Value-NegativeLevels)*255,-NegativeLevels));
+                  r1:=Gradient(r0,r1,color);
+                  g1:=Gradient(g0,g1,color);
+                  b1:=Gradient(b0,b1,color);  //Zhigarev
+                  Result:=RGB(r1,g1,b1);
+                end;
+       //////////////////////////////////////////////////////////////
+
 END;
 
 FUNCTION TShowMovingsForm.GenerateColor1(Value:word):TColor;
@@ -1318,8 +1350,8 @@ VAR
   HM,LM,SM :INTEGER;
   HP,LP,SP :INTEGER;
 BEGIN
-  RGBtoHLS(ColorPlus.Color,HP,LP,SP);
-  RGBtoHLS(ColorMinus.Color,HM,LM,SM);
+  RGBtoHLS(ColorPlus_.Color,HP,LP,SP); //Zhigarev
+  RGBtoHLS(ColorMinus_.Color,HM,LM,SM);  // Zhigarev
   HM:=HM + Trunc((HP-HM)*Value/(Form1.ChangeLegend.Position-1));
   LM:=LM + Trunc((LP-LM)*Value/(Form1.ChangeLegend.Position-1));
   SM:=SM + Trunc((SP-SM)*Value/(Form1.ChangeLegend.Position-1));
@@ -1339,12 +1371,12 @@ VAR
   END;
 
 BEGIN
-  r0:=GetRValue(ColorZero.Color);
-  g0:=GetGValue(ColorZero.Color);
-  b0:=GetBValue(ColorZero.Color);
-  r2:=GetRValue(ColorZeroPluss.Color);
-  g2:=GetGValue(ColorZeroPluss.Color);
-  b2:=GetBValue(ColorZeroPluss.Color);
+    r0:=GetRValue(ColorZero_.Color);      // Zhigarev
+    g0:=GetGValue(ColorZero_.Color);      // Zhigarev
+    b0:=GetBValue(ColorZero_.Color);      // Zhigarev
+    r2:=GetRValue(ColorZeroPluss_.Color); // Zhigarev
+    g2:=GetGValue(ColorZeroPluss_.Color); // Zhigarev
+    b2:=GetBValue(ColorZeroPluss_.Color); // Zhigarev
 //  color:=ROUND(MyDiv((Value-NegativeLevels)*255,-NegativeLevels));
 //  r2:=Gradient(r0,r2,color);
 //  g2:=Gradient(g0,g2,color);
@@ -1353,9 +1385,9 @@ BEGIN
   IF y+Level<0 THEN
   BEGIN
     //отрицательная область
-    r1:=GetRValue(ColorMinus.Color);
-    g1:=GetGValue(ColorMinus.Color);
-    b1:=GetBValue(ColorMinus.Color);
+    r1:=GetRValue(ColorMinus_.Color);  //Zhigarev
+    g1:=GetGValue(ColorMinus_.Color);  //Zhigarev
+    b1:=GetBValue(ColorMinus_.Color);  //Zhigarev
     color:=ROUND(MyDiv((Value-NegativeLevels)*255,-NegativeLevels));
     r1:=Gradient(r0,r1,color);
     g1:=Gradient(g0,g1,color);
@@ -1364,9 +1396,9 @@ BEGIN
   END
   ELSE BEGIN
     //положительная область и ноль
-    r1:=GetRValue(ColorPlus.Color);
-    g1:=GetGValue(ColorPlus.Color);
-    b1:=GetBValue(ColorPlus.Color);
+    r1:=GetRValue(ColorPlus_.Color);  //Zhigarev
+    g1:=GetGValue(ColorPlus_.Color);  //Zhigarev
+    b1:=GetBValue(ColorPlus_.Color);  //Zhigarev
     color:=ROUND(MyDiv((Value-NegativeLevels)*255,Form1.ChangeLegend.Position-NegativeLevels));
     r1:=Gradient(r2,r1,color);
     g1:=Gradient(g2,g1,color);
@@ -1854,7 +1886,7 @@ BEGIN
     if i >= level_zero then
     begin
         K_M:=(i-level_zero)*Level_plus;
-        //st := 'm4 ' + CurrToStr(K_M);
+        //st := 'm4 ' + CurrToStr(K_M);                                                                         
         //ShowMessage(st);
         K_M:=(K_M-stress[beg])/(stress[off]-stress[beg]);
     end
@@ -2136,9 +2168,9 @@ BEGIN
   TempPenColor:=Canvas.Pen.Color;
   Canvas.Pen.Color := clBlack;
   case OneElement.Material of
-    1: Canvas.Brush.Color :=  ColorMinus.Color;
-    2: Canvas.Brush.Color :=  ColorZero.Color;
-    3: Canvas.Brush.Color :=  ColorPlus.Color;
+    1: Canvas.Brush.Color :=  ColorMinus_.Color;    // было   ColorMinus.Color;
+    2: Canvas.Brush.Color :=  ColorZero_.Color;     // было   ColorZero.Color;
+    3: Canvas.Brush.Color :=  ColorPlus_.Color;     // было   ColorPlus.Color;
   end;
   Canvas.Polygon([point(x1,y1),point(x2,y2),point(x3,y3)]);
   Canvas.Brush.Color:=TempBrushColor;
@@ -2279,7 +2311,7 @@ BEGIN
                         ShowElement(Canvas,OneElement);
                 end
         end
-        else
+        else              
         begin
                 for my:=1 to Elements_Result.GetNumElements do
                 begin
@@ -2287,7 +2319,7 @@ BEGIN
                         ShowElement1(Canvas,OneElement);
                 end
         end
-    end else begin
+    end else begin                                                
       if not(Form1.CheckBox2.Checked=True) then begin
         for my:=1 to Elements_Result.GetNumElements do begin
           OneElement:=Elements_Result.GetElement(my);
@@ -2470,10 +2502,10 @@ END;
 PROCEDURE TShowMovingsForm.PaintBox1Paint(Sender: TObject);
 VAR
   Bitmap : TBitMap;
-
+  text_napr : string;
 BEGIN
   IF OnlyUpdate THEN EXIT;
-  PaintWidth:=PaintBox1.Width;
+  PaintWidth:=PaintBox1.Width;                                
   PaintHeight:=PaintBox1.Height;
   CenterX:=Trunc(PaintWidth/2);
   CenterY:=Trunc(PaintHeight/2);
@@ -2487,6 +2519,11 @@ BEGIN
     IF UseBuffer.Checked THEN BEGIN
       ShowElements(BitMap.Canvas);
       paintbox1.Canvas.Draw(0,0,BitMap);
+   //   ShowMovingsForm.NAME_STRESS.Caption := Form1.StressType.Items.Strings[Form1.StressType.ItemIndex];
+      text_napr := Form1.StressType.Items.Strings[Form1.StressType.ItemIndex]; // ShowMovingsForm.NAME_STRESS.Caption;
+      //Form1.StressType.Font.Size := 14;
+      paintbox1.Canvas.Font.Size := 14;
+      paintbox1.Canvas.TextOut(20,20, text_napr );
     END
     ELSE ShowElements(PaintBox1.Canvas);
   FINALLY
@@ -2512,7 +2549,7 @@ BEGIN
     Splitter2.Visible:=FALSE;
     LegendPanel.Visible:=FALSE;
   END;
-  ChangeDrawSize;
+  ChangeDrawSize;                                         
 END;
 
 PROCEDURE TShowMovingsForm.UseLinesClick(Sender: TObject);
@@ -2536,21 +2573,30 @@ if Form1.useLines.Checked then Form1.checkbox2.Checked:=false; //Давыдова Ю.А.
   IF Form1.CheckBox1.Checked = false THEN BEGIN
         Spin_0_max.Visible := false;
         Spin_0_min.Visible := false;
+        ShowMovingsForm.BitBtn1_Raschet.Enabled := false;
         Crosscut.Checked := false;       //Fedorova
         Crosscut.Visible := False;       //Fedorova
-        ColorMiddle.Visible := false;    //Fedorova
+          ColorMiddle_.Visible := false; //Zhigarev
         LegendRePaint;
         MainRePaint;
   end
   else begin
         Spin_0_max.Visible := true;
         Spin_0_min.Visible := true;
-        ColorPlus.Color:=StringToColor('clRed');
-        ColorMinus.Color:=StringToColor('$00FF8000');
-        ColorPlus_0.Color:=StringToColor('clYellow');
-        ColorMinus_0.Color:=StringToColor('clLime');
-        ColorMiddle.Color:= StringToColor('$ffd500');
 
+   //       max := Elements_Result.Max[Form1.StressType.ItemIndex+1];
+   //       min := Elements_Result.Min[Form1.StressType.ItemIndex+1];
+   //       Spin_0_max.Value := Round( max - (abs(max) + abs(min))/ Form1.ChangeLegend.Position );// Round(max/2);
+   //       Spin_0_min.Value := Round( min + (abs(max) + abs(min))/ Form1.ChangeLegend.Position );//Round(min/2);
+   //       Spin_0_max.Text := IntToStr(Spin_0_max.Value);
+   //       Spin_0_min.Text := IntToStr(Spin_0_min.Value);
+          
+        ShowMovingsForm.BitBtn1_Raschet.Enabled := true;
+          ColorPlus_.Color:=StringToColor('clRed');       //Zhigarev
+          ColorMinus_.Color:=StringToColor('$00FF8000');  //Zhigarev
+          ColorPlus_0_.Color:=StringToColor('clYellow');  //Zhigarev
+          ColorMinus_0_.Color:=StringToColor('clLime');   //Zhigarev
+          ColorMiddle_.Color:= StringToColor('$ffd500');  //Zhigarev
         //Fedorova E.I. 2019
         if (Form1.StressType.ItemIndex+1 <> 8) and (Form1.StressType.ItemIndex+1 <> 9) then
         begin
@@ -2564,8 +2610,8 @@ if Form1.useLines.Checked then Form1.checkbox2.Checked:=false; //Давыдова Ю.А.
 
         if (min < 0) and (max > 0) then
         begin
-          Spin_0_max.Value := Round(max/2);
-          Spin_0_min.Value := Round(min/2);
+          Spin_0_max.Value := Round( max - (abs(max) + abs(min))/ Form1.ChangeLegend.Position );// Round(max/2);
+          Spin_0_min.Value := Round( min + (abs(max) + abs(min))/ Form1.ChangeLegend.Position );//Round(min/2);
         end;
         if (min > 0) or (max < 0) then
         begin
@@ -2574,9 +2620,9 @@ if Form1.useLines.Checked then Form1.checkbox2.Checked:=false; //Давыдова Ю.А.
         end;
 
         Crosscut.Checked := false;
-        Crosscut.Visible := True;
-        if Crosscut.Checked = True then ColorMiddle.Visible := True
-        else ColorMiddle.Visible := False;
+      //  Crosscut.Visible := True;
+        if Crosscut.Checked = True then ColorMiddle_.Visible := True // было ColorMiddle.Visible
+        else ColorMiddle_.Visible := False;  // было ColorMiddle.Visible
        //end Fedorova
 
         LegendRePaint;
@@ -2588,25 +2634,28 @@ if Form1.useLines.Checked then Form1.checkbox2.Checked:=false; //Давыдова Ю.А.
       Form1.ChangeLegend.Max := 60;
       if Form1.ChangeLegend.Position > 60 then
         Form1.ChangeLegend.Position:=60;
-      ColorMinus_0.Visible := true;
-      ColorPlus_0.Visible := true;
-      ColorZero.Visible := false;
-      ColorZeroPluss.Visible:=false;
+
+        ColorMinus_0_.Visible := true;
+        ColorPlus_0_.Visible := true;
+        ColorZero_.Visible := false;
+        ColorZeroPluss_.Visible:=false;
   END
   ELSE BEGIN
       LinesShow:=false;
       Form1.ChangeLegend.Max := 255;
-      ColorZeroPluss.Visible:=true;
-      ColorZero.Visible := true;
-      ColorPlus_0.Visible := false;
-      ColorMinus_0.Visible := false;
-      ColorMiddle.Visible := False;    //Fedorova
+
+        ColorZeroPluss_.Visible:=true;
+        ColorZero_.Visible := true;
+        ColorPlus_0_.Visible := false;
+        ColorMinus_0_.Visible := false;
+        ColorMiddle_.Visible := False;
       Spin_0_max.Visible := false;
       Spin_0_min.Visible := false;
+        ShowMovingsForm.BitBtn1_Raschet.Enabled := false;
       Crosscut.Checked := false;       //Fedorova
       Spin_0_max_2.Visible := false;   //Fedorova
       Spin_0_min_2.Visible := false;   //Fedorova
-      Crosscut.Visible := False;       //Fedorova
+     // Crosscut.Visible := False;       //Fedorova
       LegendRePaint;
       MainRePaint;
   END;
@@ -2614,8 +2663,9 @@ if Form1.useLines.Checked then Form1.checkbox2.Checked:=false; //Давыдова Ю.А.
   z := Form1.ChangeLegend.Position;
   if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true) then
   begin
-   if Crosscut.Checked = true then z := 5
-   else z := 4;
+  // if Crosscut.Checked = true then z := 5
+  // else
+   z := 4;
    LegendRePaint;
    MainRePaint;
   end;
@@ -2624,16 +2674,56 @@ if Form1.useLines.Checked then Form1.checkbox2.Checked:=false; //Давыдова Ю.А.
   begin
     if Form1.UseLines.Checked = false then
     begin
-       ShowMessage('Пересечение и объединение областей возможно только при включении опции "Области"');
-       Form1.UseLines.Checked := True;
+       if (Form1.StressType.ItemIndex+1 = 8)then
+       begin
+        // Form1.StressType.ItemIndex := 0 ;
+         ShowMessage('Объединение областей возможно только при включении опции "Области". ');
+         Form1.UseLines.Checked := false;
+         Form1.StressType.ItemIndex := 0 ;
+         Form1.StressTypeClick(Sender);
+       //   Form1.StressType.ItemIndex := 0;
+       //  ShowMovingsForm.ChangeLegendChange(Sender);
+       end;                                                  
+       if (Form1.StressType.ItemIndex+1 = 9)then
+       begin                                                                                                          
+    
+         ShowMessage('Пересечение областей возможно только при включении опции "Области". ');
+         Form1.UseLines.Checked := false;
+         Form1.StressType.ItemIndex := 0 ;
+         Form1.StressTypeClick(Sender);
+       //  Form1.StressType.ItemIndex := 0;
+       //  ShowMovingsForm.ChangeLegendChange(Sender);
+       end;
+                   
     end;
     if Form1.CheckBox1.Checked = false then
     begin
-       ShowMessage('Пересечение и объединение областей возможно только при включении опции "Области"');
-       Form1.CheckBox1.Checked := True;
+       if (Form1.StressType.ItemIndex+1 = 8)then
+       begin
+       //  Form1.StressType.ItemIndex := 0 ;
+         ShowMessage('Объединение областей возможно только при включении опции "Области".');
+         Form1.UseLines.Checked := true;
+         Form1.StressType.ItemIndex := 0 ;
+         ShowMovingsForm.UseLinesClick(Sender);
+        // Form1.StressTypeClick(Sender);
+        // ShowMovingsForm.ChangeLegendChange(Sender);
+       end;
+       if (Form1.StressType.ItemIndex+1 = 9)then
+       begin
+      //   Form1.StressType.ItemIndex := 0;
+         ShowMessage('Пересечение областей возможно только при включении опции "Области".');
+         Form1.UseLines.Checked := true;
+         Form1.StressType.ItemIndex := 0 ;
+         ShowMovingsForm.UseLinesClick(Sender);
+        // Form1.StressTypeClick(Sender);
+        // ShowMovingsForm.ChangeLegendChange(Sender);
+       end;
+     //  ShowMessage('Пересечение и объединение областей возможно только при включении опции "Области". ' +  #10#13 + ' Для отключения опции "области" необходимо снять отметку с "Пересечение" или "Объединение"');
+       Form1.CheckBox1.Checked := false;
+       
     end;
     Crosscut.Checked := false;
-    Crosscut.Visible := false;
+   // Crosscut.Visible := false;
   end;
 
   Form1.ChangeLegend.Hint:=inttostr(z);
@@ -2675,11 +2765,13 @@ VAR
 BEGIN
 if (Spin_0_max.text = '') then exit;
 if (Spin_0_min.text = '') then exit;
+if (Spin_0_min.text = '-') then exit;
   z := Form1.ChangeLegend.Position;
   if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true) then
   begin
-    if Crosscut.Checked = True then z := 5     //Fedorova
-    else z := 4;
+   // if Crosscut.Checked = True then z := 5     //Fedorova
+   // else
+    z := 4;
     MainRePaint;
     LegendRePaint;
   end;
@@ -2840,12 +2932,13 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
 //Fedorova E.I. 2019
     if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true)then begin
       Spin_0_Check(Spin_0_min, Spin_0_max);
-      if Crosscut.Checked = True then
+     { if Crosscut.Checked = True then
       begin
         z :=5;         //при Зоне 0 с 2 промежутками исп. 5 градаций
         Spin_0_Check(Spin_0_min_2, Spin_0_max_2);
       end
-      else z := 4;    //при Зоне 0 с 1 промежутком исп. 4 градации
+      else  }
+      z := 4;    //при Зоне 0 с 1 промежутком исп. 4 градации
     end;
     len:=(Legend.Height- 2*Top)/z;
 
@@ -3001,8 +3094,9 @@ PROCEDURE TShowMovingsForm.LegendPaint(Sender: TObject);
     z := Form1.ChangeLegend.Position;
     if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true) then
     begin
-       if Crosscut.Checked = True then z := 5
-       else z := 4;
+      // if Crosscut.Checked = True then z := 5
+      // else
+       z := 4;
     end;
     FOR i:=0 TO z-1 DO BEGIN
       k:=z-1-i;
@@ -3039,8 +3133,9 @@ BEGIN
     z := Form1.ChangeLegend.Position;
     if (Form1.UseLines.Checked = true) and (Form1.CheckBox1.Checked = true) then
     begin
-       if Crosscut.Checked = True then z := 5
-       else z := 4;
+       //if Crosscut.Checked = True then z := 5
+       //else
+       z := 4;
     end;
 
     IF UseBuffer.Checked THEN BEGIN
@@ -3272,19 +3367,19 @@ END;
 
 PROCEDURE TShowMovingsForm.PlusMClick(Sender: TObject);
 BEGIN
-  ChangeColorClick(ColorPlus);
+  ChangeColorClick(ColorPlus_);
 END;
 
 
 PROCEDURE TShowMovingsForm.MinusMClick(Sender: TObject);
 BEGIN
-  ChangeColorClick(ColorMinus);
+  ChangeColorClick(ColorMinus_);
 END;
 
 
 PROCEDURE TShowMovingsForm.ZeroMClick(Sender: TObject);
 BEGIN
-  ChangeColorClick(ColorZero);
+  ChangeColorClick(ColorZero_);
 END;
 
 
@@ -4865,23 +4960,29 @@ ChangedFromNodeInput:=TRUE;
 //Fedorova E.I. 2019
 procedure TShowMovingsForm.CrosscutClick(Sender: TObject);
 begin
-if Spin_0_min.Visible = True then Crosscut.Visible := True;
-if Crosscut.Visible = true then
+{if Spin_0_min.Visible = True then
+begin
+  Crosscut.Visible := True;
+  ShowMovingsForm.BitBtn1_Raschet.Enabled := true;
+end;
+ if Crosscut.Visible = true then
   begin
     if Crosscut.Checked = true then
        begin
          Spin_0_max_2.Visible := true;
          Spin_0_min_2.Visible := true;
-         ColorMiddle.Visible := True;
+         ShowMovingsForm.BitBtn1_Raschet.Enabled := true;
+         ColorMiddle_.Visible := True;
        end
     else begin
          Spin_0_max_2.Visible := false;
          Spin_0_min_2.Visible := false;
-         ColorMiddle.Visible := false;
+         ShowMovingsForm.BitBtn1_Raschet.Enabled := false;
+         ColorMiddle_.Visible := false;
        end;
   end;
   MainRePaint;
-  LegendRePaint;
+  LegendRePaint; }
 end;
 
 
@@ -5531,4 +5632,9 @@ BEGIN
 END;
 
 
-end.
+procedure TShowMovingsForm.BitBtn1_RaschetClick(Sender: TObject);
+begin
+  ShowMovingsForm.ChangeLegendChange(Sender);
+end;
+
+end.

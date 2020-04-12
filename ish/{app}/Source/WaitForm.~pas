@@ -24,6 +24,7 @@ Type
                Panel2: TPanel;
                Termenate: TBitBtn;
     Bar: TProgressBar;
+//Dobavil Serafim Meleshko(2 stroki)
     Label2: TLabel;
     Label3: TLabel;
                Procedure PaintBox1Paint(Sender: TObject);

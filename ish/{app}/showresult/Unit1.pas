@@ -183,6 +183,8 @@ type
     procedure NodeEditInputChange(Sender: TObject);
     procedure KENumber1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure ZoneStressClick(Sender: TObject);
+    procedure ZoneStress2Click(Sender: TObject);
 
 
 
@@ -321,24 +323,43 @@ end;
 
 procedure TForm1.UseLinesClick(Sender: TObject);
 begin
-   ShowMovingsForm.UseLinesClick(Sender);
+  ShowMovingsForm.UseLinesClick(Sender);
+
+  IF ShowMovingsForm.UseLines.Checked THEN
+  begin
+    ShowMovingsForm.BitBtn1_Raschet.Enabled := false;
+    //ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Х';
+  end;
+
   IF ShowMovingsForm.UseLines.Checked THEN BEGIN
     ShowMovingsForm.UseLines.Checked:=False;
+   // ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Х';
   END
-  ELSE BEGIN
-    ShowMovingsForm.UseLines.Checked:=True;
+  ELSE BEGIN                                   
+    ShowMovingsForm.UseLines.Checked := True;
+   // ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Х';
   END;
+  ShowMovingsForm.UseLines.Checked := True;
+ //ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Х';
 end;
 
 procedure TForm1.CheckBox1Click(Sender: TObject);
 begin
+  Form1.StressType1.ItemIndex := 0;
+  if(ShowMovingsForm.CheckBox1.Checked = false)then
+    begin
+      ShowMovingsForm.CheckBox1.Checked := true;
+      ShowMovingsForm.BitBtn1_Raschet.Enabled := true;
+    end
+  else
+    begin
+      ShowMovingsForm.CheckBox1.Checked := false;
+      ShowMovingsForm.BitBtn1_Raschet.Enabled := false;
+     // ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Х';
+    end;
+  Form1.StressType1.ItemIndex := 0;
   ShowMovingsForm.UseLinesClick(Sender);
-  IF ShowMovingsForm.CheckBox1.Checked THEN BEGIN
-    ShowMovingsForm.CheckBox1.Checked:=False;
-  END
-  ELSE BEGIN
-    ShowMovingsForm.CheckBox1.Checked:=True;
-  END;
+ // ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Х';
 end;
 
 procedure TForm1.ChangeLegendChange(Sender: TObject);
@@ -391,6 +412,8 @@ begin
 end;
 
 procedure TForm1.StressType1Click(Sender: TObject);
+Label
+  perehod;
 begin
   //Fedorova 2019
   If (StressType1.ItemIndex + 1 = 8) or (StressType1.ItemIndex + 1 = 9) then
@@ -398,47 +421,101 @@ begin
     if CheckBox1.Checked = false then
     begin
       ShowMessage('Пересечение и объединение областей возможно только при включении опции "Области"');
-      StressType1.ItemIndex:=0;
+      StressType1.ItemIndex := 0;   ///!!!!!!!!!!!!!!!!!!!!!!
+      StressType2.ItemIndex := 0;
+      StressType1.ItemIndex := 0;
+      ShowMovingsForm.UseLinesClick(Sender);
+        //    ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Х';
+      goto  perehod;
+   //   ShowMovingsForm.CheckBox1.Checked := false;
+      ShowMovingsForm.BitBtn1_Raschet.Enabled := false;
+
+   //   StressType2.ItemIndex := 0;     //!!!!!!!!!!!!!
+      StressType1.ItemIndex := 0;
+    //  StressType.ItemIndex := 0;
+
+      ShowMovingsForm.ChengeLegendLevel;
+      ShowMovingsForm.LoadMaxMinStress;                 
+      ShowMovingsForm.LoadMaxMinStressInMaterials;
+      ShowMovingsForm.MainRePaint;
+      ShowMovingsForm.LegendRePaint;
+
+      ShowMovingsForm.CheckBox1.Checked := true;
     end;
     ShowMovingsForm.Crosscut.Checked := False;
     ShowMovingsForm.Crosscut.Visible := False;
   end
-  else if CheckBox1.Checked = True then ShowMovingsForm.Crosscut.Visible := true;
+  else if CheckBox1.Checked = True then
+    begin
+      ShowMovingsForm.BitBtn1_Raschet.Enabled := true;
+     // ShowMovingsForm.Crosscut.Visible := true;
+    end;
   //end Fedorova
 
   //ShowMovingsForm.StressType.ItemIndex := StressType1.ItemIndex;
   ShowMovingsForm.LoadMaxMinStress;
+
 //ZHEREBTSOV 2019
 //ADD LABEL OF STRESSTYPE IN WINDOW OF GRAPHICAL RESULT
 StressType.ItemIndex := StressType1.ItemIndex;
 StressType2.ItemIndex := StressType1.ItemIndex;
 
-If StressType1.ItemIndex + 1 = 1 then ShowMovingsForm.TypeStress.Caption := 'Напряжение по Х';
-If StressType1.ItemIndex + 1 = 2 then ShowMovingsForm.TypeStress.Caption := 'Напряжение по Y';
-If StressType1.ItemIndex + 1 = 3 then ShowMovingsForm.TypeStress.Caption := 'Касательное';
-If StressType1.ItemIndex + 1 = 4 then ShowMovingsForm.TypeStress.Caption := '1-ое главное';
-If StressType1.ItemIndex + 1 = 5 then ShowMovingsForm.TypeStress.Caption := '2-ое главное';
-If StressType1.ItemIndex + 1 = 6 then ShowMovingsForm.TypeStress.Caption := 'Эквивалентное';
-If StressType1.ItemIndex + 1 = 7 then ShowMovingsForm.TypeStress.Caption := 'Угол наклона к оси Х';
-If StressType1.ItemIndex + 1 = 8 then ShowMovingsForm.TypeStress.Caption := 'Пересечение';  //Fedorova 2019
-If StressType1.ItemIndex + 1 = 9 then ShowMovingsForm.TypeStress.Caption := 'Объединение';  //Fedorova 2019
+
+
+{If StressType1.ItemIndex + 1 = 1 then ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Х';
+If StressType1.ItemIndex + 1 = 2 then ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Y';
+If StressType1.ItemIndex + 1 = 3 then ShowMovingsForm.NAME_STRESS.Caption := 'Касательное';
+If StressType1.ItemIndex + 1 = 4 then ShowMovingsForm.NAME_STRESS.Caption := '1-ое главное';
+If StressType1.ItemIndex + 1 = 5 then ShowMovingsForm.NAME_STRESS.Caption := '2-ое главное';
+If StressType1.ItemIndex + 1 = 6 then ShowMovingsForm.NAME_STRESS.Caption := 'Эквивалентное';
+If StressType1.ItemIndex + 1 = 7 then ShowMovingsForm.NAME_STRESS.Caption := 'Угол наклона вектора 2-го гл. напряжения к оси Х';
+
+If StressType1.ItemIndex + 1 = 8 then ShowMovingsForm.NAME_STRESS.Caption := 'Пересечение';  //Fedorova 2019
+If StressType1.ItemIndex + 1 = 9 then ShowMovingsForm.NAME_STRESS.Caption := 'Объединение';  //Fedorova 2019  }
 //END ZHEREBTSOV
+perehod :
+//  ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Х';
+    //  StressType1.ItemIndex := 0;   ///!!!!!!!!!!!!!!!!!!!!!!
+    //  StressType2.ItemIndex := 0;
+    //  StressType.ItemIndex := 0;
 end;
 
 procedure TForm1.StressType2Click(Sender: TObject);
-begin
+Label
+  perehod;
+begin     
   //Fedorova 2019
   If (StressType1.ItemIndex + 1 = 8) or (StressType1.ItemIndex + 1 = 9) then
   begin
     if CheckBox1.Checked = false then
-    begin
+    begin        
       ShowMessage('Пересечение и объединение областей возможно только при включении опции "Области"');
-      StressType1.ItemIndex:=0;
+      StressType1.ItemIndex := 0;   ///!!!!!!!!!!!!!!!!!!!!!!
+      ShowMovingsForm.UseLinesClick(Sender);
+      //  ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Х';
+      goto perehod;
+      ShowMovingsForm.BitBtn1_Raschet.Enabled := false;
+
+     // StressType2.ItemIndex := 0; //!!!!!!!!!!!!!!!!!!!!!!!!!
+      StressType1.ItemIndex := 0;
+     // StressType.ItemIndex := 0;
+
+      ShowMovingsForm.ChengeLegendLevel;
+      ShowMovingsForm.LoadMaxMinStress;
+      ShowMovingsForm.LoadMaxMinStressInMaterials;
+      ShowMovingsForm.MainRePaint;
+      ShowMovingsForm.LegendRePaint;
+
+      ShowMovingsForm.CheckBox1.Checked := true;
     end;
     ShowMovingsForm.Crosscut.Checked := False;
     ShowMovingsForm.Crosscut.Visible := False;
   end
-  else if CheckBox1.Checked = True then ShowMovingsForm.Crosscut.Visible := true;
+  else if CheckBox1.Checked = True then
+    begin
+      ShowMovingsForm.BitBtn1_Raschet.Enabled := true;
+     // ShowMovingsForm.Crosscut.Visible := true;
+    end;
   //end Fedorova
 
   //ShowMovingsForm.StressType.ItemIndex := StressType1.ItemIndex;
@@ -448,55 +525,96 @@ begin
   StressType.ItemIndex := StressType2.ItemIndex;
   StressType1.ItemIndex := StressType2.ItemIndex;
 
-If StressType2.ItemIndex + 1 = 1 then ShowMovingsForm.TypeStress.Caption := 'Напряжение по Х';
-If StressType2.ItemIndex + 1 = 2 then ShowMovingsForm.TypeStress.Caption := 'Напряжение по Y';
-If StressType2.ItemIndex + 1 = 3 then ShowMovingsForm.TypeStress.Caption := 'Касательное';
-If StressType2.ItemIndex + 1 = 4 then ShowMovingsForm.TypeStress.Caption := '1-ое главное';
-If StressType2.ItemIndex + 1 = 5 then ShowMovingsForm.TypeStress.Caption := '2-ое главное';
-If StressType2.ItemIndex + 1 = 6 then ShowMovingsForm.TypeStress.Caption := 'Эквивалентное';
-If StressType2.ItemIndex + 1 = 7 then ShowMovingsForm.TypeStress.Caption := 'Угол наклона к оси Х';
-If StressType2.ItemIndex + 1 = 8 then ShowMovingsForm.TypeStress.Caption := 'Пересечение';  //Fedorova 2019
-If StressType2.ItemIndex + 1 = 9 then ShowMovingsForm.TypeStress.Caption := 'Объединение';  //Fedorova 2019//END ZHEREBTSOV
+
+{If StressType2.ItemIndex + 1 = 1 then ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Х';
+If StressType2.ItemIndex + 1 = 2 then ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Y';
+If StressType2.ItemIndex + 1 = 3 then ShowMovingsForm.NAME_STRESS.Caption := 'Касательное';
+If StressType2.ItemIndex + 1 = 4 then ShowMovingsForm.NAME_STRESS.Caption := '1-ое главное';
+If StressType2.ItemIndex + 1 = 5 then ShowMovingsForm.NAME_STRESS.Caption := '2-ое главное';
+If StressType2.ItemIndex + 1 = 6 then ShowMovingsForm.NAME_STRESS.Caption := 'Эквивалентное';
+If StressType2.ItemIndex + 1 = 7 then ShowMovingsForm.NAME_STRESS.Caption := 'Угол наклона вектора 2-го гл. напряжения к оси Х';
+
+If StressType2.ItemIndex + 1 = 8 then ShowMovingsForm.NAME_STRESS.Caption := 'Объединение';  //Fedorova 2019
+If StressType2.ItemIndex + 1 = 9 then ShowMovingsForm.NAME_STRESS.Caption := 'Пересечение ';  //Fedorova 2019   }
+//END ZHEREBTSOV
+perehod :
+//  ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Х';
+  //    StressType1.ItemIndex := 0;   ///!!!!!!!!!!!!!!!!!!!!!!
+  //    StressType2.ItemIndex := 0;
+  //    StressType.ItemIndex := 0;
+
+
 end;
 
 procedure TForm1.StressTypeClick(Sender: TObject);
+Label
+  perehod;
 begin
   //Fedorova 2019
   If (StressType1.ItemIndex + 1 = 8) or (StressType1.ItemIndex + 1 = 9) then
-  begin
+  begin 
     if CheckBox1.Checked = false then
     begin
       ShowMessage('Пересечение и объединение областей возможно только при включении опции "Области"');
-      StressType1.ItemIndex:=0;
+      StressType1.ItemIndex := 0;   ///!!!!!!!!!!!!!!!!!!!!!!
+      StressType2.ItemIndex := 0;
+      StressType.ItemIndex := 0;
+      ShowMovingsForm.UseLinesClick(Sender);
+      //ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Х';
+       goto  perehod;
+    //  ShowMovingsForm.CheckBox1.Checked := false;
+      ShowMovingsForm.BitBtn1_Raschet.Enabled := true;
+
+    //  StressType2.ItemIndex := 0;
+     // StressType.ItemIndex := 0;
+
+      ShowMovingsForm.ChengeLegendLevel;
+      ShowMovingsForm.LoadMaxMinStress;
+      ShowMovingsForm.LoadMaxMinStressInMaterials;
+      ShowMovingsForm.MainRePaint;
+      ShowMovingsForm.LegendRePaint;
+
+      ShowMovingsForm.CheckBox1.Checked := true;
     end;
     ShowMovingsForm.Crosscut.Checked := False;
     ShowMovingsForm.Crosscut.Visible := False;
   end
-  else if CheckBox1.Checked = True then ShowMovingsForm.Crosscut.Visible := true;
+  else if CheckBox1.Checked = True then
+    begin
+      ShowMovingsForm.BitBtn1_Raschet.Enabled := true;
+   //   ShowMovingsForm.Crosscut.Visible := true;
+    end;
   //end Fedorova
+   //  if( (CheckBox1.Checked = false) and ((StressType.ItemIndex = 7) or (StressType.ItemIndex = 8)) )then StressType.ItemIndex := 0;
+    ShowMovingsForm.ChengeLegendLevel;
+    ShowMovingsForm.LoadMaxMinStress;
+    ShowMovingsForm.LoadMaxMinStressInMaterials;
+    ShowMovingsForm.MainRePaint;
+    ShowMovingsForm.LegendRePaint;
 
-ShowMovingsForm.ChengeLegendLevel;
-ShowMovingsForm.LoadMaxMinStress;
-ShowMovingsForm.LoadMaxMinStressInMaterials;
-ShowMovingsForm.MainRePaint;
-ShowMovingsForm.LegendRePaint;
+  //  if( ShowMovingsForm.CheckBox1.Checked = true) then  ShowMovingsForm.UseLinesClick(Sender);
+
 //ZHEREBTSOV 2019
 //ADD LABEL OF STRESSTYPE IN WINDOW OF GRAPHICAL RESULT
-
+                                                                      
 StressType1.ItemIndex := StressType.ItemIndex;
 StressType2.ItemIndex := StressType.ItemIndex;
 
-If StressType.ItemIndex + 1 = 1 then ShowMovingsForm.TypeStress.Caption := 'Напряжение по Х';
-If StressType.ItemIndex + 1 = 2 then ShowMovingsForm.TypeStress.Caption := 'Напряжение по Y';
-If StressType.ItemIndex + 1 = 3 then ShowMovingsForm.TypeStress.Caption := 'Касательное';
-If StressType.ItemIndex + 1 = 4 then ShowMovingsForm.TypeStress.Caption := '1-ое главное';
-If StressType.ItemIndex + 1 = 5 then ShowMovingsForm.TypeStress.Caption := '2-ое главное';
-If StressType.ItemIndex + 1 = 6 then ShowMovingsForm.TypeStress.Caption := 'Эквивалентное';
-If StressType.ItemIndex + 1 = 7 then ShowMovingsForm.TypeStress.Caption := 'Угол наклона к оси Х';
-If StressType.ItemIndex + 1 = 8 then ShowMovingsForm.TypeStress.Caption := 'Пересечение';  //Fedorova 2019
-If StressType.ItemIndex + 1 = 9 then ShowMovingsForm.TypeStress.Caption := 'Объединение';  //Fedorova 2019
+{If StressType.ItemIndex + 1 = 1 then ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Х';
+If StressType.ItemIndex + 1 = 2 then ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Y';
+If StressType.ItemIndex + 1 = 3 then ShowMovingsForm.NAME_STRESS.Caption := 'Касательное';
+If StressType.ItemIndex + 1 = 4 then ShowMovingsForm.NAME_STRESS.Caption := '1-ое главное';
+If StressType.ItemIndex + 1 = 5 then ShowMovingsForm.NAME_STRESS.Caption := '2-ое главное';
+If StressType.ItemIndex + 1 = 6 then ShowMovingsForm.NAME_STRESS.Caption := 'Эквивалентное';
+If StressType.ItemIndex + 1 = 7 then ShowMovingsForm.NAME_STRESS.Caption := 'Угол наклона вектора 2-го гл. напряжения к оси Х';
+If StressType.ItemIndex + 1 = 8 then ShowMovingsForm.NAME_STRESS.Caption := 'Объединение';  //Fedorova 2019
+If StressType.ItemIndex + 1 = 9 then ShowMovingsForm.NAME_STRESS.Caption := 'Пересечение';  //Fedorova 2019  }
 //END ZHEREBTSOV
-
+perehod:
+//  ShowMovingsForm.NAME_STRESS.Caption := 'Напряжение по Х';
+   //   StressType1.ItemIndex := 0;   ///!!!!!!!!!!!!!!!!!!!!!!
+   //   StressType2.ItemIndex := 0;
+   //   StressType.ItemIndex := 0;
 end;
 
 
@@ -540,31 +658,69 @@ begin
     ShowMovingsForm.InfoFiniteElementNumberChange(Sender);
 end;
 
-// копирование выделенных(-ной) ячеек(-ки) в буфер обмена кликом мыши
+// копирование выделенных(-ной) ячеек(-ки) в буфер обмена кликом мыши  (СИЛЫ)
 procedure TForm1.StringGrid1Click(Sender: TObject);
 var i,j: word;
     myRect: TGridRect;
     res: string;
 begin
-res:='';
-myrect:=StringGrid1.Selection;
-for j:=myrect.Top to myrect.Bottom do
-begin
-//  внесение в будущий буфер номера элемента
-res:=res+StringGrid1.Cells[0,j]+#9;
-for i:=myrect.Left to myrect.Right do
-// внесение в будущий буфер выделенных ячеек построчно
-if i=myrect.Right then res:=res+StringGrid1.Cells[i,j]
-else res:=res+StringGrid1.Cells[i,j]+#9; // разделитель ячеек
-    res:=res+#13#10;                     //признак конца строки
+  res:='';
+  myrect:=StringGrid1.Selection;
+  for j:=myrect.Top to myrect.Bottom do
+  begin
+    //  внесение в будущий буфер номера элемента
+    res:=res+StringGrid1.Cells[0,j]+#9;
+    for i:=myrect.Left to myrect.Right do
+    // внесение в будущий буфер выделенных ячеек построчно
+    if i=myrect.Right then res:=res+StringGrid1.Cells[i,j]
+    else res:=res+StringGrid1.Cells[i,j]+#9; // разделитель ячеек
+         res:=res+#13#10;                     //признак конца строки
   end;
   // внесение полученной строки в буфер обмена
   ClipBoard.AsText:=Res;
 end;
-
-
-
-
+   // копирование выделенных(-ной) ячеек(-ки) в буфер обмена кликом мыши  (диапазон напряжений в зонах)
+procedure TForm1.ZoneStressClick(Sender: TObject);
+var i,j: word;
+    myRect: TGridRect;
+    res: string;
+begin
+  res:='';
+  myrect:=ZoneStress.Selection;
+  for j:=myrect.Top to myrect.Bottom do
+  begin
+    //  внесение в будущий буфер номера элемента
+    res:=res+ZoneStress.Cells[0,j]+#9;
+    for i:=myrect.Left to myrect.Right do
+    // внесение в будущий буфер выделенных ячеек построчно
+    if i=myrect.Right then res:=res+ZoneStress.Cells[i,j]
+    else res:=res+ZoneStress.Cells[i,j]+#9; // разделитель ячеек
+      res:=res+#13#10;                     //признак конца строки
+  end;
+  // внесение полученной строки в буфер обмена
+  ClipBoard.AsText:=Res;
+end;
+     // копирование выделенных(-ной) ячеек(-ки) в буфер обмена кликом мыши  (диапазон напряжений в свойствах)
+procedure TForm1.ZoneStress2Click(Sender: TObject);
+var i,j: word;
+    myRect: TGridRect;
+    res: string;
+begin
+  res:='';
+  myrect:=ZoneStress2.Selection;
+  for j:=myrect.Top to myrect.Bottom do
+  begin
+    //  внесение в будущий буфер номера элемента
+    res:=res+ZoneStress2.Cells[0,j]+#9;
+    for i:=myrect.Left to myrect.Right do
+      // внесение в будущий буфер выделенных ячеек построчно
+      if i=myrect.Right then res:=res+ZoneStress2.Cells[i,j]
+      else res:=res+ZoneStress2.Cells[i,j]+#9; // разделитель ячеек
+           res:=res+#13#10;                     //признак конца строки
+  end;
+  // внесение полученной строки в буфер обмена
+  ClipBoard.AsText:=Res;
+end;
 
 procedure TForm1.NodeEditInputChange(Sender: TObject);
 begin
@@ -586,4 +742,6 @@ begin
     ShowMovingsForm.InfoFiniteElementNumberChange(Sender);
     end;
 end;
+
+
 end.

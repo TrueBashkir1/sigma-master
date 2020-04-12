@@ -1,6 +1,6 @@
 object Statistics_methods_Run_Result: TStatistics_methods_Run_Result
-  Left = 197
-  Top = 286
+  Left = 222
+  Top = 229
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = #1040#1085#1072#1083#1080#1079' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1086#1074' '#1088#1072#1089#1095#1105#1090#1072
@@ -59,11 +59,11 @@ object Statistics_methods_Run_Result: TStatistics_methods_Run_Result
         Pointer.Visible = True
         XValues.DateTime = False
         XValues.Name = 'X'
-        XValues.Multiplier = 1
+        XValues.Multiplier = 1.000000000000000000
         XValues.Order = loAscending
         YValues.DateTime = False
         YValues.Name = 'Y'
-        YValues.Multiplier = 1
+        YValues.Multiplier = 1.000000000000000000
         YValues.Order = loNone
       end
       object Series2: TLineSeries
@@ -80,11 +80,11 @@ object Statistics_methods_Run_Result: TStatistics_methods_Run_Result
         Pointer.Visible = False
         XValues.DateTime = False
         XValues.Name = 'X'
-        XValues.Multiplier = 1
+        XValues.Multiplier = 1.000000000000000000
         XValues.Order = loAscending
         YValues.DateTime = False
         YValues.Name = 'Y'
-        YValues.Multiplier = 1
+        YValues.Multiplier = 1.000000000000000000
         YValues.Order = loNone
       end
       object Series3: TLineSeries
@@ -96,11 +96,11 @@ object Statistics_methods_Run_Result: TStatistics_methods_Run_Result
         Pointer.Visible = False
         XValues.DateTime = False
         XValues.Name = 'X'
-        XValues.Multiplier = 1
+        XValues.Multiplier = 1.000000000000000000
         XValues.Order = loAscending
         YValues.DateTime = False
         YValues.Name = 'Y'
-        YValues.Multiplier = 1
+        YValues.Multiplier = 1.000000000000000000
         YValues.Order = loNone
       end
       object Series4: TLineSeries
@@ -113,11 +113,11 @@ object Statistics_methods_Run_Result: TStatistics_methods_Run_Result
         Pointer.Visible = False
         XValues.DateTime = False
         XValues.Name = 'X'
-        XValues.Multiplier = 1
+        XValues.Multiplier = 1.000000000000000000
         XValues.Order = loAscending
         YValues.DateTime = False
         YValues.Name = 'Y'
-        YValues.Multiplier = 1
+        YValues.Multiplier = 1.000000000000000000
         YValues.Order = loNone
       end
     end

@@ -6,8 +6,8 @@ uses
   ComCtrls, ExtCtrls, StdCtrls, jpeg;
 
 const
-    app_version   = '7.4';
-    app_version_date   = '31.05.2019';
+    app_version   = '7.4.4';
+    app_version_date   = '1.03.2020';
     AppTitle = 'Sigma';
 
 type

@@ -537,7 +537,7 @@ END;
 
 PROCEDURE TElements.EditElement(Number:INTEGER;OneElement:TOneElement);
 BEGIN
-  ArrayOfElements[Number-1]:=OneElement;
+  ArrayOfElements[Number-1]:=OneElement;    
 END;
 
 

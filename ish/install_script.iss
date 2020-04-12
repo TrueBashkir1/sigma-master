@@ -2,14 +2,14 @@
 ;Design by Paramonov Maxim, MAI - 609, 2012
 
 [Setup]
-AppName=Sigma 7.4
-AppVerName=Sigma 7.4
-DefaultDirName=C:\Program Files\MAI\Sigma7.4
-DefaultGroupName=Sigma 7.4
-OutputBaseFilename=setup_Sigma7.4
+AppName=Sigma 7.4.4
+AppVerName=Sigma 7.4.4
+DefaultDirName=C:\Program Files\MAI\Sigma7.4.4
+DefaultGroupName=Sigma 7.4.4
+OutputBaseFilename=setup_Sigma7.4.4
 VersionInfoCompany=Ã¿» Í‡Ù.609
-VersionInfoVersion=7.4.0.0
-AppVersion=7.4
+VersionInfoVersion=7.4.4.0
+AppVersion=7.4.4
 AppPublisher=Ã¿» Í‡Ù.609
 AppContact=Ã¿» Í‡Ù.609
 Compression=lzma
@@ -494,10 +494,10 @@ Root: HKCU; Subkey: "SOFTWARE\MAI.609\SIGMA32\3.0\RupertGraph\SysSettings\curren
 ;Filename: "{app}\bin\Sigma32.exe"; Description: "{cm:LaunchProgram,Sigma 7.4}"; 
 
 [Icons]
-Name: "{group}\Sigma 7.4"; Filename: "{app}\bin\Sigma32.exe";
-Name: "{app}\Sigma 7.4"; Filename: "{app}\bin\Sigma32.exe"; 
-Name: "{group}\{cm:UninstallProgram,Sigma 7.4}"; Filename: "{uninstallexe}"; 
-Name: "{userdesktop}\Sigma 7.4"; Filename: "{app}\bin\Sigma32.exe"; WorkingDir: "{app}\bin\"; Tasks: "desktopicon"; 
+Name: "{group}\Sigma 7.4.4"; Filename: "{app}\bin\Sigma32.exe";
+Name: "{app}\Sigma 7.4.4"; Filename: "{app}\bin\Sigma32.exe"; 
+Name: "{group}\{cm:UninstallProgram,Sigma 7.4.1}"; Filename: "{uninstallexe}"; 
+Name: "{userdesktop}\Sigma 7.4.4"; Filename: "{app}\bin\Sigma32.exe"; WorkingDir: "{app}\bin\"; Tasks: "desktopicon"; 
   
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; 

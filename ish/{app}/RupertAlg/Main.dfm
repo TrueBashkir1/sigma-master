@@ -4,7 +4,7 @@ object MainForm: TMainForm
   Anchors = []
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
-  Caption = 'Sigma 7.4 - '#1043#1083#1072#1074#1085#1086#1077' '#1086#1082#1085#1086
+  Caption = 'Sigma 7.4.4 - '#1043#1083#1072#1074#1085#1086#1077' '#1086#1082#1085#1086
   ClientHeight = 521
   ClientWidth = 186
   Color = clBtnFace
@@ -121,7 +121,7 @@ object MainForm: TMainForm
       Left = 6
       Top = 16
       Width = 145
-      Height = 23
+      Height = 22
       Style = csDropDownList
       DropDownCount = 10
       Font.Charset = DEFAULT_CHARSET
@@ -130,7 +130,7 @@ object MainForm: TMainForm
       Font.Name = 'MS Reference Sans Serif'
       Font.Style = []
       ImeMode = imDisable
-      ItemHeight = 15
+      ItemHeight = 14
       ParentFont = False
       TabOrder = 0
       OnChange = CheckPointChange

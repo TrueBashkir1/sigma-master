@@ -19,8 +19,8 @@ object FAbout: TFAbout
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   DesignSize = (
-    457
-    492)
+    465
+    497)
   PixelsPerInch = 96
   TextHeight = 13
   object ver: TLabel
@@ -29,7 +29,7 @@ object FAbout: TFAbout
     Width = 157
     Height = 48
     AutoSize = False
-    Caption = '7.4'
+    Caption = '7.4.4'
     Font.Charset = ANSI_CHARSET
     Font.Color = clRed
     Font.Height = -37
@@ -61,7 +61,7 @@ object FAbout: TFAbout
     Height = 16
     Alignment = taCenter
     AutoSize = False
-    Caption = #1042#1077#1088#1089#1080#1103' '#1086#1090' 31.05.2019'
+    Caption = #1042#1077#1088#1089#1080#1103' '#1086#1090' 1.03.2020'
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clBlue
     Font.Height = -13
